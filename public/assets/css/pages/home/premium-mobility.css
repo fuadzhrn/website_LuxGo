@@ -1,0 +1,153 @@
+/* ==========================================================================
+   LUX&GO — Home / Premium Mobility Preview
+   ========================================================================== */
+
+.home-mobility {
+    background-color: var(--color-obsidian);
+    color: var(--color-white);
+    border-bottom: none;
+}
+
+.home-mobility__inner {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    column-gap: var(--grid-gap);
+    align-items: start;
+}
+
+/* Content ------------------------------------------------------------------ */
+
+.home-mobility__content {
+    grid-column: 1 / 6;
+}
+
+.home-mobility__title {
+    margin-top: clamp(18px, 1.6vw, 28px);
+    font-family: var(--font-heading);
+    font-weight: var(--fw-semibold);
+    font-size: var(--fs-section-heading);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-white);
+}
+
+.home-mobility__title-line {
+    display: block;
+}
+
+.home-mobility__description {
+    max-width: 420px;
+    margin-top: clamp(24px, 2vw, 32px);
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-body);
+    color: var(--color-off-white);
+    opacity: 0.8;
+}
+
+.home-mobility__features {
+    margin-top: clamp(40px, 3.4vw, 56px);
+}
+
+.home-mobility__feature {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(16px, 1.4vw, 24px);
+    padding-block: clamp(16px, 1.4vw, 22px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.home-mobility__feature:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.home-mobility__feature-index {
+    flex-shrink: 0;
+    width: 2.25rem;
+    font-family: var(--font-heading);
+    font-weight: var(--fw-semibold);
+    font-size: var(--fs-body);
+    color: var(--color-lux-blue);
+}
+
+.home-mobility__feature-label {
+    font-family: var(--font-body);
+    font-weight: var(--fw-medium);
+    font-size: var(--fs-body);
+    color: var(--color-off-white);
+}
+
+/* Media ----------------------------------------------------------------------- */
+
+.home-mobility__media {
+    grid-column: 7 / 13;
+    /* Deliberate vertical offset from the content column for an editorial, non 50:50 feel. */
+    margin-top: clamp(40px, 4vw, 64px);
+}
+
+.home-mobility__vehicle-name {
+    margin-bottom: clamp(20px, 1.8vw, 28px);
+    font-family: var(--font-heading);
+    font-weight: var(--fw-semibold);
+    font-size: var(--fs-feature-heading);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--color-white);
+}
+
+.home-mobility__vehicle {
+    overflow: hidden;
+    height: clamp(440px, 34vw, 620px);
+    background-color: var(--color-graphite);
+}
+
+.home-mobility__vehicle-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.home-mobility__driver-note {
+    margin-top: clamp(24px, 2vw, 32px);
+    font-family: var(--font-body);
+    font-weight: var(--fw-medium);
+    font-size: var(--fs-body);
+    color: var(--color-off-white);
+    opacity: 0.85;
+}
+
+.home-mobility__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: clamp(16px, 1.4vw, 24px);
+    padding-bottom: 2px;
+    font-family: var(--font-body);
+    font-weight: var(--fw-medium);
+    font-size: var(--fs-body);
+    color: var(--color-white);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    transition: color var(--transition-base), border-color var(--transition-base);
+}
+
+.home-mobility__link:hover {
+    border-color: var(--color-lux-blue);
+}
+
+.home-mobility__link:focus-visible {
+    outline: 2px solid var(--color-lux-blue);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+}
+
+.home-mobility__link-icon {
+    color: var(--color-lux-blue);
+    transition: transform var(--transition-base);
+}
+
+.home-mobility__link:hover .home-mobility__link-icon {
+    transform: translateX(2px);
+}

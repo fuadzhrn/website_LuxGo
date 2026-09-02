@@ -1,0 +1,9 @@
+/* ==========================================================================
+   LUX&GO — Site Footer (structure placeholder, detailed styling in a later stage)
+   ========================================================================== */
+
+.site-footer {
+    width: 100%;
+    background-color: var(--color-obsidian);
+    color: var(--color-white);
+}

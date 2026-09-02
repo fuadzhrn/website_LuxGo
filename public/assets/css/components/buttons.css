@@ -1,0 +1,59 @@
+/* ==========================================================================
+   LUX&GO — Button System
+   ========================================================================== */
+
+.lux-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-heading);
+    font-size: var(--fs-body);
+    font-weight: var(--fw-semibold);
+    line-height: 1;
+    padding: 16px 32px;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    transition: background-color var(--transition-base), color var(--transition-base),
+        border-color var(--transition-base);
+}
+
+.lux-btn-primary {
+    background-color: var(--color-obsidian);
+    color: var(--color-white);
+    border-color: var(--color-obsidian);
+}
+
+.lux-btn-primary:hover {
+    background-color: var(--color-lux-blue);
+    border-color: var(--color-lux-blue);
+}
+
+.lux-btn-secondary {
+    background-color: transparent;
+    color: var(--color-obsidian);
+    border-color: var(--color-border);
+}
+
+.lux-btn-secondary:hover {
+    color: var(--color-lux-blue);
+    border-color: var(--color-lux-blue);
+}
+
+.lux-btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    font-weight: var(--fw-medium);
+    color: var(--color-obsidian);
+    border-bottom: 1px solid var(--color-border);
+    border-radius: 0;
+}
+
+.lux-btn-link:hover {
+    color: var(--color-lux-blue);
+    border-color: var(--color-lux-blue);
+}

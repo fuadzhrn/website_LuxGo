@@ -1,0 +1,211 @@
+/* ==========================================================================
+   LUX&GO — Global Design Tokens, Reset, Typography, Container/Grid System
+   ========================================================================== */
+
+:root {
+    /* Color tokens */
+    --color-obsidian: #090a0c;
+    --color-graphite: #14171b;
+    --color-white: #ffffff;
+    --color-off-white: #f5f6f7;
+    --color-muted-gray: #9298a1;
+    --color-lux-blue: #1677ff;
+    --color-lux-blue-strong: #0f5fd6;
+
+    --color-bg: var(--color-white);
+    --color-text: var(--color-obsidian);
+    --color-text-muted: var(--color-muted-gray);
+    --color-border: #e4e6e8;
+    --color-accent: var(--color-lux-blue);
+
+    /* Font families */
+    --font-heading: "Manrope", "Segoe UI", sans-serif;
+    --font-body: "Inter", "Segoe UI", sans-serif;
+
+    /* Font weights */
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+
+    /* Fluid type scale (desktop-first, 1024px - 1920px) */
+    --fs-hero: clamp(4rem, 3.1rem + 2.2vw, 5rem); /* 64 - 80px */
+    --fs-page-heading: clamp(3.25rem, 2.6rem + 1.6vw, 4rem); /* 52 - 64px */
+    --fs-section-heading: clamp(2.5rem, 2.05rem + 1.1vw, 3rem); /* 40 - 48px */
+    --fs-feature-heading: clamp(1.375rem, 1.2rem + 0.4vw, 1.75rem); /* 22 - 28px */
+    --fs-body-lg: clamp(1.125rem, 1.03rem + 0.25vw, 1.25rem); /* 18 - 20px */
+    --fs-body: clamp(0.9375rem, 0.88rem + 0.15vw, 1.0625rem); /* 15 - 17px */
+    --fs-eyebrow: clamp(0.75rem, 0.72rem + 0.08vw, 0.875rem); /* 12 - 14px */
+
+    /* Line heights */
+    --lh-heading: 1.1;
+    --lh-body: 1.6;
+
+    /* Layout tokens */
+    --container-max: 1440px;
+    --page-gutter: clamp(24px, 2vw + 8px, 80px);
+    --section-space: clamp(80px, 6vw + 32px, 160px);
+    --grid-gap: 24px;
+    --grid-columns: 12;
+
+    /* Misc */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --border-thin: 1px solid var(--color-border);
+    --transition-base: 200ms ease;
+}
+
+/* ---------------------------------------------------------------------
+   Reset
+   --------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+ul[class],
+ol[class] {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+img,
+picture,
+svg,
+video {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+/* ---------------------------------------------------------------------
+   Base typography
+   --------------------------------------------------------------------- */
+
+body {
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-heading);
+    color: var(--color-text);
+}
+
+.lux-eyebrow {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+/* ---------------------------------------------------------------------
+   Container / Grid system
+   --------------------------------------------------------------------- */
+
+.lux-container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--page-gutter);
+}
+
+.lux-section {
+    padding-block: var(--section-space);
+}
+
+.lux-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    gap: var(--grid-gap);
+}
+
+.lux-grid--tight {
+    gap: calc(var(--grid-gap) / 2);
+}
+
+/* Column span utilities (1-12) */
+.lux-col-1 { grid-column: span 1; }
+.lux-col-2 { grid-column: span 2; }
+.lux-col-3 { grid-column: span 3; }
+.lux-col-4 { grid-column: span 4; }
+.lux-col-5 { grid-column: span 5; }
+.lux-col-6 { grid-column: span 6; }
+.lux-col-7 { grid-column: span 7; }
+.lux-col-8 { grid-column: span 8; }
+.lux-col-9 { grid-column: span 9; }
+.lux-col-10 { grid-column: span 10; }
+.lux-col-11 { grid-column: span 11; }
+.lux-col-12 { grid-column: span 12; }
+
+/* ---------------------------------------------------------------------
+   Common utilities
+   --------------------------------------------------------------------- */
+
+.lux-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.lux-text-muted {
+    color: var(--color-text-muted);
+}
+
+.lux-text-accent {
+    color: var(--color-accent);
+}

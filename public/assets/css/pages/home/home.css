@@ -1,0 +1,7 @@
+/* ==========================================================================
+   LUX&GO — Home Page (page-level base, sections styled in a later stage)
+   ========================================================================== */
+
+.home-section {
+    border-bottom: var(--border-thin);
+}

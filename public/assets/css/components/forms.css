@@ -1,0 +1,49 @@
+/* ==========================================================================
+   LUX&GO — Form Primitives
+   ========================================================================== */
+
+.lux-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lux-label {
+    font-family: var(--font-body);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.lux-input,
+.lux-textarea,
+.lux-select {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    color: var(--color-text);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    transition: border-color var(--transition-base);
+}
+
+.lux-textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.lux-input:focus,
+.lux-textarea:focus,
+.lux-select:focus {
+    outline: none;
+    border-color: var(--color-lux-blue);
+}
+
+.lux-input::placeholder,
+.lux-textarea::placeholder {
+    color: var(--color-text-muted);
+}
