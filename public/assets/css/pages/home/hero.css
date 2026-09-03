@@ -4,13 +4,14 @@
 
 .home-hero {
     /* Mirrors the fixed navbar height in header.css; the navbar overlays the
-       Hero rather than pushing it down, so content padding must compensate. */
-    --home-hero-header-offset: clamp(72px, 4vw, 80px);
+       Hero, so the section reserves that space rather than being pushed down. */
+    --home-hero-header-offset: clamp(72px, 4vw, 78px);
 
     position: relative;
     display: flex;
     align-items: center;
-    min-height: clamp(760px, 100vh, 900px);
+    min-height: clamp(620px, 75vh, 760px);
+    padding-top: var(--home-hero-header-offset);
     overflow: hidden;
     background-color: var(--color-obsidian);
     color: var(--color-white);
@@ -18,9 +19,17 @@
 
 /* Media ------------------------------------------------------------------ */
 
+/*
+   The vehicle sits from roughly 38% of the source frame rightwards. Insetting
+   the media from the left on wide viewports keeps it clear of the text column;
+   the value resolves to 0 around 1024px, where the frame is full-bleed.
+*/
 .home-hero__media {
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: clamp(0px, 10vw - 100px, 120px);
     z-index: 0;
 }
 
@@ -28,19 +37,21 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: right center;
+    object-position: 30% center;
     animation: home-hero-image-settle 900ms var(--motion-easing) both;
 }
 
 .home-hero__overlay {
     position: absolute;
     inset: 0;
+    z-index: 1;
     background: linear-gradient(
         90deg,
-        rgba(9, 10, 12, 0.96) 0%,
-        rgba(9, 10, 12, 0.82) 26%,
-        rgba(9, 10, 12, 0.4) 52%,
-        rgba(9, 10, 12, 0.05) 74%
+        rgba(9, 10, 12, 0.95) 0%,
+        rgba(9, 10, 12, 0.88) 24%,
+        rgba(9, 10, 12, 0.6) 42%,
+        rgba(9, 10, 12, 0.2) 60%,
+        rgba(9, 10, 12, 0) 78%
     );
 }
 
@@ -48,21 +59,20 @@
 
 .home-hero__container {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
-    padding-top: calc(var(--home-hero-header-offset) + 32px);
 }
 
 .home-hero__content {
-    /* Roughly 5-6 of 12 columns so line breaks keep an editorial rhythm. */
-    max-width: clamp(440px, 32vw, 580px);
+    /* Held to roughly a third of the frame so the vehicle stays dominant. */
+    max-width: clamp(360px, 30vw, 420px);
 }
 
 .home-hero__title {
     font-family: var(--font-heading);
-    font-weight: var(--fw-semibold);
+    font-weight: var(--fw-medium);
     font-size: var(--fs-hero);
-    line-height: 0.98;
+    line-height: 1;
     letter-spacing: -0.01em;
     text-transform: uppercase;
     color: var(--color-white);
@@ -86,39 +96,46 @@
     animation-delay: 180ms;
 }
 
-.home-hero__description {
-    max-width: 460px;
-    margin-top: clamp(20px, 1.5vw, 28px);
-    font-family: var(--font-body);
-    font-weight: var(--fw-regular);
-    font-size: var(--fs-body-lg);
-    line-height: var(--lh-body);
-    color: var(--color-off-white);
+.home-hero__accent {
+    display: block;
+    width: 48px;
+    height: 2px;
+    margin-top: clamp(24px, 2vw, 32px);
+    background-color: var(--color-lux-blue);
     opacity: 0;
     animation: home-hero-fade-up 600ms var(--motion-easing) both;
-    animation-delay: 240ms;
+    animation-delay: 220ms;
+}
+
+.home-hero__description {
+    max-width: 400px;
+    margin-top: clamp(20px, 1.6vw, 26px);
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: clamp(1rem, 0.95rem + 0.15vw, 1.125rem);
+    line-height: var(--lh-body);
+    color: var(--color-muted-gray);
+    opacity: 0;
+    animation: home-hero-fade-up 600ms var(--motion-easing) both;
+    animation-delay: 270ms;
 }
 
 .home-hero__actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: clamp(20px, 2vw, 32px);
-    margin-top: clamp(28px, 2vw, 40px);
+    margin-top: clamp(28px, 2.4vw, 36px);
     opacity: 0;
     animation: home-hero-fade-up 600ms var(--motion-easing) both;
-    animation-delay: 300ms;
+    animation-delay: 320ms;
 }
 
-/* Primary CTA ---------------------------------------------------------------- */
+/* CTA ------------------------------------------------------------------------ */
 
 .home-hero__cta {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    height: clamp(46px, 3.4vw, 52px);
-    padding-inline: clamp(24px, 1.8vw, 32px);
-    border-radius: 8px;
+    height: clamp(46px, 3.2vw, 50px);
+    padding-inline: clamp(22px, 1.7vw, 28px);
+    border-radius: var(--radius-sm);
     background-color: var(--color-lux-blue);
     color: var(--color-white);
     font-family: var(--font-body);
@@ -130,7 +147,6 @@
 
 .home-hero__cta:hover {
     background-color: var(--color-lux-blue-strong);
-    color: var(--color-white);
     transform: translateY(-1px);
 }
 
@@ -141,7 +157,6 @@
 .home-hero__cta:focus-visible {
     outline: 2px solid var(--color-white);
     outline-offset: 3px;
-    border-radius: 8px;
 }
 
 .home-hero__cta-icon {
@@ -149,41 +164,6 @@
 }
 
 .home-hero__cta:hover .home-hero__cta-icon {
-    transform: translateX(2px);
-}
-
-/* Secondary link -------------------------------------------------------------- */
-
-.home-hero__secondary-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding-bottom: 2px;
-    font-family: var(--font-body);
-    font-weight: var(--fw-medium);
-    font-size: var(--fs-body);
-    color: var(--color-off-white);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
-    transition: color var(--transition-base), border-color var(--transition-base);
-}
-
-.home-hero__secondary-link:hover {
-    color: var(--color-white);
-    border-color: var(--color-lux-blue);
-}
-
-.home-hero__secondary-link:focus-visible {
-    outline: 2px solid var(--color-lux-blue);
-    outline-offset: 4px;
-    border-radius: var(--radius-sm);
-}
-
-.home-hero__secondary-link-icon {
-    color: var(--color-lux-blue);
-    transition: transform var(--transition-base);
-}
-
-.home-hero__secondary-link:hover .home-hero__secondary-link-icon {
     transform: translateX(2px);
 }
 
@@ -215,6 +195,7 @@
 
 @media (prefers-reduced-motion: reduce) {
     .home-hero__title-line,
+    .home-hero__accent,
     .home-hero__description,
     .home-hero__actions,
     .home-hero__image {
@@ -224,16 +205,13 @@
     }
 
     .home-hero__cta,
-    .home-hero__cta-icon,
-    .home-hero__secondary-link,
-    .home-hero__secondary-link-icon {
+    .home-hero__cta-icon {
         transition: none;
     }
 
     .home-hero__cta:hover,
     .home-hero__cta:active,
-    .home-hero__cta:hover .home-hero__cta-icon,
-    .home-hero__secondary-link:hover .home-hero__secondary-link-icon {
+    .home-hero__cta:hover .home-hero__cta-icon {
         transform: none;
     }
 }
