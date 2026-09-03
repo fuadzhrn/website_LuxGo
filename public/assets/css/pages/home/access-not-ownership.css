@@ -3,30 +3,33 @@
    ========================================================================== */
 
 .home-access {
+    /* Deliberately tighter than the shared section rhythm: this block reads as
+       one compact editorial statement rather than a full-viewport section. */
+    padding-block: clamp(70px, 6vw, 90px);
     background-color: var(--color-off-white);
 }
 
 .home-access__grid {
     display: grid;
-    grid-template-columns: repeat(var(--grid-columns), 1fr);
-    column-gap: var(--grid-gap);
+    grid-template-columns: minmax(0, 0.85fr) 1px minmax(0, 1fr);
+    column-gap: clamp(36px, 5vw, 80px);
 }
 
-/* Left: heading -------------------------------------------------------------- */
+/* Left: statement ------------------------------------------------------------ */
 
-.home-access__heading {
-    grid-column: 1 / 6;
-}
-
-.home-access__eyebrow {
-    margin-bottom: clamp(16px, 1.4vw, 24px);
+.home-access__accent {
+    display: block;
+    width: 44px;
+    height: 2px;
+    background-color: var(--color-lux-blue);
 }
 
 .home-access__title {
+    margin-top: clamp(20px, 1.8vw, 28px);
     font-family: var(--font-heading);
-    font-weight: var(--fw-semibold);
-    font-size: var(--fs-section-heading);
-    line-height: 1.05;
+    font-weight: var(--fw-medium);
+    font-size: clamp(2.375rem, 2rem + 0.9vw, 2.875rem);
+    line-height: 1.08;
     letter-spacing: -0.01em;
     text-transform: uppercase;
     color: var(--color-text);
@@ -36,51 +39,45 @@
     display: block;
 }
 
-/* Right: intro + ownership considerations ------------------------------------ */
-
-.home-access__content {
-    grid-column: 7 / 13;
-    /* Deliberate vertical offset from the heading for an editorial, non 50:50 feel. */
-    margin-top: clamp(40px, 4vw, 64px);
-}
-
-.home-access__intro {
-    max-width: 480px;
+.home-access__copy {
+    max-width: 400px;
+    margin-top: clamp(18px, 1.6vw, 26px);
     font-family: var(--font-body);
     font-weight: var(--fw-regular);
-    font-size: var(--fs-body-lg);
+    font-size: var(--fs-body);
     line-height: var(--lh-body);
-    color: var(--color-text);
+    color: var(--color-text-muted);
 }
 
-.home-access__list {
-    margin-top: clamp(32px, 3vw, 48px);
+/* Divider ---------------------------------------------------------------------- */
+
+.home-access__divider {
+    background-color: var(--color-border);
 }
+
+/* Right: ownership considerations ---------------------------------------------- */
 
 .home-access__item {
     display: flex;
-    align-items: baseline;
-    gap: clamp(16px, 1.5vw, 28px);
-    padding-block: clamp(20px, 1.8vw, 28px);
+    align-items: center;
+    gap: clamp(14px, 1.2vw, 18px);
+    padding-block: clamp(14px, 1.2vw, 18px);
     border-bottom: var(--border-thin);
 }
 
-.home-access__item:first-child {
-    border-top: var(--border-thin);
+.home-access__item:last-child {
+    border-bottom: none;
 }
 
-.home-access__number {
+.home-access__icon {
     flex-shrink: 0;
-    width: 2.25rem;
-    font-family: var(--font-heading);
-    font-weight: var(--fw-semibold);
-    font-size: var(--fs-body-lg);
-    color: var(--color-lux-blue);
+    width: 24px;
+    height: 24px;
 }
 
 .home-access__label {
     font-family: var(--font-body);
     font-weight: var(--fw-medium);
-    font-size: var(--fs-body-lg);
+    font-size: var(--fs-body);
     color: var(--color-text);
 }

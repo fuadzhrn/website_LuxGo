@@ -1,4 +1,31 @@
-<section class="home-section lux-section home-use-cases">
+@php
+    $useCases = [
+        [
+            'label' => 'Business',
+            'image' => 'assets/images/luxgo/home/use-cases/business.webp',
+            'alt' => 'Premium mobility for business meetings and client visits.',
+            'details' => ['Meeting · Client Visit', 'Business Trip · Site Visit'],
+        ],
+        [
+            'label' => 'Family',
+            'image' => 'assets/images/luxgo/home/use-cases/family.webp',
+            'alt' => 'Premium mobility for family weekends and outings.',
+            'details' => ['Weekend · Shopping', 'Dining · Family Activities'],
+        ],
+        [
+            'label' => 'Life',
+            'image' => 'assets/images/luxgo/home/use-cases/life.webp',
+            'alt' => 'Premium mobility for special occasions and events.',
+            'details' => ['Events · Wedding', 'Airport · Special Occasions'],
+        ],
+    ];
+@endphp
+
+{{-- Photography goes in public/assets/images/luxgo/home/use-cases/ as
+     business.webp, family.webp and life.webp. Until a file is present the card
+     keeps its empty media slot instead of rendering a broken image. --}}
+
+<section class="home-section home-use-cases">
     <div class="lux-container">
         <div class="home-use-cases__header">
             <div class="home-use-cases__intro-heading" data-reveal>
@@ -16,59 +43,30 @@
         </div>
 
         <div class="home-use-cases__grid">
-            <article class="home-use-case home-use-case--business" data-reveal>
-                <div class="home-use-case__media">
-                    <img
-                        src="{{ asset('assets/images/luxgo/home/business/business-scene.webp') }}"
-                        alt="Premium mobility for business meetings and client visits."
-                        class="home-use-case__image"
-                        width="960"
-                        height="640"
-                        loading="lazy"
-                    >
-                </div>
-                <div class="home-use-case__meta">
-                    <span class="home-use-case__index">01</span>
-                    <h3 class="home-use-case__label">Business</h3>
-                    <p class="home-use-case__details">Meeting &middot; Client Visit<br>Business Trip &middot; Site Visit</p>
-                </div>
-            </article>
+            @foreach ($useCases as $index => $useCase)
+                <article class="home-use-case" data-reveal data-reveal-delay="{{ $index + 1 }}">
+                    <div class="home-use-case__media">
+                        @if (file_exists(public_path($useCase['image'])))
+                            <img
+                                src="{{ asset($useCase['image']) }}"
+                                alt="{{ $useCase['alt'] }}"
+                                class="home-use-case__image"
+                                loading="lazy"
+                            >
+                        @endif
+                    </div>
 
-            <article class="home-use-case home-use-case--family" data-reveal data-reveal-delay="1">
-                <div class="home-use-case__media">
-                    <img
-                        src="{{ asset('assets/images/luxgo/home/family/family-scene.webp') }}"
-                        alt="Premium mobility for family weekends and outings."
-                        class="home-use-case__image"
-                        width="1280"
-                        height="720"
-                        loading="lazy"
-                    >
-                </div>
-                <div class="home-use-case__meta">
-                    <span class="home-use-case__index">02</span>
-                    <h3 class="home-use-case__label">Family</h3>
-                    <p class="home-use-case__details">Weekend &middot; Shopping<br>Dining &middot; Family Activities</p>
-                </div>
-            </article>
-
-            <article class="home-use-case home-use-case--life" data-reveal>
-                <div class="home-use-case__media">
-                    <img
-                        src="{{ asset('assets/images/luxgo/home/lifestyle/lifestyle-scene.webp') }}"
-                        alt="Premium mobility for special occasions and events."
-                        class="home-use-case__image"
-                        width="1600"
-                        height="640"
-                        loading="lazy"
-                    >
-                </div>
-                <div class="home-use-case__meta">
-                    <span class="home-use-case__index">03</span>
-                    <h3 class="home-use-case__label">Life</h3>
-                    <p class="home-use-case__details">Events &middot; Wedding<br>Airport &middot; Special Occasions</p>
-                </div>
-            </article>
+                    <div class="home-use-case__meta">
+                        <span class="home-use-case__index">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                        <h3 class="home-use-case__label">{{ $useCase['label'] }}</h3>
+                        <p class="home-use-case__details">
+                            @foreach ($useCase['details'] as $line)
+                                <span class="home-use-case__details-line">{{ $line }}</span>
+                            @endforeach
+                        </p>
+                    </div>
+                </article>
+            @endforeach
         </div>
     </div>
 </section>

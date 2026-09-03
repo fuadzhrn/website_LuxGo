@@ -1,42 +1,46 @@
-<section class="home-section lux-section home-access">
+@php
+    $ownershipConsiderations = [
+        ['label' => 'High Purchase Price', 'icon' => 'tag.svg'],
+        ['label' => 'Depreciation', 'icon' => 'trending-down.svg'],
+        ['label' => 'Maintenance', 'icon' => 'wrench.svg'],
+        ['label' => 'Insurance', 'icon' => 'shield-check.svg'],
+        ['label' => 'Operational Cost', 'icon' => 'wallet.svg'],
+    ];
+@endphp
+
+<section class="home-section home-access">
     <div class="lux-container">
         <div class="home-access__grid">
-            <div class="home-access__heading" data-reveal>
-                <p class="home-access__eyebrow lux-eyebrow">The Opportunity</p>
+            <div class="home-access__lead" data-reveal>
+                <span class="home-access__accent" aria-hidden="true"></span>
+
                 <h2 class="home-access__title">
                     <span class="home-access__title-line">Access,</span>
                     <span class="home-access__title-line">Not Ownership.</span>
                 </h2>
-            </div>
 
-            <div class="home-access__content">
-                <p class="home-access__intro" data-reveal>
+                <p class="home-access__copy">
                     Not everyone needs to own a premium car. For many customers, premium mobility is needed only at certain moments.
                 </p>
-
-                <ul class="home-access__list">
-                    <li class="home-access__item" data-reveal data-reveal-delay="1">
-                        <span class="home-access__number">01</span>
-                        <span class="home-access__label">High Purchase Price</span>
-                    </li>
-                    <li class="home-access__item" data-reveal data-reveal-delay="2">
-                        <span class="home-access__number">02</span>
-                        <span class="home-access__label">Depreciation</span>
-                    </li>
-                    <li class="home-access__item" data-reveal data-reveal-delay="3">
-                        <span class="home-access__number">03</span>
-                        <span class="home-access__label">Maintenance</span>
-                    </li>
-                    <li class="home-access__item" data-reveal data-reveal-delay="4">
-                        <span class="home-access__number">04</span>
-                        <span class="home-access__label">Operational Cost</span>
-                    </li>
-                    <li class="home-access__item" data-reveal data-reveal-delay="5">
-                        <span class="home-access__number">05</span>
-                        <span class="home-access__label">Insurance</span>
-                    </li>
-                </ul>
             </div>
+
+            <span class="home-access__divider" aria-hidden="true"></span>
+
+            <ul class="home-access__list">
+                @foreach ($ownershipConsiderations as $index => $consideration)
+                    <li class="home-access__item" data-reveal data-reveal-delay="{{ $index + 1 }}">
+                        <img
+                            src="{{ asset('assets/icons/luxgo/access/'.$consideration['icon']) }}"
+                            alt=""
+                            class="home-access__icon"
+                            width="24"
+                            height="24"
+                            loading="lazy"
+                        >
+                        <span class="home-access__label">{{ $consideration['label'] }}</span>
+                    </li>
+                @endforeach
+            </ul>
         </div>
     </div>
 </section>
