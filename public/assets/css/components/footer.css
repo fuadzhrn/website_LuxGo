@@ -1,9 +1,120 @@
 /* ==========================================================================
-   LUX&GO — Site Footer (structure placeholder, detailed styling in a later stage)
+   LUX&GO — Site Footer
    ========================================================================== */
 
 .site-footer {
     width: 100%;
+    padding-top: clamp(35px, 3vw, 48px);
+    padding-bottom: clamp(25px, 2.2vw, 34px);
     background-color: var(--color-obsidian);
     color: var(--color-white);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Columns ---------------------------------------------------------------- */
+
+.site-footer__main {
+    display: grid;
+    grid-template-columns: 2.5fr 1.5fr 1.5fr 1.5fr 2fr;
+    column-gap: clamp(20px, 2.2vw, 44px);
+}
+
+.site-footer__brand {
+    font-family: var(--font-heading);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(1.25rem, 1.1rem + 0.4vw, 1.5rem);
+    letter-spacing: 0.01em;
+    color: var(--color-white);
+}
+
+.site-footer__brand:focus-visible {
+    outline: 2px solid var(--color-lux-blue);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+}
+
+.site-footer__tagline {
+    margin-top: 8px;
+    max-width: 220px;
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: clamp(0.6875rem, 0.66rem + 0.08vw, 0.8125rem);
+    line-height: 1.6;
+    color: var(--color-muted-gray);
+}
+
+.site-footer__heading {
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.625rem, 0.6rem + 0.08vw, 0.75rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-off-white);
+}
+
+.site-footer__list {
+    margin-top: 12px;
+}
+
+.site-footer__link {
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: clamp(0.6875rem, 0.66rem + 0.08vw, 0.8125rem);
+    line-height: 1.8;
+    color: var(--color-muted-gray);
+    transition: color var(--transition-base);
+}
+
+.site-footer__link:hover {
+    color: var(--color-white);
+}
+
+.site-footer__link:focus-visible {
+    outline: 2px solid var(--color-lux-blue);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+}
+
+/* Contact ------------------------------------------------------------------- */
+
+.site-footer__contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.site-footer__contact-icon {
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+}
+
+.site-footer__location {
+    /* Aligns with the contact link text, past the icon column. */
+    padding-left: 23px;
+    font-family: var(--font-body);
+    font-size: clamp(0.6875rem, 0.66rem + 0.08vw, 0.8125rem);
+    line-height: 1.8;
+    color: var(--color-muted-gray);
+}
+
+/* Bottom bar ------------------------------------------------------------------ */
+
+.site-footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: clamp(20px, 1.8vw, 30px);
+    padding-top: clamp(14px, 1.2vw, 20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: var(--font-body);
+    font-size: clamp(0.625rem, 0.61rem + 0.05vw, 0.6875rem);
+    color: var(--color-muted-gray);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .site-footer__link {
+        transition: none;
+    }
 }

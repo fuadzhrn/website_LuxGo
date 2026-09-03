@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .home-how {
-    padding-block: clamp(55px, 4.6vw, 72px);
+    padding-block: clamp(52px, 4.2vw, 66px);
     background-color: var(--color-off-white);
     /* Followed by the dark footer — no stray divider before that cut. */
     border-bottom: none;
@@ -42,7 +42,7 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     column-gap: clamp(20px, 2vw, 36px);
-    margin-top: clamp(26px, 2.4vw, 38px);
+    margin-top: clamp(32px, 2.8vw, 44px);
 }
 
 .home-how__step-icon {
