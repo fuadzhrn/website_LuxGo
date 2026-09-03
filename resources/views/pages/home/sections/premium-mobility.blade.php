@@ -1,19 +1,19 @@
 <section class="home-section lux-section home-mobility">
     <div class="lux-container home-mobility__inner">
         <div class="home-mobility__content">
-            <p class="home-mobility__eyebrow lux-eyebrow">Premium Experience</p>
+            <p class="home-mobility__eyebrow lux-eyebrow" data-reveal>Premium Experience</p>
 
-            <h2 class="home-mobility__title">
+            <h2 class="home-mobility__title" data-reveal data-reveal-delay="1">
                 <span class="home-mobility__title-line">Premium</span>
                 <span class="home-mobility__title-line">Mobility,</span>
                 <span class="home-mobility__title-line">Refined.</span>
             </h2>
 
-            <p class="home-mobility__description">
+            <p class="home-mobility__description" data-reveal data-reveal-delay="2">
                 The first vehicle in the LUX&amp;GO collection, chosen for premium comfort, modern technology, and an executive presence.
             </p>
 
-            <ul class="home-mobility__features">
+            <ul class="home-mobility__features" data-reveal data-reveal-delay="3">
                 <li class="home-mobility__feature">
                     <span class="home-mobility__feature-index">01</span>
                     <span class="home-mobility__feature-label">Premium Design</span>
@@ -34,11 +34,11 @@
         </div>
 
         <div class="home-mobility__media">
-            <p class="home-mobility__vehicle-name">Denza D9</p>
+            <p class="home-mobility__vehicle-name" data-reveal>Denza D9</p>
 
-            <div class="home-mobility__vehicle">
+            <div class="home-mobility__vehicle" data-reveal data-reveal-delay="1">
                 <img
-                    src="{{ asset('assets/images/luxgo/collection/denza-d9/denza-premium-preview-scene.webp') }}"
+                    src="{{ asset('assets/images/luxgo/collection/denza-d9/gambar_bg2.png') }}"
                     alt="Denza D9 premium vehicle for LUX&GO mobility membership."
                     class="home-mobility__vehicle-image"
                     width="1600"
@@ -47,7 +47,7 @@
                 >
             </div>
 
-            <p class="home-mobility__driver-note">Professional Driver Included</p>
+            <p class="home-mobility__driver-note" data-reveal data-reveal-delay="2">Professional Driver Included</p>
 
             <a href="/collection" class="home-mobility__link">
                 <span>Explore Our Collection</span>

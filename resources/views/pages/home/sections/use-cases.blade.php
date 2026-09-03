@@ -1,7 +1,7 @@
 <section class="home-section lux-section home-use-cases">
     <div class="lux-container">
         <div class="home-use-cases__header">
-            <div class="home-use-cases__intro-heading">
+            <div class="home-use-cases__intro-heading" data-reveal>
                 <p class="home-use-cases__eyebrow lux-eyebrow">Use It Your Way</p>
                 <h2 class="home-use-cases__title">
                     <span class="home-use-cases__title-line">For Business.</span>
@@ -10,13 +10,13 @@
                 </h2>
             </div>
 
-            <p class="home-use-cases__description">
+            <p class="home-use-cases__description" data-reveal data-reveal-delay="1">
                 Premium mobility that adapts to the moments that matter — from business commitments to family time and special occasions.
             </p>
         </div>
 
         <div class="home-use-cases__grid">
-            <article class="home-use-case home-use-case--business">
+            <article class="home-use-case home-use-case--business" data-reveal>
                 <div class="home-use-case__media">
                     <img
                         src="{{ asset('assets/images/luxgo/home/business/business-scene.webp') }}"
@@ -34,7 +34,7 @@
                 </div>
             </article>
 
-            <article class="home-use-case home-use-case--family">
+            <article class="home-use-case home-use-case--family" data-reveal data-reveal-delay="1">
                 <div class="home-use-case__media">
                     <img
                         src="{{ asset('assets/images/luxgo/home/family/family-scene.webp') }}"
@@ -52,7 +52,7 @@
                 </div>
             </article>
 
-            <article class="home-use-case home-use-case--life">
+            <article class="home-use-case home-use-case--life" data-reveal>
                 <div class="home-use-case__media">
                     <img
                         src="{{ asset('assets/images/luxgo/home/lifestyle/lifestyle-scene.webp') }}"

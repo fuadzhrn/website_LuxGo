@@ -1,0 +1,181 @@
+/* ==========================================================================
+   LUX&GO — Home / How It Works + Membership CTA
+   ========================================================================== */
+
+.home-how {
+    background-color: var(--color-off-white);
+    /* Followed by the dark footer — no stray divider before that cut. */
+    border-bottom: none;
+}
+
+/* Header ---------------------------------------------------------------- */
+
+.home-how__header {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    column-gap: var(--grid-gap);
+    align-items: end;
+}
+
+.home-how__header-heading {
+    grid-column: 1 / 8;
+}
+
+.home-how__eyebrow {
+    margin-bottom: clamp(16px, 1.4vw, 24px);
+}
+
+.home-how__title {
+    font-family: var(--font-heading);
+    font-weight: var(--fw-semibold);
+    font-size: var(--fs-section-heading);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.home-how__title-line {
+    display: block;
+}
+
+.home-how__intro {
+    grid-column: 9 / 13;
+    max-width: 320px;
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--color-text-muted);
+}
+
+/* Steps ------------------------------------------------------------------- */
+
+.home-how__steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: clamp(32px, 3vw, 56px);
+    margin-top: clamp(60px, 5vw, 80px);
+}
+
+.home-how__step {
+    position: relative;
+}
+
+.home-how__number {
+    display: block;
+    margin-bottom: clamp(12px, 1vw, 16px);
+    font-family: var(--font-heading);
+    font-weight: var(--fw-semibold);
+    font-size: var(--fs-body);
+    color: var(--color-lux-blue);
+}
+
+.home-how__step-title {
+    margin-bottom: clamp(8px, 0.8vw, 12px);
+    font-family: var(--font-heading);
+    font-weight: var(--fw-semibold);
+    font-size: var(--fs-feature-heading);
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.home-how__step-copy {
+    max-width: 260px;
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--color-text-muted);
+}
+
+.home-how__connector {
+    position: absolute;
+    top: 2px;
+    right: -1.75rem;
+    font-size: var(--fs-body);
+    color: var(--color-lux-blue);
+    opacity: 0.55;
+}
+
+/* CTA ----------------------------------------------------------------------- */
+
+.home-how__cta {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    column-gap: var(--grid-gap);
+    align-items: center;
+    margin-top: clamp(90px, 7vw, 130px);
+    padding-top: clamp(48px, 4vw, 64px);
+    border-top: var(--border-thin);
+}
+
+.home-how__cta-title {
+    grid-column: 1 / 8;
+    font-family: var(--font-heading);
+    font-weight: var(--fw-semibold);
+    font-size: var(--fs-section-heading);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.home-how__cta-title-line {
+    display: block;
+}
+
+.home-how__cta-link {
+    grid-column: 9 / 13;
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: clamp(46px, 3.4vw, 52px);
+    padding-inline: clamp(24px, 1.8vw, 32px);
+    border-radius: 8px;
+    background-color: var(--color-lux-blue);
+    color: var(--color-white);
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: var(--fs-body);
+    white-space: nowrap;
+    transition: background-color var(--transition-base), transform var(--transition-base);
+}
+
+.home-how__cta-link:hover {
+    background-color: var(--color-lux-blue-strong);
+    color: var(--color-white);
+    transform: translateY(-1px);
+}
+
+.home-how__cta-link:active {
+    transform: translateY(1px);
+}
+
+.home-how__cta-link:focus-visible {
+    outline: 2px solid var(--color-obsidian);
+    outline-offset: 3px;
+    border-radius: 8px;
+}
+
+.home-how__cta-link-icon {
+    transition: transform var(--transition-base);
+}
+
+.home-how__cta-link:hover .home-how__cta-link-icon {
+    transform: translateX(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .home-how__cta-link,
+    .home-how__cta-link-icon {
+        transition: none;
+    }
+
+    .home-how__cta-link:hover,
+    .home-how__cta-link:active,
+    .home-how__cta-link:hover .home-how__cta-link-icon {
+        transform: none;
+    }
+}

@@ -1,0 +1,60 @@
+/* ==========================================================================
+   LUX&GO — Motion Primitives (scroll reveal system)
+   ========================================================================== */
+
+:root {
+    --motion-duration: 650ms;
+    --motion-distance: 20px;
+    --motion-stagger: 80ms;
+    --motion-easing: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/*
+   Reveal is opt-in through the .has-motion flag that reveal.js sets on <html>.
+   If JavaScript never runs, the flag never lands and all content stays visible.
+*/
+
+.has-motion [data-reveal] {
+    opacity: 0;
+    transform: translateY(var(--motion-distance));
+    transition: opacity var(--motion-duration) var(--motion-easing),
+        transform var(--motion-duration) var(--motion-easing);
+}
+
+.has-motion [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+.has-motion [data-reveal-delay="1"] {
+    transition-delay: calc(var(--motion-stagger) * 1);
+}
+
+.has-motion [data-reveal-delay="2"] {
+    transition-delay: calc(var(--motion-stagger) * 2);
+}
+
+.has-motion [data-reveal-delay="3"] {
+    transition-delay: calc(var(--motion-stagger) * 3);
+}
+
+.has-motion [data-reveal-delay="4"] {
+    transition-delay: calc(var(--motion-stagger) * 4);
+}
+
+.has-motion [data-reveal-delay="5"] {
+    transition-delay: calc(var(--motion-stagger) * 5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .has-motion [data-reveal],
+    .has-motion [data-reveal].is-visible {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .has-motion [data-reveal-delay] {
+        transition-delay: 0ms;
+    }
+}

@@ -33,7 +33,7 @@
 
                 <a href="/collection" class="home-hero__secondary-link">
                     <span>Discover Our Collection</span>
-                    <span aria-hidden="true">&rarr;</span>
+                    <span class="home-hero__secondary-link-icon" aria-hidden="true">&rarr;</span>
                 </a>
             </div>
         </div>

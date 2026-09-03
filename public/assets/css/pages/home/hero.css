@@ -14,7 +14,6 @@
     overflow: hidden;
     background-color: var(--color-obsidian);
     color: var(--color-white);
-    border-bottom: none;
 }
 
 /* Media ------------------------------------------------------------------ */
@@ -30,6 +29,7 @@
     height: 100%;
     object-fit: cover;
     object-position: right center;
+    animation: home-hero-image-settle 900ms var(--motion-easing) both;
 }
 
 .home-hero__overlay {
@@ -71,8 +71,19 @@
 .home-hero__title-line {
     display: block;
     opacity: 0;
-    animation: home-hero-fade-up 700ms ease both;
-    animation-delay: 80ms;
+    animation: home-hero-fade-up 600ms var(--motion-easing) both;
+}
+
+.home-hero__title-line:nth-child(2) {
+    animation-delay: 60ms;
+}
+
+.home-hero__title-line:nth-child(3) {
+    animation-delay: 120ms;
+}
+
+.home-hero__title-line:nth-child(4) {
+    animation-delay: 180ms;
 }
 
 .home-hero__description {
@@ -84,8 +95,8 @@
     line-height: var(--lh-body);
     color: var(--color-off-white);
     opacity: 0;
-    animation: home-hero-fade-up 700ms ease both;
-    animation-delay: 220ms;
+    animation: home-hero-fade-up 600ms var(--motion-easing) both;
+    animation-delay: 240ms;
 }
 
 .home-hero__actions {
@@ -95,8 +106,8 @@
     gap: clamp(20px, 2vw, 32px);
     margin-top: clamp(28px, 2vw, 40px);
     opacity: 0;
-    animation: home-hero-fade-up 700ms ease both;
-    animation-delay: 340ms;
+    animation: home-hero-fade-up 600ms var(--motion-easing) both;
+    animation-delay: 300ms;
 }
 
 /* Primary CTA ---------------------------------------------------------------- */
@@ -121,6 +132,10 @@
     background-color: var(--color-lux-blue-strong);
     color: var(--color-white);
     transform: translateY(-1px);
+}
+
+.home-hero__cta:active {
+    transform: translateY(1px);
 }
 
 .home-hero__cta:focus-visible {
@@ -163,6 +178,15 @@
     border-radius: var(--radius-sm);
 }
 
+.home-hero__secondary-link-icon {
+    color: var(--color-lux-blue);
+    transition: transform var(--transition-base);
+}
+
+.home-hero__secondary-link:hover .home-hero__secondary-link-icon {
+    transform: translateX(2px);
+}
+
 /* Entrance animation ----------------------------------------------------------- */
 
 @keyframes home-hero-fade-up {
@@ -177,11 +201,39 @@
     }
 }
 
+@keyframes home-hero-image-settle {
+    from {
+        opacity: 0.85;
+        transform: scale(1.015);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .home-hero__title-line,
     .home-hero__description,
-    .home-hero__actions {
+    .home-hero__actions,
+    .home-hero__image {
         animation: none;
         opacity: 1;
+        transform: none;
+    }
+
+    .home-hero__cta,
+    .home-hero__cta-icon,
+    .home-hero__secondary-link,
+    .home-hero__secondary-link-icon {
+        transition: none;
+    }
+
+    .home-hero__cta:hover,
+    .home-hero__cta:active,
+    .home-hero__cta:hover .home-hero__cta-icon,
+    .home-hero__secondary-link:hover .home-hero__secondary-link-icon {
+        transform: none;
     }
 }

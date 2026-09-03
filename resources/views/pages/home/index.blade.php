@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/pages/home/access-not-ownership.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/pages/home/use-cases.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/pages/home/premium-mobility.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/pages/home/how-it-works.css') }}">
 @endpush
 
 @section('content')

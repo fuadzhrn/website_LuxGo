@@ -4,6 +4,8 @@
 
 .home-use-cases {
     background-color: var(--color-white);
+    /* Followed by dark Premium Mobility — no stray divider before that cut. */
+    border-bottom: none;
 }
 
 /* Header ---------------------------------------------------------------- */
@@ -99,6 +101,16 @@
 
 .home-use-case__media:hover .home-use-case__image {
     transform: scale(1.02);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .home-use-case__image {
+        transition: none;
+    }
+
+    .home-use-case__media:hover .home-use-case__image {
+        transform: none;
+    }
 }
 
 /* Meta ---------------------------------------------------------------------- */
