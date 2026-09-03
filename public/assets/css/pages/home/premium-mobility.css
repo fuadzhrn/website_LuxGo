@@ -3,29 +3,64 @@
    ========================================================================== */
 
 .home-mobility {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(60px, 5vw, 80px) clamp(50px, 4.5vw, 70px);
     background-color: var(--color-obsidian);
     color: var(--color-white);
     border-bottom: none;
 }
 
-.home-mobility__inner {
-    display: grid;
-    grid-template-columns: repeat(var(--grid-columns), 1fr);
-    column-gap: var(--grid-gap);
-    align-items: start;
+/* Vehicle ------------------------------------------------------------------ */
+
+/*
+   The vehicle sits on the section surface itself — no frame, no panel. Its
+   source background is already near-black, so masking the left edge lets it dissolve
+   into the section instead of ending on a hard rectangular boundary.
+*/
+.home-mobility__media {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 64%;
+    z-index: 0;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 20%, #000 100%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 20%, #000 100%);
+}
+
+.home-mobility__vehicle {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
 }
 
 /* Content ------------------------------------------------------------------ */
 
+.home-mobility__container {
+    position: relative;
+    z-index: 1;
+}
+
 .home-mobility__content {
-    grid-column: 1 / 6;
+    max-width: clamp(500px, 40vw, 580px);
+}
+
+.home-mobility__eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.6875rem, 0.65rem + 0.1vw, 0.8125rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-lux-blue);
 }
 
 .home-mobility__title {
-    margin-top: clamp(18px, 1.6vw, 28px);
+    margin-top: clamp(12px, 1.1vw, 18px);
     font-family: var(--font-heading);
-    font-weight: var(--fw-semibold);
-    font-size: var(--fs-section-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(2.5rem, 2.1rem + 1vw, 3.25rem);
     line-height: 1.05;
     letter-spacing: -0.01em;
     text-transform: uppercase;
@@ -37,128 +72,86 @@
 }
 
 .home-mobility__description {
-    max-width: 420px;
-    margin-top: clamp(24px, 2vw, 32px);
+    max-width: 430px;
+    margin-top: clamp(16px, 1.4vw, 22px);
     font-family: var(--font-body);
     font-weight: var(--fw-regular);
-    font-size: var(--fs-body-lg);
-    line-height: var(--lh-body);
-    color: var(--color-off-white);
-    opacity: 0.8;
+    font-size: clamp(0.875rem, 0.84rem + 0.1vw, 1rem);
+    line-height: 1.55;
+    color: var(--color-muted-gray);
 }
 
+/* Features ------------------------------------------------------------------- */
+
+/* Four fixed tracks so the row never wraps on desktop. */
 .home-mobility__features {
-    margin-top: clamp(40px, 3.4vw, 56px);
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: clamp(32px, 2.8vw, 42px);
 }
 
 .home-mobility__feature {
     display: flex;
-    align-items: baseline;
-    gap: clamp(16px, 1.4vw, 24px);
-    padding-block: clamp(16px, 1.4vw, 22px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-inline: clamp(6px, 0.8vw, 12px);
+    text-align: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.home-mobility__feature:first-child {
-    border-top: 1px solid rgba(255, 255, 255, 0.14);
+.home-mobility__feature:last-child {
+    border-right: none;
 }
 
-.home-mobility__feature-index {
-    flex-shrink: 0;
-    width: 2.25rem;
-    font-family: var(--font-heading);
-    font-weight: var(--fw-semibold);
-    font-size: var(--fs-body-lg);
-    color: var(--color-lux-blue);
+.home-mobility__feature-icon {
+    width: 24px;
+    height: 24px;
 }
 
 .home-mobility__feature-label {
     font-family: var(--font-body);
     font-weight: var(--fw-medium);
-    font-size: var(--fs-body-lg);
+    font-size: clamp(0.8125rem, 0.78rem + 0.1vw, 0.9375rem);
+    line-height: 1.35;
     color: var(--color-off-white);
 }
 
-/* Media ----------------------------------------------------------------------- */
-
-.home-mobility__media {
-    grid-column: 7 / 13;
-    /* Deliberate vertical offset from the content column for an editorial, non 50:50 feel. */
-    margin-top: clamp(40px, 4vw, 64px);
-}
-
-.home-mobility__vehicle-name {
-    margin-bottom: clamp(20px, 1.8vw, 28px);
-    font-family: var(--font-heading);
-    font-weight: var(--fw-semibold);
-    font-size: var(--fs-feature-heading);
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: var(--color-white);
-}
-
-.home-mobility__vehicle {
-    overflow: hidden;
-    height: clamp(440px, 34vw, 620px);
-    background-color: var(--color-graphite);
-}
-
-.home-mobility__vehicle-image {
+.home-mobility__feature-line {
     display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
-.home-mobility__driver-note {
-    margin-top: clamp(24px, 2vw, 32px);
-    font-family: var(--font-body);
-    font-weight: var(--fw-medium);
-    font-size: var(--fs-body);
-    color: var(--color-off-white);
-    opacity: 0.85;
+/* Professional driver note ------------------------------------------------------ */
+
+.home-mobility__driver {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: clamp(28px, 2.4vw, 38px);
 }
 
-.home-mobility__link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: clamp(16px, 1.4vw, 24px);
-    padding-bottom: 2px;
+.home-mobility__driver-icon {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+}
+
+.home-mobility__driver-title {
     font-family: var(--font-body);
     font-weight: var(--fw-medium);
-    font-size: var(--fs-body);
+    font-size: clamp(0.8125rem, 0.78rem + 0.1vw, 0.9375rem);
     color: var(--color-white);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
-    transition: color var(--transition-base), border-color var(--transition-base);
 }
 
-.home-mobility__link:hover {
-    border-color: var(--color-lux-blue);
-}
-
-.home-mobility__link:focus-visible {
-    outline: 2px solid var(--color-lux-blue);
-    outline-offset: 4px;
-    border-radius: var(--radius-sm);
-}
-
-.home-mobility__link-icon {
+.home-mobility__driver-accent {
     color: var(--color-lux-blue);
-    transition: transform var(--transition-base);
 }
 
-.home-mobility__link:hover .home-mobility__link-icon {
-    transform: translateX(2px);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .home-mobility__link,
-    .home-mobility__link-icon {
-        transition: none;
-    }
-
-    .home-mobility__link:hover .home-mobility__link-icon {
-        transform: none;
-    }
+.home-mobility__driver-copy {
+    margin-top: 4px;
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: clamp(0.75rem, 0.72rem + 0.08vw, 0.875rem);
+    color: var(--color-muted-gray);
 }

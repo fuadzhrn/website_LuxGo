@@ -1,58 +1,73 @@
-<section class="home-section lux-section home-mobility">
-    <div class="lux-container home-mobility__inner">
+@php
+    $previewFeatures = [
+        ['icon' => 'gem.svg', 'lines' => ['Premium', 'Design']],
+        ['icon' => 'armchair.svg', 'lines' => ['Luxury', 'Comfort']],
+        ['icon' => 'zap.svg', 'lines' => ['EV', 'Technology']],
+        ['icon' => 'user-round.svg', 'lines' => ['Executive', 'Image']],
+    ];
+@endphp
+
+<section class="home-section home-mobility">
+    <div class="home-mobility__media">
+        <img
+            src="{{ asset('assets/images/luxgo/collection/denza-d9/gambar_bg2.png') }}"
+            alt="Denza D9, the first vehicle in the LUX&GO collection."
+            class="home-mobility__vehicle"
+            width="1672"
+            height="941"
+            loading="lazy"
+        >
+    </div>
+
+    <div class="lux-container home-mobility__container">
         <div class="home-mobility__content">
-            <p class="home-mobility__eyebrow lux-eyebrow" data-reveal>Premium Experience</p>
+            <p class="home-mobility__eyebrow" data-reveal>Premium Experience</p>
 
             <h2 class="home-mobility__title" data-reveal data-reveal-delay="1">
                 <span class="home-mobility__title-line">Premium</span>
-                <span class="home-mobility__title-line">Mobility,</span>
-                <span class="home-mobility__title-line">Refined.</span>
+                <span class="home-mobility__title-line">Mobility Preview.</span>
             </h2>
 
             <p class="home-mobility__description" data-reveal data-reveal-delay="2">
-                The first vehicle in the LUX&amp;GO collection, chosen for premium comfort, modern technology, and an executive presence.
+                Experience the perfect blend of sophistication, innovation, and comfort — every single time.
             </p>
 
             <ul class="home-mobility__features" data-reveal data-reveal-delay="3">
-                <li class="home-mobility__feature">
-                    <span class="home-mobility__feature-index">01</span>
-                    <span class="home-mobility__feature-label">Premium Design</span>
-                </li>
-                <li class="home-mobility__feature">
-                    <span class="home-mobility__feature-index">02</span>
-                    <span class="home-mobility__feature-label">Luxury Comfort</span>
-                </li>
-                <li class="home-mobility__feature">
-                    <span class="home-mobility__feature-index">03</span>
-                    <span class="home-mobility__feature-label">EV Technology</span>
-                </li>
-                <li class="home-mobility__feature">
-                    <span class="home-mobility__feature-index">04</span>
-                    <span class="home-mobility__feature-label">Executive Image</span>
-                </li>
+                @foreach ($previewFeatures as $feature)
+                    <li class="home-mobility__feature">
+                        <img
+                            src="{{ asset('assets/icons/luxgo/preview/'.$feature['icon']) }}"
+                            alt=""
+                            class="home-mobility__feature-icon"
+                            width="24"
+                            height="24"
+                            loading="lazy"
+                        >
+                        <span class="home-mobility__feature-label">
+                            @foreach ($feature['lines'] as $line)
+                                <span class="home-mobility__feature-line">{{ $line }}</span>
+                            @endforeach
+                        </span>
+                    </li>
+                @endforeach
             </ul>
-        </div>
 
-        <div class="home-mobility__media">
-            <p class="home-mobility__vehicle-name" data-reveal>Denza D9</p>
-
-            <div class="home-mobility__vehicle" data-reveal data-reveal-delay="1">
+            <div class="home-mobility__driver" data-reveal data-reveal-delay="4">
                 <img
-                    src="{{ asset('assets/images/luxgo/collection/denza-d9/gambar_bg2.png') }}"
-                    alt="Denza D9 premium vehicle for LUX&GO mobility membership."
-                    class="home-mobility__vehicle-image"
-                    width="1600"
-                    height="1000"
+                    src="{{ asset('assets/icons/luxgo/preview/user-round-check.svg') }}"
+                    alt=""
+                    class="home-mobility__driver-icon"
+                    width="24"
+                    height="24"
                     loading="lazy"
                 >
+                <div>
+                    <p class="home-mobility__driver-title">
+                        Professionally Driven. <span class="home-mobility__driver-accent">Always.</span>
+                    </p>
+                    <p class="home-mobility__driver-copy">Sit back and enjoy the journey.</p>
+                </div>
             </div>
-
-            <p class="home-mobility__driver-note" data-reveal data-reveal-delay="2">Professional Driver Included</p>
-
-            <a href="/collection" class="home-mobility__link">
-                <span>Explore Our Collection</span>
-                <span class="home-mobility__link-icon" aria-hidden="true">&rarr;</span>
-            </a>
         </div>
     </div>
 </section>
