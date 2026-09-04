@@ -1,0 +1,196 @@
+/* ==========================================================================
+   LUX&GO — Membership / FAQ
+   ========================================================================== */
+
+.membership-faq {
+    padding-block: clamp(48px, 4vw, 68px);
+    background-color: var(--color-white);
+}
+
+.membership-faq__inner {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    column-gap: var(--grid-gap);
+}
+
+/* Left: intro ------------------------------------------------------------------ */
+
+.membership-faq__intro {
+    grid-column: 1 / 5;
+}
+
+.membership-faq__eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.6875rem, 0.65rem + 0.1vw, 0.8125rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-lux-blue);
+}
+
+.membership-faq__title {
+    margin-top: clamp(12px, 1.1vw, 18px);
+    font-family: var(--font-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(2.125rem, 1.8rem + 1vw, 3rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.membership-faq__title-line {
+    display: block;
+}
+
+.membership-faq__copy {
+    max-width: 320px;
+    margin-top: clamp(16px, 1.4vw, 22px);
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--color-text-muted);
+}
+
+/* Right: accordion -------------------------------------------------------------- */
+
+.membership-faq__list {
+    grid-column: 6 / 13;
+}
+
+/* Flat rows separated by hairlines — deliberately not boxed panels. */
+.membership-faq__item {
+    border-bottom: var(--border-thin);
+}
+
+.membership-faq__item:first-child {
+    border-top: var(--border-thin);
+}
+
+.membership-faq__question {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 1.2vw, 20px);
+    width: 100%;
+    padding-block: clamp(14px, 1.2vw, 20px);
+    text-align: left;
+    transition: color var(--transition-base);
+}
+
+.membership-faq__question:hover .membership-faq__label {
+    color: var(--color-lux-blue);
+}
+
+.membership-faq__question:focus-visible {
+    outline: 2px solid var(--color-lux-blue);
+    outline-offset: 3px;
+}
+
+.membership-faq__number {
+    flex-shrink: 0;
+    font-family: var(--font-heading);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.6875rem, 0.66rem + 0.08vw, 0.8125rem);
+    letter-spacing: 0.06em;
+    color: var(--color-lux-blue);
+}
+
+.membership-faq__label {
+    flex: 1;
+    font-family: var(--font-body);
+    font-weight: var(--fw-medium);
+    font-size: clamp(0.875rem, 0.84rem + 0.1vw, 1rem);
+    line-height: 1.4;
+    color: var(--color-text);
+    transition: color var(--transition-base);
+}
+
+.membership-faq__icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+}
+
+/* The open/closed glyph follows the button state — no JS needed for the swap. */
+.membership-faq__icon-minus {
+    display: none;
+}
+
+.membership-faq__question[aria-expanded="true"] .membership-faq__icon-plus {
+    display: none;
+}
+
+.membership-faq__question[aria-expanded="true"] .membership-faq__icon-minus {
+    display: block;
+}
+
+/* Answers ------------------------------------------------------------------------ */
+
+.membership-faq__answer {
+    padding-bottom: clamp(16px, 1.4vw, 24px);
+    padding-left: calc(clamp(0.6875rem, 0.66rem + 0.08vw, 0.8125rem) + clamp(14px, 1.2vw, 20px) + 0.9em);
+}
+
+.membership-faq__answer[hidden] {
+    display: none;
+}
+
+.membership-faq__answer-text {
+    max-width: 560px;
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: clamp(0.8125rem, 0.78rem + 0.1vw, 0.9375rem);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+}
+
+.membership-faq__breakdown {
+    max-width: 340px;
+    margin-top: clamp(12px, 1vw, 16px);
+}
+
+.membership-faq__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: 5px;
+}
+
+.membership-faq__row--total {
+    margin-top: 4px;
+    padding-top: 9px;
+    border-top: var(--border-thin);
+}
+
+.membership-faq__row-label {
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: clamp(0.75rem, 0.72rem + 0.1vw, 0.875rem);
+    color: var(--color-text-muted);
+}
+
+.membership-faq__row--total .membership-faq__row-label {
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.membership-faq__row-value {
+    font-family: var(--font-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(0.8125rem, 0.78rem + 0.1vw, 0.9375rem);
+    color: var(--color-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .membership-faq__question,
+    .membership-faq__label {
+        transition: none;
+    }
+}

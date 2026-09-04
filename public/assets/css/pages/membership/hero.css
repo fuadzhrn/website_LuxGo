@@ -62,7 +62,7 @@
 .membership-hero__panel {
     grid-column: 7 / 13;
     padding: clamp(26px, 2.2vw, 36px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     background-color: var(--color-graphite);
     color: var(--color-white);

@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .membership-access {
-    padding-block: clamp(60px, 5.2vw, 88px);
+    padding-block: clamp(48px, 4.2vw, 70px);
     background-color: var(--color-obsidian);
     color: var(--color-white);
 }
@@ -46,7 +46,7 @@
     margin-top: clamp(16px, 1.4vw, 22px);
     font-family: var(--font-body);
     font-weight: var(--fw-regular);
-    font-size: clamp(0.875rem, 0.84rem + 0.1vw, 1rem);
+    font-size: var(--fs-body);
     line-height: 1.6;
     color: var(--color-muted-gray);
 }
