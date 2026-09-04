@@ -1,0 +1,170 @@
+/* ==========================================================================
+   LUX&GO — Membership / Understanding Your Usage
+   ========================================================================== */
+
+.membership-usage {
+    padding-block: clamp(40px, 3.4vw, 58px);
+    background-color: var(--color-off-white);
+}
+
+/* Header ---------------------------------------------------------------------- */
+
+.membership-usage__header {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    column-gap: var(--grid-gap);
+    align-items: end;
+    margin-bottom: clamp(24px, 2.2vw, 40px);
+}
+
+.membership-usage__heading {
+    grid-column: 1 / 7;
+}
+
+.membership-usage__eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.6875rem, 0.65rem + 0.1vw, 0.8125rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-lux-blue);
+}
+
+.membership-usage__title {
+    margin-top: clamp(12px, 1.1vw, 18px);
+    font-family: var(--font-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(2.125rem, 1.8rem + 1vw, 3rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.membership-usage__title-line {
+    display: block;
+}
+
+.membership-usage__copy {
+    grid-column: 8 / 13;
+    max-width: 400px;
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--color-text-muted);
+}
+
+/* Comparison ------------------------------------------------------------------- */
+
+/* Two conditions read side by side, separated by a hairline — never boxed. */
+.membership-usage__comparison {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
+    column-gap: clamp(32px, 3.4vw, 72px);
+    padding-top: clamp(20px, 1.8vw, 30px);
+    border-top: var(--border-thin);
+}
+
+.membership-usage__divider {
+    background-color: var(--color-border);
+}
+
+.membership-usage__case-label {
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.625rem, 0.6rem + 0.08vw, 0.75rem);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.membership-usage__amount {
+    font-family: var(--font-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(1.875rem, 1.6rem + 0.9vw, 2.625rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+}
+
+.membership-usage__case > .membership-usage__amount {
+    margin-top: clamp(14px, 1.3vw, 22px);
+}
+
+.membership-usage__unit {
+    margin-top: 8px;
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.75rem, 0.72rem + 0.1vw, 0.875rem);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+/* The unit belongs to the total, so it tracks the right-aligned amount. */
+.membership-usage__breakdown + .membership-usage__unit {
+    text-align: right;
+}
+
+.membership-usage__caption {
+    margin-top: 4px;
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: clamp(0.75rem, 0.72rem + 0.1vw, 0.875rem);
+    color: var(--color-text-muted);
+}
+
+.membership-usage__note {
+    margin-top: clamp(16px, 1.4vw, 24px);
+    padding-top: clamp(12px, 1.1vw, 18px);
+    border-top: var(--border-thin);
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: clamp(0.75rem, 0.72rem + 0.1vw, 0.875rem);
+    line-height: 1.55;
+    color: var(--color-text-muted);
+}
+
+/* Breakdown so the arithmetic stays visible: 750 + 500 = 1.250 ------------------ */
+
+.membership-usage__breakdown {
+    margin-top: clamp(14px, 1.3vw, 22px);
+}
+
+.membership-usage__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: clamp(6px, 0.6vw, 10px);
+}
+
+.membership-usage__row--total {
+    align-items: baseline;
+    margin-top: clamp(6px, 0.6vw, 10px);
+    padding-top: clamp(10px, 1vw, 16px);
+    border-top: var(--border-thin);
+}
+
+.membership-usage__row-label {
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: clamp(0.75rem, 0.72rem + 0.1vw, 0.875rem);
+    color: var(--color-text-muted);
+}
+
+.membership-usage__row--total .membership-usage__row-label {
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.membership-usage__row-value {
+    font-family: var(--font-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(1rem, 0.94rem + 0.2vw, 1.25rem);
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+}

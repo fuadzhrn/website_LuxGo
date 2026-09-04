@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/pages/membership/hero.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/pages/membership/membership-package.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/pages/membership/more-access.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/pages/membership/understanding-usage.css') }}">
 @endpush
 
 @section('content')
@@ -19,6 +20,7 @@
     @include('pages.membership.sections.hero')
     @include('pages.membership.sections.membership-package')
     @include('pages.membership.sections.more-access')
+    @include('pages.membership.sections.understanding-usage')
 
 @endsection
 
