@@ -4,26 +4,26 @@
             'label' => 'Business',
             'image' => 'assets/images/luxgo/home/use-cases/business.webp',
             'alt' => 'Premium mobility for business meetings and client visits.',
-            'details' => ['Meeting · Client Visit', 'Business Trip · Site Visit'],
+            'lines' => ['Arrive with confidence.', 'Make every moment count.'],
         ],
         [
             'label' => 'Family',
             'image' => 'assets/images/luxgo/home/use-cases/family.webp',
             'alt' => 'Premium mobility for family weekends and outings.',
-            'details' => ['Weekend · Shopping', 'Dining · Family Activities'],
+            'lines' => ['More time together.', 'Every journey, effortless.'],
         ],
         [
             'label' => 'Life',
             'image' => 'assets/images/luxgo/home/use-cases/life.webp',
             'alt' => 'Premium mobility for special occasions and events.',
-            'details' => ['Events · Wedding', 'Airport · Special Occasions'],
+            'lines' => ['Your schedule. Your pace.', 'Live more, worry less.'],
         ],
     ];
 @endphp
 
 {{-- Photography goes in public/assets/images/luxgo/home/use-cases/ as
      business.webp, family.webp and life.webp. Until a file is present the card
-     keeps its empty media slot instead of rendering a broken image. --}}
+     keeps its dark media slot instead of rendering a broken image. --}}
 
 <section class="home-section home-use-cases">
     <div class="lux-container">
@@ -54,16 +54,16 @@
                                 loading="lazy"
                             >
                         @endif
-                    </div>
 
-                    <div class="home-use-case__meta">
-                        <span class="home-use-case__index">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
-                        <h3 class="home-use-case__label">{{ $useCase['label'] }}</h3>
-                        <p class="home-use-case__details">
-                            @foreach ($useCase['details'] as $line)
-                                <span class="home-use-case__details-line">{{ $line }}</span>
-                            @endforeach
-                        </p>
+                        <div class="home-use-case__overlay">
+                            <span class="home-use-case__accent" aria-hidden="true"></span>
+                            <h3 class="home-use-case__label">{{ $useCase['label'] }}</h3>
+                            <p class="home-use-case__copy">
+                                @foreach ($useCase['lines'] as $line)
+                                    <span class="home-use-case__copy-line">{{ $line }}</span>
+                                @endforeach
+                            </p>
+                        </div>
                     </div>
                 </article>
             @endforeach

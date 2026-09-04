@@ -1,0 +1,132 @@
+/* ==========================================================================
+   LUX&GO — Membership / Hero + Key Numbers
+   ========================================================================== */
+
+.membership-hero {
+    /* Mirrors the fixed navbar height in header.css, which overlays this page. */
+    --membership-hero-header-offset: clamp(72px, 4vw, 78px);
+
+    padding-top: calc(var(--membership-hero-header-offset) + clamp(36px, 3vw, 52px));
+    padding-bottom: clamp(44px, 3.6vw, 60px);
+}
+
+.membership-hero__inner {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    column-gap: var(--grid-gap);
+    align-items: center;
+}
+
+/* Left: positioning ---------------------------------------------------------- */
+
+.membership-hero__content {
+    grid-column: 1 / 6;
+}
+
+.membership-hero__eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.6875rem, 0.65rem + 0.1vw, 0.8125rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-lux-blue);
+}
+
+.membership-hero__title {
+    margin-top: clamp(14px, 1.2vw, 20px);
+    font-family: var(--font-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(2.375rem, 1.95rem + 1.4vw, 3.5rem);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.membership-hero__title-line {
+    display: block;
+}
+
+.membership-hero__copy {
+    max-width: 410px;
+    margin-top: clamp(20px, 1.8vw, 28px);
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--color-text-muted);
+}
+
+/* Right: data panel ----------------------------------------------------------- */
+
+.membership-hero__panel {
+    grid-column: 7 / 13;
+    padding: clamp(26px, 2.2vw, 36px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    background-color: var(--color-graphite);
+    color: var(--color-white);
+}
+
+.membership-hero__panel-label {
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.625rem, 0.6rem + 0.08vw, 0.75rem);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-muted-gray);
+}
+
+.membership-hero__metrics {
+    margin-top: clamp(18px, 1.6vw, 26px);
+}
+
+/* One continuous editorial stack — deliberately not three separate cards. */
+.membership-hero__metric {
+    padding-block: clamp(16px, 1.3vw, 22px);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.membership-hero__metric:first-child {
+    padding-top: 0;
+    border-top: none;
+}
+
+.membership-hero__metric:last-child {
+    padding-bottom: 0;
+}
+
+.membership-hero__value {
+    font-family: var(--font-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(3rem, 2.7rem + 0.8vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-white);
+}
+
+.membership-hero__metric:first-child .membership-hero__value {
+    font-size: clamp(4rem, 3.5rem + 1.3vw, 5rem);
+}
+
+.membership-hero__times {
+    color: var(--color-lux-blue);
+}
+
+.membership-hero__unit {
+    margin-top: clamp(6px, 0.6vw, 10px);
+    font-family: var(--font-body);
+    font-weight: var(--fw-medium);
+    font-size: clamp(0.75rem, 0.72rem + 0.1vw, 0.875rem);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-off-white);
+}
+
+.membership-hero__metric-label {
+    margin-top: 4px;
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: clamp(0.75rem, 0.72rem + 0.1vw, 0.875rem);
+    color: var(--color-muted-gray);
+}

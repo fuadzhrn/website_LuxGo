@@ -20,6 +20,16 @@
     transition: background-color var(--header-transition), border-color var(--header-transition);
 }
 
+/*
+   Pages that open on a light surface need the bar solid from the start,
+   otherwise the white navigation sits on a near-white background.
+   Reuses the scrolled-state tokens — no separate look.
+*/
+.has-light-top .site-header {
+    background-color: var(--header-bg-scrolled);
+    border-bottom-color: var(--header-border-scrolled);
+}
+
 .site-header.is-scrolled {
     background-color: var(--header-bg-scrolled);
     border-bottom-color: var(--header-border-scrolled);

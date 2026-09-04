@@ -1,0 +1,7 @@
+/* ==========================================================================
+   LUX&GO — Membership (page-level base; section styles live in their own files)
+   ========================================================================== */
+
+.membership-section {
+    background-color: var(--color-off-white);
+}

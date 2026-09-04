@@ -65,11 +65,27 @@
 }
 
 .home-use-case__media {
+    position: relative;
     overflow: hidden;
     aspect-ratio: 4 / 3;
     border-radius: var(--radius-sm);
-    /* Doubles as the placeholder while a photo has not been added yet. */
-    background-color: var(--color-off-white);
+    /* Dark so the overlay text stays legible before a photo is added. */
+    background-color: var(--color-graphite);
+}
+
+/* Scrim that keeps the overlay readable over any photograph. */
+.home-use-case__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        to top,
+        rgba(9, 10, 12, 0.88) 0%,
+        rgba(9, 10, 12, 0.45) 34%,
+        rgba(9, 10, 12, 0) 64%
+    );
+    pointer-events: none;
 }
 
 .home-use-case__image {
@@ -84,41 +100,45 @@
     transform: scale(1.02);
 }
 
-/* Meta ---------------------------------------------------------------------- */
+/* Overlay ------------------------------------------------------------------- */
 
-.home-use-case__meta {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-top: clamp(16px, 1.3vw, 22px);
+.home-use-case__overlay {
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: clamp(18px, 1.6vw, 26px);
 }
 
-.home-use-case__index {
-    font-family: var(--font-heading);
-    font-weight: var(--fw-semibold);
-    font-size: var(--fs-eyebrow);
-    letter-spacing: 0.04em;
-    color: var(--color-lux-blue);
+.home-use-case__accent {
+    display: block;
+    width: 34px;
+    height: 2px;
+    background-color: var(--color-lux-blue);
 }
 
 .home-use-case__label {
+    margin-top: clamp(10px, 0.9vw, 14px);
     font-family: var(--font-heading);
-    font-weight: var(--fw-semibold);
-    font-size: var(--fs-feature-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(1.375rem, 1.2rem + 0.5vw, 1.75rem);
     line-height: 1.1;
+    letter-spacing: 0.01em;
     text-transform: uppercase;
-    color: var(--color-text);
+    color: var(--color-white);
 }
 
-.home-use-case__details {
+.home-use-case__copy {
+    margin-top: 8px;
     font-family: var(--font-body);
     font-weight: var(--fw-regular);
-    font-size: var(--fs-body);
-    line-height: var(--lh-body);
-    color: var(--color-text-muted);
+    font-size: clamp(0.8125rem, 0.78rem + 0.1vw, 0.9375rem);
+    line-height: 1.5;
+    color: var(--color-off-white);
 }
 
-.home-use-case__details-line {
+.home-use-case__copy-line {
     display: block;
 }
 
