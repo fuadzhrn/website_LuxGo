@@ -18,6 +18,10 @@ Route::get('/experience', function () {
     return view('pages.experience.index');
 })->name('experience');
 
+Route::get('/how-it-works', function () {
+    return view('pages.how-it-works.index');
+})->name('how-it-works');
+
 Route::get('/terms-of-use', function () {
     return view('pages.legal.show', ['legalTitle' => 'Terms of Use']);
 })->name('legal.terms');

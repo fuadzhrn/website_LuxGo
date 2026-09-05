@@ -1,0 +1,7 @@
+/* ==========================================================================
+   LUX&GO — How It Works (page-level base; section styles live in their own files)
+   ========================================================================== */
+
+.hiw-section {
+    background-color: var(--color-white);
+}

@@ -1,0 +1,84 @@
+/* ==========================================================================
+   LUX&GO — How It Works / Serving Jabodetabek
+   ========================================================================== */
+
+.hiw-area {
+    padding-block: clamp(48px, 4.2vw, 70px);
+    background-color: var(--color-graphite);
+    color: var(--color-white);
+}
+
+/* Heading left, the area register right — an editorial spread, not a grid of cards. */
+.hiw-area__inner {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    column-gap: var(--grid-gap);
+}
+
+.hiw-area__intro {
+    grid-column: 1 / 5;
+}
+
+.hiw-area__eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.6875rem, 0.65rem + 0.1vw, 0.8125rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-lux-blue);
+}
+
+.hiw-area__title {
+    margin-top: clamp(12px, 1.1vw, 18px);
+    font-family: var(--font-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(2.5rem, 2.2rem + 0.9vw, 3.125rem);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-white);
+}
+
+.hiw-area__title-line {
+    display: block;
+}
+
+.hiw-area__copy {
+    max-width: 280px;
+    margin-top: clamp(14px, 1.2vw, 20px);
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--color-muted-gray);
+}
+
+/* Area register ---------------------------------------------------------------- */
+
+.hiw-area__list {
+    grid-column: 6 / 13;
+}
+
+.hiw-area__row + .hiw-area__row {
+    margin-top: clamp(14px, 1.2vw, 20px);
+    padding-top: clamp(14px, 1.2vw, 20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.hiw-area__region {
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.8125rem, 0.78rem + 0.1vw, 0.9375rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-white);
+}
+
+.hiw-area__detail {
+    margin-top: 6px;
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: clamp(0.8125rem, 0.795rem + 0.05vw, 0.875rem);
+    line-height: 1.6;
+    color: var(--color-muted-gray);
+}

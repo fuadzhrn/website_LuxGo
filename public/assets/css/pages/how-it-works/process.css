@@ -1,0 +1,140 @@
+/* ==========================================================================
+   LUX&GO — How It Works / Join · Book · Use
+   ========================================================================== */
+
+.hiw-process {
+    padding-block: clamp(70px, 6vw, 90px);
+    background-color: var(--color-off-white);
+}
+
+/* Header ----------------------------------------------------------------------- */
+
+.hiw-process__header {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    column-gap: var(--grid-gap);
+    align-items: end;
+    margin-bottom: clamp(44px, 3.8vw, 68px);
+}
+
+.hiw-process__heading {
+    grid-column: 1 / 8;
+}
+
+.hiw-process__eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.6875rem, 0.65rem + 0.1vw, 0.8125rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-lux-blue);
+}
+
+.hiw-process__title {
+    margin-top: clamp(12px, 1.1vw, 18px);
+    font-family: var(--font-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(2.375rem, 2rem + 1.05vw, 3rem);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.hiw-process__intro {
+    grid-column: 9 / 13;
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--color-text-muted);
+}
+
+/* Horizontal flow -------------------------------------------------------------- */
+
+/*
+   Three steps on one row, joined by a hairline that runs from each marker into
+   the next column. Column gap is carried by the step's own padding so the
+   connector can bridge it — never three separate cards.
+*/
+.hiw-process__flow {
+    --flow-pad: clamp(28px, 2.8vw, 60px);
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.hiw-process__step {
+    padding-right: var(--flow-pad);
+}
+
+.hiw-process__step:last-child {
+    padding-right: 0;
+}
+
+.hiw-process__number {
+    font-family: var(--font-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(2.5rem, 2.1rem + 1.2vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-lux-blue);
+}
+
+.hiw-process__track {
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 1.1vw, 20px);
+    margin-top: clamp(20px, 1.8vw, 30px);
+}
+
+.hiw-process__marker {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: clamp(48px, 3.8vw, 60px);
+    height: clamp(48px, 3.8vw, 60px);
+    border: var(--border-thin);
+    border-radius: 50%;
+    background-color: var(--color-white);
+}
+
+.hiw-process__icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+}
+
+/* Reaches past the step's own padding to meet the next marker, then fades out. */
+.hiw-process__connector {
+    flex: 1;
+    height: 1px;
+    margin-right: calc(-1 * var(--flow-pad));
+    background: linear-gradient(
+        to right,
+        var(--color-border) 0%,
+        var(--color-border) 72%,
+        rgba(228, 230, 232, 0) 100%
+    );
+}
+
+.hiw-process__step-title {
+    margin-top: clamp(22px, 2vw, 34px);
+    font-family: var(--font-heading);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(1rem, 0.94rem + 0.2vw, 1.25rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.hiw-process__step-copy {
+    max-width: 300px;
+    margin-top: clamp(8px, 0.8vw, 12px);
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: clamp(0.875rem, 0.85rem + 0.08vw, 0.9375rem);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+}
