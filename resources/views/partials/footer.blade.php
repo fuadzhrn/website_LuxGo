@@ -24,13 +24,26 @@
                 ['label' => 'How It Works', 'href' => '/how-it-works'],
             ],
         ],
+        [
+            'id' => 'footer-legal',
+            'heading' => 'Legal',
+            'links' => [
+                ['label' => 'Terms of Use', 'href' => route('legal.terms')],
+                ['label' => 'Privacy Policy', 'href' => route('legal.privacy')],
+                ['label' => 'Cookies Policy', 'href' => route('legal.cookies')],
+            ],
+        ],
+    ];
+
+    $footerSocials = [
+        ['icon' => 'instagram.svg', 'label' => 'Instagram', 'href' => 'https://www.instagram.com/luxandgo'],
+        ['icon' => 'tiktok.svg', 'label' => 'TikTok', 'href' => 'https://www.tiktok.com/@luxandgo'],
     ];
 
     $footerContact = [
-        ['icon' => 'phone.svg', 'label' => '0811-1234-1234', 'href' => 'tel:+6281112341234'],
-        ['icon' => 'mail.svg', 'label' => 'info@luxandgo.com', 'href' => 'mailto:info@luxandgo.com'],
-        ['icon' => 'instagram.svg', 'label' => '@luxandgo', 'href' => 'https://www.instagram.com/luxandgo'],
-        ['icon' => 'tiktok.svg', 'label' => '@luxandgo', 'href' => 'https://www.tiktok.com/@luxandgo'],
+        ['label' => '0811-1234-1234', 'href' => 'tel:+6281112341234'],
+        ['label' => 'info@luxandgo.com', 'href' => 'mailto:info@luxandgo.com'],
+        ['label' => 'Jakarta Pusat', 'href' => null],
     ];
 @endphp
 
@@ -39,7 +52,33 @@
         <div class="site-footer__main">
             <div class="site-footer__brand-col">
                 <a href="{{ route('home') }}" class="site-footer__brand">LUX&amp;GO</a>
-                <p class="site-footer__tagline">Premium Mobility Membership</p>
+
+                <p class="site-footer__tagline">
+                    <span class="site-footer__tagline-line">Premium mobility.</span>
+                    <span class="site-footer__tagline-line">Without ownership.</span>
+                </p>
+
+                <ul class="site-footer__socials">
+                    @foreach ($footerSocials as $social)
+                        <li>
+                            <a
+                                href="{{ $social['href'] }}"
+                                class="site-footer__social"
+                                target="_blank"
+                                rel="noopener"
+                                aria-label="{{ $social['label'] }}"
+                            >
+                                <img
+                                    src="{{ asset('assets/icons/luxgo/footer/'.$social['icon']) }}"
+                                    alt=""
+                                    width="16"
+                                    height="16"
+                                    loading="lazy"
+                                >
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
 
             @foreach ($footerColumns as $column)
@@ -55,27 +94,20 @@
                 </nav>
             @endforeach
 
+            <span class="site-footer__divider" aria-hidden="true"></span>
+
             <div class="site-footer__col">
                 <h2 class="site-footer__heading">Contact</h2>
-                <ul class="site-footer__list site-footer__list--contact">
+                <ul class="site-footer__list">
                     @foreach ($footerContact as $contact)
-                        <li class="site-footer__contact-item">
-                            <img
-                                src="{{ asset('assets/icons/luxgo/footer/'.$contact['icon']) }}"
-                                alt=""
-                                class="site-footer__contact-icon"
-                                width="16"
-                                height="16"
-                                loading="lazy"
-                            >
-                            <a
-                                href="{{ $contact['href'] }}"
-                                class="site-footer__link"
-                                @if (str_starts_with($contact['href'], 'https://')) target="_blank" rel="noopener" @endif
-                            >{{ $contact['label'] }}</a>
+                        <li>
+                            @if ($contact['href'])
+                                <a href="{{ $contact['href'] }}" class="site-footer__link">{{ $contact['label'] }}</a>
+                            @else
+                                <span class="site-footer__link">{{ $contact['label'] }}</span>
+                            @endif
                         </li>
                     @endforeach
-                    <li class="site-footer__location">Jakarta Pusat</li>
                 </ul>
             </div>
         </div>

@@ -1,0 +1,76 @@
+/* ==========================================================================
+   LUX&GO — Legal pages (shared shell for Terms, Privacy and Cookies)
+   ========================================================================== */
+
+.legal-page {
+    /* Mirrors the fixed navbar height in header.css, which overlays the page. */
+    --legal-header-offset: clamp(72px, 4vw, 78px);
+
+    display: flex;
+    align-items: center;
+    min-height: clamp(420px, 52vh, 560px);
+    padding-top: calc(var(--legal-header-offset) + clamp(40px, 3.4vw, 60px));
+    padding-bottom: clamp(48px, 4vw, 72px);
+    background-color: var(--color-off-white);
+}
+
+.legal-page__inner {
+    width: 100%;
+}
+
+.legal-page__eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.6875rem, 0.65rem + 0.1vw, 0.8125rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-lux-blue);
+}
+
+.legal-page__title {
+    margin-top: clamp(12px, 1.1vw, 18px);
+    font-family: var(--font-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(2.125rem, 1.8rem + 1vw, 3rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.legal-page__copy {
+    max-width: 460px;
+    margin-top: clamp(16px, 1.4vw, 22px);
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--color-text-muted);
+}
+
+.legal-page__contact {
+    max-width: 460px;
+    margin-top: clamp(10px, 0.9vw, 14px);
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: clamp(0.75rem, 0.72rem + 0.1vw, 0.875rem);
+    line-height: var(--lh-body);
+    color: var(--color-text-muted);
+}
+
+.legal-page__link {
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border);
+    transition: color var(--transition-base), border-color var(--transition-base);
+}
+
+.legal-page__link:hover {
+    color: var(--color-lux-blue);
+    border-color: var(--color-lux-blue);
+}
+
+.legal-page__link:focus-visible {
+    outline: 2px solid var(--color-lux-blue);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+}

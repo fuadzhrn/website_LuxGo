@@ -15,15 +15,15 @@
 
 .site-footer__main {
     display: grid;
-    grid-template-columns: 2.5fr 1.5fr 1.5fr 1.5fr 2fr;
-    column-gap: clamp(20px, 2.2vw, 44px);
+    grid-template-columns: 2.3fr 1.2fr 1.25fr 1.1fr 1.15fr 1px 1.5fr;
+    column-gap: clamp(14px, 1.7vw, 36px);
 }
 
 .site-footer__brand {
     font-family: var(--font-heading);
     font-weight: var(--fw-semibold);
-    font-size: clamp(1.25rem, 1.1rem + 0.4vw, 1.5rem);
-    letter-spacing: 0.01em;
+    font-size: clamp(1.125rem, 1rem + 0.35vw, 1.375rem);
+    letter-spacing: 0.18em;
     color: var(--color-white);
 }
 
@@ -34,13 +34,48 @@
 }
 
 .site-footer__tagline {
-    margin-top: 8px;
+    margin-top: 10px;
     max-width: 220px;
     font-family: var(--font-body);
     font-weight: var(--fw-regular);
     font-size: clamp(0.6875rem, 0.66rem + 0.08vw, 0.8125rem);
     line-height: 1.6;
     color: var(--color-muted-gray);
+}
+
+.site-footer__tagline-line {
+    display: block;
+}
+
+/* Social marks sit under the brand, as circular outlines. */
+.site-footer__socials {
+    display: flex;
+    gap: 10px;
+    margin-top: clamp(16px, 1.4vw, 22px);
+}
+
+.site-footer__social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 50%;
+    transition: border-color var(--transition-base);
+}
+
+.site-footer__social:hover {
+    border-color: var(--color-lux-blue);
+}
+
+.site-footer__social:focus-visible {
+    outline: 2px solid var(--color-lux-blue);
+    outline-offset: 3px;
+}
+
+.site-footer__divider {
+    background-color: rgba(255, 255, 255, 0.12);
 }
 
 .site-footer__heading {
@@ -75,29 +110,6 @@
     border-radius: var(--radius-sm);
 }
 
-/* Contact ------------------------------------------------------------------- */
-
-.site-footer__contact-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.site-footer__contact-icon {
-    flex-shrink: 0;
-    width: 15px;
-    height: 15px;
-}
-
-.site-footer__location {
-    /* Aligns with the contact link text, past the icon column. */
-    padding-left: 23px;
-    font-family: var(--font-body);
-    font-size: clamp(0.6875rem, 0.66rem + 0.08vw, 0.8125rem);
-    line-height: 1.8;
-    color: var(--color-muted-gray);
-}
-
 /* Bottom bar ------------------------------------------------------------------ */
 
 .site-footer__bottom {
@@ -114,7 +126,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .site-footer__link {
+    .site-footer__link,
+    .site-footer__social {
         transition: none;
     }
 }
