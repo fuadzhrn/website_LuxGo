@@ -41,7 +41,10 @@
             @endforeach
         </div>
 
-        <div class="experience-standard__cta" data-reveal>
+    </div>
+
+    <div class="experience-standard__cta">
+        <div class="lux-container experience-standard__cta-inner" data-reveal>
             <div class="experience-standard__cta-content">
                 <h2 class="experience-standard__cta-title">
                     <span class="experience-standard__title-line">Experience</span>
