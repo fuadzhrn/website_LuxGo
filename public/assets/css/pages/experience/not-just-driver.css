@@ -1,0 +1,90 @@
+/* ==========================================================================
+   LUX&GO — The Experience / Not Just a Driver
+   ========================================================================== */
+
+.experience-driver {
+    padding-block: clamp(48px, 4.2vw, 70px);
+    background-color: var(--color-off-white);
+}
+
+/* Image column and text column read as one editorial spread. */
+.experience-driver__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1fr);
+    column-gap: clamp(32px, 3.4vw, 72px);
+    align-items: stretch;
+}
+
+.experience-driver__media {
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    /* Doubles as the placeholder until the photograph is added. */
+    background-color: var(--color-graphite);
+}
+
+.experience-driver__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Content ---------------------------------------------------------------------- */
+
+.experience-driver__title {
+    font-family: var(--font-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(2.25rem, 1.9rem + 1vw, 3.125rem);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.experience-driver__title-line {
+    display: block;
+}
+
+.experience-driver__copy {
+    max-width: 420px;
+    margin-top: clamp(14px, 1.2vw, 20px);
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--color-text-muted);
+}
+
+/* Seven attributes as a numbered editorial list — never seven cards. */
+.experience-driver__list {
+    margin-top: clamp(22px, 2vw, 34px);
+}
+
+.experience-driver__item {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(16px, 1.5vw, 26px);
+    padding-block: clamp(12px, 1.1vw, 18px);
+    border-bottom: var(--border-thin);
+}
+
+.experience-driver__item:first-child {
+    border-top: var(--border-thin);
+}
+
+.experience-driver__number {
+    flex-shrink: 0;
+    width: 2rem;
+    font-family: var(--font-heading);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.6875rem, 0.66rem + 0.08vw, 0.8125rem);
+    letter-spacing: 0.06em;
+    color: var(--color-lux-blue);
+}
+
+.experience-driver__label {
+    font-family: var(--font-body);
+    font-weight: var(--fw-medium);
+    font-size: clamp(0.875rem, 0.84rem + 0.1vw, 1rem);
+    color: var(--color-text);
+}

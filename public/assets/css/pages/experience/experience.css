@@ -1,0 +1,7 @@
+/* ==========================================================================
+   LUX&GO — The Experience (page-level base; section styles live in their own files)
+   ========================================================================== */
+
+.experience-section {
+    background-color: var(--color-white);
+}

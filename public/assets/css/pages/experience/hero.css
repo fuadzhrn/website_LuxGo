@@ -1,0 +1,153 @@
+/* ==========================================================================
+   LUX&GO — The Experience / Hero
+   ========================================================================== */
+
+.experience-hero {
+    /* Mirrors the fixed navbar height in header.css, which overlays this hero. */
+    --experience-hero-header-offset: clamp(72px, 4vw, 78px);
+
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: clamp(600px, 68vh, 700px);
+    padding-top: var(--experience-hero-header-offset);
+    padding-bottom: clamp(48px, 4.2vw, 72px);
+    overflow: hidden;
+    background-color: var(--color-obsidian);
+    color: var(--color-white);
+}
+
+/* Media --------------------------------------------------------------------- */
+
+.experience-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    /* Doubles as the placeholder until the photograph is added. */
+    background-color: var(--color-graphite);
+}
+
+.experience-hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+/* Weighted to the foot of the frame, where the whole text bar sits. */
+.experience-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        to top,
+        rgba(9, 10, 12, 0.94) 0%,
+        rgba(9, 10, 12, 0.62) 26%,
+        rgba(9, 10, 12, 0.12) 58%,
+        rgba(9, 10, 12, 0) 82%
+    );
+}
+
+/* Content -------------------------------------------------------------------- */
+
+.experience-hero__container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+/*
+   A bar across the foot of the frame — headline left, service note right — so
+   the opening reads differently from the stacked overlay on Our Collection.
+*/
+.experience-hero__content {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    column-gap: var(--grid-gap);
+    align-items: end;
+}
+
+.experience-hero__heading {
+    grid-column: 1 / 8;
+}
+
+.experience-hero__eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.6875rem, 0.65rem + 0.1vw, 0.8125rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-lux-blue);
+}
+
+.experience-hero__title {
+    margin-top: clamp(14px, 1.2vw, 20px);
+    font-family: var(--font-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(2.5rem, 2.1rem + 1.2vw, 3.75rem);
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-white);
+}
+
+.experience-hero__title-line {
+    display: block;
+}
+
+.experience-hero__aside {
+    grid-column: 9 / 13;
+}
+
+.experience-hero__copy {
+    max-width: 340px;
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--color-muted-gray);
+}
+
+.experience-hero__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: clamp(16px, 1.4vw, 22px);
+    padding-bottom: 2px;
+    font-family: var(--font-body);
+    font-weight: var(--fw-medium);
+    font-size: var(--fs-body);
+    color: var(--color-white);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    transition: border-color var(--transition-base);
+}
+
+.experience-hero__link:hover {
+    border-color: var(--color-lux-blue);
+}
+
+.experience-hero__link:focus-visible {
+    outline: 2px solid var(--color-lux-blue);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+}
+
+.experience-hero__link-icon {
+    color: var(--color-lux-blue);
+    transition: transform var(--transition-base);
+}
+
+.experience-hero__link:hover .experience-hero__link-icon {
+    transform: translateX(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .experience-hero__link,
+    .experience-hero__link-icon {
+        transition: none;
+    }
+
+    .experience-hero__link:hover .experience-hero__link-icon {
+        transform: none;
+    }
+}

@@ -14,6 +14,10 @@ Route::get('/collection', function () {
     return view('pages.collection.index');
 })->name('collection');
 
+Route::get('/experience', function () {
+    return view('pages.experience.index');
+})->name('experience');
+
 Route::get('/terms-of-use', function () {
     return view('pages.legal.show', ['legalTitle' => 'Terms of Use']);
 })->name('legal.terms');
