@@ -9,3 +9,7 @@ Route::get('/', function () {
 Route::get('/membership', function () {
     return view('pages.membership.index');
 })->name('membership');
+
+Route::get('/collection', function () {
+    return view('pages.collection.index');
+})->name('collection');

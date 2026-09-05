@@ -8,7 +8,7 @@
 
 <section class="membership-package">
     <div class="lux-container membership-package__inner">
-        <div class="membership-package__intro">
+        <div class="membership-package__intro" data-reveal>
             <p class="membership-package__eyebrow">Membership Package</p>
 
             <h2 class="membership-package__title">
@@ -26,7 +26,7 @@
             </p>
         </div>
 
-        <div class="membership-package__offer">
+        <div class="membership-package__offer" data-reveal data-reveal-delay="1">
             <div class="membership-package__block">
                 <p class="membership-package__block-label">Membership Fee</p>
 

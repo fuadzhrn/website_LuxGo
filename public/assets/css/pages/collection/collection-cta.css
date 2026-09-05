@@ -1,0 +1,125 @@
+/* ==========================================================================
+   LUX&GO — Our Collection / Closing CTA
+   ========================================================================== */
+
+/*
+   Graphite against the obsidian section above and the obsidian footer below,
+   so the closing panel reads as its own block without a decorative separator.
+*/
+.collection-cta {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(48px, 4.2vw, 72px);
+    background-color: var(--color-graphite);
+    color: var(--color-white);
+}
+
+/*
+   The detail shot runs full height to the right edge and dissolves on its left,
+   so it reads as part of the panel rather than as a separate card.
+*/
+.collection-cta__media {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 42%;
+    z-index: 0;
+    background-color: var(--color-obsidian);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 18%, #000 100%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 18%, #000 100%);
+}
+
+.collection-cta__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Content ---------------------------------------------------------------------- */
+
+.collection-cta__inner {
+    position: relative;
+    z-index: 1;
+}
+
+.collection-cta__content {
+    max-width: clamp(400px, 46vw, 560px);
+}
+
+.collection-cta__title {
+    font-family: var(--font-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(2.375rem, 2rem + 1.1vw, 3.25rem);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-white);
+}
+
+.collection-cta__title-line {
+    display: block;
+}
+
+.collection-cta__copy {
+    max-width: 360px;
+    margin-top: clamp(14px, 1.2vw, 20px);
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--color-muted-gray);
+}
+
+.collection-cta__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: clamp(44px, 3.2vw, 50px);
+    padding-inline: clamp(22px, 1.8vw, 28px);
+    margin-top: clamp(20px, 1.8vw, 28px);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-lux-blue);
+    color: var(--color-white);
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.8125rem, 0.78rem + 0.1vw, 0.9375rem);
+    white-space: nowrap;
+    transition: background-color var(--transition-base), transform var(--transition-base);
+}
+
+.collection-cta__link:hover {
+    background-color: var(--color-lux-blue-strong);
+    transform: translateY(-1px);
+}
+
+.collection-cta__link:active {
+    transform: translateY(1px);
+}
+
+.collection-cta__link:focus-visible {
+    outline: 2px solid var(--color-white);
+    outline-offset: 3px;
+}
+
+.collection-cta__link-icon {
+    transition: transform var(--transition-base);
+}
+
+.collection-cta__link:hover .collection-cta__link-icon {
+    transform: translateX(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .collection-cta__link,
+    .collection-cta__link-icon {
+        transition: none;
+    }
+
+    .collection-cta__link:hover,
+    .collection-cta__link:active,
+    .collection-cta__link:hover .collection-cta__link-icon {
+        transform: none;
+    }
+}

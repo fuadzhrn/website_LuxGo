@@ -38,7 +38,7 @@
 
 <section class="membership-faq">
     <div class="lux-container membership-faq__inner">
-        <div class="membership-faq__intro">
+        <div class="membership-faq__intro" data-reveal>
             <p class="membership-faq__eyebrow">Membership FAQ</p>
 
             <h2 class="membership-faq__title">
@@ -51,7 +51,7 @@
             </p>
         </div>
 
-        <div class="membership-faq__list" data-faq>
+        <div class="membership-faq__list" data-faq data-reveal data-reveal-delay="1">
             @foreach ($membershipFaqs as $index => $faq)
                 @php
                     $number = str_pad($index + 1, 2, '0', STR_PAD_LEFT);

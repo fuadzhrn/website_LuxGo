@@ -1,6 +1,6 @@
 <section class="membership-usage">
     <div class="lux-container">
-        <div class="membership-usage__header">
+        <div class="membership-usage__header" data-reveal>
             <div class="membership-usage__heading">
                 <p class="membership-usage__eyebrow">Member Usage</p>
 
@@ -15,7 +15,7 @@
             </p>
         </div>
 
-        <div class="membership-usage__comparison">
+        <div class="membership-usage__comparison" data-reveal data-reveal-delay="1">
             <div class="membership-usage__case">
                 <p class="membership-usage__case-label">With Usage Rights</p>
 

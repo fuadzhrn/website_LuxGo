@@ -1,5 +1,5 @@
 <section class="membership-cta">
-    <div class="lux-container membership-cta__inner">
+    <div class="lux-container membership-cta__inner" data-reveal>
         <div class="membership-cta__content">
             <p class="membership-cta__kicker">5-Year Premium Mobility Membership</p>
 

@@ -1,0 +1,144 @@
+/* ==========================================================================
+   LUX&GO — Our Collection / Hero
+   ========================================================================== */
+
+.collection-hero {
+    /* Mirrors the fixed navbar height in header.css, which overlays this hero. */
+    --collection-hero-header-offset: clamp(72px, 4vw, 78px);
+
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: clamp(600px, 68vh, 700px);
+    padding-top: var(--collection-hero-header-offset);
+    padding-bottom: clamp(48px, 4.2vw, 72px);
+    overflow: hidden;
+    background-color: var(--color-obsidian);
+    color: var(--color-white);
+}
+
+/* Media --------------------------------------------------------------------- */
+
+.collection-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    /* Doubles as the placeholder until the photograph is added. */
+    background-color: var(--color-graphite);
+}
+
+.collection-hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+/* Weighted toward the lower-left, where the text sits. */
+.collection-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        linear-gradient(
+            to top,
+            rgba(9, 10, 12, 0.92) 0%,
+            rgba(9, 10, 12, 0.35) 46%,
+            rgba(9, 10, 12, 0) 78%
+        ),
+        linear-gradient(
+            to right,
+            rgba(9, 10, 12, 0.7) 0%,
+            rgba(9, 10, 12, 0) 58%
+        );
+}
+
+/* Content -------------------------------------------------------------------- */
+
+.collection-hero__container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.collection-hero__content {
+    max-width: clamp(420px, 42vw, 620px);
+}
+
+.collection-hero__eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.6875rem, 0.65rem + 0.1vw, 0.8125rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-lux-blue);
+}
+
+.collection-hero__title {
+    margin-top: clamp(14px, 1.2vw, 20px);
+    font-family: var(--font-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(2.5rem, 2.1rem + 1.2vw, 3.75rem);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-white);
+}
+
+.collection-hero__title-line {
+    display: block;
+}
+
+.collection-hero__copy {
+    max-width: 380px;
+    margin-top: clamp(16px, 1.4vw, 22px);
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--color-muted-gray);
+}
+
+.collection-hero__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: clamp(20px, 1.8vw, 28px);
+    padding-bottom: 2px;
+    font-family: var(--font-body);
+    font-weight: var(--fw-medium);
+    font-size: var(--fs-body);
+    color: var(--color-white);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    transition: border-color var(--transition-base);
+}
+
+.collection-hero__link:hover {
+    border-color: var(--color-lux-blue);
+}
+
+.collection-hero__link:focus-visible {
+    outline: 2px solid var(--color-lux-blue);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+}
+
+.collection-hero__link-icon {
+    color: var(--color-lux-blue);
+    transition: transform var(--transition-base);
+}
+
+.collection-hero__link:hover .collection-hero__link-icon {
+    transform: translateX(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .collection-hero__link,
+    .collection-hero__link-icon {
+        transition: none;
+    }
+
+    .collection-hero__link:hover .collection-hero__link-icon {
+        transform: none;
+    }
+}

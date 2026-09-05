@@ -24,20 +24,20 @@
 <section class="membership-section membership-hero">
     <div class="lux-container membership-hero__inner">
         <div class="membership-hero__content">
-            <p class="membership-hero__eyebrow">Membership</p>
+            <p class="membership-hero__eyebrow" data-enter>Membership</p>
 
-            <h1 class="membership-hero__title">
+            <h1 class="membership-hero__title" data-enter data-enter-delay="1">
                 <span class="membership-hero__title-line">One Membership.</span>
                 <span class="membership-hero__title-line">Five Years of</span>
                 <span class="membership-hero__title-line">Premium Access.</span>
             </h1>
 
-            <p class="membership-hero__copy">
+            <p class="membership-hero__copy" data-enter data-enter-delay="2">
                 Premium mobility through a five-year membership designed for access, flexibility, and convenience.
             </p>
         </div>
 
-        <div class="membership-hero__panel">
+        <div class="membership-hero__panel" data-enter data-enter-delay="1">
             <p class="membership-hero__panel-label">Membership at a Glance</p>
 
             <div class="membership-hero__metrics">

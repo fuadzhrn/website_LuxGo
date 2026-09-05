@@ -1,5 +1,5 @@
 /* ==========================================================================
-   LUX&GO — Motion Primitives (scroll reveal system)
+   LUX&GO — Motion Primitives (on-load entrance + scroll reveal)
    ========================================================================== */
 
 :root {
@@ -7,6 +7,45 @@
     --motion-distance: 20px;
     --motion-stagger: 80ms;
     --motion-easing: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+
+/*
+   On-load entrance for above-the-fold content. Pure CSS, so it runs even before
+   reveal.js executes — no flash of hidden content at the top of a page.
+*/
+
+[data-enter] {
+    opacity: 0;
+    animation: lux-enter var(--motion-duration) var(--motion-easing) both;
+}
+
+[data-enter-delay="1"] {
+    animation-delay: calc(var(--motion-stagger) * 1);
+}
+
+[data-enter-delay="2"] {
+    animation-delay: calc(var(--motion-stagger) * 2);
+}
+
+[data-enter-delay="3"] {
+    animation-delay: calc(var(--motion-stagger) * 3);
+}
+
+[data-enter-delay="4"] {
+    animation-delay: calc(var(--motion-stagger) * 4);
+}
+
+@keyframes lux-enter {
+    from {
+        opacity: 0;
+        transform: translateY(var(--motion-distance));
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
 }
 
 /*
@@ -47,6 +86,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+    [data-enter] {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
     .has-motion [data-reveal],
     .has-motion [data-reveal].is-visible {
         opacity: 1;

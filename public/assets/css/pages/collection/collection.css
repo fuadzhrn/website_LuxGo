@@ -1,0 +1,7 @@
+/* ==========================================================================
+   LUX&GO — Our Collection (page-level base; section styles live in their own files)
+   ========================================================================== */
+
+.collection-section {
+    background-color: var(--color-white);
+}

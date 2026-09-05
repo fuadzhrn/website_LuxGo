@@ -1,0 +1,156 @@
+/* ==========================================================================
+   LUX&GO — Our Collection / Featured Vehicle
+   ========================================================================== */
+
+.collection-featured {
+    padding-block: clamp(48px, 4.2vw, 70px);
+}
+
+/* Header ---------------------------------------------------------------------- */
+
+.collection-featured__header {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    column-gap: var(--grid-gap);
+    align-items: end;
+    margin-bottom: clamp(28px, 2.6vw, 44px);
+}
+
+.collection-featured__heading {
+    grid-column: 1 / 7;
+}
+
+.collection-featured__eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.6875rem, 0.65rem + 0.1vw, 0.8125rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-lux-blue);
+}
+
+.collection-featured__title {
+    margin-top: clamp(10px, 0.9vw, 16px);
+    font-family: var(--font-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(2.75rem, 2.3rem + 1.3vw, 3.875rem);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.collection-featured__title-line {
+    display: block;
+}
+
+.collection-featured__copy {
+    grid-column: 8 / 13;
+    max-width: 380px;
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--color-text-muted);
+}
+
+/* Showcase: the vehicle carries the section, the rail supports it -------------- */
+
+.collection-featured__showcase {
+    display: grid;
+    grid-template-columns: minmax(0, 2.35fr) minmax(0, 1fr);
+    column-gap: clamp(24px, 2.4vw, 48px);
+}
+
+.collection-featured__media {
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-sm);
+    /* Doubles as the placeholder until the photograph is added. */
+    background-color: var(--color-off-white);
+}
+
+.collection-featured__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Feature rail ------------------------------------------------------------------ */
+
+.collection-featured__rail {
+    display: flex;
+    flex-direction: column;
+}
+
+/* A flat list separated by hairlines — deliberately not four cards. */
+.collection-featured__feature {
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 1.1vw, 16px);
+    padding-block: clamp(20px, 1.9vw, 30px);
+    border-bottom: var(--border-thin);
+}
+
+.collection-featured__feature:first-child {
+    padding-top: 0;
+}
+
+.collection-featured__feature-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.collection-featured__feature-label {
+    font-family: var(--font-body);
+    font-weight: var(--fw-medium);
+    font-size: clamp(0.875rem, 0.84rem + 0.1vw, 1rem);
+    line-height: 1.35;
+    color: var(--color-text);
+}
+
+.collection-featured__link {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    gap: 8px;
+    padding-top: clamp(20px, 1.8vw, 28px);
+    padding-bottom: 2px;
+    font-family: var(--font-body);
+    font-weight: var(--fw-medium);
+    font-size: var(--fs-body);
+    color: var(--color-text);
+    transition: color var(--transition-base);
+}
+
+.collection-featured__link:hover {
+    color: var(--color-lux-blue);
+}
+
+.collection-featured__link:focus-visible {
+    outline: 2px solid var(--color-lux-blue);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+}
+
+.collection-featured__link-icon {
+    color: var(--color-lux-blue);
+    transition: transform var(--transition-base);
+}
+
+.collection-featured__link:hover .collection-featured__link-icon {
+    transform: translateX(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .collection-featured__link,
+    .collection-featured__link-icon {
+        transition: none;
+    }
+
+    .collection-featured__link:hover .collection-featured__link-icon {
+        transform: none;
+    }
+}

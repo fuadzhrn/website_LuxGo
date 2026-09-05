@@ -8,7 +8,7 @@
 
 <section class="membership-access">
     <div class="lux-container membership-access__inner">
-        <div class="membership-access__intro">
+        <div class="membership-access__intro" data-reveal>
             <p class="membership-access__eyebrow">Membership Access</p>
 
             <h2 class="membership-access__title">
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <div class="membership-access__calculator" data-calculator>
+        <div class="membership-access__calculator" data-calculator data-reveal data-reveal-delay="1">
             <p class="membership-access__calculator-title">Plan Your Access</p>
             <p class="membership-access__calculator-copy">
                 Choose the number of LOTs to see your available Usage Rights.
