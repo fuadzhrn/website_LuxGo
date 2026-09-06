@@ -34,6 +34,17 @@ class UserFactory extends Factory
     }
 
     /**
+     * The `role` column is guarded on the model, so it is set outside mass
+     * assignment rather than by loosening the model for tests.
+     */
+    public function administrator(): static
+    {
+        return $this->afterMaking(fn (User $user) => $user->forceFill([
+            'role' => User::ROLE_ADMINISTRATOR,
+        ]));
+    }
+
+    /**
      * Indicate that the model's email address should be unverified.
      */
     public function unverified(): static

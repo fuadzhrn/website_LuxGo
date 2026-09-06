@@ -254,3 +254,323 @@
         transition: none;
     }
 }
+
+/* Media library ------------------------------------------------------------ */
+
+.admin-media__upload,
+.admin-media__search {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.admin-media__upload .admin-field,
+.admin-media__search .admin-field {
+    flex: 1 1 260px;
+}
+
+.admin-media__search {
+    margin-bottom: 18px;
+}
+
+.admin-media__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+}
+
+.admin-media__link {
+    display: block;
+    padding: 8px;
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    transition: border-color var(--admin-transition);
+}
+
+.admin-media__link:hover {
+    border-color: var(--admin-blue);
+}
+
+.admin-media__link:focus-visible {
+    outline: 2px solid var(--admin-blue);
+    outline-offset: 2px;
+}
+
+.admin-media__item.is-selected .admin-media__link {
+    border-color: var(--admin-blue);
+    box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.18);
+}
+
+/* Fixed ratio so a grid of mixed shapes stays tidy; the detail view shows the
+   whole image undistorted. */
+.admin-media__thumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 4px;
+    background-color: var(--admin-surface);
+}
+
+.admin-media__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin-media__missing {
+    padding: 8px;
+    font-size: 0.6875rem;
+    text-align: center;
+    color: var(--admin-text-muted);
+}
+
+.admin-media__name {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+}
+
+.admin-media__meta {
+    display: block;
+    margin-top: 2px;
+    font-size: 0.6875rem;
+    color: var(--admin-text-muted);
+}
+
+.admin-media__pagination {
+    margin-top: 18px;
+}
+
+.admin-media__detail {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: 22px;
+}
+
+.admin-media__detail-preview {
+    /* Wraps the image rather than matching the height of the column beside it. */
+    align-self: start;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 12px;
+    background-color: var(--admin-surface);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+}
+
+.admin-media__detail-preview img {
+    max-width: 100%;
+    max-height: 320px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.admin-media__alt {
+    margin-top: 18px;
+}
+
+.admin-media__alt .admin-button {
+    margin-top: 12px;
+}
+
+.admin-media__locked {
+    margin-top: 18px;
+    padding: 12px 14px;
+    border: 1px solid rgba(229, 72, 77, 0.3);
+    border-radius: var(--admin-radius);
+    background-color: rgba(229, 72, 77, 0.06);
+    font-size: 0.8125rem;
+    color: var(--admin-danger);
+}
+
+/* Delete confirmation ------------------------------------------------------ */
+
+/* A disclosure, so the second deliberate click is required with or without JS. */
+.admin-confirm {
+    margin-top: 18px;
+}
+
+.admin-confirm__summary {
+    display: inline-block;
+    padding: 8px 12px;
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    font-size: 0.8125rem;
+    color: var(--admin-danger);
+    cursor: pointer;
+}
+
+.admin-confirm__summary:focus-visible {
+    outline: 2px solid var(--admin-danger);
+    outline-offset: 2px;
+}
+
+.admin-confirm__body {
+    margin-top: 12px;
+    padding: 14px;
+    border: 1px solid rgba(229, 72, 77, 0.3);
+    border-radius: var(--admin-radius);
+}
+
+.admin-confirm__copy {
+    margin-bottom: 12px;
+    font-size: 0.8125rem;
+}
+
+.admin-confirm__body form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Media picker ------------------------------------------------------------- */
+
+/* Set by the picker script so the page behind the modal cannot be scrolled. */
+.has-picker-open {
+    overflow: hidden;
+}
+
+.admin-picker {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.admin-picker__scrim {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(9, 10, 12, 0.5);
+}
+
+.admin-picker__panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: min(860px, 100%);
+    max-height: 84vh;
+    background-color: var(--admin-white);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.admin-picker__head,
+.admin-picker__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+}
+
+.admin-picker__head {
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-picker__foot {
+    border-top: 1px solid var(--admin-border);
+    flex-wrap: wrap;
+}
+
+.admin-picker__title {
+    font-family: var(--admin-font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.admin-picker__close {
+    width: 30px;
+    height: 30px;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--admin-text-muted);
+}
+
+.admin-picker__close:focus-visible {
+    outline: 2px solid var(--admin-blue);
+    outline-offset: 2px;
+}
+
+.admin-picker__body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 18px;
+}
+
+.admin-picker__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+    gap: 10px;
+}
+
+.admin-picker__item {
+    display: block;
+    width: 100%;
+    padding: 6px;
+    text-align: left;
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    transition: border-color var(--admin-transition);
+}
+
+.admin-picker__item:hover {
+    border-color: var(--admin-blue);
+}
+
+.admin-picker__item:focus-visible {
+    outline: 2px solid var(--admin-blue);
+    outline-offset: 2px;
+}
+
+.admin-picker__thumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 4px;
+    background-color: var(--admin-surface);
+}
+
+.admin-picker__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin-picker__name {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.6875rem;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 767px) {
+    .admin-media__detail {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .admin-media__upload .admin-button,
+    .admin-media__search .admin-button {
+        flex: 1 1 auto;
+    }
+
+    .admin-picker {
+        padding: 10px;
+    }
+
+    .admin-picker__panel {
+        max-height: 92vh;
+    }
+}

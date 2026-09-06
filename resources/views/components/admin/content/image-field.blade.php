@@ -16,8 +16,11 @@
     $maxKb = config('admin.images.max_kilobytes');
 @endphp
 
-{{-- Nothing here touches storage. Choosing a file only draws a preview, and
-     Remove just marks intent — the file is dealt with when the form is saved. --}}
+{{-- Nothing here touches storage. Choosing a file only draws a preview, picking
+     an existing image only records its id, and Remove just marks intent — all of
+     it is resolved when the form is saved.
+
+     Remove clears this field. It never deletes the file from the library. --}}
 <div class="admin-image" data-admin-image>
     <p class="admin-label" id="{{ $id }}-label">{{ $label }}</p>
 
@@ -42,7 +45,7 @@
 
     <div class="admin-image__actions">
         <label class="admin-button admin-button--ghost" for="{{ $id }}">
-            {{ $media ? 'Replace image' : 'Choose image' }}
+            {{ $media ? 'Replace image' : 'Upload image' }}
         </label>
 
         <input
@@ -57,6 +60,10 @@
             data-image-input
         >
 
+        <button type="button" class="admin-button admin-button--ghost" data-image-choose>
+            Choose existing
+        </button>
+
         <button type="button" class="admin-button admin-button--quiet" data-image-remove @unless ($media) hidden @endunless>
             Remove image
         </button>
@@ -66,11 +73,13 @@
         </button>
     </div>
 
-    {{-- Read on save; the record is only cleared once the form is submitted. --}}
+    {{-- Read on save: an id when an existing image was picked, the remove flag
+         when the field was cleared. The library itself is never modified here. --}}
+    <input type="hidden" name="{{ $name }}_media_id" value="{{ old($key.'_media_id', $media?->id) }}" data-image-media-id>
     <input type="hidden" name="{{ $name }}_remove" value="0" data-image-remove-flag>
 
     <p class="admin-help" id="{{ $id }}-help">
-        {{ $help ?? 'JPG, PNG or WebP. Up to '.round($maxKb / 1024, 1).' MB.' }}
+        {{ $help ?? 'JPG, PNG or WebP. Up to '.round($maxKb / 1024).' MB.' }}
     </p>
 
     <x-admin.form.error :name="$name" :id="$id.'-error'" />
@@ -81,3 +90,9 @@
         </div>
     @endif
 </div>
+
+@once
+    @push('modals')
+        @include('admin.partials.media-picker')
+    @endpush
+@endonce

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\ShellController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/', DashboardController::class)->name('dashboard');
 
         Route::get('content', [ShellController::class, 'content'])->name('content');
-        Route::get('media', [ShellController::class, 'media'])->name('media');
+        Route::get('media', [MediaController::class, 'index'])->name('media');
+        Route::post('media', [MediaController::class, 'store'])->name('media.store');
+        Route::patch('media/{media}', [MediaController::class, 'update'])->name('media.update');
+        Route::delete('media/{media}', [MediaController::class, 'destroy'])->name('media.destroy');
         Route::get('applications', [ShellController::class, 'applications'])->name('applications');
         Route::get('seo', [ShellController::class, 'seo'])->name('seo');
         Route::get('settings', [ShellController::class, 'settings'])->name('settings');

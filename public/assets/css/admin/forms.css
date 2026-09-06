@@ -116,6 +116,15 @@
     color: var(--admin-blue);
 }
 
+.admin-button--danger {
+    background-color: var(--admin-danger);
+    color: var(--admin-white);
+}
+
+.admin-button--danger:hover:not(:disabled) {
+    background-color: #c93b3f;
+}
+
 .admin-button--quiet {
     padding-inline: 12px;
     background: none;

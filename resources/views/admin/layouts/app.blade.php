@@ -30,6 +30,9 @@
         </main>
     </div>
 
+    {{-- Image fields push the shared media picker here, once per page. --}}
+    @stack('modals')
+
     <script src="{{ asset('assets/js/admin/admin.js') }}" defer></script>
     <script src="{{ asset('assets/js/admin/components.js') }}" defer></script>
 
