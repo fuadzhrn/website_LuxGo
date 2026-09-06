@@ -25,3 +25,61 @@ document.addEventListener("DOMContentLoaded", () => {
     updateHeaderState();
     window.addEventListener("scroll", requestHeaderUpdate, { passive: true });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector(".site-header");
+    const toggle = document.querySelector("[data-menu-toggle]");
+    const menu = document.querySelector("[data-site-menu]");
+
+    if (!header || !toggle || !menu) {
+        return;
+    }
+
+    const iconOpen = toggle.querySelector('[data-menu-icon="open"]');
+    const iconClose = toggle.querySelector('[data-menu-icon="close"]');
+    const desktop = window.matchMedia("(min-width: 1024px)");
+
+    const setMenu = (isOpen) => {
+        menu.classList.toggle("is-open", isOpen);
+        header.classList.toggle("is-menu-open", isOpen);
+        document.body.classList.toggle("has-menu-open", isOpen);
+
+        toggle.setAttribute("aria-expanded", String(isOpen));
+        toggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+
+        if (iconOpen) {
+            iconOpen.hidden = isOpen;
+        }
+
+        if (iconClose) {
+            iconClose.hidden = !isOpen;
+        }
+    };
+
+    const isOpen = () => menu.classList.contains("is-open");
+
+    toggle.addEventListener("click", () => {
+        setMenu(!isOpen());
+    });
+
+    /* Any navigation link dismisses the panel, including same-page links. */
+    menu.addEventListener("click", (event) => {
+        if (event.target.closest("a")) {
+            setMenu(false);
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && isOpen()) {
+            setMenu(false);
+            toggle.focus();
+        }
+    });
+
+    /* Crossing back to desktop must never leave the body scroll-locked. */
+    desktop.addEventListener("change", (event) => {
+        if (event.matches) {
+            setMenu(false);
+        }
+    });
+});

@@ -1,0 +1,141 @@
+/* ==========================================================================
+   LUX&GO — About & Contact / Contact & Head Office
+   ========================================================================== */
+
+/* Surface comes from .about-section, so this closes the page on plain white
+   against the obsidian footer below. */
+.about-contact {
+    padding-block: clamp(60px, 4.4vw, 76px);
+}
+
+/* Identity left, channels right — one horizontal composition. */
+.about-contact__inner {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    column-gap: var(--grid-gap);
+}
+
+.about-contact__identity {
+    grid-column: 1 / 7;
+}
+
+.about-contact__eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.6875rem, 0.65rem + 0.1vw, 0.8125rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-lux-blue);
+}
+
+.about-contact__title {
+    margin-top: clamp(12px, 1.1vw, 18px);
+    font-family: var(--font-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(2.5rem, 2.2rem + 0.9vw, 3.125rem);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.about-contact__title-line {
+    display: block;
+}
+
+.about-contact__company {
+    margin-top: clamp(24px, 2.2vw, 36px);
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.875rem, 0.85rem + 0.1vw, 1rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.about-contact__address {
+    margin-top: clamp(10px, 0.9vw, 14px);
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: clamp(0.875rem, 0.86rem + 0.05vw, 0.9375rem);
+    font-style: normal;
+    line-height: 1.75;
+    color: var(--color-text-muted);
+}
+
+.about-contact__address-line {
+    display: block;
+}
+
+/* Channels ---------------------------------------------------------------------- */
+
+.about-contact__channels {
+    grid-column: 8 / 13;
+}
+
+.about-contact__channels-title {
+    margin-bottom: clamp(16px, 1.4vw, 24px);
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.6875rem, 0.65rem + 0.1vw, 0.8125rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.about-contact__row + .about-contact__row {
+    border-top: var(--border-thin);
+}
+
+.about-contact__link {
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 1.1vw, 18px);
+    padding-block: clamp(12px, 1.1vw, 17px);
+}
+
+.about-contact__icon {
+    display: block;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+}
+
+.about-contact__channel {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.about-contact__label {
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.6875rem, 0.66rem + 0.08vw, 0.8125rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.about-contact__value {
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: clamp(0.875rem, 0.85rem + 0.1vw, 1rem);
+    color: var(--color-text);
+    transition: color var(--transition-base);
+}
+
+.about-contact__link:hover .about-contact__value {
+    color: var(--color-lux-blue);
+}
+
+.about-contact__link:focus-visible {
+    outline: 2px solid var(--color-lux-blue);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .about-contact__value {
+        transition: none;
+    }
+}

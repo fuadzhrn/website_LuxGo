@@ -12,12 +12,14 @@
     <link rel="stylesheet" href="{{ asset('assets/css/pages/about-contact/about-contact.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/pages/about-contact/about.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/pages/about-contact/membership-application.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/pages/about-contact/contact-head-office.css') }}">
 @endpush
 
 @section('content')
 
     @include('pages.about-contact.sections.about')
     @include('pages.about-contact.sections.membership-application')
+    @include('pages.about-contact.sections.contact-head-office')
 
 @endsection
 

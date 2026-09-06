@@ -131,3 +131,62 @@
         transition: none;
     }
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/*
+   The seven desktop tracks collapse to a two-column register: brand across the
+   top, the four link groups paired, then contact across the foot. Desktop rules
+   above this line are untouched.
+*/
+@media (max-width: 1023px) {
+    .site-footer__main {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: clamp(20px, 4vw, 40px);
+        row-gap: clamp(26px, 4vw, 38px);
+    }
+
+    .site-footer__brand-col,
+    .site-footer__main > :last-child {
+        grid-column: 1 / -1;
+    }
+
+    .site-footer__col {
+        min-width: 0;
+    }
+
+    /* The hairline column has no place in a stacked layout. */
+    .site-footer__divider {
+        display: none;
+    }
+
+    .site-footer__link {
+        overflow-wrap: anywhere;
+    }
+}
+
+/* Tablet: the four link groups still fit on one row. */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .site-footer__main {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+/* Mobile ------------------------------------------------------------------------ */
+
+@media (max-width: 767px) {
+    .site-footer__brand {
+        font-size: 1.25rem;
+    }
+
+    .site-footer__link {
+        font-size: 0.875rem;
+        line-height: 1.9;
+    }
+
+    .site-footer__bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+}
