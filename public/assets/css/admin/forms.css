@@ -229,6 +229,14 @@
     color: var(--admin-text-muted);
 }
 
+.admin-select {
+    /* The native control keeps its own arrow; only the box is themed. */
+    max-width: 420px;
+    padding-right: 12px;
+    background-color: var(--admin-white);
+    cursor: pointer;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .admin-input,
     .admin-button,

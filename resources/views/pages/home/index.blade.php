@@ -16,11 +16,11 @@
 
 @section('content')
 
-    @include('pages.home.sections.hero')
-    @include('pages.home.sections.access-not-ownership')
-    @include('pages.home.sections.use-cases')
-    @include('pages.home.sections.premium-mobility')
-    @include('pages.home.sections.how-it-works')
+    {{-- Order and visibility come from the CMS; the sections themselves are the
+         same partials as before, each handed its own resolved content. --}}
+    @foreach ($page->sections() as $key => $section)
+        @include($page->view($key), ['s' => $section])
+    @endforeach
 
 @endsection
 

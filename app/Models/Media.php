@@ -25,6 +25,7 @@ class Media extends Model
     private const REFERENCES = [
         'vehicles' => 'main_media_id',
         'vehicle_media' => 'media_id',
+        'page_section_media' => 'media_id',
         'seo_settings' => 'og_media_id',
     ];
 
@@ -93,6 +94,23 @@ class Media extends Model
         }
 
         return $used;
+    }
+
+    /**
+     * The same list in words, for the admin panel.
+     *
+     * @return array<int, string>
+     */
+    public function usedByLabels(): array
+    {
+        $labels = [
+            'vehicles' => 'Vehicles',
+            'vehicle_media' => 'Vehicle galleries',
+            'page_section_media' => 'Page sections',
+            'seo_settings' => 'SEO settings',
+        ];
+
+        return array_map(fn (string $table) => $labels[$table] ?? $table, $this->usedBy());
     }
 
     public function humanSize(): string

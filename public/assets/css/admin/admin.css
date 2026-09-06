@@ -347,6 +347,91 @@ button {
     overflow-wrap: anywhere;
 }
 
+.admin-table__actions {
+    text-align: right;
+}
+
+.admin-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* Breadcrumb -------------------------------------------------------------- */
+
+.admin-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    font-size: 0.8125rem;
+    color: var(--admin-text-muted);
+}
+
+.admin-breadcrumb a {
+    color: var(--admin-text-muted);
+}
+
+.admin-breadcrumb a:hover {
+    color: var(--admin-blue);
+}
+
+/* Section list ------------------------------------------------------------ */
+
+.admin-sections {
+    display: grid;
+    gap: 10px;
+}
+
+.admin-sections__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 18px;
+    background-color: var(--admin-surface);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+}
+
+.admin-sections__body {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.admin-sections__name {
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Field group ------------------------------------------------------------- */
+
+.admin-fieldgroup {
+    margin: 22px 0 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--admin-border);
+    font-family: var(--admin-font-heading);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--admin-text-muted);
+}
+
+.admin-tabs__panel > .admin-fieldgroup:first-child {
+    margin-top: 4px;
+    padding-top: 0;
+    border-top: 0;
+}
+
 /* Tablet and mobile ------------------------------------------------------- */
 
 @media (max-width: 1023px) {
@@ -356,5 +441,16 @@ button {
 
     .admin-topbar__toggle {
         display: flex;
+    }
+}
+
+@media (max-width: 599px) {
+    .admin-sections__item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .admin-sections__item .admin-button {
+        width: 100%;
     }
 }

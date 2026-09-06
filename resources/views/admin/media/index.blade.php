@@ -144,7 +144,7 @@
                         {{-- Deleting is refused while anything still points at this row. --}}
                         <p class="admin-media__locked">
                             This media is currently in use and cannot be deleted.
-                            <span class="admin-help">Referenced by: {{ implode(', ', $usedBy) }}.</span>
+                            <span class="admin-help">Used by: {{ implode(', ', $selected->usedByLabels()) }}.</span>
                         </p>
                     @else
                         {{-- A disclosure rather than a JS confirm, so the second

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\Admin\PageContentController;
 use App\Http\Controllers\Admin\ShellController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['auth', 'administrator'])->group(function () {
         Route::get('/', DashboardController::class)->name('dashboard');
 
-        Route::get('content', [ShellController::class, 'content'])->name('content');
+        /* One set of routes for every CMS page. Scoped bindings mean a section
+           key only resolves when it really belongs to the page in the URL. */
+        Route::get('content', [PageContentController::class, 'index'])->name('content');
+        Route::get('content/{page:key}', [PageContentController::class, 'show'])->name('content.page');
+        Route::get('content/{page:key}/sections/{section:section_key}/edit', [PageContentController::class, 'edit'])
+            ->scopeBindings()->name('content.section.edit');
+        Route::put('content/{page:key}/sections/{section:section_key}', [PageContentController::class, 'update'])
+            ->scopeBindings()->name('content.section.update');
         Route::get('media', [MediaController::class, 'index'])->name('media');
         Route::post('media', [MediaController::class, 'store'])->name('media.store');
         Route::patch('media/{media}', [MediaController::class, 'update'])->name('media.update');

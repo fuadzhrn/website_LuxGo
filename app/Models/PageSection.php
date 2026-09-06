@@ -11,11 +11,12 @@ class PageSection extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['page_id', 'section_key', 'is_active', 'sort_order'];
+    protected $fillable = ['page_id', 'section_key', 'settings', 'is_active', 'sort_order'];
 
     protected function casts(): array
     {
         return [
+            'settings' => 'array',
             'is_active' => 'boolean',
             'sort_order' => 'integer',
         ];
@@ -29,6 +30,20 @@ class PageSection extends Model
     public function translations(): HasMany
     {
         return $this->hasMany(PageSectionTranslation::class);
+    }
+
+    /**
+     * Images this section shows, one per slot. The same relation serves every
+     * page, so a new page needs no new media plumbing.
+     */
+    public function sectionMedia(): HasMany
+    {
+        return $this->hasMany(PageSectionMedia::class)->orderBy('sort_order');
+    }
+
+    public function mediaForSlot(string $slot): ?Media
+    {
+        return $this->sectionMedia->firstWhere('slot', $slot)?->media;
     }
 
     /**

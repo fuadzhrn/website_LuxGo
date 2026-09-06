@@ -1,10 +1,12 @@
 @php
+    /* Five considerations, fixed by the layout — the CMS supplies the wording,
+       the icons stay with the design. */
     $ownershipConsiderations = [
-        ['label' => __('home.access.items.price'), 'icon' => 'tag.svg'],
-        ['label' => __('home.access.items.depreciation'), 'icon' => 'trending-down.svg'],
-        ['label' => __('home.access.items.maintenance'), 'icon' => 'wrench.svg'],
-        ['label' => __('home.access.items.insurance'), 'icon' => 'shield-check.svg'],
-        ['label' => __('home.access.items.operational'), 'icon' => 'wallet.svg'],
+        ['label' => $s->text('items.price'), 'icon' => 'tag.svg'],
+        ['label' => $s->text('items.depreciation'), 'icon' => 'trending-down.svg'],
+        ['label' => $s->text('items.maintenance'), 'icon' => 'wrench.svg'],
+        ['label' => $s->text('items.insurance'), 'icon' => 'shield-check.svg'],
+        ['label' => $s->text('items.operational'), 'icon' => 'wallet.svg'],
     ];
 @endphp
 
@@ -15,12 +17,12 @@
                 <span class="home-access__accent" aria-hidden="true"></span>
 
                 <h2 class="home-access__title">
-                    <span class="home-access__title-line">{{ __('home.access.title_1') }}</span>
-                    <span class="home-access__title-line">{{ __('home.access.title_2') }}</span>
+                    <span class="home-access__title-line">{{ $s->text('title_1') }}</span>
+                    <span class="home-access__title-line">{{ $s->text('title_2') }}</span>
                 </h2>
 
                 <p class="home-access__copy">
-                    {{ __('home.access.copy') }}
+                    {{ $s->text('copy') }}
                 </p>
             </div>
 

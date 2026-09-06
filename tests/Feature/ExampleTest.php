@@ -2,10 +2,14 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
+    /* Home reads its content from the database, so the schema has to exist. */
+    use RefreshDatabase;
+
     /**
      * The root path carries no locale, so it hands the visitor to the default one.
      */

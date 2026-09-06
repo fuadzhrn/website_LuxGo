@@ -1,10 +1,13 @@
 @php
+    /* Four feature slots, fixed by the layout; the CMS supplies their wording. */
     $previewFeatures = [
-        ['icon' => 'gem.svg', 'lines' => [__('home.mobility.features.design.line_1'), __('home.mobility.features.design.line_2')]],
-        ['icon' => 'armchair.svg', 'lines' => [__('home.mobility.features.comfort.line_1'), __('home.mobility.features.comfort.line_2')]],
-        ['icon' => 'zap.svg', 'lines' => [__('home.mobility.features.ev.line_1'), __('home.mobility.features.ev.line_2')]],
-        ['icon' => 'user-round.svg', 'lines' => [__('home.mobility.features.executive.line_1'), __('home.mobility.features.executive.line_2')]],
+        ['icon' => 'gem.svg', 'lines' => [$s->text('features.design.line_1'), $s->text('features.design.line_2')]],
+        ['icon' => 'armchair.svg', 'lines' => [$s->text('features.comfort.line_1'), $s->text('features.comfort.line_2')]],
+        ['icon' => 'zap.svg', 'lines' => [$s->text('features.ev.line_1'), $s->text('features.ev.line_2')]],
+        ['icon' => 'user-round.svg', 'lines' => [$s->text('features.executive.line_1'), $s->text('features.executive.line_2')]],
     ];
+
+    $vehicleImage = $s->media('vehicle_image');
 @endphp
 
 <section class="home-section home-mobility">
@@ -13,26 +16,27 @@
              on desktop; on mobile it is reordered into the flow between the
              description and the feature grid. --}}
         <div class="home-mobility__media">
-            <img
-                src="{{ asset('assets/images/luxgo/collection/denza-d9/gambar_bg2.png') }}"
-                alt="{{ __('home.mobility.vehicle_alt') }}"
-                class="home-mobility__vehicle"
-                width="1672"
-                height="941"
-                loading="lazy"
-            >
+            @if ($s->hasImage('vehicle_image'))
+                <img
+                    src="{{ $s->imageUrl('vehicle_image') }}"
+                    alt="{{ $s->text('vehicle_alt') }}"
+                    class="home-mobility__vehicle"
+                    @if ($vehicleImage?->width) width="{{ $vehicleImage->width }}" height="{{ $vehicleImage->height }}" @endif
+                    loading="lazy"
+                >
+            @endif
         </div>
 
         <div class="home-mobility__content">
-            <p class="home-mobility__eyebrow" data-reveal>{{ __('home.mobility.eyebrow') }}</p>
+            <p class="home-mobility__eyebrow" data-reveal>{{ $s->text('eyebrow') }}</p>
 
             <h2 class="home-mobility__title" data-reveal data-reveal-delay="1">
-                <span class="home-mobility__title-line">{{ __('home.mobility.title_1') }}</span>
-                <span class="home-mobility__title-line">{{ __('home.mobility.title_2') }}</span>
+                <span class="home-mobility__title-line">{{ $s->text('title_1') }}</span>
+                <span class="home-mobility__title-line">{{ $s->text('title_2') }}</span>
             </h2>
 
             <p class="home-mobility__description" data-reveal data-reveal-delay="2">
-                {{ __('home.mobility.description') }}
+                {{ $s->text('description') }}
             </p>
         </div>
 
@@ -68,9 +72,9 @@
                 >
                 <div>
                     <p class="home-mobility__driver-title">
-                        {{ __('home.mobility.driver_title') }} <span class="home-mobility__driver-accent">{{ __('home.mobility.driver_accent') }}</span>
+                        {{ $s->text('driver_title') }} <span class="home-mobility__driver-accent">{{ $s->text('driver_accent') }}</span>
                     </p>
-                    <p class="home-mobility__driver-copy">{{ __('home.mobility.driver_copy') }}</p>
+                    <p class="home-mobility__driver-copy">{{ $s->text('driver_copy') }}</p>
                 </div>
             </div>
         </div>

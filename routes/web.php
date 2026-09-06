@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\PageContentService;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,8 +26,10 @@ Route::prefix('{locale}')
     ->where(['locale' => implode('|', config('locales.supported'))])
     ->middleware('locale')
     ->group(function () {
-        Route::get('/', function () {
-            return view('pages.home.index');
+        /* Home reads its copy and imagery from the CMS; the service applies
+           the locale fallback so the view never has to. */
+        Route::get('/', function (PageContentService $content) {
+            return view('pages.home.index', ['page' => $content->render('home')]);
         })->name('home');
 
         Route::get('/membership', function () {

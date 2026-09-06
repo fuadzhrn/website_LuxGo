@@ -91,6 +91,11 @@
 
 /* Image field -------------------------------------------------------------- */
 
+.admin-image {
+    /* Sits in a form beside ordinary fields, so it needs their rhythm. */
+    margin-bottom: 22px;
+}
+
 .admin-image__frame {
     display: flex;
     align-items: center;
@@ -446,6 +451,11 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
+}
+
+/* The class sets display, so [hidden] has to be restated for it to win. */
+.admin-picker[hidden] {
+    display: none;
 }
 
 .admin-picker__scrim {

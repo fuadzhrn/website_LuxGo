@@ -1,44 +1,45 @@
 @php
+    /* Three cards, fixed by the layout. Each one has its own image slot, shared
+       between the languages; only the copy and alt text are translated. */
     $useCases = [
         [
-            'label' => __('home.use_cases.business.label'),
-            'image' => 'assets/images/luxgo/home/use-cases/business.webp',
-            'alt' => __('home.use_cases.business.alt'),
-            'lines' => [__('home.use_cases.business.line_1'), __('home.use_cases.business.line_2')],
+            'slot' => 'business_image',
+            'label' => $s->text('business.label'),
+            'alt' => $s->text('business.alt'),
+            'lines' => [$s->text('business.line_1'), $s->text('business.line_2')],
         ],
         [
-            'label' => __('home.use_cases.family.label'),
-            'image' => 'assets/images/luxgo/home/use-cases/family.webp',
-            'alt' => __('home.use_cases.family.alt'),
-            'lines' => [__('home.use_cases.family.line_1'), __('home.use_cases.family.line_2')],
+            'slot' => 'family_image',
+            'label' => $s->text('family.label'),
+            'alt' => $s->text('family.alt'),
+            'lines' => [$s->text('family.line_1'), $s->text('family.line_2')],
         ],
         [
-            'label' => __('home.use_cases.life.label'),
-            'image' => 'assets/images/luxgo/home/use-cases/life.webp',
-            'alt' => __('home.use_cases.life.alt'),
-            'lines' => [__('home.use_cases.life.line_1'), __('home.use_cases.life.line_2')],
+            'slot' => 'life_image',
+            'label' => $s->text('life.label'),
+            'alt' => $s->text('life.alt'),
+            'lines' => [$s->text('life.line_1'), $s->text('life.line_2')],
         ],
     ];
 @endphp
 
-{{-- Photography goes in public/assets/images/luxgo/home/use-cases/ as
-     business.webp, family.webp and life.webp. Until a file is present the card
-     keeps its dark media slot instead of rendering a broken image. --}}
+{{-- A card whose slot has no image keeps its dark media panel instead of
+     rendering a broken image. --}}
 
 <section class="home-section home-use-cases">
     <div class="lux-container">
         <div class="home-use-cases__header">
             <div class="home-use-cases__intro-heading" data-reveal>
-                <p class="home-use-cases__eyebrow lux-eyebrow">{{ __('home.use_cases.eyebrow') }}</p>
+                <p class="home-use-cases__eyebrow lux-eyebrow">{{ $s->text('eyebrow') }}</p>
                 <h2 class="home-use-cases__title">
-                    <span class="home-use-cases__title-line">{{ __('home.use_cases.title_1') }}</span>
-                    <span class="home-use-cases__title-line">{{ __('home.use_cases.title_2') }}</span>
-                    <span class="home-use-cases__title-line">{{ __('home.use_cases.title_3') }}</span>
+                    <span class="home-use-cases__title-line">{{ $s->text('title_1') }}</span>
+                    <span class="home-use-cases__title-line">{{ $s->text('title_2') }}</span>
+                    <span class="home-use-cases__title-line">{{ $s->text('title_3') }}</span>
                 </h2>
             </div>
 
             <p class="home-use-cases__description" data-reveal data-reveal-delay="1">
-                {{ __('home.use_cases.description') }}
+                {{ $s->text('description') }}
             </p>
         </div>
 
@@ -46,9 +47,9 @@
             @foreach ($useCases as $index => $useCase)
                 <article class="home-use-case" data-reveal data-reveal-delay="{{ $index + 1 }}">
                     <div class="home-use-case__media">
-                        @if (file_exists(public_path($useCase['image'])))
+                        @if ($s->hasImage($useCase['slot']))
                             <img
-                                src="{{ asset($useCase['image']) }}"
+                                src="{{ $s->imageUrl($useCase['slot']) }}"
                                 alt="{{ $useCase['alt'] }}"
                                 class="home-use-case__image"
                                 loading="lazy"

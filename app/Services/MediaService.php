@@ -53,6 +53,46 @@ class MediaService
     }
 
     /**
+     * Copies a file that already ships with the site into the library. The
+     * original is left where it is, so pages that still reference it directly
+     * keep working.
+     */
+    public function storeFromPath(string $absolutePath, ?string $originalName = null, ?int $userId = null): Media
+    {
+        if (! is_file($absolutePath)) {
+            throw new \RuntimeException("No file at {$absolutePath}.");
+        }
+
+        $disk = config('admin.media.disk');
+        $directory = config('admin.media.directory');
+
+        $extension = strtolower(pathinfo($absolutePath, PATHINFO_EXTENSION) ?: 'bin');
+        $path = $directory.'/'.Str::uuid()->toString().'.'.$extension;
+
+        Storage::disk($disk)->put($path, file_get_contents($absolutePath));
+
+        $size = @getimagesize($absolutePath);
+
+        try {
+            return Media::create([
+                'disk' => $disk,
+                'path' => $path,
+                'filename' => $originalName ?? basename($absolutePath),
+                'mime_type' => is_array($size) ? ($size['mime'] ?? 'application/octet-stream') : 'application/octet-stream',
+                'extension' => $extension,
+                'size_bytes' => filesize($absolutePath) ?: null,
+                'width' => is_array($size) ? $size[0] : null,
+                'height' => is_array($size) ? $size[1] : null,
+                'created_by' => $userId,
+            ]);
+        } catch (Throwable $e) {
+            Storage::disk($disk)->delete($path);
+
+            throw $e;
+        }
+    }
+
+    /**
      * Removes the row and the file together. A file that has already vanished
      * is not an error — the row still needs clearing.
      */

@@ -57,7 +57,7 @@
 
                 <ul class="admin-sidebar__list">
                     @foreach ($group['items'] as $item)
-                        @php($isActive = request()->routeIs($item['route']))
+                        @php($isActive = request()->routeIs($item['route']) || request()->routeIs($item['route'].'.*'))
                         <li>
                             <a
                                 href="{{ route($item['route']) }}"
