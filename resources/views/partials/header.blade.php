@@ -29,9 +29,6 @@
             </ul>
         </nav>
 
-        <a href="/become-a-member" class="site-header__cta">
-            <span>Become a Member</span>
-            <span class="site-header__cta-icon" aria-hidden="true">&rarr;</span>
-        </a>
+        <a href="/become-a-member" class="site-header__cta">Become a Member</a>
     </div>
 </header>

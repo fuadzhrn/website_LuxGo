@@ -122,30 +122,32 @@
 
 /* CTA ----------------------------------------------------------------------- */
 
+/*
+   A hairline outline rather than a filled block. This CTA is pinned to every
+   page, so keeping it quiet leaves blue as an accent and lets the filled blue
+   action close a page on its own terms.
+*/
 .site-header__cta {
     display: inline-flex;
     flex-shrink: 0;
     align-items: center;
-    gap: 8px;
     height: clamp(42px, 3vw, 46px);
-    padding-inline: clamp(22px, 1.8vw, 30px);
+    padding-inline: clamp(24px, 2vw, 34px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: var(--radius-sm);
-    background-color: var(--color-lux-blue);
     color: var(--color-white);
     font-family: var(--font-body);
-    font-size: var(--header-nav-size);
-    font-weight: var(--fw-semibold);
+    font-size: clamp(0.75rem, 0.72rem + 0.08vw, 0.8125rem);
+    font-weight: var(--fw-medium);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     white-space: nowrap;
-    transition: background-color var(--transition-base), transform var(--transition-base);
+    transition: background-color var(--transition-base), border-color var(--transition-base);
 }
 
 .site-header__cta:hover {
-    background-color: var(--color-lux-blue-strong);
-    transform: translateY(-1px);
-}
-
-.site-header__cta:active {
-    transform: translateY(1px);
+    background-color: rgba(255, 255, 255, 0.06);
+    border-color: var(--color-white);
 }
 
 .site-header__cta:focus-visible {
@@ -153,26 +155,11 @@
     outline-offset: 3px;
 }
 
-.site-header__cta-icon {
-    transition: transform var(--transition-base);
-}
-
-.site-header__cta:hover .site-header__cta-icon {
-    transform: translateX(2px);
-}
-
 @media (prefers-reduced-motion: reduce) {
     .site-header,
     .site-nav__link,
     .site-nav__link::after,
-    .site-header__cta,
-    .site-header__cta-icon {
+    .site-header__cta {
         transition: none;
-    }
-
-    .site-header__cta:hover,
-    .site-header__cta:active,
-    .site-header__cta:hover .site-header__cta-icon {
-        transform: none;
     }
 }

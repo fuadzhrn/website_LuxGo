@@ -1,0 +1,7 @@
+/* ==========================================================================
+   LUX&GO — About & Contact (page-level base; section styles live in their own files)
+   ========================================================================== */
+
+.about-section {
+    background-color: var(--color-white);
+}

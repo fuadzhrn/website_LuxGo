@@ -1,0 +1,101 @@
+/* ==========================================================================
+   LUX&GO — About & Contact / About LUX&GO + Who We Serve
+   ========================================================================== */
+
+.about-intro {
+    /* Mirrors the fixed navbar height in header.css, which overlays this section. */
+    --about-header-offset: clamp(72px, 4vw, 78px);
+
+    padding-top: calc(var(--about-header-offset) + clamp(48px, 4vw, 76px));
+    padding-bottom: clamp(56px, 4.6vw, 84px);
+    background-color: var(--color-off-white);
+}
+
+/* Brand statement left, the audience register right. */
+.about-intro__inner {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    column-gap: var(--grid-gap);
+}
+
+.about-intro__lead {
+    grid-column: 1 / 7;
+}
+
+.about-intro__eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.6875rem, 0.65rem + 0.1vw, 0.8125rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-lux-blue);
+}
+
+.about-intro__title {
+    margin-top: clamp(14px, 1.2vw, 20px);
+    font-family: var(--font-heading);
+    font-weight: var(--fw-medium);
+    font-size: clamp(2.5rem, 2.15rem + 1vw, 3.25rem);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.about-intro__title-line {
+    display: block;
+}
+
+.about-intro__copy {
+    max-width: 420px;
+    margin-top: clamp(18px, 1.6vw, 26px);
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+    font-size: clamp(0.875rem, 0.85rem + 0.1vw, 1rem);
+    line-height: var(--lh-body);
+    color: var(--color-text-muted);
+}
+
+/* Who we serve ----------------------------------------------------------------- */
+
+.about-intro__serve {
+    grid-column: 8 / 13;
+}
+
+.about-intro__serve-title {
+    margin-bottom: clamp(18px, 1.6vw, 26px);
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.6875rem, 0.65rem + 0.1vw, 0.8125rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.about-intro__item {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(14px, 1.3vw, 22px);
+    padding-block: clamp(13px, 1.15vw, 19px);
+}
+
+.about-intro__item + .about-intro__item {
+    border-top: var(--border-thin);
+}
+
+.about-intro__number {
+    flex-shrink: 0;
+    width: 2rem;
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: clamp(0.75rem, 0.72rem + 0.09vw, 0.875rem);
+    letter-spacing: 0.06em;
+    color: var(--color-lux-blue);
+}
+
+.about-intro__label {
+    font-family: var(--font-body);
+    font-weight: var(--fw-medium);
+    font-size: clamp(0.875rem, 0.85rem + 0.1vw, 1rem);
+    color: var(--color-text);
+}
