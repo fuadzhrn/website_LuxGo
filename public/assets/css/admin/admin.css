@@ -412,6 +412,38 @@ button {
     font-weight: 500;
 }
 
+.admin-sections__index {
+    font-family: var(--admin-font-heading);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--admin-text-muted);
+}
+
+.admin-sections__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-tokens {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.admin-tokens code {
+    display: inline-block;
+    padding: 3px 8px;
+    background-color: var(--admin-surface);
+    border: 1px solid var(--admin-border);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: var(--admin-text-muted);
+}
+
 /* Field group ------------------------------------------------------------- */
 
 .admin-fieldgroup {
@@ -451,6 +483,10 @@ button {
     }
 
     .admin-sections__item .admin-button {
+        width: 100%;
+    }
+
+    .admin-sections__actions {
         width: 100%;
     }
 }

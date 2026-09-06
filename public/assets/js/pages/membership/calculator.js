@@ -18,9 +18,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const MIN_LOTS = 1;
     /* Safeguard for the input only — not a business limit on LOTs. */
     const MAX_LOTS = 99;
-    const BASE_RIGHTS = 6;
-    const RIGHTS_PER_ADDITIONAL_LOT = 2;
-    const MEMBERSHIP_YEARS = 5;
+
+    /* The rule comes from the page, which renders it from the membership
+       settings. No business figure is written here, so changing a setting is
+       enough — this file never needs editing. */
+    const number = (name) => Number.parseInt(calculator.dataset[name], 10);
+
+    const BASE_RIGHTS = number("baseRights");
+    const RIGHTS_PER_ADDITIONAL_LOT = number("additionalRights");
+    const MEMBERSHIP_YEARS = number("period");
+
+    if (!Number.isFinite(BASE_RIGHTS) || !Number.isFinite(RIGHTS_PER_ADDITIONAL_LOT) || !Number.isFinite(MEMBERSHIP_YEARS)) {
+        /* Without the figures the server-rendered values stay as they are,
+           rather than being replaced with something invented here. */
+        return;
+    }
 
     let lots = MIN_LOTS;
 

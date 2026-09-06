@@ -229,6 +229,11 @@
     color: var(--admin-text-muted);
 }
 
+.admin-input[type="number"] {
+    /* A figure does not need the width of a sentence. */
+    max-width: 260px;
+}
+
 .admin-select {
     /* The native control keeps its own arrow; only the box is themed. */
     max-width: 420px;

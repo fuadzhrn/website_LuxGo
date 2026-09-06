@@ -41,6 +41,15 @@ class PageSection extends Model
         return $this->hasMany(PageSectionMedia::class)->orderBy('sort_order');
     }
 
+    /**
+     * FAQ entries this section renders, in display order. Empty for the
+     * sections that do not host a FAQ list.
+     */
+    public function faqItems(): HasMany
+    {
+        return $this->hasMany(FaqItem::class)->orderBy('sort_order')->orderBy('id');
+    }
+
     public function mediaForSlot(string $slot): ?Media
     {
         return $this->sectionMedia->firstWhere('slot', $slot)?->media;

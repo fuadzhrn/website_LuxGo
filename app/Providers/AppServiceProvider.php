@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Media;
+use App\Models\MembershipSetting;
 use App\Support\LocaleUrl;
+use App\Support\MembershipValues;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +16,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        /* One row of published figures, resolved once per request. Everything
+           that shows a price, a usage right or a duration reads it from here. */
+        $this->app->scoped(MembershipValues::class, function () {
+            return new MembershipValues(MembershipSetting::query()->orderBy('id')->firstOrFail());
+        });
     }
 
     /**

@@ -19,7 +19,9 @@
     {{-- Order and visibility come from the CMS; the sections themselves are the
          same partials as before, each handed its own resolved content. --}}
     @foreach ($page->sections() as $key => $section)
-        @include($page->view($key), ['s' => $section])
+        @foreach ($page->views($key) as $partial)
+            @include($partial, ['s' => $section])
+        @endforeach
     @endforeach
 
 @endsection

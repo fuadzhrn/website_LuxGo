@@ -6,6 +6,7 @@ use App\Models\Media;
 use App\Models\Page;
 use App\Models\PageSection;
 use App\Services\MediaService;
+use App\Services\PageContentService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
 
@@ -21,7 +22,10 @@ use Illuminate\Support\Arr;
  */
 class PageContentSeeder extends Seeder
 {
-    public function __construct(private readonly MediaService $media) {}
+    public function __construct(
+        private readonly MediaService $media,
+        private readonly PageContentService $content,
+    ) {}
 
     public function run(): void
     {
@@ -43,9 +47,10 @@ class PageContentSeeder extends Seeder
                     continue;
                 }
 
-                $this->seedTranslations($section, $sectionDefinition);
+                $this->seedTranslations($pageKey, $sectionKey, $section, $sectionDefinition);
                 $this->seedSettings($section, $sectionDefinition);
                 $this->seedMedia($section, $sectionDefinition);
+                $this->seedFaq($section, $sectionDefinition);
             }
         }
     }
@@ -53,18 +58,14 @@ class PageContentSeeder extends Seeder
     /**
      * @param  array<string, mixed>  $definition
      */
-    private function seedTranslations(PageSection $section, array $definition): void
+    private function seedTranslations(string $pageKey, string $sectionKey, PageSection $section, array $definition): void
     {
-        $namespace = $definition['lang'] ?? null;
-
-        if (! is_string($namespace)) {
-            return;
-        }
-
         foreach (config('locales.supported') as $locale) {
-            $lines = trans($namespace, [], $locale);
+            /* The service knows how a section's lang namespaces are laid out,
+               including the sections that draw on more than one. */
+            $lines = $this->content->langContent($pageKey, $sectionKey, $locale);
 
-            if (! is_array($lines)) {
+            if ($lines === []) {
                 continue;
             }
 
@@ -106,6 +107,43 @@ class PageContentSeeder extends Seeder
 
         if ($settings !== ($section->settings ?? [])) {
             $section->update(['settings' => $settings]);
+        }
+    }
+
+    /**
+     * The questions a section shipped with, created once. After that the list
+     * belongs to the admin: a re-run adds nothing and removes nothing.
+     *
+     * @param  array<string, mixed>  $definition
+     */
+    private function seedFaq(PageSection $section, array $definition): void
+    {
+        $faq = $definition['faq'] ?? null;
+
+        if (! is_array($faq) || $section->faqItems()->exists()) {
+            return;
+        }
+
+        foreach ($faq['items'] ?? [] as $order => $item) {
+            $entry = $section->faqItems()->create([
+                'shows_usage_breakdown' => (bool) ($item['breakdown'] ?? false),
+                'is_active' => true,
+                'sort_order' => $order + 1,
+            ]);
+
+            foreach (config('locales.supported') as $locale) {
+                $lines = trans($faq['lang'], [], $locale);
+
+                if (! is_array($lines)) {
+                    continue;
+                }
+
+                $entry->translations()->create([
+                    'locale' => $locale,
+                    'question' => Arr::get($lines, $item['question'], ''),
+                    'answer' => Arr::get($lines, $item['answer'], ''),
+                ]);
+            }
         }
     }
 

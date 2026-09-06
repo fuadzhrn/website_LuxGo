@@ -153,10 +153,12 @@ class HomeContentTest extends TestCase
 
     public function test_a_page_without_an_editor_cannot_be_opened(): void
     {
-        $membership = Page::where('key', 'membership')->sole();
+        /* Our Collection has no editor yet; opening it is a 404, not a blank
+           screen. */
+        $collection = Page::where('key', 'collection')->sole();
 
         $this->actingAs($this->administrator())
-            ->get(route('admin.content.page', $membership))
+            ->get(route('admin.content.page', $collection))
             ->assertNotFound();
     }
 

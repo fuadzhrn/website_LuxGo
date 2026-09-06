@@ -15,6 +15,17 @@
         description="Each section is edited on its own, in both languages. Turning a section off keeps its content and hides it from the public page."
     />
 
+    @if ($definition['business_settings'] ?? false)
+        <div class="admin-panel">
+            <x-admin.ui.section-header
+                title="Business settings"
+                description="Prices, usage rights and durations. Stored once and used by every section, the calculator and the FAQ."
+            />
+
+            <a class="admin-button admin-button--ghost" href="{{ route('admin.content.business-settings', $page) }}">Edit business settings</a>
+        </div>
+    @endif
+
     <div class="admin-panel">
         <ul class="admin-sections">
             @foreach ($sections as $item)

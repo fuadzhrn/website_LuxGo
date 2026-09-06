@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\Admin\MembershipSettingsController;
 use App\Http\Controllers\Admin\PageContentController;
 use App\Http\Controllers\Admin\ShellController;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +30,27 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->scopeBindings()->name('content.section.edit');
         Route::put('content/{page:key}/sections/{section:section_key}', [PageContentController::class, 'update'])
             ->scopeBindings()->name('content.section.update');
+
+        /* Business figures live on their own screen: they are shared by the
+           whole site, not owned by one section. */
+        Route::get('content/{page:key}/business-settings', [MembershipSettingsController::class, 'edit'])
+            ->name('content.business-settings');
+        Route::put('content/{page:key}/business-settings', [MembershipSettingsController::class, 'update'])
+            ->name('content.business-settings.update');
+
+        /* A FAQ list belongs to the section that renders it. */
+        Route::prefix('content/{page:key}/sections/{section:section_key}/faq')
+            ->name('content.faq')
+            ->scopeBindings()
+            ->group(function () {
+                Route::get('/', [FaqController::class, 'index']);
+                Route::get('create', [FaqController::class, 'create'])->name('.create');
+                Route::post('/', [FaqController::class, 'store'])->name('.store');
+                Route::get('{faq_item}/edit', [FaqController::class, 'edit'])->name('.edit');
+                Route::put('{faq_item}', [FaqController::class, 'update'])->name('.update');
+                Route::delete('{faq_item}', [FaqController::class, 'destroy'])->name('.destroy');
+                Route::post('{faq_item}/move', [FaqController::class, 'move'])->name('.move');
+            });
         Route::get('media', [MediaController::class, 'index'])->name('media');
         Route::post('media', [MediaController::class, 'store'])->name('media.store');
         Route::patch('media/{media}', [MediaController::class, 'update'])->name('media.update');

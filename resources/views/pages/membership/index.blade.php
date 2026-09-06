@@ -19,12 +19,13 @@
 
 @section('content')
 
-    @include('pages.membership.sections.hero')
-    @include('pages.membership.sections.membership-package')
-    @include('pages.membership.sections.more-access')
-    @include('pages.membership.sections.understanding-usage')
-    @include('pages.membership.sections.faq')
-    @include('pages.membership.sections.membership-cta')
+    {{-- Order and visibility come from the CMS; the figures come from the
+         membership settings, which every partial receives. --}}
+    @foreach ($page->sections() as $key => $section)
+        @foreach ($page->views($key) as $partial)
+            @include($partial, ['s' => $section, 'membership' => $membership])
+        @endforeach
+    @endforeach
 
 @endsection
 

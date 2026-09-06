@@ -4,6 +4,8 @@ namespace App\Http\Requests\Admin;
 
 use App\Models\Page;
 use App\Models\PageSection;
+use App\Support\MembershipValues;
+use Closure;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
@@ -32,13 +34,16 @@ class UpdatePageSectionRequest extends FormRequest
 
         foreach (config('locales.supported') as $locale) {
             foreach (Arr::get($definition, 'fields', []) as $path => $field) {
-                $rules["content.{$locale}.{$path}"] = $field['rules'] ?? ['nullable', 'string', 'max:255'];
+                $rules["content.{$locale}.{$path}"] = array_merge(
+                    $field['rules'] ?? ['nullable', 'string', 'max:255'],
+                    [$this->placeholderRule()],
+                );
             }
         }
 
         foreach (Arr::get($definition, 'settings', []) as $key => $setting) {
-            $rules["settings.{$key}"] = ($setting['type'] ?? null) === 'route'
-                ? ['required', Rule::in(array_keys(config('page_content.cta_routes', [])))]
+            $rules["settings.{$key}"] = ($setting['type'] ?? null) === 'cta'
+                ? ['required', Rule::in(array_keys(config('page_content.cta_targets', [])))]
                 : ['nullable', 'string', 'max:255'];
         }
 
@@ -66,6 +71,28 @@ class UpdatePageSectionRequest extends FormRequest
         }
 
         return $attributes;
+    }
+
+    /**
+     * Copy may refer to a business figure by placeholder, but only to one the
+     * site knows how to fill in — a typo is caught here rather than shipped to
+     * the page as literal braces.
+     */
+    private function placeholderRule(): Closure
+    {
+        return function (string $attribute, mixed $value, Closure $fail): void {
+            if (! is_string($value)) {
+                return;
+            }
+
+            preg_match_all('/\{\{[^}]*\}\}/', $value, $matches);
+
+            foreach ($matches[0] as $token) {
+                if (! in_array($token, MembershipValues::allowedPlaceholders(), true)) {
+                    $fail("The :attribute uses an unknown placeholder {$token}.");
+                }
+            }
+        };
     }
 
     public function page(): Page

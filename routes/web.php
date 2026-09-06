@@ -1,6 +1,7 @@
 <?php
 
 use App\Services\PageContentService;
+use App\Support\MembershipValues;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,8 +33,13 @@ Route::prefix('{locale}')
             return view('pages.home.index', ['page' => $content->render('home')]);
         })->name('home');
 
-        Route::get('/membership', function () {
-            return view('pages.membership.index');
+        /* Copy and imagery come from the CMS; every figure on the page comes
+           from the membership settings, never from the copy itself. */
+        Route::get('/membership', function (PageContentService $content, MembershipValues $membership) {
+            return view('pages.membership.index', [
+                'page' => $content->render('membership'),
+                'membership' => $membership,
+            ]);
         })->name('membership');
 
         Route::get('/our-collection', function () {

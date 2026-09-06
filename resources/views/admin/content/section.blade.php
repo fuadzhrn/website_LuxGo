@@ -54,6 +54,7 @@
                                         :name="$name"
                                         :label="$field['label']"
                                         :value="$current"
+                                        :help="$field['help'] ?? null"
                                         :rows="3"
                                     />
                                 @else
@@ -61,6 +62,7 @@
                                         :name="$name"
                                         :label="$field['label']"
                                         :value="$current"
+                                        :help="$field['help'] ?? null"
                                     />
                                 @endif
                             @endforeach
@@ -88,11 +90,11 @@
             @endforeach
 
             @foreach ($definition['settings'] ?? [] as $key => $setting)
-                @if (($setting['type'] ?? null) === 'route')
+                @if (($setting['type'] ?? null) === 'cta')
                     <x-admin.form.select
                         :name="'settings['.$key.']'"
                         :label="$setting['label']"
-                        :options="config('page_content.cta_routes')"
+                        :options="collect(config('page_content.cta_targets'))->map(fn ($target) => $target['label'])->all()"
                         :value="$section->settings[$key] ?? ($setting['default'] ?? null)"
                         help="The link keeps the visitor's language automatically."
                     />
@@ -104,6 +106,17 @@
                 help="An inactive section keeps its content but is not shown on the public page."
             />
         </div>
+
+        @if ($definition['faq'] ?? false)
+            <div class="admin-panel">
+                <x-admin.ui.section-header
+                    title="FAQ"
+                    description="The questions in this section are managed on their own screen, so they can be added, reordered and switched off individually."
+                />
+
+                <a class="admin-button admin-button--ghost" href="{{ route('admin.content.faq', [$page, $section]) }}">Manage FAQ</a>
+            </div>
+        @endif
 
         <x-admin.ui.save-bar :updated-at="$section->updated_at">
             <a class="admin-button admin-button--quiet" href="{{ route('admin.content.page', $page) }}">Back to sections</a>

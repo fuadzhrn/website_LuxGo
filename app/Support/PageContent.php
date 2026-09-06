@@ -10,7 +10,7 @@ class PageContent
 {
     /**
      * @param  array<string, SectionContent>  $sections  keyed by section_key, in display order
-     * @param  array<string, string>  $views  section_key => Blade view
+     * @param  array<string, array<int, string>>  $views  section_key => Blade views
      */
     public function __construct(
         public readonly string $key,
@@ -36,8 +36,14 @@ class PageContent
         return $this->sections[$sectionKey] ?? null;
     }
 
-    public function view(string $sectionKey): ?string
+    /**
+     * The partials a section renders. Usually one; a section that the approved
+     * page splits across two partials lists both.
+     *
+     * @return array<int, string>
+     */
+    public function views(string $sectionKey): array
     {
-        return $this->views[$sectionKey] ?? null;
+        return $this->views[$sectionKey] ?? [];
     }
 }

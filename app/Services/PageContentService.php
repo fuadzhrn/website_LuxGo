@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Models\MembershipSetting;
 use App\Models\Page;
 use App\Models\PageSection;
+use App\Support\MembershipValues;
 use App\Support\PageContent;
 use App\Support\SectionContent;
 use Illuminate\Support\Arr;
@@ -27,11 +29,14 @@ class PageContentService
     /** @var array<string, Page|null> */
     private array $pages = [];
 
+    /** @var array<string, string>|null */
+    private ?array $placeholders = null;
+
     public function page(string $pageKey): ?Page
     {
         return $this->pages[$pageKey] ??= Page::query()
             ->where('key', $pageKey)
-            ->with(['sections.translations', 'sections.sectionMedia.media'])
+            ->with(['sections.translations', 'sections.sectionMedia.media', 'sections.faqItems.translations'])
             ->first();
     }
 
@@ -57,7 +62,7 @@ class PageContentService
             }
 
             $sections[$sectionKey] = $this->resolve($pageKey, $sectionKey, $section, $locale);
-            $views[$sectionKey] = $sectionDefinition['view'];
+            $views[$sectionKey] = (array) $sectionDefinition['view'];
         }
 
         return new PageContent($pageKey, $sections, $views);
@@ -127,15 +132,57 @@ class PageContentService
      */
     public function langContent(string $pageKey, string $sectionKey, string $locale): array
     {
-        $namespace = Arr::get($this->sectionDefinition($pageKey, $sectionKey) ?? [], 'lang');
+        $namespaces = Arr::get($this->sectionDefinition($pageKey, $sectionKey) ?? [], 'lang');
 
-        if (! is_string($namespace)) {
+        if (is_string($namespaces)) {
+            $namespaces = ['' => $namespaces];
+        }
+
+        if (! is_array($namespaces)) {
             return [];
         }
 
-        $lines = trans($namespace, [], $locale);
+        $content = [];
 
-        return is_array($lines) ? $lines : [];
+        /* A section may draw on more than one namespace: the key says where the
+           lines are nested, '' meaning the root of the section content. */
+        foreach ($namespaces as $prefix => $namespace) {
+            $lines = trans($namespace, [], $locale);
+
+            if (! is_array($lines)) {
+                continue;
+            }
+
+            if ($prefix === '') {
+                $content = array_replace_recursive($content, $lines);
+
+                continue;
+            }
+
+            Arr::set($content, $prefix, array_replace_recursive(Arr::get($content, $prefix, []), $lines));
+        }
+
+        return $content;
+    }
+
+    /**
+     * The business figures CMS copy may refer to. Resolved once per request.
+     *
+     * @return array<string, string>
+     */
+    private function placeholders(): array
+    {
+        if ($this->placeholders !== null) {
+            return $this->placeholders;
+        }
+
+        $settings = MembershipSetting::query()->orderBy('id')->first();
+
+        /* Before the settings are seeded there is nothing to substitute; the
+           copy still renders, placeholders and all, instead of failing. */
+        return $this->placeholders = $settings
+            ? (new MembershipValues($settings))->placeholders()
+            : [];
     }
 
     private function resolve(string $pageKey, string $sectionKey, ?PageSection $section, string $locale): SectionContent
@@ -166,6 +213,8 @@ class PageContentService
             $media,
             $section?->settings ?? [],
             $definition,
+            $this->placeholders(),
+            $section?->faqItems->where('is_active', true)->values(),
         );
     }
 }

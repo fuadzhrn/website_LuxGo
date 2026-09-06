@@ -22,16 +22,18 @@
 
 return [
 
-    /* Internal routes a CTA may point at. A destination is chosen from this
-       list rather than typed, so a link can never carry javascript: or leave
-       the site, and route() keeps the visitor's locale. */
-    'cta_routes' => [
-        'membership' => 'Membership',
-        'collection' => 'Our Collection',
-        'experience' => 'The Experience',
-        'how-it-works' => 'How It Works',
-        'about' => 'About & Contact',
-        'home' => 'Home',
+    /* Destinations a CTA may point at. One is chosen from this list rather
+       than typed, so a link can never carry javascript: or leave the site.
+       A `route` entry keeps the visitor's locale automatically; `path` is for
+       the site-wide placeholder link that has no page of its own yet. */
+    'cta_targets' => [
+        'membership' => ['label' => 'Membership', 'route' => 'membership'],
+        'collection' => ['label' => 'Our Collection', 'route' => 'collection'],
+        'experience' => ['label' => 'The Experience', 'route' => 'experience'],
+        'how-it-works' => ['label' => 'How It Works', 'route' => 'how-it-works'],
+        'about' => ['label' => 'About & Contact', 'route' => 'about'],
+        'home' => ['label' => 'Home', 'route' => 'home'],
+        'become_member' => ['label' => 'Become a member', 'path' => '/become-a-member'],
     ],
 
     'pages' => [
@@ -64,7 +66,7 @@ return [
                         ],
                     ],
                     'settings' => [
-                        'cta_route' => ['label' => 'CTA destination', 'type' => 'route', 'default' => 'membership'],
+                        'cta_route' => ['label' => 'CTA destination', 'type' => 'cta', 'default' => 'membership'],
                     ],
                 ],
 
@@ -173,7 +175,7 @@ return [
                         'cta_link' => ['label' => 'CTA label', 'group' => 'Closing CTA', 'rules' => ['required', 'string', 'max:60']],
                     ],
                     'settings' => [
-                        'cta_route' => ['label' => 'CTA destination', 'type' => 'route', 'default' => 'membership'],
+                        'cta_route' => ['label' => 'CTA destination', 'type' => 'cta', 'default' => 'membership'],
                     ],
                 ],
 
@@ -181,7 +183,166 @@ return [
         ],
 
         /* Structure only until their own stage; the editor is not offered yet. */
-        'membership' => ['label' => 'Membership', 'editable' => false],
+        'membership' => [
+            'label' => 'Membership',
+            'editable' => true,
+            'view' => 'pages.membership.index',
+
+            /* Every figure this page shows lives in membership_settings, so the
+               editor gets a screen of its own for them. */
+            'business_settings' => true,
+
+            'sections' => [
+
+                'hero' => [
+                    'label' => 'Hero',
+                    'view' => 'pages.membership.sections.hero',
+                    'lang' => 'membership.hero',
+                    'fields' => [
+                        'eyebrow' => ['label' => 'Eyebrow', 'rules' => ['required', 'string', 'max:60']],
+                        'title_1' => ['label' => 'Heading line 1', 'rules' => ['required', 'string', 'max:60']],
+                        'title_2' => ['label' => 'Heading line 2', 'rules' => ['required', 'string', 'max:60']],
+                        'title_3' => ['label' => 'Heading line 3', 'rules' => ['required', 'string', 'max:60']],
+                        'copy' => ['label' => 'Description', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:400']],
+
+                        'panel_label' => ['label' => 'Panel label', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:60']],
+                        'unit_years' => ['label' => 'Unit - years', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:40']],
+                        'unit_per_year' => ['label' => 'Unit - per year', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:40']],
+                        'unit_per_five_years' => ['label' => 'Unit - per membership period', 'group' => 'Key numbers', 'help' => 'Use {{membership_period}} for the number of years.', 'rules' => ['required', 'string', 'max:40']],
+                        'label_period' => ['label' => 'Label - membership period', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:60']],
+                        'label_rights' => ['label' => 'Label - usage rights', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:60']],
+                        'label_total_rights' => ['label' => 'Label - total usage rights', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:60']],
+                    ],
+                ],
+
+                'membership_package' => [
+                    'label' => 'Membership Package',
+                    'view' => 'pages.membership.sections.membership-package',
+                    'lang' => 'membership.package',
+                    'fields' => [
+                        'eyebrow' => ['label' => 'Eyebrow', 'rules' => ['required', 'string', 'max:60']],
+                        'title_1' => ['label' => 'Heading line 1', 'rules' => ['required', 'string', 'max:60']],
+                        'title_2' => ['label' => 'Heading line 2', 'rules' => ['required', 'string', 'max:60']],
+                        'copy' => ['label' => 'Description', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:400']],
+                        'lot_label' => ['label' => 'LOT label', 'rules' => ['required', 'string', 'max:60']],
+
+                        'fee_label' => ['label' => 'Fee block label', 'group' => 'Fee block', 'rules' => ['required', 'string', 'max:60']],
+                        'price_regular' => ['label' => 'Regular price caption', 'group' => 'Fee block', 'rules' => ['required', 'string', 'max:60']],
+                        'price_promo' => ['label' => 'Promo price caption', 'group' => 'Fee block', 'rules' => ['required', 'string', 'max:60']],
+                        'price_note' => ['label' => 'Promo label', 'group' => 'Fee block', 'help' => 'Use {{promo_member_limit}} for the promo quota.', 'rules' => ['required', 'string', 'max:120']],
+
+                        'what_you_get' => ['label' => 'Metrics block label', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:60']],
+                        'unit_years' => ['label' => 'Unit - years', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:40']],
+                        'unit_per_year' => ['label' => 'Unit - per year', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:40']],
+                        'unit_per_five_years' => ['label' => 'Unit - per membership period', 'group' => 'Key numbers', 'help' => 'Use {{membership_period}} for the number of years.', 'rules' => ['required', 'string', 'max:40']],
+                        'label_period' => ['label' => 'Label - membership period', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:60']],
+                        'label_rights' => ['label' => 'Label - usage rights', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:60']],
+                        'label_total_rights' => ['label' => 'Label - total usage rights', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:60']],
+
+                        'usage_label' => ['label' => 'Usage block label', 'group' => 'Usage fee', 'rules' => ['required', 'string', 'max:60']],
+                        'usage_unit' => ['label' => 'Usage unit', 'group' => 'Usage fee', 'help' => 'Use {{usage_duration}} for the hours.', 'rules' => ['required', 'string', 'max:60']],
+                        'usage_note' => ['label' => 'Usage note', 'group' => 'Usage fee', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:300']],
+                    ],
+                    'settings' => [
+                        'cta_target' => ['label' => 'CTA destination', 'type' => 'cta', 'default' => 'become_member'],
+                    ],
+                ],
+
+                'more_lot' => [
+                    'label' => 'More LOT. More Access',
+                    'view' => 'pages.membership.sections.more-access',
+                    'lang' => 'membership.access',
+                    'fields' => [
+                        'eyebrow' => ['label' => 'Eyebrow', 'rules' => ['required', 'string', 'max:60']],
+                        'title_1' => ['label' => 'Heading line 1', 'rules' => ['required', 'string', 'max:60']],
+                        'title_2' => ['label' => 'Heading line 2', 'rules' => ['required', 'string', 'max:60']],
+                        'copy' => ['label' => 'Description', 'type' => 'textarea', 'help' => 'Use {{base_usage_rights}} and {{additional_lot_rights}} instead of typing the figures.', 'rules' => ['required', 'string', 'max:400']],
+
+                        'rule_one_lot' => ['label' => 'Rule - one LOT', 'group' => 'Rule', 'rules' => ['required', 'string', 'max:60']],
+                        'rule_additional' => ['label' => 'Rule - additional LOT', 'group' => 'Rule', 'rules' => ['required', 'string', 'max:60']],
+                        'unit_per_year' => ['label' => 'Unit - per year', 'group' => 'Rule', 'rules' => ['required', 'string', 'max:40']],
+
+                        'calculator_title' => ['label' => 'Calculator title', 'group' => 'Calculator', 'rules' => ['required', 'string', 'max:80']],
+                        'calculator_copy' => ['label' => 'Calculator copy', 'group' => 'Calculator', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:300']],
+                        'decrease' => ['label' => 'Decrease button label', 'group' => 'Calculator', 'rules' => ['required', 'string', 'max:60']],
+                        'increase' => ['label' => 'Increase button label', 'group' => 'Calculator', 'rules' => ['required', 'string', 'max:60']],
+                        'result_annual' => ['label' => 'Result - per year', 'group' => 'Calculator', 'rules' => ['required', 'string', 'max:60']],
+                        'result_total' => ['label' => 'Result - total', 'group' => 'Calculator', 'help' => 'Use {{membership_period}} for the number of years.', 'rules' => ['required', 'string', 'max:80']],
+                        'calculator_note' => ['label' => 'Calculator note', 'group' => 'Calculator', 'type' => 'textarea', 'help' => 'Use {{additional_lot_rights}} instead of typing the figure.', 'rules' => ['required', 'string', 'max:300']],
+                    ],
+                ],
+
+                'usage' => [
+                    'label' => 'Understanding Your Usage',
+                    'view' => 'pages.membership.sections.understanding-usage',
+                    'lang' => 'membership.usage',
+                    'fields' => [
+                        'eyebrow' => ['label' => 'Eyebrow', 'rules' => ['required', 'string', 'max:60']],
+                        'title_1' => ['label' => 'Heading line 1', 'rules' => ['required', 'string', 'max:60']],
+                        'title_2' => ['label' => 'Heading line 2', 'rules' => ['required', 'string', 'max:60']],
+                        'copy' => ['label' => 'Description', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:400']],
+                        'unit' => ['label' => 'Unit', 'help' => 'Use {{usage_duration}} for the hours.', 'rules' => ['required', 'string', 'max:60']],
+
+                        'with_rights' => ['label' => 'Label', 'group' => 'With usage rights', 'rules' => ['required', 'string', 'max:60']],
+                        'caption' => ['label' => 'Fee caption', 'group' => 'With usage rights', 'rules' => ['required', 'string', 'max:60']],
+                        'driver_included' => ['label' => 'Driver note', 'group' => 'With usage rights', 'rules' => ['required', 'string', 'max:120']],
+
+                        'after_rights' => ['label' => 'Label', 'group' => 'After rights are used', 'rules' => ['required', 'string', 'max:60']],
+                        'regular_usage' => ['label' => 'Row - regular usage', 'group' => 'After rights are used', 'rules' => ['required', 'string', 'max:60']],
+                        'additional_usage' => ['label' => 'Row - additional usage', 'group' => 'After rights are used', 'rules' => ['required', 'string', 'max:60']],
+                        'total' => ['label' => 'Row - total', 'group' => 'After rights are used', 'rules' => ['required', 'string', 'max:60']],
+                        'availability' => ['label' => 'Availability note', 'group' => 'After rights are used', 'rules' => ['required', 'string', 'max:200']],
+                    ],
+                ],
+
+                'faq_cta' => [
+                    'label' => 'FAQ + Closing CTA',
+                    /* One section, two partials - the FAQ list and the closing
+                       CTA are switched on and off together, as they are on the
+                       approved page. */
+                    'view' => [
+                        'pages.membership.sections.faq',
+                        'pages.membership.sections.membership-cta',
+                    ],
+                    'lang' => ['' => 'membership.faq', 'cta' => 'membership.cta'],
+
+                    /* The questions the page shipped with. They are seeded once
+                       into faq_items, after which the list is the admin's. */
+                    'faq' => [
+                        'lang' => 'membership.faq',
+                        'items' => [
+                            ['question' => 'q1', 'answer' => 'a1'],
+                            ['question' => 'q2', 'answer' => 'a2'],
+                            ['question' => 'q3', 'answer' => 'a3'],
+                            ['question' => 'q4', 'answer' => 'a4'],
+                            ['question' => 'q5', 'answer' => 'a5'],
+                            ['question' => 'q6', 'answer' => 'a6'],
+                            ['question' => 'q7', 'answer' => 'a7', 'breakdown' => true],
+                        ],
+                    ],
+                    'fields' => [
+                        'eyebrow' => ['label' => 'Eyebrow', 'rules' => ['required', 'string', 'max:60']],
+                        'title_1' => ['label' => 'Heading line 1', 'rules' => ['required', 'string', 'max:60']],
+                        'title_2' => ['label' => 'Heading line 2', 'rules' => ['required', 'string', 'max:60']],
+                        'copy' => ['label' => 'Description', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:400']],
+
+                        'row_regular' => ['label' => 'Row - regular usage', 'group' => 'Usage breakdown labels', 'rules' => ['required', 'string', 'max:60']],
+                        'row_additional' => ['label' => 'Row - additional usage', 'group' => 'Usage breakdown labels', 'rules' => ['required', 'string', 'max:60']],
+                        'row_total' => ['label' => 'Row - total', 'group' => 'Usage breakdown labels', 'rules' => ['required', 'string', 'max:60']],
+                        'row_total_value' => ['label' => 'Row - total value', 'group' => 'Usage breakdown labels', 'help' => 'Use {{additional_usage_total}} and {{usage_duration}} instead of typing the figures.', 'rules' => ['required', 'string', 'max:80']],
+
+                        'cta.kicker' => ['label' => 'Kicker', 'group' => 'Closing CTA', 'help' => 'Use {{membership_period}} for the number of years.', 'rules' => ['required', 'string', 'max:80']],
+                        'cta.title_1' => ['label' => 'Heading line 1', 'group' => 'Closing CTA', 'rules' => ['required', 'string', 'max:60']],
+                        'cta.title_2' => ['label' => 'Heading line 2', 'group' => 'Closing CTA', 'rules' => ['required', 'string', 'max:60']],
+                        'cta.copy' => ['label' => 'Description', 'group' => 'Closing CTA', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:300']],
+                    ],
+                    'settings' => [
+                        'cta_target' => ['label' => 'CTA destination', 'type' => 'cta', 'default' => 'become_member'],
+                    ],
+                ],
+
+            ],
+        ],
         'collection' => ['label' => 'Our Collection', 'editable' => false],
         'experience' => ['label' => 'The Experience', 'editable' => false],
         'how_it_works' => ['label' => 'How It Works', 'editable' => false],

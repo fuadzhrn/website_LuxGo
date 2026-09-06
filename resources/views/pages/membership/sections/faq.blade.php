@@ -1,53 +1,33 @@
 @php
-    $membershipFaqs = [
-        [
-            'question' => __('membership.faq.q1'),
-            'answer' => __('membership.faq.a1'),
-        ],
-        [
-            'question' => __('membership.faq.q2'),
-            'answer' => __('membership.faq.a2'),
-        ],
-        [
-            'question' => __('membership.faq.q3'),
-            'answer' => __('membership.faq.a3'),
-        ],
-        [
-            'question' => __('membership.faq.q4'),
-            'answer' => __('membership.faq.a4'),
-        ],
-        [
-            'question' => __('membership.faq.q5'),
-            'answer' => __('membership.faq.a5'),
-        ],
-        [
-            'question' => __('membership.faq.q6'),
-            'answer' => __('membership.faq.a6'),
-        ],
-        [
-            'question' => __('membership.faq.q7'),
-            'answer' => __('membership.faq.a7'),
-            'breakdown' => [
-                ['label' => __('membership.faq.row_regular'), 'value' => 'Rp750.000'],
-                ['label' => __('membership.faq.row_additional'), 'value' => '+ Rp500.000'],
-                ['label' => __('membership.faq.row_total'), 'value' => __('membership.faq.row_total_value'), 'total' => true],
-            ],
-        ],
-    ];
+    $locale = app()->getLocale();
+    $fallbackLocale = 'en';
+
+    /* Active questions, in the order the CMS holds them. A question with no
+       translation in this locale falls back to English rather than showing
+       nothing. */
+    $membershipFaqs = $s->faqItems()->map(function ($item) use ($s, $locale, $fallbackLocale) {
+        $translation = $item->translation($locale) ?? $item->translation($fallbackLocale);
+
+        return [
+            'question' => $s->substitute($translation?->question),
+            'answer' => $s->substitute($translation?->answer),
+            'breakdown' => $item->shows_usage_breakdown,
+        ];
+    })->filter(fn (array $faq) => $faq['question'] !== '')->values();
 @endphp
 
 <section class="membership-faq">
     <div class="lux-container membership-faq__inner">
         <div class="membership-faq__intro" data-reveal>
-            <p class="membership-faq__eyebrow">{{ __('membership.faq.eyebrow') }}</p>
+            <p class="membership-faq__eyebrow">{{ $s->text('eyebrow') }}</p>
 
             <h2 class="membership-faq__title">
-                <span class="membership-faq__title-line">{{ __('membership.faq.title_1') }}</span>
-                <span class="membership-faq__title-line">{{ __('membership.faq.title_2') }}</span>
+                <span class="membership-faq__title-line">{{ $s->text('title_1') }}</span>
+                <span class="membership-faq__title-line">{{ $s->text('title_2') }}</span>
             </h2>
 
             <p class="membership-faq__copy">
-                {{ __('membership.faq.copy') }}
+                {{ $s->text('copy') }}
             </p>
         </div>
 
@@ -101,16 +81,27 @@
                     >
                         <p class="membership-faq__answer-text">{{ $faq['answer'] }}</p>
 
-                        @isset($faq['breakdown'])
+                        {{-- The amounts in the breakdown come from the
+                             membership settings, so this table can never
+                             disagree with the section above it. --}}
+                        @if ($faq['breakdown'])
                             <div class="membership-faq__breakdown">
-                                @foreach ($faq['breakdown'] as $row)
-                                    <div class="membership-faq__row{{ ! empty($row['total']) ? ' membership-faq__row--total' : '' }}">
-                                        <span class="membership-faq__row-label">{{ $row['label'] }}</span>
-                                        <span class="membership-faq__row-value">{{ $row['value'] }}</span>
-                                    </div>
-                                @endforeach
+                                <div class="membership-faq__row">
+                                    <span class="membership-faq__row-label">{{ $s->text('row_regular') }}</span>
+                                    <span class="membership-faq__row-value">{{ $membership->memberUsageFee() }}</span>
+                                </div>
+
+                                <div class="membership-faq__row">
+                                    <span class="membership-faq__row-label">{{ $s->text('row_additional') }}</span>
+                                    <span class="membership-faq__row-value">+ {{ $membership->additionalUsageFee() }}</span>
+                                </div>
+
+                                <div class="membership-faq__row membership-faq__row--total">
+                                    <span class="membership-faq__row-label">{{ $s->text('row_total') }}</span>
+                                    <span class="membership-faq__row-value">{{ $s->text('row_total_value') }}</span>
+                                </div>
                             </div>
-                        @endisset
+                        @endif
                     </div>
                 </div>
             @endforeach
