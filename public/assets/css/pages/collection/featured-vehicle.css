@@ -154,3 +154,36 @@
         transform: none;
     }
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/* The rail leaves the right column and becomes a list under the vehicle. */
+@media (max-width: 1023px) {
+    .collection-featured__header {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: clamp(16px, 2.4vw, 24px);
+    }
+
+    .collection-featured__heading,
+    .collection-featured__copy {
+        grid-column: 1 / -1;
+        max-width: 560px;
+    }
+
+    .collection-featured__showcase {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: clamp(24px, 4vw, 36px);
+    }
+}
+
+@media (max-width: 767px) {
+    .collection-featured__title {
+        font-size: clamp(2.375rem, 2rem + 1.6vw, 2.875rem);
+    }
+
+    /* The source is 3:2 — showing it uncropped keeps the vehicle whole and
+       gives a taller frame than the desktop 16:9 crop. */
+    .collection-featured__media {
+        aspect-ratio: 3 / 2;
+    }
+}

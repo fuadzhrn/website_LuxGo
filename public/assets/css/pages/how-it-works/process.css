@@ -138,3 +138,105 @@
     line-height: 1.6;
     color: var(--color-text-muted);
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/*
+   The horizontal flow becomes a vertical timeline. The track already groups the
+   marker and the connector, so turning it into a column gives the left rail
+   directly — the connector then runs from each icon down to the next.
+*/
+@media (max-width: 1023px) {
+    .hiw-process {
+        padding-block: clamp(48px, 10vw, 70px);
+    }
+
+    .hiw-process__header {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: clamp(14px, 2.4vw, 22px);
+        margin-bottom: clamp(30px, 5vw, 44px);
+    }
+
+    .hiw-process__heading,
+    .hiw-process__intro {
+        grid-column: 1 / -1;
+        max-width: 560px;
+    }
+
+    .hiw-process__flow {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hiw-process__step {
+        --step-gap: clamp(30px, 5vw, 44px);
+
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr);
+        column-gap: clamp(14px, 2.6vw, 20px);
+        padding-right: 0;
+        padding-bottom: var(--step-gap);
+    }
+
+    .hiw-process__step:last-child {
+        padding-bottom: 0;
+    }
+
+    /* span, not -1: these rows are implicit and a negative line has nothing to
+       resolve against. */
+    .hiw-process__track {
+        grid-column: 1;
+        grid-row: 1 / span 3;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: 0;
+    }
+
+    .hiw-process__marker {
+        width: 44px;
+        height: 44px;
+    }
+
+    /* flex: 1 from the base rule fills the rail; only the axis changes. */
+    .hiw-process__connector {
+        width: 1px;
+        height: auto;
+        margin-right: 0;
+        margin-bottom: calc(-1 * var(--step-gap));
+        background: linear-gradient(
+            to bottom,
+            var(--color-border) 0%,
+            var(--color-border) 82%,
+            rgba(228, 230, 232, 0) 100%
+        );
+    }
+
+    .hiw-process__number {
+        grid-column: 2;
+        grid-row: 1;
+        align-self: center;
+        font-size: clamp(2rem, 1.8rem + 0.9vw, 2.5rem);
+    }
+
+    .hiw-process__step-title {
+        grid-column: 2;
+        grid-row: 2;
+        margin-top: clamp(10px, 1.8vw, 14px);
+    }
+
+    .hiw-process__step-copy {
+        grid-column: 2;
+        grid-row: 3;
+        max-width: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .hiw-process__title {
+        font-size: clamp(1.875rem, 1.6rem + 1.2vw, 2.375rem);
+    }
+
+    .hiw-process__step-title {
+        font-size: clamp(1.125rem, 1.05rem + 0.3vw, 1.375rem);
+    }
+}

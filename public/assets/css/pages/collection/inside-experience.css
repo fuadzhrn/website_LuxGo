@@ -85,3 +85,49 @@
     height: 100%;
     object-fit: cover;
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/*
+   One dominant frame with the two details paired beneath it — still a fixed
+   composition, never a slider.
+*/
+@media (max-width: 1023px) {
+    .collection-inside__header {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: clamp(16px, 2.4vw, 24px);
+    }
+
+    .collection-inside__heading,
+    .collection-inside__copy {
+        grid-column: 1 / -1;
+        max-width: 560px;
+    }
+
+    .collection-inside__gallery {
+        grid-template-columns: minmax(0, 1fr);
+        /* Height now comes from each frame's own ratio. */
+        height: auto;
+        row-gap: 8px;
+    }
+
+    .collection-inside__main {
+        aspect-ratio: 4 / 3;
+    }
+
+    /* Side by side, and half the height of the main frame. */
+    .collection-inside__details {
+        grid-template-rows: auto;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .collection-inside__detail {
+        aspect-ratio: 4 / 3;
+    }
+}
+
+@media (max-width: 767px) {
+    .collection-inside__title {
+        font-size: clamp(1.875rem, 1.6rem + 1.2vw, 2.375rem);
+    }
+}

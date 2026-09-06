@@ -82,3 +82,37 @@
     line-height: 1.6;
     color: var(--color-muted-gray);
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/* Heading and the area register unroll into one vertical read. */
+@media (max-width: 1023px) {
+    .hiw-area {
+        padding-block: clamp(48px, 10vw, 70px);
+    }
+
+    .hiw-area__inner {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: clamp(26px, 4vw, 38px);
+    }
+
+    .hiw-area__intro,
+    .hiw-area__list {
+        grid-column: 1 / -1;
+    }
+
+    .hiw-area__copy {
+        max-width: 480px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hiw-area__title {
+        font-size: clamp(1.875rem, 1.6rem + 1.2vw, 2.375rem);
+    }
+
+    /* Long area strings wrap rather than being held to one line. */
+    .hiw-area__detail {
+        overflow-wrap: break-word;
+    }
+}

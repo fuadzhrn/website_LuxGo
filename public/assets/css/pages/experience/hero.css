@@ -151,3 +151,51 @@
         transform: none;
     }
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/* The cinematic overlay is kept — the split bar simply stacks. */
+@media (max-width: 1023px) {
+    .experience-hero {
+        --experience-hero-header-offset: 64px;
+
+        min-height: clamp(580px, 80vh, 680px);
+        padding-bottom: clamp(40px, 6vw, 60px);
+    }
+
+    .experience-hero__content {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: clamp(18px, 3vw, 26px);
+        align-items: start;
+    }
+
+    .experience-hero__heading,
+    .experience-hero__aside {
+        grid-column: 1 / -1;
+    }
+
+    .experience-hero__copy {
+        max-width: 480px;
+    }
+}
+
+@media (max-width: 767px) {
+    .experience-hero__title {
+        font-size: clamp(2.25rem, 1.95rem + 1.3vw, 2.625rem);
+    }
+
+    .experience-hero__copy {
+        max-width: 340px;
+    }
+
+    /* The stacked block is taller here, so the foot of the frame carries further. */
+    .experience-hero__overlay {
+        background: linear-gradient(
+            to top,
+            rgba(9, 10, 12, 0.94) 0%,
+            rgba(9, 10, 12, 0.68) 32%,
+            rgba(9, 10, 12, 0.22) 60%,
+            rgba(9, 10, 12, 0) 88%
+        );
+    }
+}

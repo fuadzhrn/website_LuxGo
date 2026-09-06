@@ -147,3 +147,60 @@
     text-transform: uppercase;
     color: var(--color-white);
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/* The cinematic overlay is kept — only the frame and type are resized. */
+@media (max-width: 1023px) {
+    .hiw-hero {
+        --hiw-hero-header-offset: 64px;
+
+        min-height: clamp(560px, 78vh, 650px);
+        padding-bottom: clamp(30px, 4.5vw, 44px);
+    }
+
+    .hiw-hero__content {
+        max-width: none;
+    }
+
+    .hiw-hero__copy {
+        max-width: 480px;
+    }
+
+    /* One pass from the foot: the side gradient existed to clear the copy column
+       that no longer sits to the left. */
+    .hiw-hero__overlay {
+        background: linear-gradient(
+            to top,
+            rgba(9, 10, 12, 0.94) 0%,
+            rgba(9, 10, 12, 0.7) 30%,
+            rgba(9, 10, 12, 0.28) 58%,
+            rgba(9, 10, 12, 0.05) 82%,
+            rgba(9, 10, 12, 0) 100%
+        );
+    }
+
+    .hiw-hero__index {
+        margin-top: clamp(26px, 4vw, 38px);
+    }
+}
+
+@media (max-width: 767px) {
+    .hiw-hero__title {
+        font-size: clamp(2.25rem, 1.95rem + 1.3vw, 2.625rem);
+    }
+
+    .hiw-hero__copy {
+        max-width: 340px;
+    }
+
+    /* A 2:1 frame shows only a narrow slice once the crop turns portrait; this
+       keeps the interchange and its light trails in view rather than bare asphalt. */
+    .hiw-hero__image {
+        object-position: center 55%;
+    }
+
+    .hiw-hero__index-list {
+        column-gap: clamp(10px, 2.6vw, 16px);
+    }
+}

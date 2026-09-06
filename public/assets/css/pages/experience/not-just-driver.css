@@ -88,3 +88,55 @@
     font-size: clamp(0.875rem, 0.84rem + 0.1vw, 1rem);
     color: var(--color-text);
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/*
+   Heading and intro come first, then the photograph, then the seven attributes.
+   Dissolving the content wrapper lets those four blocks be ordered individually
+   without a second Blade or a duplicated image.
+*/
+@media (max-width: 1023px) {
+    .experience-driver__inner {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: clamp(16px, 2.6vw, 22px);
+        align-items: start;
+    }
+
+    .experience-driver__content {
+        display: contents;
+    }
+
+    .experience-driver__title {
+        order: 1;
+    }
+
+    .experience-driver__copy {
+        order: 2;
+        max-width: 560px;
+        /* Spacing is the grid's job once these are siblings. */
+        margin-top: 0;
+    }
+
+    .experience-driver__media {
+        order: 3;
+        margin-top: clamp(8px, 1.6vw, 14px);
+        aspect-ratio: 4 / 3;
+    }
+
+    .experience-driver__list {
+        order: 4;
+    }
+}
+
+@media (max-width: 767px) {
+    .experience-driver__title {
+        font-size: clamp(1.875rem, 1.6rem + 1.2vw, 2.375rem);
+    }
+
+    /* Seven rows: kept compact so the section does not run long. */
+    .experience-driver__item {
+        padding-block: 13px;
+        gap: 16px;
+    }
+}

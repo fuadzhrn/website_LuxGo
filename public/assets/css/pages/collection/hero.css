@@ -142,3 +142,51 @@
         transform: none;
     }
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/* The cinematic overlay is kept — only the frame and type are resized. */
+@media (max-width: 1023px) {
+    .collection-hero {
+        --collection-hero-header-offset: 64px;
+
+        min-height: clamp(560px, 80vh, 680px);
+        padding-bottom: clamp(40px, 6vw, 60px);
+    }
+
+    .collection-hero__content {
+        max-width: none;
+    }
+
+    .collection-hero__copy {
+        max-width: 480px;
+    }
+}
+
+@media (max-width: 767px) {
+    .collection-hero__title {
+        font-size: clamp(2.25rem, 1.95rem + 1.3vw, 2.625rem);
+    }
+
+    /* A 2:1 frame crops hard at this width; holding it just right of centre
+       keeps the vehicle in view. */
+    .collection-hero__image {
+        object-position: 58% center;
+    }
+
+    /* The copy block is taller here, so the foot of the frame carries further. */
+    .collection-hero__overlay {
+        background:
+            linear-gradient(
+                to top,
+                rgba(9, 10, 12, 0.94) 0%,
+                rgba(9, 10, 12, 0.62) 34%,
+                rgba(9, 10, 12, 0.18) 62%,
+                rgba(9, 10, 12, 0) 88%
+            );
+    }
+
+    .collection-hero__copy {
+        max-width: 340px;
+    }
+}
