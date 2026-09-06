@@ -4,7 +4,7 @@
             'id' => 'footer-membership',
             'heading' => 'Membership',
             'links' => [
-                ['label' => 'Membership', 'href' => '/membership'],
+                ['label' => 'Membership', 'href' => route('membership')],
                 ['label' => 'Become a Member', 'href' => '/become-a-member'],
             ],
         ],
@@ -12,16 +12,16 @@
             'id' => 'footer-collection',
             'heading' => 'Our Collection',
             'links' => [
-                ['label' => 'Our Collection', 'href' => '/collection'],
-                ['label' => 'Experience', 'href' => '/experience'],
+                ['label' => 'Our Collection', 'href' => route('collection')],
+                ['label' => 'Experience', 'href' => route('experience')],
             ],
         ],
         [
             'id' => 'footer-company',
             'heading' => 'Company',
             'links' => [
-                ['label' => 'About', 'href' => '/about'],
-                ['label' => 'How It Works', 'href' => '/how-it-works'],
+                ['label' => 'About', 'href' => route('about')],
+                ['label' => 'How It Works', 'href' => route('how-it-works')],
             ],
         ],
         [

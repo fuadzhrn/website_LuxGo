@@ -1,11 +1,13 @@
 @php
+    /* route() carries the active locale automatically — SetLocale registers it as
+       a URL default — so these links never drop the visitor into another language. */
     $siteNavItems = [
         ['label' => 'Home', 'href' => route('home'), 'active' => request()->routeIs('home')],
-        ['label' => 'Membership', 'href' => '/membership', 'active' => request()->is('membership*')],
-        ['label' => 'Our Collection', 'href' => '/collection', 'active' => request()->is('collection*')],
-        ['label' => 'Experience', 'href' => '/experience', 'active' => request()->is('experience*')],
-        ['label' => 'How It Works', 'href' => '/how-it-works', 'active' => request()->is('how-it-works*')],
-        ['label' => 'About', 'href' => '/about', 'active' => request()->is('about*')],
+        ['label' => 'Membership', 'href' => route('membership'), 'active' => request()->routeIs('membership')],
+        ['label' => 'Our Collection', 'href' => route('collection'), 'active' => request()->routeIs('collection')],
+        ['label' => 'Experience', 'href' => route('experience'), 'active' => request()->routeIs('experience')],
+        ['label' => 'How It Works', 'href' => route('how-it-works'), 'active' => request()->routeIs('how-it-works')],
+        ['label' => 'About', 'href' => route('about'), 'active' => request()->routeIs('about')],
     ];
 @endphp
 
@@ -29,7 +31,22 @@
             </ul>
         </nav>
 
-        <a href="/become-a-member" class="site-header__cta">Become a Member</a>
+        {{-- Grouped with the CTA so the bar keeps three flex children and the
+             navigation stays where it was. --}}
+        <div class="site-header__actions">
+            <div class="site-header__lang" role="group" aria-label="{{ __('ui.language') }}">
+                @foreach ($localeAlternates as $code => $alternate)
+                    <a
+                        href="{{ $alternate['url'] }}"
+                        class="site-header__lang-link{{ $alternate['active'] ? ' is-active' : '' }}"
+                        hreflang="{{ $code }}"
+                        @if ($alternate['active']) aria-current="true" @endif
+                    >{{ strtoupper($code) }}</a>
+                @endforeach
+            </div>
+
+            <a href="/become-a-member" class="site-header__cta">Become a Member</a>
+        </div>
 
         {{-- Replaces the desktop nav and CTA below 1024px; behaviour lives in header.js. --}}
         <button
@@ -81,5 +98,20 @@
             <span>Become a Member</span>
             <span class="site-menu__cta-icon" aria-hidden="true">&rarr;</span>
         </a>
+
+        <div class="site-menu__lang" role="group" aria-label="{{ __('ui.language') }}">
+            <p class="site-menu__lang-label">{{ __('ui.language') }}</p>
+
+            <div class="site-menu__lang-links">
+                @foreach ($localeAlternates as $code => $alternate)
+                    <a
+                        href="{{ $alternate['url'] }}"
+                        class="site-menu__lang-link{{ $alternate['active'] ? ' is-active' : '' }}"
+                        hreflang="{{ $code }}"
+                        @if ($alternate['active']) aria-current="true" @endif
+                    >{{ strtoupper($code) }}</a>
+                @endforeach
+            </div>
+        </div>
     </nav>
 </div>

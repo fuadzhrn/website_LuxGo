@@ -29,7 +29,7 @@
             </p>
 
             <div class="home-hero__actions">
-                <a href="/membership" class="home-hero__cta">
+                <a href="{{ route('membership') }}" class="home-hero__cta">
                     <span>Explore Membership</span>
                     <span class="home-hero__cta-icon" aria-hidden="true">&rarr;</span>
                 </a>

@@ -58,7 +58,7 @@
                     @endforeach
                 </ul>
 
-                <a href="/experience" class="collection-featured__link">
+                <a href="{{ route('experience') }}" class="collection-featured__link">
                     <span>Discover the Experience</span>
                     <span class="collection-featured__link-icon" aria-hidden="true">&rarr;</span>
                 </a>

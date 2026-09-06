@@ -164,6 +164,52 @@
     }
 }
 
+/* Language switcher ------------------------------------------------------------ */
+
+/* The switcher shares a wrapper with the CTA so the bar keeps three flex
+   children and the navigation is not pushed off its position. */
+.site-header__actions {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: clamp(14px, 1.4vw, 22px);
+}
+
+.site-header__lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-weight: var(--fw-medium);
+    font-size: clamp(0.6875rem, 0.66rem + 0.08vw, 0.8125rem);
+    letter-spacing: 0.08em;
+}
+
+.site-header__lang-link {
+    color: var(--color-muted-gray);
+    transition: color var(--transition-base);
+}
+
+.site-header__lang-link:hover {
+    color: var(--color-white);
+}
+
+.site-header__lang-link.is-active {
+    color: var(--color-lux-blue);
+}
+
+/* A hairline rather than a pipe character, so the divider is not read aloud. */
+.site-header__lang-link + .site-header__lang-link {
+    padding-left: 8px;
+    border-left: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.site-header__lang-link:focus-visible {
+    outline: 2px solid var(--color-lux-blue);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+}
+
 /* Mobile menu ------------------------------------------------------------------ */
 
 /*
@@ -187,7 +233,7 @@
     }
 
     .site-nav,
-    .site-header__cta {
+    .site-header__actions {
         display: none;
     }
 
@@ -304,6 +350,51 @@
     .site-menu__cta:focus-visible {
         outline: 2px solid var(--color-white);
         outline-offset: 3px;
+    }
+
+    .site-menu__lang {
+        margin-top: clamp(4px, 1.6vw, 10px);
+        padding-top: clamp(20px, 3.4vw, 28px);
+        border-top: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .site-menu__lang-label {
+        font-family: var(--font-body);
+        font-weight: var(--fw-semibold);
+        font-size: clamp(0.625rem, 0.6rem + 0.08vw, 0.75rem);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--color-muted-gray);
+    }
+
+    .site-menu__lang-links {
+        display: flex;
+        align-items: center;
+        gap: clamp(18px, 4vw, 26px);
+        margin-top: clamp(10px, 2vw, 14px);
+    }
+
+    /* Sized for a finger, not just for the two characters. */
+    .site-menu__lang-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding-inline: 2px;
+        font-family: var(--font-body);
+        font-weight: var(--fw-medium);
+        font-size: clamp(0.875rem, 0.85rem + 0.1vw, 1rem);
+        letter-spacing: 0.12em;
+        color: var(--color-muted-gray);
+    }
+
+    .site-menu__lang-link.is-active {
+        color: var(--color-lux-blue);
+    }
+
+    .site-menu__lang-link:focus-visible {
+        outline: 2px solid var(--color-lux-blue);
+        outline-offset: 3px;
+        border-radius: var(--radius-sm);
     }
 
     /* Scroll lock while the panel is open. */

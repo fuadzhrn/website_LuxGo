@@ -67,7 +67,7 @@
                 Join LUX&amp;GO today and elevate the way you move.
             </p>
 
-            <a href="/membership" class="home-how__cta-link">
+            <a href="{{ route('membership') }}" class="home-how__cta-link">
                 <span>View Membership Plans</span>
                 <img
                     src="{{ asset('assets/icons/luxgo/process/arrow-right.svg') }}"
