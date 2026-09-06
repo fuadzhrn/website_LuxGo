@@ -99,3 +99,39 @@
     font-size: clamp(0.875rem, 0.85rem + 0.1vw, 1rem);
     color: var(--color-text);
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/* Brand statement above the audience register, in one vertical read. */
+@media (max-width: 1023px) {
+    .about-intro {
+        --about-header-offset: 64px;
+
+        padding-top: calc(var(--about-header-offset) + clamp(36px, 6vw, 60px));
+        padding-bottom: clamp(44px, 8vw, 70px);
+    }
+
+    .about-intro__inner {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: clamp(30px, 5vw, 44px);
+    }
+
+    .about-intro__lead,
+    .about-intro__serve {
+        grid-column: 1 / -1;
+    }
+
+    .about-intro__copy {
+        max-width: 560px;
+    }
+}
+
+@media (max-width: 767px) {
+    .about-intro__title {
+        font-size: clamp(2rem, 1.75rem + 1.1vw, 2.375rem);
+    }
+
+    .about-intro__item {
+        padding-block: 14px;
+    }
+}

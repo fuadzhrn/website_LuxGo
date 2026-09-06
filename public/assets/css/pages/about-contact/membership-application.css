@@ -172,3 +172,61 @@
         transform: none;
     }
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/* Positioning above the form; every field already runs the full column width. */
+@media (max-width: 1023px) {
+    .about-apply {
+        padding-block: clamp(44px, 8vw, 70px);
+    }
+
+    .about-apply__inner {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: clamp(30px, 5vw, 44px);
+        align-items: start;
+    }
+
+    .about-apply__copy {
+        max-width: 560px;
+    }
+
+    /*
+       16px exactly: anything smaller makes mobile Safari zoom the page on focus.
+       The taller box also gives each field a comfortable target — tablets are
+       touch devices too, so this starts at 1023 rather than 767.
+    */
+    .about-apply__input {
+        min-height: 50px;
+        padding-block: 13px;
+        font-size: 1rem;
+    }
+
+    .about-apply__textarea {
+        min-height: 130px;
+    }
+
+    .about-apply__submit {
+        height: 50px;
+    }
+}
+
+@media (max-width: 767px) {
+    .about-apply__title {
+        font-size: clamp(1.875rem, 1.6rem + 1.2vw, 2.25rem);
+    }
+
+    .about-apply__submit {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .about-apply__actions {
+        align-items: stretch;
+    }
+
+    /* Error text stays inside the column instead of pushing the field wide. */
+    .about-apply__error {
+        overflow-wrap: break-word;
+    }
+}

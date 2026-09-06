@@ -139,3 +139,40 @@
         transition: none;
     }
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/* Company and address above, the channel list beneath — still flat rows. */
+@media (max-width: 1023px) {
+    .about-contact {
+        padding-block: clamp(48px, 9vw, 76px);
+    }
+
+    .about-contact__inner {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: clamp(30px, 5vw, 44px);
+    }
+
+    .about-contact__identity,
+    .about-contact__channels {
+        grid-column: 1 / -1;
+    }
+
+}
+
+@media (max-width: 767px) {
+    .about-contact__title {
+        font-size: clamp(1.875rem, 1.6rem + 1.2vw, 2.25rem);
+    }
+
+    /* The address is set in short lines; let long ones wrap rather than overflow. */
+    .about-contact__address-line,
+    .about-contact__value {
+        overflow-wrap: break-word;
+    }
+
+    /* Comfortable target for the whole row, not just the text. */
+    .about-contact__link {
+        min-height: 48px;
+    }
+}
