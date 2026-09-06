@@ -1,8 +1,8 @@
 @php
     $interiorMain = 'assets/images/luxgo/collection/interior/interior-main.webp';
     $interiorDetails = [
-        ['path' => 'assets/images/luxgo/collection/interior/interior-detail-01.webp', 'alt' => 'Denza D9 interior detail.'],
-        ['path' => 'assets/images/luxgo/collection/interior/interior-detail-02.webp', 'alt' => 'Denza D9 cabin detail.'],
+        ['path' => 'assets/images/luxgo/collection/interior/interior-detail-01.webp', 'alt' => __('collection.inside.detail_1_alt')],
+        ['path' => 'assets/images/luxgo/collection/interior/interior-detail-02.webp', 'alt' => __('collection.inside.detail_2_alt')],
     ];
 @endphp
 
@@ -14,17 +14,17 @@
     <div class="lux-container">
         <div class="collection-inside__header" data-reveal>
             <div class="collection-inside__heading">
-                <p class="collection-inside__eyebrow">Inside the Experience</p>
+                <p class="collection-inside__eyebrow">{{ __('collection.inside.eyebrow') }}</p>
 
                 <h2 class="collection-inside__title">
-                    <span class="collection-inside__title-line">Step Inside.</span>
-                    <span class="collection-inside__title-line">Comfort in</span>
-                    <span class="collection-inside__title-line">Every Detail.</span>
+                    <span class="collection-inside__title-line">{{ __('collection.inside.title_1') }}</span>
+                    <span class="collection-inside__title-line">{{ __('collection.inside.title_2') }}</span>
+                    <span class="collection-inside__title-line">{{ __('collection.inside.title_3') }}</span>
                 </h2>
             </div>
 
             <p class="collection-inside__copy">
-                A premium environment designed to make every journey feel composed and effortless.
+                {{ __('collection.inside.copy') }}
             </p>
         </div>
 
@@ -33,7 +33,7 @@
                 @if (file_exists(public_path($interiorMain)))
                     <img
                         src="{{ asset($interiorMain) }}"
-                        alt="Denza D9 interior."
+                        alt="{{ __('collection.inside.main_alt') }}"
                         class="collection-inside__image"
                         loading="lazy"
                     >

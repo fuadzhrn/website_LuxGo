@@ -2,10 +2,10 @@
     $featuredImage = 'assets/images/luxgo/collection/featured/denza-d9-main.webp';
 
     $vehicleFeatures = [
-        ['icon' => 'gem.svg', 'label' => 'Premium Design'],
-        ['icon' => 'armchair.svg', 'label' => 'Luxury Comfort'],
-        ['icon' => 'zap.svg', 'label' => 'EV Technology'],
-        ['icon' => 'user-round.svg', 'label' => 'Executive Image'],
+        ['icon' => 'gem.svg', 'label' => __('collection.featured.features.design')],
+        ['icon' => 'armchair.svg', 'label' => __('collection.featured.features.comfort')],
+        ['icon' => 'zap.svg', 'label' => __('collection.featured.features.ev')],
+        ['icon' => 'user-round.svg', 'label' => __('collection.featured.features.executive')],
     ];
 @endphp
 
@@ -16,7 +16,7 @@
     <div class="lux-container">
         <div class="collection-featured__header" data-reveal>
             <div class="collection-featured__heading">
-                <p class="collection-featured__eyebrow">Featured Vehicle</p>
+                <p class="collection-featured__eyebrow">{{ __('collection.featured.eyebrow') }}</p>
 
                 <h2 class="collection-featured__title">
                     <span class="collection-featured__title-line">Denza</span>
@@ -25,7 +25,7 @@
             </div>
 
             <p class="collection-featured__copy">
-                Crafted for premium mobility with refined comfort, modern electric character, and executive presence.
+                {{ __('collection.featured.copy') }}
             </p>
         </div>
 
@@ -34,7 +34,7 @@
                 @if (file_exists(public_path($featuredImage)))
                     <img
                         src="{{ asset($featuredImage) }}"
-                        alt="Denza D9, the featured vehicle of the LUX&GO collection."
+                        alt="{{ __('collection.featured.image_alt') }}"
                         class="collection-featured__image"
                         loading="lazy"
                     >
@@ -59,7 +59,7 @@
                 </ul>
 
                 <a href="{{ route('experience') }}" class="collection-featured__link">
-                    <span>Discover the Experience</span>
+                    <span>{{ __('collection.featured.link') }}</span>
                     <span class="collection-featured__link-icon" aria-hidden="true">&rarr;</span>
                 </a>
             </div>

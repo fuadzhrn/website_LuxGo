@@ -45,8 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const invalid = [];
 
         [
-            ["apply-name", "Please enter your full name."],
-            ["apply-phone", "Please enter a phone or WhatsApp number."],
+            ["apply-name", form.dataset.errorName],
+            ["apply-phone", form.dataset.errorPhone],
         ].forEach(([id, message]) => {
             const field = form.querySelector(`#${id}`);
 
@@ -68,10 +68,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const value = email.value.trim();
 
             if (value === "") {
-                setError(email, "Please enter your email address.");
+                setError(email, form.dataset.errorEmailRequired);
                 invalid.push(email);
             } else if (!looksLikeEmail(value)) {
-                setError(email, "Please enter a valid email address.");
+                setError(email, form.dataset.errorEmailInvalid);
                 invalid.push(email);
             } else {
                 clearError(email);
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const value = lots.value.trim();
 
             if (value !== "" && (!Number.isInteger(Number(value)) || Number(value) < 1)) {
-                setError(lots, "Enter a whole number of LOTs, starting from 1.");
+                setError(lots, form.dataset.errorLots);
                 invalid.push(lots);
             } else {
                 clearError(lots);
@@ -114,8 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (status) {
-            status.textContent =
-                "Online submission isn't available yet. You can reach LUX&GO using the contact details in the footer.";
+            status.textContent = form.dataset.statusUnavailable;
         }
     });
 

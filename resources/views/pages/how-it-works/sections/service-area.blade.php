@@ -1,6 +1,6 @@
 @php
     $serviceAreas = [
-        ['region' => 'Jakarta', 'areas' => ['Central', 'North', 'South', 'West', 'East']],
+        ['region' => 'Jakarta', 'areas' => [__('how-it-works.area.jakarta.central'), __('how-it-works.area.jakarta.north'), __('how-it-works.area.jakarta.south'), __('how-it-works.area.jakarta.west'), __('how-it-works.area.jakarta.east')]],
         ['region' => 'Tangerang', 'areas' => ['Kota Tangerang', 'Tangerang Selatan', 'Kabupaten Tangerang']],
         ['region' => 'Bekasi', 'areas' => ['Kota Bekasi', 'Kabupaten Bekasi']],
         ['region' => 'Bogor', 'areas' => ['Kota Bogor', 'Kabupaten Bogor']],
@@ -11,15 +11,15 @@
 <section class="hiw-section hiw-area" id="service-area">
     <div class="lux-container hiw-area__inner">
         <div class="hiw-area__intro" data-reveal>
-            <p class="hiw-area__eyebrow">Service Area</p>
+            <p class="hiw-area__eyebrow">{{ __('how-it-works.area.eyebrow') }}</p>
 
             <h2 class="hiw-area__title">
-                <span class="hiw-area__title-line">Serving</span>
-                <span class="hiw-area__title-line">Jabodetabek.</span>
+                <span class="hiw-area__title-line">{{ __('how-it-works.area.title_1') }}</span>
+                <span class="hiw-area__title-line">{{ __('how-it-works.area.title_2') }}</span>
             </h2>
 
             <p class="hiw-area__copy">
-                Premium mobility across the greater Jakarta area.
+                {{ __('how-it-works.area.copy') }}
             </p>
         </div>
 

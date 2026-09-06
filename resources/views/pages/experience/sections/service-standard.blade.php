@@ -2,18 +2,18 @@
     $servicePillars = [
         [
             'number' => '01',
-            'title' => 'Professional',
-            'copy' => 'Professional appearance, punctuality, and defensive driving.',
+            'title' => __('experience.standard.pillars.professional.title'),
+            'copy' => __('experience.standard.pillars.professional.copy'),
         ],
         [
             'number' => '02',
-            'title' => 'Hospitality',
-            'copy' => 'Polite, courteous, customer-oriented service with a hospitality mindset.',
+            'title' => __('experience.standard.pillars.hospitality.title'),
+            'copy' => __('experience.standard.pillars.hospitality.copy'),
         ],
         [
             'number' => '03',
-            'title' => 'Privacy',
-            'copy' => 'Privacy and confidentiality throughout the journey.',
+            'title' => __('experience.standard.pillars.privacy.title'),
+            'copy' => __('experience.standard.pillars.privacy.copy'),
         ],
     ];
 @endphp
@@ -22,11 +22,11 @@
     <div class="lux-container">
         <div class="experience-standard__header" data-reveal>
             <div class="experience-standard__heading">
-                <p class="experience-standard__eyebrow">LUX&amp;GO Service Standard</p>
+                <p class="experience-standard__eyebrow">{{ __('experience.standard.eyebrow') }}</p>
 
                 <h2 class="experience-standard__title">
-                    <span class="experience-standard__title-line">Service,</span>
-                    <span class="experience-standard__title-line">Without Compromise.</span>
+                    <span class="experience-standard__title-line">{{ __('experience.standard.title_1') }}</span>
+                    <span class="experience-standard__title-line">{{ __('experience.standard.title_2') }}</span>
                 </h2>
             </div>
         </div>
@@ -47,17 +47,17 @@
         <div class="lux-container experience-standard__cta-inner" data-reveal>
             <div class="experience-standard__cta-content">
                 <h2 class="experience-standard__cta-title">
-                    <span class="experience-standard__title-line">Experience</span>
-                    <span class="experience-standard__title-line">LUX&amp;GO For Yourself.</span>
+                    <span class="experience-standard__title-line">{{ __('experience.standard.cta_title_1') }}</span>
+                    <span class="experience-standard__title-line">{{ __('experience.standard.cta_title_2') }}</span>
                 </h2>
 
                 <p class="experience-standard__cta-copy">
-                    Premium mobility, professionally delivered.
+                    {{ __('experience.standard.cta_copy') }}
                 </p>
             </div>
 
             <a href="{{ route('membership') }}" class="experience-standard__link">
-                <span>Become a Member</span>
+                <span>{{ __('global.cta.become_member') }}</span>
                 <span class="experience-standard__link-icon" aria-hidden="true">&rarr;</span>
             </a>
         </div>

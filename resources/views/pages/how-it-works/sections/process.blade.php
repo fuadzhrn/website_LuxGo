@@ -3,20 +3,20 @@
         [
             'number' => '01',
             'icon' => 'user-round.svg',
-            'title' => 'Join',
-            'copy' => 'Become a LUX&GO Member through LOT Membership.',
+            'title' => __('how-it-works.process.steps.join.title'),
+            'copy' => __('how-it-works.process.steps.join.copy'),
         ],
         [
             'number' => '02',
             'icon' => 'calendar.svg',
-            'title' => 'Book',
-            'copy' => 'Reserve the vehicle based on availability.',
+            'title' => __('how-it-works.process.steps.book.title'),
+            'copy' => __('how-it-works.process.steps.book.copy'),
         ],
         [
             'number' => '03',
             'icon' => 'car-front.svg',
-            'title' => 'Use',
-            'copy' => 'Enjoy the vehicle for 12 hours with a professional driver.',
+            'title' => __('how-it-works.process.steps.use.title'),
+            'copy' => __('how-it-works.process.steps.use.copy'),
         ],
     ];
 @endphp
@@ -25,12 +25,12 @@
     <div class="lux-container">
         <div class="hiw-process__header" data-reveal>
             <div class="hiw-process__heading">
-                <p class="hiw-process__eyebrow">The Process</p>
-                <h2 class="hiw-process__title">Join. Book. Use.</h2>
+                <p class="hiw-process__eyebrow">{{ __('how-it-works.process.eyebrow') }}</p>
+                <h2 class="hiw-process__title">{{ __('how-it-works.process.title') }}</h2>
             </div>
 
             <p class="hiw-process__intro">
-                Three steps stand between a LUX&amp;GO membership and the moment you step into the vehicle.
+                {{ __('how-it-works.process.intro') }}
             </p>
         </div>
 

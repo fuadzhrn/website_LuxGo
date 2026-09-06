@@ -1,3 +1,8 @@
+@php
+    $title = __('home.meta.title');
+    $description = __('home.meta.description');
+@endphp
+
 @extends('layouts.app')
 
 @push('styles')

@@ -19,17 +19,17 @@
     <div class="lux-container collection-cta__inner" data-reveal>
         <div class="collection-cta__content">
             <h2 class="collection-cta__title">
-                <span class="collection-cta__title-line">Your Premium</span>
-                <span class="collection-cta__title-line">Journey Starts</span>
-                <span class="collection-cta__title-line">Here.</span>
+                <span class="collection-cta__title-line">{{ __('collection.cta.title_1') }}</span>
+                <span class="collection-cta__title-line">{{ __('collection.cta.title_2') }}</span>
+                <span class="collection-cta__title-line">{{ __('collection.cta.title_3') }}</span>
             </h2>
 
             <p class="collection-cta__copy">
-                Premium mobility, designed around the moments that matter.
+                {{ __('collection.cta.copy') }}
             </p>
 
             <a href="{{ route('membership') }}" class="collection-cta__link">
-                <span>Explore Membership</span>
+                <span>{{ __('collection.cta.link') }}</span>
                 <span class="collection-cta__link-icon" aria-hidden="true">&rarr;</span>
             </a>
         </div>

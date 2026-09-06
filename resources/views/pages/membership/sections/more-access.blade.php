@@ -9,28 +9,28 @@
 <section class="membership-access">
     <div class="lux-container membership-access__inner">
         <div class="membership-access__intro" data-reveal>
-            <p class="membership-access__eyebrow">Membership Access</p>
+            <p class="membership-access__eyebrow">{{ __('membership.access.eyebrow') }}</p>
 
             <h2 class="membership-access__title">
-                <span class="membership-access__title-line">More LOT.</span>
-                <span class="membership-access__title-line">More Access.</span>
+                <span class="membership-access__title-line">{{ __('membership.access.title_1') }}</span>
+                <span class="membership-access__title-line">{{ __('membership.access.title_2') }}</span>
             </h2>
 
             <p class="membership-access__copy">
-                Start with 6 Usage Rights per year with 1 LOT. Every additional LOT adds 2 more Usage Rights per year.
+                {{ __('membership.access.copy') }}
             </p>
 
             <div class="membership-access__rule">
                 <div class="membership-access__rule-item">
-                    <p class="membership-access__rule-label">1 LOT</p>
+                    <p class="membership-access__rule-label">{{ __('membership.access.rule_one_lot') }}</p>
                     <p class="membership-access__rule-value">6<span class="membership-access__times">×</span></p>
-                    <p class="membership-access__rule-unit">/ Year</p>
+                    <p class="membership-access__rule-unit">{{ __('membership.access.unit_per_year') }}</p>
                 </div>
 
                 <div class="membership-access__rule-item">
-                    <p class="membership-access__rule-label">Each Additional LOT</p>
+                    <p class="membership-access__rule-label">{{ __('membership.access.rule_additional') }}</p>
                     <p class="membership-access__rule-value">+2<span class="membership-access__times">×</span></p>
-                    <p class="membership-access__rule-unit">/ Year</p>
+                    <p class="membership-access__rule-unit">{{ __('membership.access.unit_per_year') }}</p>
                 </div>
             </div>
 
@@ -39,16 +39,16 @@
                     <div class="membership-access__example">
                         <p class="membership-access__example-lots">{{ $example['lots'] }}</p>
                         <p class="membership-access__example-rights">{{ $example['rights'] }}</p>
-                        <p class="membership-access__example-unit">/ Year</p>
+                        <p class="membership-access__example-unit">{{ __('membership.access.unit_per_year') }}</p>
                     </div>
                 @endforeach
             </div>
         </div>
 
         <div class="membership-access__calculator" data-calculator data-reveal data-reveal-delay="1">
-            <p class="membership-access__calculator-title">Plan Your Access</p>
+            <p class="membership-access__calculator-title">{{ __('membership.access.calculator_title') }}</p>
             <p class="membership-access__calculator-copy">
-                Choose the number of LOTs to see your available Usage Rights.
+                {{ __('membership.access.calculator_copy') }}
             </p>
 
             <div class="membership-access__stepper">
@@ -76,17 +76,17 @@
             <div class="membership-access__results" aria-live="polite">
                 <div class="membership-access__result">
                     <p class="membership-access__result-value" data-calculator-annual>6×</p>
-                    <p class="membership-access__result-label">Usage Rights / Year</p>
+                    <p class="membership-access__result-label">{{ __('membership.access.result_annual') }}</p>
                 </div>
 
                 <div class="membership-access__result">
                     <p class="membership-access__result-value" data-calculator-total>30×</p>
-                    <p class="membership-access__result-label">Total Usage Rights / 5 Years</p>
+                    <p class="membership-access__result-label">{{ __('membership.access.result_total') }}</p>
                 </div>
             </div>
 
             <p class="membership-access__calculator-note">
-                Each additional LOT adds 2 Usage Rights per year. Additional LOT pricing follows applicable membership terms.
+                {{ __('membership.access.calculator_note') }}
             </p>
         </div>
     </div>

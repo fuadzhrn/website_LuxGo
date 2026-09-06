@@ -1,6 +1,6 @@
 @php
-    $title = 'Our Collection — LUX&GO';
-    $description = 'The LUX&GO collection — the Denza D9, crafted for premium mobility.';
+    $title = __('collection.meta.title');
+    $description = __('collection.meta.description');
 @endphp
 
 @extends('layouts.app')

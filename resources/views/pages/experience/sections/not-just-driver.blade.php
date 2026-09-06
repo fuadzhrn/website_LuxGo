@@ -2,13 +2,13 @@
     $driverImage = 'assets/images/luxgo/experience/driver/driver-service.webp';
 
     $driverAttributes = [
-        'Professional Appearance',
-        'Punctual',
-        'Polite & Courteous',
-        'Defensive Driving',
-        'Customer-Oriented',
-        'Hospitality Mindset',
-        'Privacy & Confidentiality',
+        __('experience.driver.attributes.appearance'),
+        __('experience.driver.attributes.punctual'),
+        __('experience.driver.attributes.polite'),
+        __('experience.driver.attributes.defensive'),
+        __('experience.driver.attributes.customer'),
+        __('experience.driver.attributes.hospitality'),
+        __('experience.driver.attributes.privacy'),
     ];
 @endphp
 
@@ -21,7 +21,7 @@
             @if (file_exists(public_path($driverImage)))
                 <img
                     src="{{ asset($driverImage) }}"
-                    alt="A LUX&GO professional driver attending to a member."
+                    alt="{{ __('experience.driver.image_alt') }}"
                     class="experience-driver__image"
                     loading="lazy"
                 >
@@ -30,12 +30,12 @@
 
         <div class="experience-driver__content" data-reveal data-reveal-delay="1">
             <h2 class="experience-driver__title">
-                <span class="experience-driver__title-line">Not Just</span>
-                <span class="experience-driver__title-line">a Driver.</span>
+                <span class="experience-driver__title-line">{{ __('experience.driver.title_1') }}</span>
+                <span class="experience-driver__title-line">{{ __('experience.driver.title_2') }}</span>
             </h2>
 
             <p class="experience-driver__copy">
-                Professional service that goes beyond getting you from one place to another.
+                {{ __('experience.driver.copy') }}
             </p>
 
             <ul class="experience-driver__list">

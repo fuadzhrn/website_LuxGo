@@ -1,6 +1,6 @@
 @php
-    $title = 'About & Contact — LUX&GO';
-    $description = 'LUX&GO is a premium mobility membership offering flexible access to premium vehicles without ownership.';
+    $title = __('about.meta.title');
+    $description = __('about.meta.description');
 @endphp
 
 @extends('layouts.app')

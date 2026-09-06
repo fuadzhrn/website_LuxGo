@@ -19,11 +19,11 @@ return [
     | Default Locale
     |--------------------------------------------------------------------------
     |
-    | Temporary: the site content is still English while the Indonesian copy is
-    | being prepared. This becomes 'id' at the content localization stage.
+    | Indonesian is the default for new visitors. English stays available at
+    | /en and remains the fallback for any key that is missing a translation.
     |
     */
 
-    'default' => 'en',
+    'default' => 'id',
 
 ];

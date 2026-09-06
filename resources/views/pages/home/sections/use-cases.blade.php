@@ -1,22 +1,22 @@
 @php
     $useCases = [
         [
-            'label' => 'Business',
+            'label' => __('home.use_cases.business.label'),
             'image' => 'assets/images/luxgo/home/use-cases/business.webp',
-            'alt' => 'Premium mobility for business meetings and client visits.',
-            'lines' => ['Arrive with confidence.', 'Make every moment count.'],
+            'alt' => __('home.use_cases.business.alt'),
+            'lines' => [__('home.use_cases.business.line_1'), __('home.use_cases.business.line_2')],
         ],
         [
-            'label' => 'Family',
+            'label' => __('home.use_cases.family.label'),
             'image' => 'assets/images/luxgo/home/use-cases/family.webp',
-            'alt' => 'Premium mobility for family weekends and outings.',
-            'lines' => ['More time together.', 'Every journey, effortless.'],
+            'alt' => __('home.use_cases.family.alt'),
+            'lines' => [__('home.use_cases.family.line_1'), __('home.use_cases.family.line_2')],
         ],
         [
-            'label' => 'Life',
+            'label' => __('home.use_cases.life.label'),
             'image' => 'assets/images/luxgo/home/use-cases/life.webp',
-            'alt' => 'Premium mobility for special occasions and events.',
-            'lines' => ['Your schedule. Your pace.', 'Live more, worry less.'],
+            'alt' => __('home.use_cases.life.alt'),
+            'lines' => [__('home.use_cases.life.line_1'), __('home.use_cases.life.line_2')],
         ],
     ];
 @endphp
@@ -29,16 +29,16 @@
     <div class="lux-container">
         <div class="home-use-cases__header">
             <div class="home-use-cases__intro-heading" data-reveal>
-                <p class="home-use-cases__eyebrow lux-eyebrow">Use It Your Way</p>
+                <p class="home-use-cases__eyebrow lux-eyebrow">{{ __('home.use_cases.eyebrow') }}</p>
                 <h2 class="home-use-cases__title">
-                    <span class="home-use-cases__title-line">For Business.</span>
-                    <span class="home-use-cases__title-line">For Family.</span>
-                    <span class="home-use-cases__title-line">For Life.</span>
+                    <span class="home-use-cases__title-line">{{ __('home.use_cases.title_1') }}</span>
+                    <span class="home-use-cases__title-line">{{ __('home.use_cases.title_2') }}</span>
+                    <span class="home-use-cases__title-line">{{ __('home.use_cases.title_3') }}</span>
                 </h2>
             </div>
 
             <p class="home-use-cases__description" data-reveal data-reveal-delay="1">
-                Premium mobility that adapts to the moments that matter — from business commitments to family time and special occasions.
+                {{ __('home.use_cases.description') }}
             </p>
         </div>
 

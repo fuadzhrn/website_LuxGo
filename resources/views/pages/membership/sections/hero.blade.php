@@ -2,20 +2,20 @@
     $membershipMetrics = [
         [
             'value' => '5',
-            'unit' => 'Years',
-            'label' => 'Membership Period',
+            'unit' => __('membership.hero.unit_years'),
+            'label' => __('membership.hero.label_period'),
             'accent' => false,
         ],
         [
             'value' => '6',
-            'unit' => '/ Year',
-            'label' => 'Usage Rights',
+            'unit' => __('membership.hero.unit_per_year'),
+            'label' => __('membership.hero.label_rights'),
             'accent' => true,
         ],
         [
             'value' => '30',
-            'unit' => '/ 5 Years',
-            'label' => 'Total Usage Rights',
+            'unit' => __('membership.hero.unit_per_five_years'),
+            'label' => __('membership.hero.label_total_rights'),
             'accent' => true,
         ],
     ];
@@ -24,21 +24,21 @@
 <section class="membership-section membership-hero">
     <div class="lux-container membership-hero__inner">
         <div class="membership-hero__content">
-            <p class="membership-hero__eyebrow" data-enter>Membership</p>
+            <p class="membership-hero__eyebrow" data-enter>{{ __('membership.hero.eyebrow') }}</p>
 
             <h1 class="membership-hero__title" data-enter data-enter-delay="1">
-                <span class="membership-hero__title-line">One Membership.</span>
-                <span class="membership-hero__title-line">Five Years of</span>
-                <span class="membership-hero__title-line">Premium Access.</span>
+                <span class="membership-hero__title-line">{{ __('membership.hero.title_1') }}</span>
+                <span class="membership-hero__title-line">{{ __('membership.hero.title_2') }}</span>
+                <span class="membership-hero__title-line">{{ __('membership.hero.title_3') }}</span>
             </h1>
 
             <p class="membership-hero__copy" data-enter data-enter-delay="2">
-                Premium mobility through a five-year membership designed for access, flexibility, and convenience.
+                {{ __('membership.hero.copy') }}
             </p>
         </div>
 
         <div class="membership-hero__panel" data-enter data-enter-delay="1">
-            <p class="membership-hero__panel-label">Membership at a Glance</p>
+            <p class="membership-hero__panel-label">{{ __('membership.hero.panel_label') }}</p>
 
             <div class="membership-hero__metrics">
                 @foreach ($membershipMetrics as $metric)

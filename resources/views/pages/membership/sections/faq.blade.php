@@ -1,36 +1,36 @@
 @php
     $membershipFaqs = [
         [
-            'question' => 'What is a LUX&GO LOT Membership?',
-            'answer' => '1 LOT is the base Membership unit that provides access to LUX&GO Usage Rights during the Membership period.',
+            'question' => __('membership.faq.q1'),
+            'answer' => __('membership.faq.a1'),
         ],
         [
-            'question' => 'How long is the Membership valid?',
-            'answer' => 'The Membership is valid for 5 years.',
+            'question' => __('membership.faq.q2'),
+            'answer' => __('membership.faq.a2'),
         ],
         [
-            'question' => 'How many Usage Rights do I receive with 1 LOT?',
-            'answer' => '1 LOT provides 6 Usage Rights per year, equal to 30 Usage Rights over 5 years.',
+            'question' => __('membership.faq.q3'),
+            'answer' => __('membership.faq.a3'),
         ],
         [
-            'question' => 'What happens when I add more LOTs?',
-            'answer' => 'Every additional LOT adds 2 Usage Rights per year.',
+            'question' => __('membership.faq.q4'),
+            'answer' => __('membership.faq.a4'),
         ],
         [
-            'question' => 'Is there a fee each time I use the vehicle?',
-            'answer' => 'Yes. The Member Usage Fee is Rp750.000 for 12 hours of vehicle use. Professional driver is included.',
+            'question' => __('membership.faq.q5'),
+            'answer' => __('membership.faq.a5'),
         ],
         [
-            'question' => 'Is a professional driver included?',
-            'answer' => 'Yes. LUX&GO vehicle usage includes a professional driver.',
+            'question' => __('membership.faq.q6'),
+            'answer' => __('membership.faq.a6'),
         ],
         [
-            'question' => 'What happens after my Usage Rights are used?',
-            'answer' => 'The vehicle can still be used based on availability.',
+            'question' => __('membership.faq.q7'),
+            'answer' => __('membership.faq.a7'),
             'breakdown' => [
-                ['label' => 'Regular Usage', 'value' => 'Rp750.000'],
-                ['label' => 'Additional Usage', 'value' => '+ Rp500.000'],
-                ['label' => 'Total', 'value' => 'Rp1.250.000 / 12 Hours', 'total' => true],
+                ['label' => __('membership.faq.row_regular'), 'value' => 'Rp750.000'],
+                ['label' => __('membership.faq.row_additional'), 'value' => '+ Rp500.000'],
+                ['label' => __('membership.faq.row_total'), 'value' => __('membership.faq.row_total_value'), 'total' => true],
             ],
         ],
     ];
@@ -39,15 +39,15 @@
 <section class="membership-faq">
     <div class="lux-container membership-faq__inner">
         <div class="membership-faq__intro" data-reveal>
-            <p class="membership-faq__eyebrow">Membership FAQ</p>
+            <p class="membership-faq__eyebrow">{{ __('membership.faq.eyebrow') }}</p>
 
             <h2 class="membership-faq__title">
-                <span class="membership-faq__title-line">Everything You</span>
-                <span class="membership-faq__title-line">Need to Know.</span>
+                <span class="membership-faq__title-line">{{ __('membership.faq.title_1') }}</span>
+                <span class="membership-faq__title-line">{{ __('membership.faq.title_2') }}</span>
             </h2>
 
             <p class="membership-faq__copy">
-                The essentials of a LUX&amp;GO Membership — how it works, what you receive, and what applies each time you use the vehicle.
+                {{ __('membership.faq.copy') }}
             </p>
         </div>
 

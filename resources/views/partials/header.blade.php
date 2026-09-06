@@ -2,22 +2,22 @@
     /* route() carries the active locale automatically — SetLocale registers it as
        a URL default — so these links never drop the visitor into another language. */
     $siteNavItems = [
-        ['label' => 'Home', 'href' => route('home'), 'active' => request()->routeIs('home')],
-        ['label' => 'Membership', 'href' => route('membership'), 'active' => request()->routeIs('membership')],
-        ['label' => 'Our Collection', 'href' => route('collection'), 'active' => request()->routeIs('collection')],
-        ['label' => 'Experience', 'href' => route('experience'), 'active' => request()->routeIs('experience')],
-        ['label' => 'How It Works', 'href' => route('how-it-works'), 'active' => request()->routeIs('how-it-works')],
-        ['label' => 'About', 'href' => route('about'), 'active' => request()->routeIs('about')],
+        ['label' => __('global.nav.home'), 'href' => route('home'), 'active' => request()->routeIs('home')],
+        ['label' => __('global.nav.membership'), 'href' => route('membership'), 'active' => request()->routeIs('membership')],
+        ['label' => __('global.nav.collection'), 'href' => route('collection'), 'active' => request()->routeIs('collection')],
+        ['label' => __('global.nav.experience'), 'href' => route('experience'), 'active' => request()->routeIs('experience')],
+        ['label' => __('global.nav.how_it_works'), 'href' => route('how-it-works'), 'active' => request()->routeIs('how-it-works')],
+        ['label' => __('global.nav.about'), 'href' => route('about'), 'active' => request()->routeIs('about')],
     ];
 @endphp
 
 <header class="site-header" data-site-header>
     <div class="lux-container site-header__inner">
-        <a href="{{ route('home') }}" class="site-header__brand" aria-label="LUX&GO — Home">
+        <a href="{{ route('home') }}" class="site-header__brand" aria-label="{{ __('global.header.brand_aria') }}">
             LUX&amp;GO
         </a>
 
-        <nav class="site-nav" aria-label="Primary navigation">
+        <nav class="site-nav" aria-label="{{ __('global.header.primary_nav') }}">
             <ul class="site-nav__list">
                 @foreach ($siteNavItems as $item)
                     <li class="site-nav__item">
@@ -45,7 +45,7 @@
                 @endforeach
             </div>
 
-            <a href="/become-a-member" class="site-header__cta">Become a Member</a>
+            <a href="/become-a-member" class="site-header__cta">{{ __('global.cta.become_member') }}</a>
         </div>
 
         {{-- Replaces the desktop nav and CTA below 1024px; behaviour lives in header.js. --}}
@@ -53,7 +53,9 @@
             type="button"
             class="site-header__toggle"
             data-menu-toggle
-            aria-label="Open menu"
+            aria-label="{{ __('global.header.menu_open') }}"
+            data-label-open="{{ __('global.header.menu_open') }}"
+            data-label-close="{{ __('global.header.menu_close') }}"
             aria-expanded="false"
             aria-controls="site-menu"
         >
@@ -81,7 +83,7 @@
 {{-- Sits behind the header bar, so the open state reads as "LUX&GO … ×" over a
      full-screen dark panel. Never rendered above 1024px. --}}
 <div class="site-menu" id="site-menu" data-site-menu>
-    <nav class="lux-container site-menu__inner" aria-label="Mobile navigation">
+    <nav class="lux-container site-menu__inner" aria-label="{{ __('global.header.mobile_nav') }}">
         <ul class="site-menu__list">
             @foreach ($siteNavItems as $item)
                 <li class="site-menu__item">
@@ -95,7 +97,7 @@
         </ul>
 
         <a href="/become-a-member" class="site-menu__cta">
-            <span>Become a Member</span>
+            <span>{{ __('global.cta.become_member') }}</span>
             <span class="site-menu__cta-icon" aria-hidden="true">&rarr;</span>
         </a>
 

@@ -2,9 +2,9 @@
     $heroImage = 'assets/images/luxgo/how-it-works/hero/how-it-works-hero.webp';
 
     $heroIndex = [
-        ['number' => '01', 'label' => 'Join'],
-        ['number' => '02', 'label' => 'Book'],
-        ['number' => '03', 'label' => 'Use'],
+        ['number' => '01', 'label' => __('how-it-works.process.steps.join.title')],
+        ['number' => '02', 'label' => __('how-it-works.process.steps.book.title')],
+        ['number' => '03', 'label' => __('how-it-works.process.steps.use.title')],
     ];
 @endphp
 
@@ -13,7 +13,7 @@
         @if (file_exists(public_path($heroImage)))
             <img
                 src="{{ asset($heroImage) }}"
-                alt="Roads converging at night, the journey a LUX&GO membership leads to."
+                alt="{{ __('how-it-works.hero.image_alt') }}"
                 class="hiw-hero__image"
                 loading="eager"
                 fetchpriority="high"
@@ -25,15 +25,15 @@
 
     <div class="lux-container hiw-hero__container">
         <div class="hiw-hero__content">
-            <p class="hiw-hero__eyebrow" data-enter>How It Works</p>
+            <p class="hiw-hero__eyebrow" data-enter>{{ __('how-it-works.hero.eyebrow') }}</p>
 
             <h1 class="hiw-hero__title" data-enter data-enter-delay="1">
-                <span class="hiw-hero__title-line">From Membership</span>
-                <span class="hiw-hero__title-line">To Your Journey.</span>
+                <span class="hiw-hero__title-line">{{ __('how-it-works.hero.title_1') }}</span>
+                <span class="hiw-hero__title-line">{{ __('how-it-works.hero.title_2') }}</span>
             </h1>
 
             <p class="hiw-hero__copy" data-enter data-enter-delay="2">
-                A simple three-step experience — join, book, and enjoy premium mobility with LUX&amp;GO.
+                {{ __('how-it-works.hero.copy') }}
             </p>
         </div>
 

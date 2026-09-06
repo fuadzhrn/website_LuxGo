@@ -1,6 +1,6 @@
 @php
-    $title = 'How It Works — LUX&GO';
-    $description = 'From membership to your journey — join, book, and use premium mobility in three simple steps.';
+    $title = __('how-it-works.meta.title');
+    $description = __('how-it-works.meta.description');
 @endphp
 
 @extends('layouts.app')

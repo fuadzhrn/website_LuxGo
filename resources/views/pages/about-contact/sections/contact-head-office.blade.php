@@ -9,21 +9,21 @@
     /* Icons and destinations are the ones already carried by the approved footer —
        no new assets, and no URL invented for this section. */
     $contactChannels = [
-        ['icon' => 'phone.svg', 'label' => 'WhatsApp', 'value' => '0811-1234-1234', 'href' => 'tel:+6281112341234', 'external' => false],
-        ['icon' => 'mail.svg', 'label' => 'Email', 'value' => 'info@luxandgo.com', 'href' => 'mailto:info@luxandgo.com', 'external' => false],
-        ['icon' => 'instagram.svg', 'label' => 'Instagram', 'value' => '@luxandgo', 'href' => 'https://www.instagram.com/luxandgo', 'external' => true],
-        ['icon' => 'tiktok.svg', 'label' => 'TikTok', 'value' => '@luxandgo', 'href' => 'https://www.tiktok.com/@luxandgo', 'external' => true],
+        ['icon' => 'phone.svg', 'label' => __('about.contact.label_whatsapp'), 'value' => '0811-1234-1234', 'href' => 'tel:+6281112341234', 'external' => false],
+        ['icon' => 'mail.svg', 'label' => __('about.contact.label_email'), 'value' => 'info@luxandgo.com', 'href' => 'mailto:info@luxandgo.com', 'external' => false],
+        ['icon' => 'instagram.svg', 'label' => __('about.contact.label_instagram'), 'value' => '@luxandgo', 'href' => 'https://www.instagram.com/luxandgo', 'external' => true],
+        ['icon' => 'tiktok.svg', 'label' => __('about.contact.label_tiktok'), 'value' => '@luxandgo', 'href' => 'https://www.tiktok.com/@luxandgo', 'external' => true],
     ];
 @endphp
 
 <section class="about-section about-contact" id="contact">
     <div class="lux-container about-contact__inner">
         <div class="about-contact__identity" data-reveal>
-            <p class="about-contact__eyebrow">Contact</p>
+            <p class="about-contact__eyebrow">{{ __('about.contact.eyebrow') }}</p>
 
             <h2 class="about-contact__title">
-                <span class="about-contact__title-line">Contact</span>
-                <span class="about-contact__title-line">&amp; Head Office.</span>
+                <span class="about-contact__title-line">{{ __('about.contact.title_1') }}</span>
+                <span class="about-contact__title-line">{{ __('about.contact.title_2') }}</span>
             </h2>
 
             <p class="about-contact__company">PT Dwimuria Investama Properti</p>
@@ -36,7 +36,7 @@
         </div>
 
         <div class="about-contact__channels" data-reveal data-reveal-delay="1">
-            <h3 class="about-contact__channels-title">Let&rsquo;s Talk</h3>
+            <h3 class="about-contact__channels-title">{{ __('about.contact.channels_title') }}</h3>
 
             {{-- Hairline-separated rows, each a single link — never four cards. --}}
             <ul class="about-contact__list">

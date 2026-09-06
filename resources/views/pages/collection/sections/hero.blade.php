@@ -11,7 +11,7 @@
         @if (file_exists(public_path($heroImage)))
             <img
                 src="{{ asset($heroImage) }}"
-                alt="The Denza D9, the vehicle behind the LUX&GO experience."
+                alt="{{ __('collection.hero.image_alt') }}"
                 class="collection-hero__image"
                 loading="eager"
                 fetchpriority="high"
@@ -23,20 +23,20 @@
 
     <div class="lux-container collection-hero__container">
         <div class="collection-hero__content">
-            <p class="collection-hero__eyebrow" data-enter>Our Collection</p>
+            <p class="collection-hero__eyebrow" data-enter>{{ __('collection.hero.eyebrow') }}</p>
 
             <h1 class="collection-hero__title" data-enter data-enter-delay="1">
-                <span class="collection-hero__title-line">The Collection.</span>
-                <span class="collection-hero__title-line">Designed For</span>
-                <span class="collection-hero__title-line">Premium Mobility.</span>
+                <span class="collection-hero__title-line">{{ __('collection.hero.title_1') }}</span>
+                <span class="collection-hero__title-line">{{ __('collection.hero.title_2') }}</span>
+                <span class="collection-hero__title-line">{{ __('collection.hero.title_3') }}</span>
             </h1>
 
             <p class="collection-hero__copy" data-enter data-enter-delay="2">
-                Discover the vehicle behind the LUX&amp;GO experience.
+                {{ __('collection.hero.copy') }}
             </p>
 
             <a href="#featured-vehicle" class="collection-hero__link" data-enter data-enter-delay="3">
-                <span>Discover Denza D9</span>
+                <span>{{ __('collection.hero.link') }}</span>
                 <span class="collection-hero__link-icon" aria-hidden="true">&rarr;</span>
             </a>
         </div>

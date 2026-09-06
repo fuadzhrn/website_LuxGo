@@ -1,30 +1,42 @@
 @php
     $applicationFields = [
-        ['id' => 'apply-name', 'name' => 'full_name', 'label' => 'Full Name', 'type' => 'text', 'autocomplete' => 'name', 'required' => true],
-        ['id' => 'apply-phone', 'name' => 'phone', 'label' => 'Phone / WhatsApp', 'type' => 'tel', 'autocomplete' => 'tel', 'required' => true],
-        ['id' => 'apply-email', 'name' => 'email', 'label' => 'Email', 'type' => 'email', 'autocomplete' => 'email', 'required' => true],
-        ['id' => 'apply-lots', 'name' => 'lots', 'label' => 'Number of LOTs Interested', 'type' => 'number', 'autocomplete' => 'off', 'required' => false],
+        ['id' => 'apply-name', 'name' => 'full_name', 'label' => __('about.apply.field_name'), 'type' => 'text', 'autocomplete' => 'name', 'required' => true],
+        ['id' => 'apply-phone', 'name' => 'phone', 'label' => __('about.apply.field_phone'), 'type' => 'tel', 'autocomplete' => 'tel', 'required' => true],
+        ['id' => 'apply-email', 'name' => 'email', 'label' => __('about.apply.field_email'), 'type' => 'email', 'autocomplete' => 'email', 'required' => true],
+        ['id' => 'apply-lots', 'name' => 'lots', 'label' => __('about.apply.field_lots'), 'type' => 'number', 'autocomplete' => 'off', 'required' => false],
     ];
 @endphp
 
 <section class="about-section about-apply" id="membership-application">
     <div class="lux-container about-apply__inner">
         <div class="about-apply__lead" data-reveal>
-            <p class="about-apply__eyebrow">Membership Application</p>
+            <p class="about-apply__eyebrow">{{ __('about.apply.eyebrow') }}</p>
 
             <h2 class="about-apply__title">
-                <span class="about-apply__title-line">Become a</span>
-                <span class="about-apply__title-line">LUX&amp;GO Member.</span>
+                <span class="about-apply__title-line">{{ __('about.apply.title_1') }}</span>
+                <span class="about-apply__title-line">{{ __('about.apply.title_2') }}</span>
             </h2>
 
             <p class="about-apply__copy">
-                Tell us a little about yourself and take the next step toward premium mobility.
+                {{ __('about.apply.copy') }}
             </p>
         </div>
 
         {{-- Front-end only for now: validation runs in membership-application.js and
              submission stays blocked. The endpoint is wired up in the CMS/backend stage. --}}
-        <form class="about-apply__form" data-membership-application novalidate data-reveal data-reveal-delay="1">
+        <form
+            class="about-apply__form"
+            data-membership-application
+            novalidate
+            data-reveal
+            data-reveal-delay="1"
+            data-error-name="{{ __('about.apply.error_name') }}"
+            data-error-phone="{{ __('about.apply.error_phone') }}"
+            data-error-email-required="{{ __('about.apply.error_email_required') }}"
+            data-error-email-invalid="{{ __('about.apply.error_email_invalid') }}"
+            data-error-lots="{{ __('about.apply.error_lots') }}"
+            data-status-unavailable="{{ __('about.apply.status_unavailable') }}"
+        >
             @foreach ($applicationFields as $field)
                 <div class="lux-field">
                     <label class="lux-label" for="{{ $field['id'] }}">{{ $field['label'] }}</label>
@@ -45,7 +57,7 @@
             @endforeach
 
             <div class="lux-field">
-                <label class="lux-label" for="apply-message">Message / Notes <span class="about-apply__optional">(optional)</span></label>
+                <label class="lux-label" for="apply-message">{{ __('about.apply.field_message') }} <span class="about-apply__optional">{{ __('about.apply.optional') }}</span></label>
 
                 <textarea
                     class="about-apply__input about-apply__textarea"
@@ -57,7 +69,7 @@
 
             <div class="about-apply__actions">
                 <button type="submit" class="about-apply__submit">
-                    <span>Submit Membership Application</span>
+                    <span>{{ __('about.apply.submit') }}</span>
                     <span class="about-apply__submit-icon" aria-hidden="true">&rarr;</span>
                 </button>
 

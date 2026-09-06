@@ -3,20 +3,20 @@
         [
             'number' => '01',
             'icon' => 'user-round.svg',
-            'title' => 'Join',
-            'copy' => 'Choose the membership plan that fits your lifestyle.',
+            'title' => __('home.how.steps.join.title'),
+            'copy' => __('home.how.steps.join.copy'),
         ],
         [
             'number' => '02',
             'icon' => 'calendar.svg',
-            'title' => 'Book',
-            'copy' => 'Reserve your ride based on vehicle availability.',
+            'title' => __('home.how.steps.book.title'),
+            'copy' => __('home.how.steps.book.copy'),
         ],
         [
             'number' => '03',
             'icon' => 'car-front.svg',
-            'title' => 'Use',
-            'copy' => 'Enjoy 12 hours with our professional driver.',
+            'title' => __('home.how.steps.use.title'),
+            'copy' => __('home.how.steps.use.copy'),
         ],
     ];
 @endphp
@@ -24,9 +24,9 @@
 <section class="home-section home-how">
     <div class="lux-container home-how__inner">
         <div class="home-how__process">
-            <p class="home-how__eyebrow" data-reveal>How It Works</p>
+            <p class="home-how__eyebrow" data-reveal>{{ __('home.how.eyebrow') }}</p>
 
-            <h2 class="home-how__title" data-reveal data-reveal-delay="1">Three Simple Steps</h2>
+            <h2 class="home-how__title" data-reveal data-reveal-delay="1">{{ __('home.how.title') }}</h2>
 
             <ol class="home-how__steps">
                 @foreach ($processSteps as $index => $step)
@@ -59,16 +59,16 @@
 
         <div class="home-how__cta">
             <h3 class="home-how__cta-title" data-reveal>
-                <span class="home-how__cta-title-line">Ready to Experience</span>
-                <span class="home-how__cta-title-line">Premium Mobility?</span>
+                <span class="home-how__cta-title-line">{{ __('home.how.cta_title_1') }}</span>
+                <span class="home-how__cta-title-line">{{ __('home.how.cta_title_2') }}</span>
             </h3>
 
             <p class="home-how__cta-copy" data-reveal data-reveal-delay="1">
-                Join LUX&amp;GO today and elevate the way you move.
+                {{ __('home.how.cta_copy') }}
             </p>
 
             <a href="{{ route('membership') }}" class="home-how__cta-link">
-                <span>View Membership Plans</span>
+                <span>{{ __('home.how.cta_link') }}</span>
                 <img
                     src="{{ asset('assets/icons/luxgo/process/arrow-right.svg') }}"
                     alt=""

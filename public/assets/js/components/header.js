@@ -45,7 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.classList.toggle("has-menu-open", isOpen);
 
         toggle.setAttribute("aria-expanded", String(isOpen));
-        toggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+        /* Labels come from the markup so they follow the active locale. */
+        toggle.setAttribute(
+            "aria-label",
+            isOpen
+                ? toggle.dataset.labelClose || "Close menu"
+                : toggle.dataset.labelOpen || "Open menu"
+        );
 
         if (iconOpen) {
             iconOpen.hidden = isOpen;

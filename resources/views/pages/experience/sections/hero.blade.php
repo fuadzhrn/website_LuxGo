@@ -10,7 +10,7 @@
         @if (file_exists(public_path($heroImage)))
             <img
                 src="{{ asset($heroImage) }}"
-                alt="A LUX&GO professional driver welcoming a member on arrival."
+                alt="{{ __('experience.hero.image_alt') }}"
                 class="experience-hero__image"
                 loading="eager"
                 fetchpriority="high"
@@ -23,21 +23,21 @@
     <div class="lux-container experience-hero__container">
         <div class="experience-hero__content">
             <div class="experience-hero__heading">
-                <p class="experience-hero__eyebrow" data-enter>The Experience</p>
+                <p class="experience-hero__eyebrow" data-enter>{{ __('experience.hero.eyebrow') }}</p>
 
                 <h1 class="experience-hero__title" data-enter data-enter-delay="1">
-                    <span class="experience-hero__title-line">Every Journey.</span>
-                    <span class="experience-hero__title-line">Elevated.</span>
+                    <span class="experience-hero__title-line">{{ __('experience.hero.title_1') }}</span>
+                    <span class="experience-hero__title-line">{{ __('experience.hero.title_2') }}</span>
                 </h1>
             </div>
 
             <div class="experience-hero__aside">
                 <p class="experience-hero__copy" data-enter data-enter-delay="2">
-                    Premium mobility shaped by thoughtful service, professional driving, and attention to every journey.
+                    {{ __('experience.hero.copy') }}
                 </p>
 
                 <a href="#the-service" class="experience-hero__link" data-enter data-enter-delay="3">
-                    <span>Discover the Service</span>
+                    <span>{{ __('experience.hero.link') }}</span>
                     <span class="experience-hero__link-icon" aria-hidden="true">&rarr;</span>
                 </a>
             </div>

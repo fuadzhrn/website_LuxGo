@@ -2,35 +2,35 @@
     $footerColumns = [
         [
             'id' => 'footer-membership',
-            'heading' => 'Membership',
+            'heading' => __('global.footer.heading_membership'),
             'links' => [
-                ['label' => 'Membership', 'href' => route('membership')],
-                ['label' => 'Become a Member', 'href' => '/become-a-member'],
+                ['label' => __('global.footer.link_membership'), 'href' => route('membership')],
+                ['label' => __('global.footer.link_become_member'), 'href' => '/become-a-member'],
             ],
         ],
         [
             'id' => 'footer-collection',
-            'heading' => 'Our Collection',
+            'heading' => __('global.footer.heading_collection'),
             'links' => [
-                ['label' => 'Our Collection', 'href' => route('collection')],
-                ['label' => 'Experience', 'href' => route('experience')],
+                ['label' => __('global.footer.link_collection'), 'href' => route('collection')],
+                ['label' => __('global.footer.link_experience'), 'href' => route('experience')],
             ],
         ],
         [
             'id' => 'footer-company',
-            'heading' => 'Company',
+            'heading' => __('global.footer.heading_company'),
             'links' => [
-                ['label' => 'About', 'href' => route('about')],
-                ['label' => 'How It Works', 'href' => route('how-it-works')],
+                ['label' => __('global.footer.link_about'), 'href' => route('about')],
+                ['label' => __('global.footer.link_how_it_works'), 'href' => route('how-it-works')],
             ],
         ],
         [
             'id' => 'footer-legal',
-            'heading' => 'Legal',
+            'heading' => __('global.footer.heading_legal'),
             'links' => [
-                ['label' => 'Terms of Use', 'href' => route('legal.terms')],
-                ['label' => 'Privacy Policy', 'href' => route('legal.privacy')],
-                ['label' => 'Cookies Policy', 'href' => route('legal.cookies')],
+                ['label' => __('global.footer.link_terms'), 'href' => route('legal.terms')],
+                ['label' => __('global.footer.link_privacy'), 'href' => route('legal.privacy')],
+                ['label' => __('global.footer.link_cookies'), 'href' => route('legal.cookies')],
             ],
         ],
     ];
@@ -54,8 +54,8 @@
                 <a href="{{ route('home') }}" class="site-footer__brand">LUX&amp;GO</a>
 
                 <p class="site-footer__tagline">
-                    <span class="site-footer__tagline-line">Premium mobility.</span>
-                    <span class="site-footer__tagline-line">Without ownership.</span>
+                    <span class="site-footer__tagline-line">{{ __('global.footer.tagline_1') }}</span>
+                    <span class="site-footer__tagline-line">{{ __('global.footer.tagline_2') }}</span>
                 </p>
 
                 <ul class="site-footer__socials">
@@ -97,7 +97,7 @@
             <span class="site-footer__divider" aria-hidden="true"></span>
 
             <div class="site-footer__col">
-                <h2 class="site-footer__heading">Contact</h2>
+                <h2 class="site-footer__heading">{{ __('global.footer.heading_contact') }}</h2>
                 <ul class="site-footer__list">
                     @foreach ($footerContact as $contact)
                         <li>
@@ -113,7 +113,7 @@
         </div>
 
         <div class="site-footer__bottom">
-            <p>&copy; {{ date('Y') }} LUX&amp;GO. All rights reserved.</p>
+            <p>{{ __('global.footer.rights', ['year' => date('Y')]) }}</p>
             <p>PT Dwimuria Investama Properti</p>
         </div>
     </div>

@@ -1,10 +1,10 @@
 @php
     $ownershipConsiderations = [
-        ['label' => 'High Purchase Price', 'icon' => 'tag.svg'],
-        ['label' => 'Depreciation', 'icon' => 'trending-down.svg'],
-        ['label' => 'Maintenance', 'icon' => 'wrench.svg'],
-        ['label' => 'Insurance', 'icon' => 'shield-check.svg'],
-        ['label' => 'Operational Cost', 'icon' => 'wallet.svg'],
+        ['label' => __('home.access.items.price'), 'icon' => 'tag.svg'],
+        ['label' => __('home.access.items.depreciation'), 'icon' => 'trending-down.svg'],
+        ['label' => __('home.access.items.maintenance'), 'icon' => 'wrench.svg'],
+        ['label' => __('home.access.items.insurance'), 'icon' => 'shield-check.svg'],
+        ['label' => __('home.access.items.operational'), 'icon' => 'wallet.svg'],
     ];
 @endphp
 
@@ -15,12 +15,12 @@
                 <span class="home-access__accent" aria-hidden="true"></span>
 
                 <h2 class="home-access__title">
-                    <span class="home-access__title-line">Access,</span>
-                    <span class="home-access__title-line">Not Ownership.</span>
+                    <span class="home-access__title-line">{{ __('home.access.title_1') }}</span>
+                    <span class="home-access__title-line">{{ __('home.access.title_2') }}</span>
                 </h2>
 
                 <p class="home-access__copy">
-                    Not everyone needs to own a premium car. For many customers, premium mobility is needed only at certain moments.
+                    {{ __('home.access.copy') }}
                 </p>
             </div>
 

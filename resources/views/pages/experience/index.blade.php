@@ -1,6 +1,6 @@
 @php
-    $title = 'The Experience — LUX&GO';
-    $description = 'Premium mobility shaped by thoughtful service and professional driving.';
+    $title = __('experience.meta.title');
+    $description = __('experience.meta.description');
 @endphp
 
 @extends('layouts.app')

@@ -15,16 +15,16 @@
 
     <section class="legal-page">
         <div class="lux-container legal-page__inner">
-            <p class="legal-page__eyebrow" data-enter>Legal</p>
+            <p class="legal-page__eyebrow" data-enter>{{ __('global.legal.eyebrow') }}</p>
 
             <h1 class="legal-page__title" data-enter data-enter-delay="1">{{ $legalTitle }}</h1>
 
             <p class="legal-page__copy" data-enter data-enter-delay="2">
-                This page is being prepared. The full {{ $legalTitle }} for LUX&amp;GO will be published here.
+                {{ __('global.legal.preparing', ['title' => $legalTitle]) }}
             </p>
 
             <p class="legal-page__contact" data-enter data-enter-delay="3">
-                For questions in the meantime, contact
+                {{ __('global.legal.contact') }}
                 <a href="mailto:info@luxandgo.com" class="legal-page__link">info@luxandgo.com</a>.
             </p>
         </div>

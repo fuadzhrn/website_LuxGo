@@ -1,9 +1,9 @@
 @php
     $previewFeatures = [
-        ['icon' => 'gem.svg', 'lines' => ['Premium', 'Design']],
-        ['icon' => 'armchair.svg', 'lines' => ['Luxury', 'Comfort']],
-        ['icon' => 'zap.svg', 'lines' => ['EV', 'Technology']],
-        ['icon' => 'user-round.svg', 'lines' => ['Executive', 'Image']],
+        ['icon' => 'gem.svg', 'lines' => [__('home.mobility.features.design.line_1'), __('home.mobility.features.design.line_2')]],
+        ['icon' => 'armchair.svg', 'lines' => [__('home.mobility.features.comfort.line_1'), __('home.mobility.features.comfort.line_2')]],
+        ['icon' => 'zap.svg', 'lines' => [__('home.mobility.features.ev.line_1'), __('home.mobility.features.ev.line_2')]],
+        ['icon' => 'user-round.svg', 'lines' => [__('home.mobility.features.executive.line_1'), __('home.mobility.features.executive.line_2')]],
     ];
 @endphp
 
@@ -15,7 +15,7 @@
         <div class="home-mobility__media">
             <img
                 src="{{ asset('assets/images/luxgo/collection/denza-d9/gambar_bg2.png') }}"
-                alt="Denza D9, the first vehicle in the LUX&GO collection."
+                alt="{{ __('home.mobility.vehicle_alt') }}"
                 class="home-mobility__vehicle"
                 width="1672"
                 height="941"
@@ -24,15 +24,15 @@
         </div>
 
         <div class="home-mobility__content">
-            <p class="home-mobility__eyebrow" data-reveal>Premium Experience</p>
+            <p class="home-mobility__eyebrow" data-reveal>{{ __('home.mobility.eyebrow') }}</p>
 
             <h2 class="home-mobility__title" data-reveal data-reveal-delay="1">
-                <span class="home-mobility__title-line">Premium</span>
-                <span class="home-mobility__title-line">Mobility Preview.</span>
+                <span class="home-mobility__title-line">{{ __('home.mobility.title_1') }}</span>
+                <span class="home-mobility__title-line">{{ __('home.mobility.title_2') }}</span>
             </h2>
 
             <p class="home-mobility__description" data-reveal data-reveal-delay="2">
-                Experience the perfect blend of sophistication, innovation, and comfort — every single time.
+                {{ __('home.mobility.description') }}
             </p>
         </div>
 
@@ -68,9 +68,9 @@
                 >
                 <div>
                     <p class="home-mobility__driver-title">
-                        Professionally Driven. <span class="home-mobility__driver-accent">Always.</span>
+                        {{ __('home.mobility.driver_title') }} <span class="home-mobility__driver-accent">{{ __('home.mobility.driver_accent') }}</span>
                     </p>
-                    <p class="home-mobility__driver-copy">Sit back and enjoy the journey.</p>
+                    <p class="home-mobility__driver-copy">{{ __('home.mobility.driver_copy') }}</p>
                 </div>
             </div>
         </div>
