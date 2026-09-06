@@ -39,6 +39,18 @@ class ShellController extends Controller
         return view('admin.settings.index');
     }
 
+    /**
+     * Renders every reusable CMS component on one page so they can be checked
+     * together. Local only — it is a development aid, not a feature, and it is
+     * deliberately absent from the sidebar.
+     */
+    public function components(): View
+    {
+        abort_unless(app()->environment('local', 'testing'), 404);
+
+        return view('admin.components.index');
+    }
+
     public function profile(): View
     {
         return view('admin.profile.index');

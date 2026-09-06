@@ -32,7 +32,7 @@
     <h2 class="admin-heading">Quick access</h2>
 
     <div class="admin-quick">
-        <a class="admin-quick__link" href="{{ route('admin.content') }}">Content</a>
+        <a class="admin-quick__link" href="{{ route('admin.content') }}">Manage Content</a>
         <a class="admin-quick__link" href="{{ route('admin.media') }}">Media</a>
         <a class="admin-quick__link" href="{{ route('admin.applications') }}">Membership Applications</a>
         <a class="admin-quick__link" href="{{ route('admin.seo') }}">SEO</a>

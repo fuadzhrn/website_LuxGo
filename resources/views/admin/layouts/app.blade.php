@@ -12,6 +12,8 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/admin/admin.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/admin/sidebar.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/admin/forms.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/admin/components.css') }}">
 </head>
 <body class="admin">
 
@@ -21,11 +23,15 @@
         @include('admin.partials.topbar')
 
         <main class="admin__content">
+            {{-- Any controller can report an outcome with a session flash. --}}
+            <x-admin.ui.flash />
+
             @yield('content')
         </main>
     </div>
 
     <script src="{{ asset('assets/js/admin/admin.js') }}" defer></script>
+    <script src="{{ asset('assets/js/admin/components.js') }}" defer></script>
 
 </body>
 </html>

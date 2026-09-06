@@ -25,6 +25,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('settings', [ShellController::class, 'settings'])->name('settings');
         Route::get('profile', [ShellController::class, 'profile'])->name('profile');
 
+        // Development-only component showcase; not linked from the sidebar.
+        Route::get('components', [ShellController::class, 'components'])->name('components');
+
         Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
     });
 });

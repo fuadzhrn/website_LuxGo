@@ -54,6 +54,12 @@ a {
     text-decoration: none;
 }
 
+/* A display declaration on a class outranks the browser's rule for [hidden],
+   so the attribute is honoured explicitly. */
+[hidden] {
+    display: none;
+}
+
 button {
     font: inherit;
     color: inherit;
@@ -339,68 +345,6 @@ button {
 .admin-detail__value {
     margin: 0;
     overflow-wrap: anywhere;
-}
-
-/* Form primitives --------------------------------------------------------- */
-
-.admin-field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.admin-label {
-    font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--admin-text-muted);
-}
-
-.admin-input {
-    width: 100%;
-    /* 16px keeps mobile browsers from zooming the field on focus. */
-    height: 44px;
-    padding-inline: 12px;
-    font-family: var(--admin-font-body);
-    font-size: 1rem;
-    color: var(--admin-text);
-    background-color: var(--admin-white);
-    border: 1px solid var(--admin-border);
-    border-radius: var(--admin-radius);
-    transition: border-color var(--admin-transition), box-shadow var(--admin-transition);
-}
-
-.admin-input:focus {
-    outline: none;
-    border-color: var(--admin-blue);
-    box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.16);
-}
-
-.admin-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 44px;
-    padding-inline: 20px;
-    border-radius: var(--admin-radius);
-    font-weight: 600;
-    font-size: 0.875rem;
-    transition: background-color var(--admin-transition);
-}
-
-.admin-button--primary {
-    background-color: var(--admin-blue);
-    color: var(--admin-white);
-}
-
-.admin-button--primary:hover {
-    background-color: var(--admin-blue-strong);
-}
-
-.admin-button:focus-visible {
-    outline: 2px solid var(--admin-blue);
-    outline-offset: 2px;
 }
 
 /* Tablet and mobile ------------------------------------------------------- */

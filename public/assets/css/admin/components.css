@@ -1,0 +1,256 @@
+/* ==========================================================================
+   LUX&GO — Admin CMS components
+
+   Language tabs, image fields and alerts. Shared by every editor added later,
+   so none of them needs styling of its own.
+   ========================================================================== */
+
+/* Section header ----------------------------------------------------------- */
+
+.admin-section-header {
+    margin-bottom: 16px;
+}
+
+.admin-section-header__title {
+    font-family: var(--admin-font-heading);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    letter-spacing: -0.01em;
+}
+
+.admin-section-header__copy {
+    margin-top: 4px;
+    max-width: 62ch;
+    color: var(--admin-text-muted);
+}
+
+/* Panel -------------------------------------------------------------------- */
+
+.admin-panel {
+    padding: 22px;
+    background-color: var(--admin-white);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+}
+
+.admin-panel + .admin-panel {
+    margin-top: 18px;
+}
+
+/* Language tabs ------------------------------------------------------------ */
+
+.admin-tabs__label {
+    margin-bottom: 8px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--admin-text-muted);
+}
+
+.admin-tabs__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 4px;
+    background-color: var(--admin-surface);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+}
+
+.admin-tabs__tab {
+    padding: 7px 14px;
+    border-radius: 4px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--admin-text-muted);
+    transition: background-color var(--admin-transition), color var(--admin-transition);
+}
+
+/* The active tab carries a surface change and a weight change, not colour
+   alone, so it reads without relying on hue. */
+.admin-tabs__tab.is-active {
+    background-color: var(--admin-white);
+    color: var(--admin-text);
+    font-weight: 600;
+    box-shadow: inset 0 -2px 0 0 var(--admin-blue);
+}
+
+.admin-tabs__tab:focus-visible {
+    outline: 2px solid var(--admin-blue);
+    outline-offset: 2px;
+}
+
+.admin-tabs__panels {
+    margin-top: 18px;
+}
+
+.admin-tabs__panel[hidden] {
+    display: none;
+}
+
+/* Image field -------------------------------------------------------------- */
+
+.admin-image__frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 360px;
+    margin-top: 8px;
+    padding: 10px;
+    background-color: var(--admin-surface);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+}
+
+/* Fits the frame without distortion whatever the source ratio is. */
+.admin-image__preview {
+    display: block;
+    max-width: 100%;
+    max-height: 200px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.admin-image__preview[hidden] {
+    display: none;
+}
+
+.admin-image__placeholder {
+    padding-block: 34px;
+    font-size: 0.8125rem;
+    color: var(--admin-text-muted);
+}
+
+.admin-image__state {
+    margin-top: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--admin-blue-strong);
+}
+
+.admin-image__state--removing {
+    color: var(--admin-danger);
+}
+
+.admin-image__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+/* The visible control is the label; the input stays focusable for keyboards. */
+.admin-image__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.admin-image__input:focus-visible + [data-image-remove],
+.admin-image__input:focus-visible ~ .admin-button {
+    outline: none;
+}
+
+.admin-image__alt {
+    margin-top: 14px;
+    max-width: 420px;
+}
+
+.admin-image.is-removing .admin-image__frame {
+    opacity: 0.45;
+}
+
+/* Alerts ------------------------------------------------------------------- */
+
+.admin-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    border: 1px solid;
+    border-radius: var(--admin-radius);
+    font-size: 0.8125rem;
+}
+
+.admin-alert--success {
+    border-color: rgba(22, 119, 255, 0.28);
+    background-color: rgba(22, 119, 255, 0.07);
+    color: var(--admin-blue-strong);
+}
+
+.admin-alert--error {
+    border-color: rgba(229, 72, 77, 0.32);
+    background-color: rgba(229, 72, 77, 0.07);
+    color: var(--admin-danger);
+}
+
+.admin-alert--warning {
+    border-color: rgba(180, 120, 20, 0.3);
+    background-color: rgba(180, 120, 20, 0.08);
+    color: #8a5a0b;
+}
+
+.admin-alert__message {
+    flex: 1;
+}
+
+.admin-alert__dismiss {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    font-size: 1.125rem;
+    line-height: 1;
+    color: inherit;
+    opacity: 0.7;
+}
+
+.admin-alert__dismiss:hover {
+    opacity: 1;
+}
+
+.admin-alert__dismiss:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+/* Small screens ------------------------------------------------------------ */
+
+@media (max-width: 767px) {
+    .admin-panel {
+        padding: 16px;
+    }
+
+    .admin-tabs__list {
+        /* Two locales fit; more would scroll rather than wrap awkwardly. */
+        overflow-x: auto;
+        flex-wrap: nowrap;
+    }
+
+    .admin-tabs__tab {
+        white-space: nowrap;
+    }
+
+    .admin-image__frame {
+        max-width: 100%;
+    }
+
+    .admin-image__actions .admin-button {
+        flex: 1 1 auto;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .admin-tabs__tab {
+        transition: none;
+    }
+}

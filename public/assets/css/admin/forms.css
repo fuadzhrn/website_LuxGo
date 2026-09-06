@@ -1,0 +1,236 @@
+/* ==========================================================================
+   LUX&GO — Admin form primitives
+
+   Every field in the CMS is built from these, so spacing, labels, focus and
+   error states stay identical across modules. Moved here from admin.css rather
+   than duplicated, so a selector is defined in exactly one place.
+   ========================================================================== */
+
+.admin-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.admin-field + .admin-field {
+    margin-top: 16px;
+}
+
+.admin-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--admin-text-muted);
+}
+
+.admin-label__required {
+    margin-left: 3px;
+    color: var(--admin-danger);
+}
+
+.admin-input {
+    width: 100%;
+    /* 16px keeps mobile browsers from zooming the field on focus. */
+    min-height: 44px;
+    padding: 10px 12px;
+    font-family: var(--admin-font-body);
+    font-size: 1rem;
+    color: var(--admin-text);
+    background-color: var(--admin-white);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    transition: border-color var(--admin-transition), box-shadow var(--admin-transition);
+}
+
+.admin-input:focus {
+    outline: none;
+    border-color: var(--admin-blue);
+    box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.16);
+}
+
+.admin-input:disabled {
+    background-color: var(--admin-surface);
+    color: var(--admin-text-muted);
+    cursor: not-allowed;
+}
+
+/* Colour is not the only signal — the message below the field carries it too. */
+.admin-input.has-error {
+    border-color: var(--admin-danger);
+}
+
+.admin-input.has-error:focus {
+    box-shadow: 0 0 0 3px rgba(229, 72, 77, 0.16);
+}
+
+.admin-textarea {
+    min-height: 110px;
+    line-height: 1.55;
+    resize: vertical;
+}
+
+.admin-help {
+    font-size: 0.75rem;
+    color: var(--admin-text-muted);
+}
+
+.admin-error {
+    font-size: 0.75rem;
+    color: var(--admin-danger);
+    overflow-wrap: anywhere;
+}
+
+/* Buttons ----------------------------------------------------------------- */
+
+.admin-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding-inline: 20px;
+    border-radius: var(--admin-radius);
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: background-color var(--admin-transition), border-color var(--admin-transition), color var(--admin-transition);
+}
+
+.admin-button--primary {
+    background-color: var(--admin-blue);
+    color: var(--admin-white);
+}
+
+.admin-button--primary:hover:not(:disabled) {
+    background-color: var(--admin-blue-strong);
+}
+
+.admin-button--ghost {
+    background-color: var(--admin-white);
+    border: 1px solid var(--admin-border);
+    color: var(--admin-text);
+    cursor: pointer;
+}
+
+.admin-button--ghost:hover {
+    border-color: var(--admin-blue);
+    color: var(--admin-blue);
+}
+
+.admin-button--quiet {
+    padding-inline: 12px;
+    background: none;
+    color: var(--admin-text-muted);
+}
+
+.admin-button--quiet:hover {
+    color: var(--admin-danger);
+}
+
+.admin-button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.admin-button:focus-visible {
+    outline: 2px solid var(--admin-blue);
+    outline-offset: 2px;
+}
+
+/* Higher specificity than .admin-button's own display, so a hidden button
+   stays hidden whatever order the stylesheets load in. */
+.admin-button[hidden] {
+    display: none;
+}
+
+/* Status toggle ------------------------------------------------------------ */
+
+.admin-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+/* Visually replaced by the track below, but still the real focusable control. */
+.admin-toggle__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.admin-toggle__track {
+    position: relative;
+    display: block;
+    width: 40px;
+    height: 22px;
+    border-radius: 999px;
+    background-color: #cbd0d6;
+    transition: background-color var(--admin-transition);
+}
+
+.admin-toggle__thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--admin-white);
+    transition: transform var(--admin-transition);
+}
+
+.admin-toggle__input:checked + .admin-toggle__track {
+    background-color: var(--admin-blue);
+}
+
+.admin-toggle__input:checked + .admin-toggle__track .admin-toggle__thumb {
+    transform: translateX(18px);
+}
+
+.admin-toggle__input:focus-visible + .admin-toggle__track {
+    outline: 2px solid var(--admin-blue);
+    outline-offset: 2px;
+}
+
+.admin-toggle__text {
+    font-size: 0.8125rem;
+    font-weight: 500;
+}
+
+/* Save action -------------------------------------------------------------- */
+
+.admin-save {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid var(--admin-border);
+}
+
+.admin-save__meta {
+    font-size: 0.75rem;
+    color: var(--admin-text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .admin-input,
+    .admin-button,
+    .admin-toggle__track,
+    .admin-toggle__thumb {
+        transition: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .admin-save .admin-button {
+        width: 100%;
+    }
+}
