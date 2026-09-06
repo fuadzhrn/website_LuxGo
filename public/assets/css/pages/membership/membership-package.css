@@ -276,3 +276,62 @@
         transform: none;
     }
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/*
+   The editorial split unrolls into one vertical read. Fee, entitlements and the
+   usage fee keep their own labelled blocks and rules, so the membership price is
+   never mistaken for covering usage.
+*/
+@media (max-width: 1023px) {
+    .membership-package__inner {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: clamp(28px, 4vw, 40px);
+    }
+
+    .membership-package__intro,
+    .membership-package__offer {
+        grid-column: 1 / -1;
+    }
+
+    .membership-package__copy {
+        max-width: 560px;
+    }
+
+    /* Entitlements stack into a divided list rather than three narrow columns. */
+    .membership-package__metrics {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .membership-package__metric + .membership-package__metric {
+        margin-top: clamp(14px, 2.4vw, 20px);
+        padding-top: clamp(14px, 2.4vw, 20px);
+        padding-left: 0;
+        border-top: var(--border-thin);
+        border-left: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .membership-package__title {
+        font-size: clamp(1.875rem, 1.6rem + 1.2vw, 2.375rem);
+    }
+
+    /* Regular above promo: side by side leaves neither enough room to read. */
+    .membership-package__prices {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: clamp(16px, 3.4vw, 22px);
+    }
+
+    .membership-package__usage-note {
+        max-width: none;
+    }
+
+    .membership-package__cta {
+        justify-content: center;
+        width: 100%;
+        height: 48px;
+    }
+}

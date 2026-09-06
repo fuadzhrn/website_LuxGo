@@ -151,3 +151,72 @@
         transform: none;
     }
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/*
+   Three tracks would leave each card too small to read below 1024px, so the row
+   becomes a native scroll-snap rail — no slider script, no library. The rail
+   bleeds to the viewport edges so a card can sit flush while scrolling.
+*/
+@media (max-width: 1023px) {
+    .home-use-cases__header {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: clamp(16px, 2.4vw, 24px);
+    }
+
+    .home-use-cases__intro-heading,
+    .home-use-cases__description {
+        grid-column: 1 / -1;
+    }
+
+    .home-use-cases__description {
+        max-width: 520px;
+    }
+
+    .home-use-cases__grid {
+        display: flex;
+        gap: clamp(14px, 2vw, 20px);
+        margin-inline: calc(-1 * var(--page-gutter));
+        padding-inline: var(--page-gutter);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: var(--page-gutter);
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    /* Hidden visually only — the rail stays keyboard and pointer scrollable. */
+    .home-use-cases__grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .home-use-case {
+        flex: 0 0 56vw;
+        scroll-snap-align: start;
+    }
+
+    .home-use-case__media {
+        aspect-ratio: auto;
+        height: clamp(360px, 46vw, 460px);
+    }
+}
+
+@media (max-width: 767px) {
+    .home-use-cases {
+        padding-block: clamp(48px, 12vw, 64px);
+    }
+
+    .home-use-cases__title {
+        font-size: clamp(1.875rem, 1.6rem + 1.2vw, 2.375rem);
+    }
+
+    /* One card dominant, the next just visible as a swipe affordance. */
+    .home-use-case {
+        flex: 0 0 84vw;
+    }
+
+    .home-use-case__media {
+        height: clamp(420px, 62vh, 520px);
+    }
+}

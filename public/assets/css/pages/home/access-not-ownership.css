@@ -81,3 +81,35 @@
     font-size: var(--fs-body);
     color: var(--color-text);
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/* Two columns and a rule become one vertical flow. */
+@media (max-width: 1023px) {
+    .home-access__grid {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: clamp(28px, 4vw, 40px);
+    }
+
+    .home-access__divider {
+        display: none;
+    }
+
+    .home-access__copy {
+        max-width: 560px;
+    }
+}
+
+@media (max-width: 767px) {
+    .home-access {
+        padding-block: clamp(48px, 12vw, 64px);
+    }
+
+    .home-access__title {
+        font-size: clamp(1.875rem, 1.6rem + 1.2vw, 2.375rem);
+    }
+
+    .home-access__item {
+        padding-block: 14px;
+    }
+}

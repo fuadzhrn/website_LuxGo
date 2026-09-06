@@ -168,3 +168,35 @@
     letter-spacing: -0.01em;
     color: var(--color-text);
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/* Side-by-side comparison becomes a vertical one, split by the same hairline. */
+@media (max-width: 1023px) {
+    .membership-usage__header {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: clamp(16px, 2.4vw, 24px);
+    }
+
+    .membership-usage__heading,
+    .membership-usage__copy {
+        grid-column: 1 / -1;
+        max-width: 560px;
+    }
+
+    .membership-usage__comparison {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: clamp(24px, 4vw, 34px);
+    }
+
+    /* The 1px track was vertical; as a row it needs its height stated. */
+    .membership-usage__divider {
+        height: 1px;
+    }
+}
+
+@media (max-width: 767px) {
+    .membership-usage__title {
+        font-size: clamp(1.875rem, 1.6rem + 1.2vw, 2.375rem);
+    }
+}

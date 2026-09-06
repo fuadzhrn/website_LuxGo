@@ -38,12 +38,18 @@
 
 /* Content ------------------------------------------------------------------ */
 
+/*
+   Left static so the vehicle frame keeps resolving against the section, exactly
+   as before the media moved inside this container.
+*/
 .home-mobility__container {
-    position: relative;
-    z-index: 1;
+    position: static;
 }
 
-.home-mobility__content {
+/* Positioned, and after the media in source order, so the copy paints above it. */
+.home-mobility__content,
+.home-mobility__details {
+    position: relative;
     max-width: clamp(500px, 40vw, 580px);
 }
 
@@ -154,4 +160,75 @@
     font-weight: var(--fw-regular);
     font-size: clamp(0.75rem, 0.72rem + 0.08vw, 0.875rem);
     color: var(--color-muted-gray);
+}
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/*
+   The vehicle leaves its absolute frame and rejoins the flow between the
+   description and the feature grid, giving the mobile order the brief asks for:
+   copy, vehicle, features, driver note.
+*/
+@media (max-width: 1023px) {
+    .home-mobility {
+        padding-block: clamp(48px, 8vw, 70px);
+    }
+
+    .home-mobility__container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .home-mobility__content {
+        order: 1;
+        max-width: none;
+    }
+
+    .home-mobility__media {
+        order: 2;
+        position: static;
+        width: 100%;
+        margin-top: clamp(26px, 4vw, 38px);
+        /* The left fade only made sense against the copy it used to sit beside. */
+        -webkit-mask-image: none;
+        mask-image: none;
+    }
+
+    .home-mobility__vehicle {
+        height: auto;
+    }
+
+    .home-mobility__details {
+        order: 3;
+        max-width: none;
+    }
+
+    .home-mobility__description {
+        max-width: 560px;
+    }
+
+    /* Two by two, still flat: hairlines only, no cards and no shadow. */
+    .home-mobility__features {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: clamp(28px, 4vw, 38px);
+    }
+
+    .home-mobility__feature {
+        padding-block: clamp(16px, 2.4vw, 22px);
+        border-right: none;
+    }
+
+    .home-mobility__feature:nth-child(odd) {
+        border-right: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .home-mobility__feature:nth-child(-n + 2) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    }
+}
+
+@media (max-width: 767px) {
+    .home-mobility__title {
+        font-size: clamp(1.875rem, 1.6rem + 1.2vw, 2.375rem);
+    }
 }

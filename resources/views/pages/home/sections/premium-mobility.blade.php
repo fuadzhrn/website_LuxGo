@@ -8,18 +8,21 @@
 @endphp
 
 <section class="home-section home-mobility">
-    <div class="home-mobility__media">
-        <img
-            src="{{ asset('assets/images/luxgo/collection/denza-d9/gambar_bg2.png') }}"
-            alt="Denza D9, the first vehicle in the LUX&GO collection."
-            class="home-mobility__vehicle"
-            width="1672"
-            height="941"
-            loading="lazy"
-        >
-    </div>
-
     <div class="lux-container home-mobility__container">
+        {{-- Kept first so the absolutely positioned frame paints beneath the copy
+             on desktop; on mobile it is reordered into the flow between the
+             description and the feature grid. --}}
+        <div class="home-mobility__media">
+            <img
+                src="{{ asset('assets/images/luxgo/collection/denza-d9/gambar_bg2.png') }}"
+                alt="Denza D9, the first vehicle in the LUX&GO collection."
+                class="home-mobility__vehicle"
+                width="1672"
+                height="941"
+                loading="lazy"
+            >
+        </div>
+
         <div class="home-mobility__content">
             <p class="home-mobility__eyebrow" data-reveal>Premium Experience</p>
 
@@ -31,7 +34,9 @@
             <p class="home-mobility__description" data-reveal data-reveal-delay="2">
                 Experience the perfect blend of sophistication, innovation, and comfort — every single time.
             </p>
+        </div>
 
+        <div class="home-mobility__details">
             <ul class="home-mobility__features" data-reveal data-reveal-delay="3">
                 @foreach ($previewFeatures as $feature)
                     <li class="home-mobility__feature">

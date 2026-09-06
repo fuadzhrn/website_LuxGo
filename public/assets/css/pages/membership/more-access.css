@@ -277,3 +277,62 @@
         transition: none;
     }
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/* The calculator drops below the explanation and runs full width. */
+@media (max-width: 1023px) {
+    .membership-access__inner {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: clamp(30px, 4.5vw, 44px);
+    }
+
+    .membership-access__copy {
+        max-width: 560px;
+    }
+
+    .membership-access__calculator-copy {
+        max-width: 460px;
+    }
+
+    /* Comfortable to tap without changing the desktop control. */
+    .membership-access__step {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+@media (max-width: 767px) {
+    .membership-access__title {
+        font-size: clamp(1.875rem, 1.6rem + 1.2vw, 2.375rem);
+    }
+
+    .membership-access__calculator {
+        padding: clamp(22px, 5vw, 30px);
+    }
+
+    .membership-access__examples {
+        column-gap: clamp(10px, 2.6vw, 16px);
+    }
+
+    .membership-access__example + .membership-access__example {
+        padding-left: clamp(10px, 2.6vw, 16px);
+    }
+
+    .membership-access__example-rights {
+        font-size: clamp(1.5rem, 1.3rem + 1vw, 1.875rem);
+    }
+
+    /* Two narrow result columns become one clear pair of readings. */
+    .membership-access__results {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .membership-access__result + .membership-access__result {
+        margin-top: clamp(16px, 3.4vw, 22px);
+        padding-top: clamp(16px, 3.4vw, 22px);
+        padding-left: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        border-left: none;
+    }
+}

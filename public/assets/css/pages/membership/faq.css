@@ -194,3 +194,44 @@
         transition: none;
     }
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/* Intro above, accordion full width below. The existing faq.js is untouched. */
+@media (max-width: 1023px) {
+    .membership-faq__inner {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: clamp(26px, 4vw, 38px);
+    }
+
+    .membership-faq__intro,
+    .membership-faq__list {
+        grid-column: 1 / -1;
+    }
+
+    .membership-faq__copy {
+        max-width: 560px;
+    }
+}
+
+@media (max-width: 767px) {
+    .membership-faq__title {
+        font-size: clamp(1.875rem, 1.6rem + 1.2vw, 2.375rem);
+    }
+
+    /* Comfortable tap target for the whole question row. */
+    .membership-faq__question {
+        min-height: 48px;
+        padding-block: 14px;
+    }
+
+    .membership-faq__icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .membership-faq__answer-text,
+    .membership-faq__breakdown {
+        max-width: none;
+    }
+}

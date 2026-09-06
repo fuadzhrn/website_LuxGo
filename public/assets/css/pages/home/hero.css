@@ -215,3 +215,78 @@
         transform: none;
     }
 }
+
+/* Tablet and mobile ------------------------------------------------------------- */
+
+/*
+   The desktop composition puts copy left and the vehicle right. Below 1024px the
+   frame goes full-bleed and the copy drops to the foot, so the car is never
+   crowded by text. Desktop rules above this line are untouched.
+*/
+@media (max-width: 1023px) {
+    .home-hero {
+        --home-hero-header-offset: 64px;
+
+        align-items: flex-end;
+        min-height: clamp(620px, 84vh, 700px);
+        padding-bottom: clamp(40px, 6vw, 64px);
+    }
+
+    .home-hero__media {
+        left: 0;
+    }
+
+    /* Holds the vehicle in frame once the crop turns portrait. */
+    .home-hero__image {
+        object-position: 62% center;
+    }
+
+    /* Weighted to the foot rather than the left flank. */
+    .home-hero__overlay {
+        background: linear-gradient(
+            to top,
+            rgba(9, 10, 12, 0.94) 0%,
+            rgba(9, 10, 12, 0.72) 26%,
+            rgba(9, 10, 12, 0.3) 52%,
+            rgba(9, 10, 12, 0.06) 78%,
+            rgba(9, 10, 12, 0) 100%
+        );
+    }
+
+    .home-hero__content {
+        max-width: none;
+    }
+
+    .home-hero__title {
+        font-size: clamp(2.75rem, 2.4rem + 1.2vw, 3.25rem);
+    }
+
+    .home-hero__description {
+        max-width: 480px;
+    }
+}
+
+@media (max-width: 767px) {
+    .home-hero__title {
+        font-size: clamp(2.25rem, 1.9rem + 1.6vw, 2.75rem);
+    }
+
+    .home-hero__description {
+        max-width: 340px;
+        font-size: clamp(0.875rem, 0.85rem + 0.1vw, 1rem);
+    }
+
+    .home-hero__accent {
+        margin-top: 20px;
+    }
+
+    .home-hero__actions {
+        margin-top: 24px;
+    }
+
+    /* Comfortable target, and never wider than the gutter allows. */
+    .home-hero__cta {
+        height: 48px;
+        justify-content: center;
+    }
+}
