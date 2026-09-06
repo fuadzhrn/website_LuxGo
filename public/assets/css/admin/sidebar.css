@@ -1,0 +1,146 @@
+/* ==========================================================================
+   LUX&GO — Admin sidebar
+   ========================================================================== */
+
+.admin-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 40;
+    display: flex;
+    flex-direction: column;
+    width: var(--admin-sidebar-width);
+    padding: 22px 16px;
+    overflow-y: auto;
+    background-color: var(--admin-obsidian);
+    color: var(--admin-white);
+}
+
+.admin-sidebar__brand {
+    padding-inline: 8px;
+    margin-bottom: 26px;
+}
+
+.admin-sidebar__wordmark {
+    display: block;
+    font-family: var(--admin-font-heading);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    letter-spacing: 0.16em;
+}
+
+.admin-sidebar__kicker {
+    display: block;
+    margin-top: 3px;
+    font-size: 0.625rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.admin-sidebar__nav {
+    flex: 1;
+}
+
+.admin-sidebar__group + .admin-sidebar__group {
+    margin-top: 20px;
+}
+
+.admin-sidebar__group-label {
+    padding-inline: 8px;
+    margin-bottom: 6px;
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.admin-sidebar__link {
+    display: block;
+    padding: 8px 10px;
+    border-radius: var(--admin-radius);
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.72);
+    transition: background-color var(--admin-transition), color var(--admin-transition);
+}
+
+.admin-sidebar__link:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+    color: var(--admin-white);
+}
+
+/* Blue stays an accent: a tinted row and a white label, not a solid block. */
+.admin-sidebar__link.is-active {
+    background-color: rgba(22, 119, 255, 0.16);
+    color: var(--admin-white);
+    box-shadow: inset 2px 0 0 0 var(--admin-blue);
+}
+
+.admin-sidebar__link:focus-visible {
+    outline: 2px solid var(--admin-blue);
+    outline-offset: 2px;
+}
+
+.admin-sidebar__logout {
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-sidebar__logout-button {
+    width: 100%;
+    padding: 9px 10px;
+    border-radius: var(--admin-radius);
+    text-align: left;
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.72);
+    transition: background-color var(--admin-transition), color var(--admin-transition);
+}
+
+.admin-sidebar__logout-button:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+    color: var(--admin-white);
+}
+
+.admin-sidebar__logout-button:focus-visible {
+    outline: 2px solid var(--admin-blue);
+    outline-offset: 2px;
+}
+
+.admin-sidebar__scrim {
+    display: none;
+}
+
+/* Tablet and mobile ------------------------------------------------------- */
+
+/* The sidebar becomes a drawer; the desktop rules above are untouched. */
+@media (max-width: 1023px) {
+    .admin-sidebar {
+        transform: translateX(-100%);
+        transition: transform var(--admin-transition);
+    }
+
+    .admin-sidebar.is-open {
+        transform: translateX(0);
+    }
+
+    .admin-sidebar__scrim {
+        position: fixed;
+        inset: 0;
+        z-index: 30;
+        display: block;
+        background-color: rgba(9, 10, 12, 0.5);
+    }
+
+    .admin-sidebar__scrim[hidden] {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .admin-sidebar {
+        transition: none;
+    }
+}
