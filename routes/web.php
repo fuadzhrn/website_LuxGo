@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Vehicle;
 use App\Services\PageContentService;
 use App\Support\MembershipValues;
 use Illuminate\Support\Facades\Route;
@@ -42,8 +43,18 @@ Route::prefix('{locale}')
             ]);
         })->name('membership');
 
-        Route::get('/our-collection', function () {
-            return view('pages.collection.index');
+        /* Copy comes from the CMS; the vehicles come from their own module,
+           active ones only and in the order the admin set. */
+        Route::get('/our-collection', function (PageContentService $content) {
+            return view('pages.collection.index', [
+                'page' => $content->render('collection'),
+                'vehicles' => Vehicle::query()
+                    ->active()
+                    ->with(['mainMedia', 'translations', 'galleryMedia'])
+                    ->orderBy('sort_order')
+                    ->orderBy('id')
+                    ->get(),
+            ]);
         })->name('collection');
 
         Route::get('/experience', function () {

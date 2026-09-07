@@ -1,14 +1,8 @@
-@php
-    $ctaImage = 'assets/images/luxgo/collection/cta/collection-cta-detail.webp';
-@endphp
-
-{{-- Replace with collection-cta-detail.webp in public/assets/images/luxgo/collection/cta/. --}}
-
 <section class="collection-cta">
     <div class="collection-cta__media" aria-hidden="true">
-        @if (file_exists(public_path($ctaImage)))
+        @if ($s->hasImage('cta_image'))
             <img
-                src="{{ asset($ctaImage) }}"
+                src="{{ $s->imageUrl('cta_image') }}"
                 alt=""
                 class="collection-cta__image"
                 loading="lazy"
@@ -19,17 +13,17 @@
     <div class="lux-container collection-cta__inner" data-reveal>
         <div class="collection-cta__content">
             <h2 class="collection-cta__title">
-                <span class="collection-cta__title-line">{{ __('collection.cta.title_1') }}</span>
-                <span class="collection-cta__title-line">{{ __('collection.cta.title_2') }}</span>
-                <span class="collection-cta__title-line">{{ __('collection.cta.title_3') }}</span>
+                <span class="collection-cta__title-line">{{ $s->text('title_1') }}</span>
+                <span class="collection-cta__title-line">{{ $s->text('title_2') }}</span>
+                <span class="collection-cta__title-line">{{ $s->text('title_3') }}</span>
             </h2>
 
             <p class="collection-cta__copy">
-                {{ __('collection.cta.copy') }}
+                {{ $s->text('copy') }}
             </p>
 
-            <a href="{{ route('membership') }}" class="collection-cta__link">
-                <span>{{ __('collection.cta.link') }}</span>
+            <a href="{{ $s->link('cta_target') }}" class="collection-cta__link">
+                <span>{{ $s->text('link') }}</span>
                 <span class="collection-cta__link-icon" aria-hidden="true">&rarr;</span>
             </a>
         </div>

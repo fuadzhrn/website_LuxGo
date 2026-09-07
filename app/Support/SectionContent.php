@@ -107,6 +107,15 @@ class SectionContent
     }
 
     /**
+     * A shared setting, as stored. Used for references the view resolves for
+     * itself, such as which vehicle a section shows.
+     */
+    public function setting(string $key): mixed
+    {
+        return $this->settings[$key] ?? Arr::get($this->definition, "settings.{$key}.default");
+    }
+
+    /**
      * FAQ entries for this section, active ones only, already ordered.
      *
      * @return Collection<int, FaqItem>

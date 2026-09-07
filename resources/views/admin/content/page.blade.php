@@ -26,6 +26,17 @@
         </div>
     @endif
 
+    @if ($definition['vehicles'] ?? false)
+        <div class="admin-panel">
+            <x-admin.ui.section-header
+                title="Vehicles"
+                description="The vehicles this page shows, with their own copy, imagery and order."
+            />
+
+            <a class="admin-button admin-button--ghost" href="{{ route('admin.vehicles') }}">Manage vehicles</a>
+        </div>
+    @endif
+
     <div class="admin-panel">
         <ul class="admin-sections">
             @foreach ($sections as $item)

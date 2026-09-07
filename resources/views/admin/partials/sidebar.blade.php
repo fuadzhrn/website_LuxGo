@@ -12,6 +12,7 @@
             'label' => 'Content',
             'items' => [
                 ['label' => 'Content', 'route' => 'admin.content'],
+                ['label' => 'Vehicles', 'route' => 'admin.vehicles'],
             ],
         ],
         [

@@ -90,7 +90,17 @@
             @endforeach
 
             @foreach ($definition['settings'] ?? [] as $key => $setting)
-                @if (($setting['type'] ?? null) === 'cta')
+                @if (($setting['type'] ?? null) === 'vehicle')
+                    {{-- A reference, not a copy: the section shows whichever
+                         vehicle is chosen, with that vehicle's own content. --}}
+                    <x-admin.form.select
+                        :name="'settings['.$key.']'"
+                        :label="$setting['label']"
+                        :options="App\Models\Vehicle::orderBy('sort_order')->orderBy('id')->pluck('name', 'id')->all()"
+                        :value="$section->settings[$key] ?? null"
+                        :help="$setting['help'] ?? null"
+                    />
+                @elseif (($setting['type'] ?? null) === 'cta')
                     <x-admin.form.select
                         :name="'settings['.$key.']'"
                         :label="$setting['label']"

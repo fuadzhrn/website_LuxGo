@@ -1,39 +1,41 @@
 @php
-    $interiorMain = 'assets/images/luxgo/collection/interior/interior-main.webp';
+    /* The interior belongs to a vehicle, so the images come from that vehicle's
+       gallery rather than being copied into this section. The first three
+       images fill the main slot and the two details. */
+    $galleryVehicle = $vehicles->firstWhere('id', (int) ($s->setting('vehicle_id') ?? 0)) ?? $vehicles->first();
+    $gallery = $galleryVehicle?->galleryMedia ?? collect();
+
+    $interiorMain = $gallery->get(0);
     $interiorDetails = [
-        ['path' => 'assets/images/luxgo/collection/interior/interior-detail-01.webp', 'alt' => __('collection.inside.detail_1_alt')],
-        ['path' => 'assets/images/luxgo/collection/interior/interior-detail-02.webp', 'alt' => __('collection.inside.detail_2_alt')],
+        ['media' => $gallery->get(1), 'alt' => $s->text('detail_1_alt')],
+        ['media' => $gallery->get(2), 'alt' => $s->text('detail_2_alt')],
     ];
 @endphp
-
-{{-- Replace with interior-main.webp, interior-detail-01.webp and interior-detail-02.webp
-     in public/assets/images/luxgo/collection/interior/. Empty slots stay dark
-     instead of rendering broken images. --}}
 
 <section class="collection-inside">
     <div class="lux-container">
         <div class="collection-inside__header" data-reveal>
             <div class="collection-inside__heading">
-                <p class="collection-inside__eyebrow">{{ __('collection.inside.eyebrow') }}</p>
+                <p class="collection-inside__eyebrow">{{ $s->text('eyebrow') }}</p>
 
                 <h2 class="collection-inside__title">
-                    <span class="collection-inside__title-line">{{ __('collection.inside.title_1') }}</span>
-                    <span class="collection-inside__title-line">{{ __('collection.inside.title_2') }}</span>
-                    <span class="collection-inside__title-line">{{ __('collection.inside.title_3') }}</span>
+                    <span class="collection-inside__title-line">{{ $s->text('title_1') }}</span>
+                    <span class="collection-inside__title-line">{{ $s->text('title_2') }}</span>
+                    <span class="collection-inside__title-line">{{ $s->text('title_3') }}</span>
                 </h2>
             </div>
 
             <p class="collection-inside__copy">
-                {{ __('collection.inside.copy') }}
+                {{ $s->text('copy') }}
             </p>
         </div>
 
         <div class="collection-inside__gallery" data-reveal data-reveal-delay="1">
             <figure class="collection-inside__main">
-                @if (file_exists(public_path($interiorMain)))
+                @if ($interiorMain?->exists())
                     <img
-                        src="{{ asset($interiorMain) }}"
-                        alt="{{ __('collection.inside.main_alt') }}"
+                        src="{{ $interiorMain->url() }}"
+                        alt="{{ $s->text('main_alt') }}"
                         class="collection-inside__image"
                         loading="lazy"
                     >
@@ -43,9 +45,9 @@
             <div class="collection-inside__details">
                 @foreach ($interiorDetails as $detail)
                     <figure class="collection-inside__detail">
-                        @if (file_exists(public_path($detail['path'])))
+                        @if ($detail['media']?->exists())
                             <img
-                                src="{{ asset($detail['path']) }}"
+                                src="{{ $detail['media']->url() }}"
                                 alt="{{ $detail['alt'] }}"
                                 class="collection-inside__image"
                                 loading="lazy"

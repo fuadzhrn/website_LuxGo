@@ -15,9 +15,12 @@
 
 @section('content')
 
-    @include('pages.collection.sections.hero')
-    @include('pages.collection.sections.featured-vehicle')
-    @include('pages.collection.sections.inside-experience')
-    @include('pages.collection.sections.collection-cta')
+    {{-- Order and visibility come from the CMS; the vehicles are handed to the
+         sections that show them. --}}
+    @foreach ($page->sections() as $key => $section)
+        @foreach ($page->views($key) as $partial)
+            @include($partial, ['s' => $section, 'vehicles' => $vehicles])
+        @endforeach
+    @endforeach
 
 @endsection

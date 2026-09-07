@@ -36,6 +36,18 @@ return [
         'become_member' => ['label' => 'Become a member', 'path' => '/become-a-member'],
     ],
 
+    /* What a vehicle record holds. The name and slug are shared; everything
+       here is translated, and the figures a vehicle does not publish are simply
+       absent — the site never invents a specification. */
+    'vehicle_fields' => [
+        'tagline' => ['label' => 'Tagline', 'type' => 'textarea', 'lang' => 'copy', 'rules' => ['required', 'string', 'max:400']],
+        'image_alt' => ['label' => 'Main image alt text', 'lang' => 'image_alt', 'rules' => ['nullable', 'string', 'max:200']],
+        'features.design' => ['label' => 'Feature 1', 'group' => 'Features', 'lang' => 'features.design', 'rules' => ['required', 'string', 'max:60']],
+        'features.comfort' => ['label' => 'Feature 2', 'group' => 'Features', 'lang' => 'features.comfort', 'rules' => ['required', 'string', 'max:60']],
+        'features.ev' => ['label' => 'Feature 3', 'group' => 'Features', 'lang' => 'features.ev', 'rules' => ['required', 'string', 'max:60']],
+        'features.executive' => ['label' => 'Feature 4', 'group' => 'Features', 'lang' => 'features.executive', 'rules' => ['required', 'string', 'max:60']],
+    ],
+
     'pages' => [
 
         'home' => [
@@ -343,7 +355,100 @@ return [
 
             ],
         ],
-        'collection' => ['label' => 'Our Collection', 'editable' => false],
+        'collection' => [
+            'label' => 'Our Collection',
+            'editable' => true,
+            'view' => 'pages.collection.index',
+
+            /* The vehicles themselves are managed in their own module; this
+               page holds only the copy around them. */
+            'vehicles' => true,
+
+            'sections' => [
+
+                'hero' => [
+                    'label' => 'Collection Hero',
+                    'view' => 'pages.collection.sections.hero',
+                    'lang' => 'collection.hero',
+                    'fields' => [
+                        'eyebrow' => ['label' => 'Eyebrow', 'rules' => ['required', 'string', 'max:60']],
+                        'title_1' => ['label' => 'Heading line 1', 'rules' => ['required', 'string', 'max:60']],
+                        'title_2' => ['label' => 'Heading line 2', 'rules' => ['required', 'string', 'max:60']],
+                        'title_3' => ['label' => 'Heading line 3', 'rules' => ['required', 'string', 'max:60']],
+                        'copy' => ['label' => 'Description', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:400']],
+                        'link' => ['label' => 'Link label', 'rules' => ['required', 'string', 'max:60']],
+                        'image_alt' => ['label' => 'Hero image alt text', 'rules' => ['nullable', 'string', 'max:200']],
+                    ],
+                    'media' => [
+                        'hero_image' => [
+                            'label' => 'Hero image',
+                            'alt' => 'image_alt',
+                            'fallback' => 'assets/images/luxgo/collection/hero/collection-hero.webp',
+                        ],
+                    ],
+                ],
+
+                'featured_vehicle' => [
+                    'label' => 'Vehicle Showcase',
+                    'view' => 'pages.collection.sections.featured-vehicle',
+                    'lang' => 'collection.featured',
+                    /* The vehicles this section shows come from the vehicle
+                       module, so its own copy is only the wrapper around them. */
+                    'fields' => [
+                        'eyebrow' => ['label' => 'Eyebrow', 'rules' => ['required', 'string', 'max:60']],
+                        'link' => ['label' => 'Link label', 'rules' => ['required', 'string', 'max:60']],
+                    ],
+                    'settings' => [
+                        'cta_target' => ['label' => 'Link destination', 'type' => 'cta', 'default' => 'experience'],
+                    ],
+                ],
+
+                'inside_experience' => [
+                    'label' => 'Inside the Experience',
+                    'view' => 'pages.collection.sections.inside-experience',
+                    'lang' => 'collection.inside',
+                    'fields' => [
+                        'eyebrow' => ['label' => 'Eyebrow', 'rules' => ['required', 'string', 'max:60']],
+                        'title_1' => ['label' => 'Heading line 1', 'rules' => ['required', 'string', 'max:60']],
+                        'title_2' => ['label' => 'Heading line 2', 'rules' => ['required', 'string', 'max:60']],
+                        'title_3' => ['label' => 'Heading line 3', 'rules' => ['required', 'string', 'max:60']],
+                        'copy' => ['label' => 'Description', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:400']],
+
+                        'main_alt' => ['label' => 'Main image alt text', 'group' => 'Gallery alt text', 'rules' => ['nullable', 'string', 'max:200']],
+                        'detail_1_alt' => ['label' => 'Detail 1 alt text', 'group' => 'Gallery alt text', 'rules' => ['nullable', 'string', 'max:200']],
+                        'detail_2_alt' => ['label' => 'Detail 2 alt text', 'group' => 'Gallery alt text', 'rules' => ['nullable', 'string', 'max:200']],
+                    ],
+                    'settings' => [
+                        /* The interior shown here is one vehicle's gallery: the
+                           images live with the vehicle, never copied to here. */
+                        'vehicle_id' => ['label' => 'Vehicle', 'type' => 'vehicle', 'help' => 'The gallery shown in this section comes from this vehicle.'],
+                    ],
+                ],
+
+                'collection_cta' => [
+                    'label' => 'Collection CTA',
+                    'view' => 'pages.collection.sections.collection-cta',
+                    'lang' => 'collection.cta',
+                    'fields' => [
+                        'title_1' => ['label' => 'Heading line 1', 'rules' => ['required', 'string', 'max:60']],
+                        'title_2' => ['label' => 'Heading line 2', 'rules' => ['required', 'string', 'max:60']],
+                        'title_3' => ['label' => 'Heading line 3', 'rules' => ['required', 'string', 'max:60']],
+                        'copy' => ['label' => 'Description', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:400']],
+                        'link' => ['label' => 'Button label', 'rules' => ['required', 'string', 'max:60']],
+                    ],
+                    'media' => [
+                        'cta_image' => [
+                            'label' => 'Background image',
+                            'fallback' => 'assets/images/luxgo/collection/cta/collection-cta-detail.webp',
+                        ],
+                    ],
+                    'settings' => [
+                        'cta_target' => ['label' => 'CTA destination', 'type' => 'cta', 'default' => 'membership'],
+                    ],
+                ],
+
+            ],
+        ],
         'experience' => ['label' => 'The Experience', 'editable' => false],
         'how_it_works' => ['label' => 'How It Works', 'editable' => false],
         'about' => ['label' => 'About & Contact', 'editable' => false],

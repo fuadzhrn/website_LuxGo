@@ -42,9 +42,11 @@ class UpdatePageSectionRequest extends FormRequest
         }
 
         foreach (Arr::get($definition, 'settings', []) as $key => $setting) {
-            $rules["settings.{$key}"] = ($setting['type'] ?? null) === 'cta'
-                ? ['required', Rule::in(array_keys(config('page_content.cta_targets', [])))]
-                : ['nullable', 'string', 'max:255'];
+            $rules["settings.{$key}"] = match ($setting['type'] ?? null) {
+                'cta' => ['required', Rule::in(array_keys(config('page_content.cta_targets', [])))],
+                'vehicle' => ['nullable', 'integer', 'exists:vehicles,id'],
+                default => ['nullable', 'string', 'max:255'],
+            };
         }
 
         foreach (array_keys(Arr::get($definition, 'media', [])) as $slot) {
