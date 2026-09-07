@@ -3,6 +3,11 @@
     'label' => 'Status',
     'checked' => true,
     'help' => null,
+    /* The two states in words. They default to Active/Inactive because most
+       toggles switch a section on and off, but a toggle that means something
+       else says so. */
+    'onLabel' => 'Active',
+    'offLabel' => 'Inactive',
 ])
 
 @php
@@ -29,7 +34,12 @@
             data-status-toggle
         >
         <span class="admin-toggle__track" aria-hidden="true"><span class="admin-toggle__thumb"></span></span>
-        <span class="admin-toggle__text" data-status-label>{{ $isOn ? 'Active' : 'Inactive' }}</span>
+        <span
+            class="admin-toggle__text"
+            data-status-label
+            data-status-on="{{ $onLabel }}"
+            data-status-off="{{ $offLabel }}"
+        >{{ $isOn ? $onLabel : $offLabel }}</span>
     </label>
 
     @if ($help)

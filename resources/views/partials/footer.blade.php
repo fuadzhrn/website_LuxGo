@@ -5,7 +5,7 @@
             'heading' => __('global.footer.heading_membership'),
             'links' => [
                 ['label' => __('global.footer.link_membership'), 'href' => route('membership')],
-                ['label' => __('global.footer.link_become_member'), 'href' => '/become-a-member'],
+                ['label' => __('global.footer.link_become_member'), 'href' => App\Support\CtaTarget::url('become_member')],
             ],
         ],
         [
@@ -35,16 +35,19 @@
         ],
     ];
 
-    $footerSocials = [
-        ['icon' => 'instagram.svg', 'label' => 'Instagram', 'href' => 'https://www.instagram.com/luxandgo'],
-        ['icon' => 'tiktok.svg', 'label' => 'TikTok', 'href' => 'https://www.tiktok.com/@luxandgo'],
-    ];
+    /* Company details come from the site settings, so the footer, the contact
+       section and anywhere else show the same value without it being written
+       out more than once. A channel with nothing stored is left out. */
+    $footerSocials = collect([
+        ['icon' => 'instagram.svg', 'label' => 'Instagram', 'href' => $site->instagramUrl()],
+        ['icon' => 'tiktok.svg', 'label' => 'TikTok', 'href' => $site->tiktokUrl()],
+    ])->filter(fn (array $social) => $social['href'] !== null);
 
-    $footerContact = [
-        ['label' => '0811-1234-1234', 'href' => 'tel:+6281112341234'],
-        ['label' => 'info@luxandgo.com', 'href' => 'mailto:info@luxandgo.com'],
-        ['label' => 'Jakarta Pusat', 'href' => null],
-    ];
+    $footerContact = collect([
+        ['label' => $site->phone(), 'href' => $site->phoneLink()],
+        ['label' => $site->email(), 'href' => $site->emailLink()],
+        ['label' => $site->headOfficeCity(), 'href' => null],
+    ])->filter(fn (array $contact) => $contact['label'] !== '');
 @endphp
 
 <footer class="site-footer">
@@ -114,7 +117,7 @@
 
         <div class="site-footer__bottom">
             <p>{{ __('global.footer.rights', ['year' => date('Y')]) }}</p>
-            <p>PT Dwimuria Investama Properti</p>
+            <p>{{ $site->companyName() }}</p>
         </div>
     </div>
 </footer>

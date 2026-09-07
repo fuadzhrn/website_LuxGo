@@ -96,14 +96,8 @@ class SectionContent
     public function link(string $key): string
     {
         $chosen = $this->settings[$key] ?? Arr::get($this->definition, "settings.{$key}.default");
-        $targets = config('page_content.cta_targets', []);
-        $target = is_string($chosen) ? ($targets[$chosen] ?? null) : null;
 
-        if ($target === null) {
-            return route('home');
-        }
-
-        return isset($target['route']) ? route($target['route']) : $target['path'];
+        return CtaTarget::url(is_string($chosen) ? $chosen : 'home');
     }
 
     /**

@@ -104,7 +104,7 @@
                     <x-admin.form.select
                         :name="'settings['.$key.']'"
                         :label="$setting['label']"
-                        :options="collect(config('page_content.cta_targets'))->map(fn ($target) => $target['label'])->all()"
+                        :options="App\Support\CtaTarget::options()"
                         :value="$section->settings[$key] ?? ($setting['default'] ?? null)"
                         help="The link keeps the visitor's language automatically."
                     />

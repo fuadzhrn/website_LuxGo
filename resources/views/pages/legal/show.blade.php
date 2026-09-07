@@ -25,7 +25,7 @@
 
             <p class="legal-page__contact" data-enter data-enter-delay="3">
                 {{ __('global.legal.contact') }}
-                <a href="mailto:info@luxandgo.com" class="legal-page__link">info@luxandgo.com</a>.
+                <a href="{{ $site->emailLink() }}" class="legal-page__link">{{ $site->email() }}</a>.
             </p>
         </div>
     </section>

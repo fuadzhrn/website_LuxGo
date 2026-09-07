@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Media;
 use App\Models\Page;
 use App\Models\PageSection;
+use App\Models\SeoSetting;
 use App\Services\MediaService;
 use App\Services\PageContentService;
 use Illuminate\Database\Seeder;
@@ -40,6 +41,8 @@ class PageContentSeeder extends Seeder
                 continue;
             }
 
+            $this->seedSeo($page, $definition);
+
             foreach ($definition['sections'] ?? [] as $sectionKey => $sectionDefinition) {
                 $section = $page->sections()->where('section_key', $sectionKey)->first();
 
@@ -53,6 +56,41 @@ class PageContentSeeder extends Seeder
                 $this->seedFaq($section, $sectionDefinition);
             }
         }
+    }
+
+    /**
+     * The search and sharing wording a page shipped with, moved into the SEO
+     * records once. A value already saved is never overwritten, and no second
+     * translation row is ever created for a locale.
+     *
+     * @param  array<string, mixed>  $definition
+     */
+    private function seedSeo(Page $page, array $definition): void
+    {
+        $namespace = $definition['meta'] ?? null;
+
+        if (! is_string($namespace)) {
+            return;
+        }
+
+        $setting = SeoSetting::firstOrCreate(['page_id' => $page->id], ['is_indexable' => true]);
+
+        foreach (config('locales.supported') as $locale) {
+            $translation = $setting->translations()->firstOrNew(['locale' => $locale]);
+
+            $translation->meta_title ??= $this->line($namespace, 'title', $locale);
+            $translation->meta_description ??= $this->line($namespace, 'description', $locale);
+
+            $translation->save();
+        }
+    }
+
+    private function line(string $namespace, string $field, string $locale): ?string
+    {
+        $key = "{$namespace}.{$field}";
+        $value = trans($key, [], $locale);
+
+        return is_string($value) && $value !== $key ? $value : null;
     }
 
     /**

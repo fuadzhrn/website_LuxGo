@@ -24,8 +24,8 @@ return [
 
     /* Destinations a CTA may point at. One is chosen from this list rather
        than typed, so a link can never carry javascript: or leave the site.
-       A `route` entry keeps the visitor's locale automatically; `path` is for
-       the site-wide placeholder link that has no page of its own yet. */
+       A `route` entry keeps the visitor's locale automatically, and a
+       `fragment` scrolls to the part of that page the link is about. */
     'cta_targets' => [
         'membership' => ['label' => 'Membership', 'route' => 'membership'],
         'collection' => ['label' => 'Our Collection', 'route' => 'collection'],
@@ -33,7 +33,9 @@ return [
         'how-it-works' => ['label' => 'How It Works', 'route' => 'how-it-works'],
         'about' => ['label' => 'About & Contact', 'route' => 'about'],
         'home' => ['label' => 'Home', 'route' => 'home'],
-        'become_member' => ['label' => 'Become a member', 'path' => '/become-a-member'],
+        /* The membership application form lives on the About & Contact page;
+           this is the destination every "become a member" link uses. */
+        'become_member' => ['label' => 'Become a member (application form)', 'route' => 'about', 'fragment' => 'membership-application'],
     ],
 
     /* What a vehicle record holds. The name and slug are shared; everything
@@ -52,6 +54,8 @@ return [
 
         'home' => [
             'label' => 'Home',
+            'route' => 'home',
+            'meta' => 'home.meta',
             'editable' => true,
             'view' => 'pages.home.index',
 
@@ -194,9 +198,10 @@ return [
             ],
         ],
 
-        /* Structure only until their own stage; the editor is not offered yet. */
         'membership' => [
             'label' => 'Membership',
+            'route' => 'membership',
+            'meta' => 'membership.meta',
             'editable' => true,
             'view' => 'pages.membership.index',
 
@@ -357,6 +362,8 @@ return [
         ],
         'collection' => [
             'label' => 'Our Collection',
+            'route' => 'collection',
+            'meta' => 'collection.meta',
             'editable' => true,
             'view' => 'pages.collection.index',
 
@@ -449,9 +456,273 @@ return [
 
             ],
         ],
-        'experience' => ['label' => 'The Experience', 'editable' => false],
-        'how_it_works' => ['label' => 'How It Works', 'editable' => false],
-        'about' => ['label' => 'About & Contact', 'editable' => false],
+        'experience' => [
+            'label' => 'The Experience',
+            'route' => 'experience',
+            'meta' => 'experience.meta',
+            'editable' => true,
+            'view' => 'pages.experience.index',
+
+            'sections' => [
+
+                'hero' => [
+                    'label' => 'Experience Hero',
+                    'view' => 'pages.experience.sections.hero',
+                    'lang' => 'experience.hero',
+                    'fields' => [
+                        'eyebrow' => ['label' => 'Eyebrow', 'rules' => ['required', 'string', 'max:60']],
+                        'title_1' => ['label' => 'Heading line 1', 'rules' => ['required', 'string', 'max:60']],
+                        'title_2' => ['label' => 'Heading line 2', 'rules' => ['required', 'string', 'max:60']],
+                        'copy' => ['label' => 'Description', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:400']],
+                        'link' => ['label' => 'Link label', 'rules' => ['required', 'string', 'max:60']],
+                        'image_alt' => ['label' => 'Hero image alt text', 'rules' => ['nullable', 'string', 'max:200']],
+                    ],
+                    'media' => [
+                        'hero_image' => [
+                            'label' => 'Hero image',
+                            'alt' => 'image_alt',
+                            'fallback' => 'assets/images/luxgo/experience/hero/experience-hero.webp',
+                        ],
+                    ],
+                ],
+
+                'not_just_driver' => [
+                    'label' => 'Not Just a Driver',
+                    'view' => 'pages.experience.sections.not-just-driver',
+                    'lang' => 'experience.driver',
+                    'fields' => [
+                        'title_1' => ['label' => 'Heading line 1', 'rules' => ['required', 'string', 'max:60']],
+                        'title_2' => ['label' => 'Heading line 2', 'rules' => ['required', 'string', 'max:60']],
+                        'copy' => ['label' => 'Description', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:400']],
+                        'image_alt' => ['label' => 'Image alt text', 'rules' => ['nullable', 'string', 'max:200']],
+
+                        /* Seven attributes, fixed by the layout. */
+                        'attributes.appearance' => ['label' => 'Attribute 01', 'group' => 'Service attributes', 'rules' => ['required', 'string', 'max:60']],
+                        'attributes.punctual' => ['label' => 'Attribute 02', 'group' => 'Service attributes', 'rules' => ['required', 'string', 'max:60']],
+                        'attributes.polite' => ['label' => 'Attribute 03', 'group' => 'Service attributes', 'rules' => ['required', 'string', 'max:60']],
+                        'attributes.defensive' => ['label' => 'Attribute 04', 'group' => 'Service attributes', 'rules' => ['required', 'string', 'max:60']],
+                        'attributes.customer' => ['label' => 'Attribute 05', 'group' => 'Service attributes', 'rules' => ['required', 'string', 'max:60']],
+                        'attributes.hospitality' => ['label' => 'Attribute 06', 'group' => 'Service attributes', 'rules' => ['required', 'string', 'max:60']],
+                        'attributes.privacy' => ['label' => 'Attribute 07', 'group' => 'Service attributes', 'rules' => ['required', 'string', 'max:60']],
+                    ],
+                    'media' => [
+                        'driver_image' => [
+                            'label' => 'Service image',
+                            'alt' => 'image_alt',
+                            'fallback' => 'assets/images/luxgo/experience/driver/driver-service.webp',
+                        ],
+                    ],
+                ],
+
+                'service_standard' => [
+                    'label' => 'Service Standard',
+                    'view' => 'pages.experience.sections.service-standard',
+                    'lang' => 'experience.standard',
+                    'fields' => [
+                        'eyebrow' => ['label' => 'Eyebrow', 'rules' => ['required', 'string', 'max:60']],
+                        'title_1' => ['label' => 'Heading line 1', 'rules' => ['required', 'string', 'max:60']],
+                        'title_2' => ['label' => 'Heading line 2', 'rules' => ['required', 'string', 'max:60']],
+
+                        /* Three pillars, fixed by the layout. */
+                        'pillars.professional.title' => ['label' => 'Pillar 01 - title', 'group' => 'Pillars', 'rules' => ['required', 'string', 'max:60']],
+                        'pillars.professional.copy' => ['label' => 'Pillar 01 - copy', 'group' => 'Pillars', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:300']],
+                        'pillars.hospitality.title' => ['label' => 'Pillar 02 - title', 'group' => 'Pillars', 'rules' => ['required', 'string', 'max:60']],
+                        'pillars.hospitality.copy' => ['label' => 'Pillar 02 - copy', 'group' => 'Pillars', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:300']],
+                        'pillars.privacy.title' => ['label' => 'Pillar 03 - title', 'group' => 'Pillars', 'rules' => ['required', 'string', 'max:60']],
+                        'pillars.privacy.copy' => ['label' => 'Pillar 03 - copy', 'group' => 'Pillars', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:300']],
+
+                        'cta_title_1' => ['label' => 'CTA heading line 1', 'group' => 'Closing CTA', 'rules' => ['required', 'string', 'max:60']],
+                        'cta_title_2' => ['label' => 'CTA heading line 2', 'group' => 'Closing CTA', 'rules' => ['required', 'string', 'max:60']],
+                        'cta_copy' => ['label' => 'CTA copy', 'group' => 'Closing CTA', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:300']],
+                    ],
+                    'settings' => [
+                        'cta_target' => ['label' => 'CTA destination', 'type' => 'cta', 'default' => 'membership'],
+                    ],
+                ],
+
+            ],
+        ],
+        'how_it_works' => [
+            'label' => 'How It Works',
+            'route' => 'how-it-works',
+            'meta' => 'how-it-works.meta',
+            'editable' => true,
+            'view' => 'pages.how-it-works.index',
+
+            'sections' => [
+
+                'hero' => [
+                    'label' => 'How It Works Hero',
+                    'view' => 'pages.how-it-works.sections.hero',
+                    'lang' => 'how-it-works.hero',
+                    'fields' => [
+                        'eyebrow' => ['label' => 'Eyebrow', 'rules' => ['required', 'string', 'max:60']],
+                        'title_1' => ['label' => 'Heading line 1', 'rules' => ['required', 'string', 'max:60']],
+                        'title_2' => ['label' => 'Heading line 2', 'rules' => ['required', 'string', 'max:60']],
+                        'copy' => ['label' => 'Description', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:400']],
+                        'image_alt' => ['label' => 'Hero image alt text', 'rules' => ['nullable', 'string', 'max:200']],
+                    ],
+                    'media' => [
+                        'hero_image' => [
+                            'label' => 'Hero image',
+                            'alt' => 'image_alt',
+                            'fallback' => 'assets/images/luxgo/how-it-works/hero/how-it-works-hero.webp',
+                        ],
+                    ],
+                ],
+
+                'process' => [
+                    'label' => 'Join / Book / Use',
+                    'view' => 'pages.how-it-works.sections.process',
+                    'lang' => 'how-it-works.process',
+                    'fields' => [
+                        'eyebrow' => ['label' => 'Eyebrow', 'rules' => ['required', 'string', 'max:60']],
+                        'title' => ['label' => 'Heading', 'rules' => ['required', 'string', 'max:80']],
+                        'intro' => ['label' => 'Intro', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:400']],
+
+                        /* Three steps, fixed by the layout: JOIN, BOOK, USE. */
+                        'steps.join.title' => ['label' => 'Step 01 - title', 'group' => 'Steps', 'rules' => ['required', 'string', 'max:40']],
+                        'steps.join.copy' => ['label' => 'Step 01 - copy', 'group' => 'Steps', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:300']],
+                        'steps.book.title' => ['label' => 'Step 02 - title', 'group' => 'Steps', 'rules' => ['required', 'string', 'max:40']],
+                        'steps.book.copy' => ['label' => 'Step 02 - copy', 'group' => 'Steps', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:300']],
+                        'steps.use.title' => ['label' => 'Step 03 - title', 'group' => 'Steps', 'rules' => ['required', 'string', 'max:40']],
+                        'steps.use.copy' => ['label' => 'Step 03 - copy', 'group' => 'Steps', 'type' => 'textarea', 'help' => 'Use {{usage_duration}} for the number of hours.', 'rules' => ['required', 'string', 'max:300']],
+                    ],
+                ],
+
+                'service_area' => [
+                    'label' => 'Serving Jabodetabek',
+                    'view' => 'pages.how-it-works.sections.service-area',
+                    'lang' => 'how-it-works.area',
+                    'fields' => [
+                        'eyebrow' => ['label' => 'Eyebrow', 'rules' => ['required', 'string', 'max:60']],
+                        'title_1' => ['label' => 'Heading line 1', 'rules' => ['required', 'string', 'max:60']],
+                        'title_2' => ['label' => 'Heading line 2', 'rules' => ['required', 'string', 'max:60']],
+                        'copy' => ['label' => 'Description', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:400']],
+
+                        /* The service area itself is fixed: the wording can be
+                           edited, the regions and locations cannot be added to. */
+                        'areas.jakarta.name' => ['label' => 'Region name', 'group' => 'Jakarta', 'rules' => ['required', 'string', 'max:60']],
+                        'areas.jakarta.locations.central' => ['label' => 'Location 1', 'group' => 'Jakarta', 'rules' => ['required', 'string', 'max:60']],
+                        'areas.jakarta.locations.north' => ['label' => 'Location 2', 'group' => 'Jakarta', 'rules' => ['required', 'string', 'max:60']],
+                        'areas.jakarta.locations.south' => ['label' => 'Location 3', 'group' => 'Jakarta', 'rules' => ['required', 'string', 'max:60']],
+                        'areas.jakarta.locations.west' => ['label' => 'Location 4', 'group' => 'Jakarta', 'rules' => ['required', 'string', 'max:60']],
+                        'areas.jakarta.locations.east' => ['label' => 'Location 5', 'group' => 'Jakarta', 'rules' => ['required', 'string', 'max:60']],
+
+                        'areas.tangerang.name' => ['label' => 'Region name', 'group' => 'Tangerang', 'rules' => ['required', 'string', 'max:60']],
+                        'areas.tangerang.locations.kota' => ['label' => 'Location 1', 'group' => 'Tangerang', 'rules' => ['required', 'string', 'max:60']],
+                        'areas.tangerang.locations.selatan' => ['label' => 'Location 2', 'group' => 'Tangerang', 'rules' => ['required', 'string', 'max:60']],
+                        'areas.tangerang.locations.kabupaten' => ['label' => 'Location 3', 'group' => 'Tangerang', 'rules' => ['required', 'string', 'max:60']],
+
+                        'areas.bekasi.name' => ['label' => 'Region name', 'group' => 'Bekasi', 'rules' => ['required', 'string', 'max:60']],
+                        'areas.bekasi.locations.kota' => ['label' => 'Location 1', 'group' => 'Bekasi', 'rules' => ['required', 'string', 'max:60']],
+                        'areas.bekasi.locations.kabupaten' => ['label' => 'Location 2', 'group' => 'Bekasi', 'rules' => ['required', 'string', 'max:60']],
+
+                        'areas.bogor.name' => ['label' => 'Region name', 'group' => 'Bogor', 'rules' => ['required', 'string', 'max:60']],
+                        'areas.bogor.locations.kota' => ['label' => 'Location 1', 'group' => 'Bogor', 'rules' => ['required', 'string', 'max:60']],
+                        'areas.bogor.locations.kabupaten' => ['label' => 'Location 2', 'group' => 'Bogor', 'rules' => ['required', 'string', 'max:60']],
+
+                        'areas.depok.name' => ['label' => 'Region name', 'group' => 'Depok', 'rules' => ['required', 'string', 'max:60']],
+                        'areas.depok.locations.kota' => ['label' => 'Location 1', 'group' => 'Depok', 'rules' => ['required', 'string', 'max:60']],
+                    ],
+                ],
+
+                'closing_cta' => [
+                    'label' => 'Closing CTA',
+                    'view' => 'pages.how-it-works.sections.closing-cta',
+                    'lang' => 'how-it-works.closing',
+                    'fields' => [
+                        'title_1' => ['label' => 'Heading line 1', 'rules' => ['required', 'string', 'max:60']],
+                        'title_2' => ['label' => 'Heading line 2', 'rules' => ['required', 'string', 'max:60']],
+                        'copy' => ['label' => 'Description', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:400']],
+                    ],
+                    'settings' => [
+                        'cta_target' => ['label' => 'CTA destination', 'type' => 'cta', 'default' => 'membership'],
+                    ],
+                ],
+
+            ],
+        ],
+        'about' => [
+            'label' => 'About & Contact',
+            'route' => 'about',
+            'meta' => 'about.meta',
+            'editable' => true,
+            'view' => 'pages.about-contact.index',
+
+            'sections' => [
+
+                'about' => [
+                    'label' => 'About LUX&GO',
+                    'view' => 'pages.about-contact.sections.about',
+                    'lang' => 'about.intro',
+                    'fields' => [
+                        'eyebrow' => ['label' => 'Eyebrow', 'rules' => ['required', 'string', 'max:60']],
+                        'title_1' => ['label' => 'Heading line 1', 'rules' => ['required', 'string', 'max:60']],
+                        'title_2' => ['label' => 'Heading line 2', 'rules' => ['required', 'string', 'max:60']],
+                        'copy' => ['label' => 'Brand story', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:600']],
+
+                        'serve_title' => ['label' => 'Heading', 'group' => 'Who we serve', 'rules' => ['required', 'string', 'max:60']],
+                        /* Five audiences, fixed by the layout. */
+                        'audiences.business' => ['label' => 'Audience 01', 'group' => 'Who we serve', 'rules' => ['required', 'string', 'max:60']],
+                        'audiences.executives' => ['label' => 'Audience 02', 'group' => 'Who we serve', 'rules' => ['required', 'string', 'max:60']],
+                        'audiences.families' => ['label' => 'Audience 03', 'group' => 'Who we serve', 'rules' => ['required', 'string', 'max:60']],
+                        'audiences.professionals' => ['label' => 'Audience 04', 'group' => 'Who we serve', 'rules' => ['required', 'string', 'max:60']],
+                        'audiences.corporate' => ['label' => 'Audience 05', 'group' => 'Who we serve', 'rules' => ['required', 'string', 'max:60']],
+                    ],
+                ],
+
+                'membership_application' => [
+                    'label' => 'Membership Application',
+                    'view' => 'pages.about-contact.sections.membership-application',
+                    'lang' => 'about.apply',
+                    /* Wording only: the form still behaves exactly as approved,
+                       and no submission is processed at this stage. */
+                    'fields' => [
+                        'eyebrow' => ['label' => 'Eyebrow', 'rules' => ['required', 'string', 'max:60']],
+                        'title_1' => ['label' => 'Heading line 1', 'rules' => ['required', 'string', 'max:60']],
+                        'title_2' => ['label' => 'Heading line 2', 'rules' => ['required', 'string', 'max:60']],
+                        'copy' => ['label' => 'Description', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:400']],
+
+                        'field_name' => ['label' => 'Full name', 'group' => 'Field labels', 'rules' => ['required', 'string', 'max:80']],
+                        'field_phone' => ['label' => 'Phone / WhatsApp', 'group' => 'Field labels', 'rules' => ['required', 'string', 'max:80']],
+                        'field_email' => ['label' => 'Email', 'group' => 'Field labels', 'rules' => ['required', 'string', 'max:80']],
+                        'field_lots' => ['label' => 'Number of LOTs', 'group' => 'Field labels', 'rules' => ['required', 'string', 'max:80']],
+                        'field_message' => ['label' => 'Message / notes', 'group' => 'Field labels', 'rules' => ['required', 'string', 'max:80']],
+                        'optional' => ['label' => 'Optional marker', 'group' => 'Field labels', 'rules' => ['required', 'string', 'max:40']],
+                        'submit' => ['label' => 'Submit button', 'group' => 'Field labels', 'rules' => ['required', 'string', 'max:80']],
+
+                        'error_name' => ['label' => 'Missing name', 'group' => 'Validation messages', 'rules' => ['required', 'string', 'max:200']],
+                        'error_phone' => ['label' => 'Missing phone', 'group' => 'Validation messages', 'rules' => ['required', 'string', 'max:200']],
+                        'error_email_required' => ['label' => 'Missing email', 'group' => 'Validation messages', 'rules' => ['required', 'string', 'max:200']],
+                        'error_email_invalid' => ['label' => 'Invalid email', 'group' => 'Validation messages', 'rules' => ['required', 'string', 'max:200']],
+                        'error_lots' => ['label' => 'Invalid LOT count', 'group' => 'Validation messages', 'rules' => ['required', 'string', 'max:200']],
+                        'status_unavailable' => ['label' => 'Submission status', 'group' => 'Validation messages', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:300']],
+                    ],
+                ],
+
+                'contact' => [
+                    'label' => 'Contact & Head Office',
+                    'view' => 'pages.about-contact.sections.contact-head-office',
+                    'lang' => 'about.contact',
+                    /* Labels only. The company name, address, phone, email and
+                       handles come from site_settings, so they are written once
+                       for the whole site. */
+                    'fields' => [
+                        'eyebrow' => ['label' => 'Eyebrow', 'rules' => ['required', 'string', 'max:60']],
+                        'title_1' => ['label' => 'Heading line 1', 'rules' => ['required', 'string', 'max:60']],
+                        'title_2' => ['label' => 'Heading line 2', 'rules' => ['required', 'string', 'max:60']],
+                        'channels_title' => ['label' => 'Channels heading', 'rules' => ['required', 'string', 'max:60']],
+
+                        'label_whatsapp' => ['label' => 'WhatsApp label', 'group' => 'Channel labels', 'rules' => ['required', 'string', 'max:40']],
+                        'label_email' => ['label' => 'Email label', 'group' => 'Channel labels', 'rules' => ['required', 'string', 'max:40']],
+                        'label_instagram' => ['label' => 'Instagram label', 'group' => 'Channel labels', 'rules' => ['required', 'string', 'max:40']],
+                        'label_tiktok' => ['label' => 'TikTok label', 'group' => 'Channel labels', 'rules' => ['required', 'string', 'max:40']],
+                    ],
+                ],
+
+            ],
+        ],
 
     ],
 

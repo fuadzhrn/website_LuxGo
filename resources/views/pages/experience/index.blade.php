@@ -14,8 +14,12 @@
 
 @section('content')
 
-    @include('pages.experience.sections.hero')
-    @include('pages.experience.sections.not-just-driver')
-    @include('pages.experience.sections.service-standard')
+    {{-- Order and visibility come from the CMS; the partials are the approved
+         ones, each handed its own resolved content. --}}
+    @foreach ($page->sections() as $key => $section)
+        @foreach ($page->views($key) as $partial)
+            @include($partial, ['s' => $section, 'page' => $page])
+        @endforeach
+    @endforeach
 
 @endsection

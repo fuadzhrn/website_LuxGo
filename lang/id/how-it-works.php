@@ -22,7 +22,7 @@ return [
         'steps' => [
             'join' => ['title' => 'Join', 'copy' => 'Menjadi Member LUX&GO melalui LOT Membership.'],
             'book' => ['title' => 'Book', 'copy' => 'Pesan kendaraan sesuai ketersediaan.'],
-            'use' => ['title' => 'Use', 'copy' => 'Nikmati kendaraan selama 12 jam bersama pengemudi profesional.'],
+            'use' => ['title' => 'Use', 'copy' => 'Nikmati kendaraan selama {{usage_duration}} jam bersama pengemudi profesional.'],
         ],
     ],
 
@@ -31,7 +31,28 @@ return [
         'title_1' => 'Melayani',
         'title_2' => 'Jabodetabek.',
         'copy' => 'Mobilitas premium di seluruh area Jakarta dan sekitarnya.',
-        'jakarta' => ['central' => 'Pusat', 'north' => 'Utara', 'south' => 'Selatan', 'west' => 'Barat', 'east' => 'Timur'],
+        'areas' => [
+            'jakarta' => [
+                'name' => 'Jakarta',
+                'locations' => ['central' => 'Pusat', 'north' => 'Utara', 'south' => 'Selatan', 'west' => 'Barat', 'east' => 'Timur'],
+            ],
+            'tangerang' => [
+                'name' => 'Tangerang',
+                'locations' => ['kota' => 'Kota Tangerang', 'selatan' => 'Tangerang Selatan', 'kabupaten' => 'Kabupaten Tangerang'],
+            ],
+            'bekasi' => [
+                'name' => 'Bekasi',
+                'locations' => ['kota' => 'Kota Bekasi', 'kabupaten' => 'Kabupaten Bekasi'],
+            ],
+            'bogor' => [
+                'name' => 'Bogor',
+                'locations' => ['kota' => 'Kota Bogor', 'kabupaten' => 'Kabupaten Bogor'],
+            ],
+            'depok' => [
+                'name' => 'Depok',
+                'locations' => ['kota' => 'Kota Depok'],
+            ],
+        ],
     ],
 
     'closing' => [

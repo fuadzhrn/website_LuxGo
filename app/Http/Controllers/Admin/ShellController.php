@@ -11,16 +11,6 @@ use Illuminate\View\View;
  */
 class ShellController extends Controller
 {
-    public function applications(): View
-    {
-        return view('admin.applications.index');
-    }
-
-    public function seo(): View
-    {
-        return view('admin.seo.index');
-    }
-
     public function settings(): View
     {
         return view('admin.settings.index');

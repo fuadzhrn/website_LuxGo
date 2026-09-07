@@ -17,9 +17,13 @@
 
 @section('content')
 
-    @include('pages.about-contact.sections.about')
-    @include('pages.about-contact.sections.membership-application')
-    @include('pages.about-contact.sections.contact-head-office')
+    {{-- Order and visibility come from the CMS; the partials are the approved
+         ones, each handed its own resolved content. --}}
+    @foreach ($page->sections() as $key => $section)
+        @foreach ($page->views($key) as $partial)
+            @include($partial, ['s' => $section, 'page' => $page])
+        @endforeach
+    @endforeach
 
 @endsection
 

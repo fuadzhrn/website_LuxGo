@@ -1,41 +1,43 @@
 @php
+    /* The fields the approved form has. Their labels come from the CMS; the
+       field names, types and behaviour are part of the page. */
     $applicationFields = [
-        ['id' => 'apply-name', 'name' => 'full_name', 'label' => __('about.apply.field_name'), 'type' => 'text', 'autocomplete' => 'name', 'required' => true],
-        ['id' => 'apply-phone', 'name' => 'phone', 'label' => __('about.apply.field_phone'), 'type' => 'tel', 'autocomplete' => 'tel', 'required' => true],
-        ['id' => 'apply-email', 'name' => 'email', 'label' => __('about.apply.field_email'), 'type' => 'email', 'autocomplete' => 'email', 'required' => true],
-        ['id' => 'apply-lots', 'name' => 'lots', 'label' => __('about.apply.field_lots'), 'type' => 'number', 'autocomplete' => 'off', 'required' => false],
+        ['id' => 'apply-name', 'name' => 'full_name', 'label' => $s->text('field_name'), 'type' => 'text', 'autocomplete' => 'name', 'required' => true],
+        ['id' => 'apply-phone', 'name' => 'phone', 'label' => $s->text('field_phone'), 'type' => 'tel', 'autocomplete' => 'tel', 'required' => true],
+        ['id' => 'apply-email', 'name' => 'email', 'label' => $s->text('field_email'), 'type' => 'email', 'autocomplete' => 'email', 'required' => true],
+        ['id' => 'apply-lots', 'name' => 'lots', 'label' => $s->text('field_lots'), 'type' => 'number', 'autocomplete' => 'off', 'required' => false],
     ];
 @endphp
 
 <section class="about-section about-apply" id="membership-application">
     <div class="lux-container about-apply__inner">
         <div class="about-apply__lead" data-reveal>
-            <p class="about-apply__eyebrow">{{ __('about.apply.eyebrow') }}</p>
+            <p class="about-apply__eyebrow">{{ $s->text('eyebrow') }}</p>
 
             <h2 class="about-apply__title">
-                <span class="about-apply__title-line">{{ __('about.apply.title_1') }}</span>
-                <span class="about-apply__title-line">{{ __('about.apply.title_2') }}</span>
+                <span class="about-apply__title-line">{{ $s->text('title_1') }}</span>
+                <span class="about-apply__title-line">{{ $s->text('title_2') }}</span>
             </h2>
 
             <p class="about-apply__copy">
-                {{ __('about.apply.copy') }}
+                {{ $s->text('copy') }}
             </p>
         </div>
 
         {{-- Front-end only for now: validation runs in membership-application.js and
-             submission stays blocked. The endpoint is wired up in the CMS/backend stage. --}}
+             submission stays blocked. The endpoint is wired up in the next stage. --}}
         <form
             class="about-apply__form"
             data-membership-application
             novalidate
             data-reveal
             data-reveal-delay="1"
-            data-error-name="{{ __('about.apply.error_name') }}"
-            data-error-phone="{{ __('about.apply.error_phone') }}"
-            data-error-email-required="{{ __('about.apply.error_email_required') }}"
-            data-error-email-invalid="{{ __('about.apply.error_email_invalid') }}"
-            data-error-lots="{{ __('about.apply.error_lots') }}"
-            data-status-unavailable="{{ __('about.apply.status_unavailable') }}"
+            data-error-name="{{ $s->text('error_name') }}"
+            data-error-phone="{{ $s->text('error_phone') }}"
+            data-error-email-required="{{ $s->text('error_email_required') }}"
+            data-error-email-invalid="{{ $s->text('error_email_invalid') }}"
+            data-error-lots="{{ $s->text('error_lots') }}"
+            data-status-unavailable="{{ $s->text('status_unavailable') }}"
         >
             @foreach ($applicationFields as $field)
                 <div class="lux-field">
@@ -57,7 +59,7 @@
             @endforeach
 
             <div class="lux-field">
-                <label class="lux-label" for="apply-message">{{ __('about.apply.field_message') }} <span class="about-apply__optional">{{ __('about.apply.optional') }}</span></label>
+                <label class="lux-label" for="apply-message">{{ $s->text('field_message') }} <span class="about-apply__optional">{{ $s->text('optional') }}</span></label>
 
                 <textarea
                     class="about-apply__input about-apply__textarea"
@@ -69,7 +71,7 @@
 
             <div class="about-apply__actions">
                 <button type="submit" class="about-apply__submit">
-                    <span>{{ __('about.apply.submit') }}</span>
+                    <span>{{ $s->text('submit') }}</span>
                     <span class="about-apply__submit-icon" aria-hidden="true">&rarr;</span>
                 </button>
 

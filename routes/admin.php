@@ -4,8 +4,10 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\Admin\MembershipApplicationController;
 use App\Http\Controllers\Admin\MembershipSettingsController;
 use App\Http\Controllers\Admin\PageContentController;
+use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\ShellController;
 use App\Http\Controllers\Admin\VehicleController;
 use Illuminate\Support\Facades\Route;
@@ -73,8 +75,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('media', [MediaController::class, 'store'])->name('media.store');
         Route::patch('media/{media}', [MediaController::class, 'update'])->name('media.update');
         Route::delete('media/{media}', [MediaController::class, 'destroy'])->name('media.destroy');
-        Route::get('applications', [ShellController::class, 'applications'])->name('applications');
-        Route::get('seo', [ShellController::class, 'seo'])->name('seo');
+        /* Leads submitted through the public membership form. They are read
+           and followed up here; the submission itself is never edited. */
+        Route::get('applications', [MembershipApplicationController::class, 'index'])->name('applications');
+        Route::get('applications/{application}', [MembershipApplicationController::class, 'show'])->name('applications.show');
+        Route::patch('applications/{application}/status', [MembershipApplicationController::class, 'updateStatus'])
+            ->name('applications.status');
+        /* Search and sharing information, one record per published page. */
+        Route::get('seo', [SeoController::class, 'index'])->name('seo');
+        Route::get('seo/{page:key}/edit', [SeoController::class, 'edit'])->name('seo.edit');
+        Route::put('seo/{page:key}', [SeoController::class, 'update'])->name('seo.update');
         Route::get('settings', [ShellController::class, 'settings'])->name('settings');
         Route::get('profile', [ShellController::class, 'profile'])->name('profile');
 

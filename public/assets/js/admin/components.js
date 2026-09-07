@@ -259,8 +259,13 @@ function initStatusToggles() {
             return;
         }
 
+        /* The wording comes from the markup, so a toggle that is not about
+           being active reads correctly too. */
+        const onLabel = label.dataset.statusOn || "Active";
+        const offLabel = label.dataset.statusOff || "Inactive";
+
         input.addEventListener("change", () => {
-            label.textContent = input.checked ? "Active" : "Inactive";
+            label.textContent = input.checked ? onLabel : offLabel;
         });
     });
 }

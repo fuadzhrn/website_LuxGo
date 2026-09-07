@@ -1,25 +1,34 @@
 @php
-    $serviceAreas = [
-        ['region' => 'Jakarta', 'areas' => [__('how-it-works.area.jakarta.central'), __('how-it-works.area.jakarta.north'), __('how-it-works.area.jakarta.south'), __('how-it-works.area.jakarta.west'), __('how-it-works.area.jakarta.east')]],
-        ['region' => 'Tangerang', 'areas' => ['Kota Tangerang', 'Tangerang Selatan', 'Kabupaten Tangerang']],
-        ['region' => 'Bekasi', 'areas' => ['Kota Bekasi', 'Kabupaten Bekasi']],
-        ['region' => 'Bogor', 'areas' => ['Kota Bogor', 'Kabupaten Bogor']],
-        ['region' => 'Depok', 'areas' => ['Kota Depok']],
-    ];
+    /* The service area as published: five regions, each with its own locations.
+       The CMS holds their wording; the list itself is not something the editor
+       can add to. */
+    $serviceAreas = collect([
+        ['key' => 'jakarta', 'locations' => ['central', 'north', 'south', 'west', 'east']],
+        ['key' => 'tangerang', 'locations' => ['kota', 'selatan', 'kabupaten']],
+        ['key' => 'bekasi', 'locations' => ['kota', 'kabupaten']],
+        ['key' => 'bogor', 'locations' => ['kota', 'kabupaten']],
+        ['key' => 'depok', 'locations' => ['kota']],
+    ])->map(fn (array $area) => [
+        'region' => $s->text("areas.{$area['key']}.name"),
+        'areas' => array_values(array_filter(array_map(
+            fn (string $location) => $s->text("areas.{$area['key']}.locations.{$location}"),
+            $area['locations']
+        ))),
+    ]);
 @endphp
 
 <section class="hiw-section hiw-area" id="service-area">
     <div class="lux-container hiw-area__inner">
         <div class="hiw-area__intro" data-reveal>
-            <p class="hiw-area__eyebrow">{{ __('how-it-works.area.eyebrow') }}</p>
+            <p class="hiw-area__eyebrow">{{ $s->text('eyebrow') }}</p>
 
             <h2 class="hiw-area__title">
-                <span class="hiw-area__title-line">{{ __('how-it-works.area.title_1') }}</span>
-                <span class="hiw-area__title-line">{{ __('how-it-works.area.title_2') }}</span>
+                <span class="hiw-area__title-line">{{ $s->text('title_1') }}</span>
+                <span class="hiw-area__title-line">{{ $s->text('title_2') }}</span>
             </h2>
 
             <p class="hiw-area__copy">
-                {{ __('how-it-works.area.copy') }}
+                {{ $s->text('copy') }}
             </p>
         </div>
 

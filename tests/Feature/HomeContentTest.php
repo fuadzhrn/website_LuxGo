@@ -153,12 +153,13 @@ class HomeContentTest extends TestCase
 
     public function test_a_page_without_an_editor_cannot_be_opened(): void
     {
-        /* The Experience has no editor yet; opening it is a 404, not a blank
-           screen. */
-        $experience = Page::where('key', 'experience')->sole();
+        /* Every published page has an editor now, so this is checked with a
+           page the definition does not describe: opening it is a 404, not a
+           blank screen. */
+        $unknown = Page::create(['key' => 'not-in-the-definition', 'slug' => 'unknown']);
 
         $this->actingAs($this->administrator())
-            ->get(route('admin.content.page', $experience))
+            ->get(route('admin.content.page', $unknown))
             ->assertNotFound();
     }
 

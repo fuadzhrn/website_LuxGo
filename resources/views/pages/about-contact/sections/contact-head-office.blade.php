@@ -1,42 +1,36 @@
 @php
-    $headOffice = [
-        'Gajah Mada Tower, Lt. 19-01',
-        'Jl. Gajah Mada No.19-26',
-        'Petojo Utara, Gambir',
-        'Jakarta Pusat 10130',
-    ];
-
-    /* Icons and destinations are the ones already carried by the approved footer —
-       no new assets, and no URL invented for this section. */
-    $contactChannels = [
-        ['icon' => 'phone.svg', 'label' => __('about.contact.label_whatsapp'), 'value' => '0811-1234-1234', 'href' => 'tel:+6281112341234', 'external' => false],
-        ['icon' => 'mail.svg', 'label' => __('about.contact.label_email'), 'value' => 'info@luxandgo.com', 'href' => 'mailto:info@luxandgo.com', 'external' => false],
-        ['icon' => 'instagram.svg', 'label' => __('about.contact.label_instagram'), 'value' => '@luxandgo', 'href' => 'https://www.instagram.com/luxandgo', 'external' => true],
-        ['icon' => 'tiktok.svg', 'label' => __('about.contact.label_tiktok'), 'value' => '@luxandgo', 'href' => 'https://www.tiktok.com/@luxandgo', 'external' => true],
-    ];
+    /* Labels come from the CMS; the company details come from the site
+       settings, which is the one place they are stored. A channel without a
+       destination is not rendered — no address is invented here. */
+    $contactChannels = collect([
+        ['icon' => 'phone.svg', 'label' => $s->text('label_whatsapp'), 'value' => $site->phone(), 'href' => $site->phoneLink(), 'external' => false],
+        ['icon' => 'mail.svg', 'label' => $s->text('label_email'), 'value' => $site->email(), 'href' => $site->emailLink(), 'external' => false],
+        ['icon' => 'instagram.svg', 'label' => $s->text('label_instagram'), 'value' => $site->instagramHandle(), 'href' => $site->instagramUrl(), 'external' => true],
+        ['icon' => 'tiktok.svg', 'label' => $s->text('label_tiktok'), 'value' => $site->tiktokHandle(), 'href' => $site->tiktokUrl(), 'external' => true],
+    ])->filter(fn (array $channel) => $channel['value'] !== '' && $channel['href'] !== null);
 @endphp
 
 <section class="about-section about-contact" id="contact">
     <div class="lux-container about-contact__inner">
         <div class="about-contact__identity" data-reveal>
-            <p class="about-contact__eyebrow">{{ __('about.contact.eyebrow') }}</p>
+            <p class="about-contact__eyebrow">{{ $s->text('eyebrow') }}</p>
 
             <h2 class="about-contact__title">
-                <span class="about-contact__title-line">{{ __('about.contact.title_1') }}</span>
-                <span class="about-contact__title-line">{{ __('about.contact.title_2') }}</span>
+                <span class="about-contact__title-line">{{ $s->text('title_1') }}</span>
+                <span class="about-contact__title-line">{{ $s->text('title_2') }}</span>
             </h2>
 
-            <p class="about-contact__company">PT Dwimuria Investama Properti</p>
+            <p class="about-contact__company">{{ $site->companyName() }}</p>
 
             <address class="about-contact__address">
-                @foreach ($headOffice as $line)
+                @foreach ($site->headOfficeLines() as $line)
                     <span class="about-contact__address-line">{{ $line }}</span>
                 @endforeach
             </address>
         </div>
 
         <div class="about-contact__channels" data-reveal data-reveal-delay="1">
-            <h3 class="about-contact__channels-title">{{ __('about.contact.channels_title') }}</h3>
+            <h3 class="about-contact__channels-title">{{ $s->text('channels_title') }}</h3>
 
             {{-- Hairline-separated rows, each a single link — never four cards. --}}
             <ul class="about-contact__list">

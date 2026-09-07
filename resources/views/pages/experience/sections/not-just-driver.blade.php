@@ -1,27 +1,23 @@
 @php
-    $driverImage = 'assets/images/luxgo/experience/driver/driver-service.webp';
-
+    /* Seven attributes, fixed by the layout — the CMS supplies their wording. */
     $driverAttributes = [
-        __('experience.driver.attributes.appearance'),
-        __('experience.driver.attributes.punctual'),
-        __('experience.driver.attributes.polite'),
-        __('experience.driver.attributes.defensive'),
-        __('experience.driver.attributes.customer'),
-        __('experience.driver.attributes.hospitality'),
-        __('experience.driver.attributes.privacy'),
+        $s->text('attributes.appearance'),
+        $s->text('attributes.punctual'),
+        $s->text('attributes.polite'),
+        $s->text('attributes.defensive'),
+        $s->text('attributes.customer'),
+        $s->text('attributes.hospitality'),
+        $s->text('attributes.privacy'),
     ];
 @endphp
-
-{{-- Replace with driver-service.webp in public/assets/images/luxgo/experience/driver/.
-     Until the file exists the column keeps its neutral media slot. --}}
 
 <section class="experience-section experience-driver">
     <div class="lux-container experience-driver__inner">
         <figure class="experience-driver__media" data-reveal>
-            @if (file_exists(public_path($driverImage)))
+            @if ($s->hasImage('driver_image'))
                 <img
-                    src="{{ asset($driverImage) }}"
-                    alt="{{ __('experience.driver.image_alt') }}"
+                    src="{{ $s->imageUrl('driver_image') }}"
+                    alt="{{ $s->text('image_alt') }}"
                     class="experience-driver__image"
                     loading="lazy"
                 >
@@ -30,12 +26,12 @@
 
         <div class="experience-driver__content" data-reveal data-reveal-delay="1">
             <h2 class="experience-driver__title">
-                <span class="experience-driver__title-line">{{ __('experience.driver.title_1') }}</span>
-                <span class="experience-driver__title-line">{{ __('experience.driver.title_2') }}</span>
+                <span class="experience-driver__title-line">{{ $s->text('title_1') }}</span>
+                <span class="experience-driver__title-line">{{ $s->text('title_2') }}</span>
             </h2>
 
             <p class="experience-driver__copy">
-                {{ __('experience.driver.copy') }}
+                {{ $s->text('copy') }}
             </p>
 
             <ul class="experience-driver__list">

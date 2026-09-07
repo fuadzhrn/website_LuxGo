@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <p class="admin-lede">The six public pages. Home is editable now; the others get their editors in the stages that follow.</p>
+    <p class="admin-lede">The six public pages. Each one is edited section by section, in both languages.</p>
 
     <div class="admin-table-wrap">
         <table class="admin-table">
@@ -33,7 +33,7 @@
                             @if ($isEditable)
                                 <a class="admin-button admin-button--ghost" href="{{ route('admin.content.page', $page) }}">Edit content</a>
                             @else
-                                <span class="admin-help">Editor coming soon</span>
+                                <span class="admin-help">No editor</span>
                             @endif
                         </td>
                     </tr>

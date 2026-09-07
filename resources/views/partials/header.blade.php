@@ -45,7 +45,7 @@
                 @endforeach
             </div>
 
-            <a href="/become-a-member" class="site-header__cta">{{ __('global.cta.become_member') }}</a>
+            <a href="{{ App\Support\CtaTarget::url('become_member') }}" class="site-header__cta">{{ __('global.cta.become_member') }}</a>
         </div>
 
         {{-- Replaces the desktop nav and CTA below 1024px; behaviour lives in header.js. --}}
@@ -96,7 +96,7 @@
             @endforeach
         </ul>
 
-        <a href="/become-a-member" class="site-menu__cta">
+        <a href="{{ App\Support\CtaTarget::url('become_member') }}" class="site-menu__cta">
             <span>{{ __('global.cta.become_member') }}</span>
             <span class="site-menu__cta-icon" aria-hidden="true">&rarr;</span>
         </a>

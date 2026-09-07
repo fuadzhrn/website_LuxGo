@@ -57,16 +57,16 @@ Route::prefix('{locale}')
             ]);
         })->name('collection');
 
-        Route::get('/experience', function () {
-            return view('pages.experience.index');
+        Route::get('/experience', function (PageContentService $content) {
+            return view('pages.experience.index', ['page' => $content->render('experience')]);
         })->name('experience');
 
-        Route::get('/how-it-works', function () {
-            return view('pages.how-it-works.index');
+        Route::get('/how-it-works', function (PageContentService $content) {
+            return view('pages.how-it-works.index', ['page' => $content->render('how_it_works')]);
         })->name('how-it-works');
 
-        Route::get('/about', function () {
-            return view('pages.about-contact.index');
+        Route::get('/about', function (PageContentService $content) {
+            return view('pages.about-contact.index', ['page' => $content->render('about')]);
         })->name('about');
 
         Route::get('/terms-of-use', function () {

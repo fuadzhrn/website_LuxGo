@@ -1,23 +1,10 @@
 @php
+    /* Three steps, fixed by the layout: JOIN, BOOK, USE. The CMS supplies their
+       wording; the numbering and icons stay with the design. */
     $processFlow = [
-        [
-            'number' => '01',
-            'icon' => 'user-round.svg',
-            'title' => __('how-it-works.process.steps.join.title'),
-            'copy' => __('how-it-works.process.steps.join.copy'),
-        ],
-        [
-            'number' => '02',
-            'icon' => 'calendar.svg',
-            'title' => __('how-it-works.process.steps.book.title'),
-            'copy' => __('how-it-works.process.steps.book.copy'),
-        ],
-        [
-            'number' => '03',
-            'icon' => 'car-front.svg',
-            'title' => __('how-it-works.process.steps.use.title'),
-            'copy' => __('how-it-works.process.steps.use.copy'),
-        ],
+        ['number' => '01', 'icon' => 'user-round.svg', 'title' => $s->text('steps.join.title'), 'copy' => $s->text('steps.join.copy')],
+        ['number' => '02', 'icon' => 'calendar.svg', 'title' => $s->text('steps.book.title'), 'copy' => $s->text('steps.book.copy')],
+        ['number' => '03', 'icon' => 'car-front.svg', 'title' => $s->text('steps.use.title'), 'copy' => $s->text('steps.use.copy')],
     ];
 @endphp
 
@@ -25,12 +12,12 @@
     <div class="lux-container">
         <div class="hiw-process__header" data-reveal>
             <div class="hiw-process__heading">
-                <p class="hiw-process__eyebrow">{{ __('how-it-works.process.eyebrow') }}</p>
-                <h2 class="hiw-process__title">{{ __('how-it-works.process.title') }}</h2>
+                <p class="hiw-process__eyebrow">{{ $s->text('eyebrow') }}</p>
+                <h2 class="hiw-process__title">{{ $s->text('title') }}</h2>
             </div>
 
             <p class="hiw-process__intro">
-                {{ __('how-it-works.process.intro') }}
+                {{ $s->text('intro') }}
             </p>
         </div>
 
