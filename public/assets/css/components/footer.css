@@ -20,11 +20,41 @@
 }
 
 .site-footer__brand {
+    display: inline-flex;
     font-family: var(--font-heading);
     font-weight: var(--fw-semibold);
     font-size: clamp(1.125rem, 1rem + 0.35vw, 1.375rem);
-    letter-spacing: 0.18em;
+    letter-spacing: 0.01em;
     color: var(--color-white);
+}
+
+/* The same mark as the navbar, at the size the footer has room for. */
+.site-footer__brand .lux-mark__rule {
+    display: inline-flex;
+    align-items: baseline;
+    padding: 0.3em 0.62em;
+    border: 1.5px solid var(--color-lux-blue);
+    border-radius: 2px;
+    line-height: 1;
+}
+
+.site-footer__brand .lux-mark__word {
+    font-family: var(--font-mark);
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.05em;
+}
+
+/* In the logo the ampersand is not Outfit's — Poppins draws the same straight
+   leg and flat cut. It is set at about 55% of the cap height, a shade lighter
+   than the letters, floats a fifth of the cap height clear of the baseline, and
+   is pulled a little tighter than the letters on either side. */
+.site-footer__brand .lux-mark__amp {
+    display: inline-block;
+    font-family: var(--font-mark-amp);
+    font-size: 0.54em;
+    font-weight: var(--fw-semibold);
+    position: relative;
+    top: -0.235em;
 }
 
 .site-footer__brand:focus-visible {
@@ -34,17 +64,14 @@
 }
 
 .site-footer__tagline {
-    margin-top: 10px;
-    max-width: 220px;
-    font-family: var(--font-body);
-    font-weight: var(--fw-regular);
-    font-size: clamp(0.6875rem, 0.66rem + 0.08vw, 0.8125rem);
-    line-height: 1.6;
+    margin-top: 12px;
+    font-family: var(--font-mark);
+    font-weight: var(--fw-light);
+    font-size: clamp(0.5625rem, 0.53rem + 0.1vw, 0.6875rem);
+    letter-spacing: 0.34em;
+    line-height: 1.5;
+    text-transform: uppercase;
     color: var(--color-muted-gray);
-}
-
-.site-footer__tagline-line {
-    display: block;
 }
 
 /* Social marks sit under the brand, as circular outlines. */

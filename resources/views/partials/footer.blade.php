@@ -54,12 +54,17 @@
     <div class="lux-container">
         <div class="site-footer__main">
             <div class="site-footer__brand-col">
-                <a href="{{ route('home') }}" class="site-footer__brand">LUX&amp;GO</a>
+                {{-- The full lockup: the rule, the wordmark and the tagline. The
+                     footer has the room the navbar does not, so this is where the
+                     tagline belongs. It is the brand line and stays in English in
+                     both locales, as a logo would. --}}
+                <a href="{{ route('home') }}" class="site-footer__brand">
+                    <span class="lux-mark__rule">
+                        <span class="lux-mark__word">LUX<span class="lux-mark__amp">&amp;</span>GO</span>
+                    </span>
+                </a>
 
-                <p class="site-footer__tagline">
-                    <span class="site-footer__tagline-line">{{ __('global.footer.tagline_1') }}</span>
-                    <span class="site-footer__tagline-line">{{ __('global.footer.tagline_2') }}</span>
-                </p>
+                <p class="site-footer__tagline">Premium Mobility Membership</p>
 
                 <ul class="site-footer__socials">
                     @foreach ($footerSocials as $social)

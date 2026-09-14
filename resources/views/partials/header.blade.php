@@ -13,8 +13,14 @@
 
 <header class="site-header" data-site-header>
     <div class="lux-container site-header__inner">
+        {{-- The compact form of the mark: the rule and the wordmark, without the
+             tagline, which is unreadable at this height. It is set in type
+             rather than shipped as an image so it stays sharp at any density
+             and costs nothing to load. --}}
         <a href="{{ route('home') }}" class="site-header__brand" aria-label="{{ __('global.header.brand_aria') }}">
-            LUX&amp;GO
+            <span class="lux-mark__rule">
+                <span class="lux-mark__word">LUX<span class="lux-mark__amp">&amp;</span>GO</span>
+            </span>
         </a>
 
         <nav class="site-nav" aria-label="{{ __('global.header.primary_nav') }}">

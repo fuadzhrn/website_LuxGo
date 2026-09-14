@@ -39,4 +39,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600&family=Outfit:wght@300;700&display=swap" rel="stylesheet">
+{{-- The logo's ampersand is not Outfit's — it has the straight leg and flat cut
+     of a grotesque. Poppins draws it almost exactly, so it is requested for that
+     one character (724 bytes) and carries a unicode-range of U+26, which keeps
+     it from reaching any other text. --}}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&text=%26&display=swap" rel="stylesheet">
