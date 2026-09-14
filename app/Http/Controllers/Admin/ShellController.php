@@ -11,11 +11,6 @@ use Illuminate\View\View;
  */
 class ShellController extends Controller
 {
-    public function settings(): View
-    {
-        return view('admin.settings.index');
-    }
-
     /**
      * Renders every reusable CMS component on one page so they can be checked
      * together. Local only — it is a development aid, not a feature, and it is

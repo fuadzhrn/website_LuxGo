@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\MembershipSettingsController;
 use App\Http\Controllers\Admin\PageContentController;
 use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\ShellController;
+use App\Http\Controllers\Admin\SiteSettingsController;
 use App\Http\Controllers\Admin\VehicleController;
 use Illuminate\Support\Facades\Route;
 
@@ -85,7 +86,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('seo', [SeoController::class, 'index'])->name('seo');
         Route::get('seo/{page:key}/edit', [SeoController::class, 'edit'])->name('seo.edit');
         Route::put('seo/{page:key}', [SeoController::class, 'update'])->name('seo.update');
-        Route::get('settings', [ShellController::class, 'settings'])->name('settings');
+        /* Company details shared by the whole site. */
+        Route::get('settings', [SiteSettingsController::class, 'edit'])->name('settings');
+        Route::put('settings', [SiteSettingsController::class, 'update'])->name('settings.update');
         Route::get('profile', [ShellController::class, 'profile'])->name('profile');
 
         // Development-only component showcase; not linked from the sidebar.

@@ -17,8 +17,8 @@ class SiteSettingsSeeder extends Seeder
         ['group' => 'company', 'key' => 'company_name', 'value' => 'PT Dwimuria Investama Properti', 'type' => 'string'],
         ['group' => 'contact', 'key' => 'phone', 'value' => '0811-1234-1234', 'type' => 'string'],
         ['group' => 'contact', 'key' => 'email', 'value' => 'info@luxandgo.com', 'type' => 'string'],
-        ['group' => 'social', 'key' => 'instagram_handle', 'value' => '@luxandgo', 'type' => 'string'],
-        ['group' => 'social', 'key' => 'tiktok_handle', 'value' => '@luxandgo', 'type' => 'string'],
+        ['group' => 'social', 'key' => 'instagram_handle', 'value' => '@luxandgo.id', 'type' => 'string'],
+        ['group' => 'social', 'key' => 'tiktok_handle', 'value' => '@luxandgo.id', 'type' => 'string'],
         [
             'group' => 'company',
             'key' => 'head_office_address',
