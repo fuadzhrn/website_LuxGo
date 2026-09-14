@@ -278,6 +278,15 @@
         min-height: 100svh;
     }
 
+    /*
+       A full-height frame crops this wide photograph far more tightly, so the
+       slice is moved to the front of the vehicle: the grille reads as a car,
+       where the earlier position left only a headlight and a wheel.
+    */
+    .home-hero__image {
+        object-position: 38% center;
+    }
+
     .home-hero__title {
         font-size: clamp(2.25rem, 1.9rem + 1.6vw, 2.75rem);
     }

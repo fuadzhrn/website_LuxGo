@@ -186,6 +186,16 @@
 }
 
 @media (max-width: 767px) {
+    /*
+       On a phone the Hero fills the screen exactly, with nothing of the next
+       section showing beneath it. svh is the height the visitor can actually
+       see — vh on iOS measures the screen without the browser bars.
+    */
+    .hiw-hero {
+        min-height: 100vh;
+        min-height: 100svh;
+    }
+
     .hiw-hero__title {
         font-size: clamp(2.25rem, 1.95rem + 1.3vw, 2.625rem);
     }
@@ -194,10 +204,11 @@
         max-width: 340px;
     }
 
-    /* A 2:1 frame shows only a narrow slice once the crop turns portrait; this
-       keeps the interchange and its light trails in view rather than bare asphalt. */
+    /* A full-height frame shows an even narrower slice of this 2:1 photograph;
+       holding it left of centre keeps the sweep of the interchange in view
+       rather than a flat stretch of asphalt. */
     .hiw-hero__image {
-        object-position: center 55%;
+        object-position: 35% 55%;
     }
 
     .hiw-hero__index-list {

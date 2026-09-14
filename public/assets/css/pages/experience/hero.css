@@ -180,12 +180,29 @@
 }
 
 @media (max-width: 767px) {
+    /*
+       On a phone the Hero fills the screen exactly, with nothing of the next
+       section showing beneath it. svh is the height the visitor can actually
+       see — vh on iOS measures the screen without the browser bars.
+    */
+    .experience-hero {
+        min-height: 100vh;
+        min-height: 100svh;
+    }
+
     .experience-hero__title {
         font-size: clamp(2.25rem, 1.95rem + 1.3vw, 2.625rem);
     }
 
     .experience-hero__copy {
         max-width: 340px;
+    }
+
+    /* A full-height frame crops this wide photograph hard, so the slice is
+       moved left of centre: the driver and the moment of opening the door stay
+       whole, where centring cut him at the edge. */
+    .experience-hero__image {
+        object-position: 38% center;
     }
 
     /* The stacked block is taller here, so the foot of the frame carries further. */

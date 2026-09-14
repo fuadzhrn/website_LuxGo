@@ -164,14 +164,25 @@
 }
 
 @media (max-width: 767px) {
+    /*
+       On a phone the Hero fills the screen exactly, with nothing of the next
+       section showing beneath it. svh is the height the visitor can actually
+       see — vh on iOS measures the screen without the browser bars.
+    */
+    .collection-hero {
+        min-height: 100vh;
+        min-height: 100svh;
+    }
+
     .collection-hero__title {
         font-size: clamp(2.25rem, 1.95rem + 1.3vw, 2.625rem);
     }
 
-    /* A 2:1 frame crops hard at this width; holding it just right of centre
-       keeps the vehicle in view. */
+    /* A full-height frame crops this 2:1 photograph harder still, so the slice
+       is moved to the front of the vehicle: the grille reads as a car, where
+       the earlier position pushed its nose out of frame. */
     .collection-hero__image {
-        object-position: 58% center;
+        object-position: 35% center;
     }
 
     /* The copy block is taller here, so the foot of the frame carries further. */
