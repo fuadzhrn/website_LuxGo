@@ -1,10 +1,16 @@
 @php
     /* The three worked examples the page shows. The LOT counts are the design;
-       the rights they yield are calculated with the same rule the calculator
-       uses, so an example can never disagree with it. */
+       the figures come from the same rule the calculator uses, so an example can
+       never disagree with it.
+
+       The two benefits are reported separately: Usage Rights are the base and
+       stay the same however many LOTs are held, while Discounted Usage Rights
+       are what the additional LOTs buy. Adding them would produce a number that
+       describes neither. */
     $lotExamples = collect([1, 5, 10])->map(fn (int $lots) => [
         'lots' => $lots.' LOT',
-        'rights' => $membership->annualRightsFor($lots).'×',
+        'rights' => $membership->usageRightsPerYear().'×',
+        'discounted' => $membership->discountedRightsFor($lots).'×',
     ]);
 @endphp
 
@@ -26,13 +32,13 @@
                 <div class="membership-access__rule-item">
                     <p class="membership-access__rule-label">{{ $s->text('rule_one_lot') }}</p>
                     <p class="membership-access__rule-value">{{ $membership->baseRights() }}<span class="membership-access__times">×</span></p>
-                    <p class="membership-access__rule-unit">{{ $s->text('unit_per_year') }}</p>
+                    <p class="membership-access__rule-unit">{{ $s->text('unit_rights') }}</p>
                 </div>
 
                 <div class="membership-access__rule-item">
                     <p class="membership-access__rule-label">{{ $s->text('rule_additional') }}</p>
                     <p class="membership-access__rule-value">+{{ $membership->additionalLotRights() }}<span class="membership-access__times">×</span></p>
-                    <p class="membership-access__rule-unit">{{ $s->text('unit_per_year') }}</p>
+                    <p class="membership-access__rule-unit">{{ $s->text('unit_discounted') }}</p>
                 </div>
             </div>
 
@@ -40,8 +46,12 @@
                 @foreach ($lotExamples as $example)
                     <div class="membership-access__example">
                         <p class="membership-access__example-lots">{{ $example['lots'] }}</p>
+
                         <p class="membership-access__example-rights">{{ $example['rights'] }}</p>
-                        <p class="membership-access__example-unit">{{ $s->text('unit_per_year') }}</p>
+                        <p class="membership-access__example-unit">{{ $s->text('unit_rights') }}</p>
+
+                        <p class="membership-access__example-rights membership-access__example-rights--discounted">{{ $example['discounted'] }}</p>
+                        <p class="membership-access__example-unit">{{ $s->text('unit_discounted') }}</p>
                     </div>
                 @endforeach
             </div>
@@ -84,15 +94,28 @@
                 >+</button>
             </div>
 
+            {{-- Four readings: each benefit per year, then each across the
+                 membership. The script replaces the values; these are what a
+                 visitor without JavaScript sees for a single LOT. --}}
             <div class="membership-access__results" aria-live="polite">
                 <div class="membership-access__result">
-                    <p class="membership-access__result-value" data-calculator-annual>{{ $membership->annualRightsFor(1) }}×</p>
+                    <p class="membership-access__result-value" data-calculator-annual>{{ $membership->usageRightsPerYear() }}×</p>
                     <p class="membership-access__result-label">{{ $s->text('result_annual') }}</p>
                 </div>
 
                 <div class="membership-access__result">
-                    <p class="membership-access__result-value" data-calculator-total>{{ $membership->totalRightsFor(1) }}×</p>
+                    <p class="membership-access__result-value" data-calculator-annual-discounted>{{ $membership->discountedRightsFor(1) }}×</p>
+                    <p class="membership-access__result-label">{{ $s->text('unit_discounted') }}</p>
+                </div>
+
+                <div class="membership-access__result">
+                    <p class="membership-access__result-value" data-calculator-total>{{ $membership->totalUsageRights() }}×</p>
                     <p class="membership-access__result-label">{{ $s->text('result_total') }}</p>
+                </div>
+
+                <div class="membership-access__result">
+                    <p class="membership-access__result-value" data-calculator-total-discounted>{{ $membership->totalDiscountedRightsFor(1) }}×</p>
+                    <p class="membership-access__result-label">{{ $s->text('result_total_discounted') }}</p>
                 </div>
             </div>
 

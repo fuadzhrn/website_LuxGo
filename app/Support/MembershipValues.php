@@ -60,6 +60,30 @@ class MembershipValues
         return $this->settings->totalRightsFor($lots);
     }
 
+    /* The two benefits, kept apart. An additional LOT buys Discounted Usage
+       Rights, not Usage Rights, so the page reports them separately rather than
+       adding them into one figure that belongs to neither. */
+
+    public function usageRightsPerYear(): int
+    {
+        return $this->settings->usageRightsPerYear();
+    }
+
+    public function discountedRightsFor(int $lots): int
+    {
+        return $this->settings->discountedRightsFor($lots);
+    }
+
+    public function totalUsageRights(): int
+    {
+        return $this->settings->totalUsageRights();
+    }
+
+    public function totalDiscountedRightsFor(int $lots): int
+    {
+        return $this->settings->totalDiscountedRightsFor($lots);
+    }
+
     /**
      * Total Usage Rights across the membership for a single LOT. Derived, never
      * stored: base rights × period.

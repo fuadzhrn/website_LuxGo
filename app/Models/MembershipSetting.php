@@ -56,4 +56,32 @@ class MembershipSetting extends Model
     {
         return $this->annualRightsFor($lots) * $this->membership_period_years;
     }
+
+    /**
+     * Usage Rights are the base benefit and do not grow with the number of
+     * LOTs: one LOT or ten, the member gets the same free usages each year.
+     */
+    public function usageRightsPerYear(): int
+    {
+        return $this->base_usage_rights_per_year;
+    }
+
+    /**
+     * Discounted Usage Rights are what an additional LOT buys. The first LOT
+     * carries none of them, so a single-LOT membership returns zero.
+     */
+    public function discountedRightsFor(int $lots): int
+    {
+        return max(0, max(1, $lots) - 1) * $this->additional_lot_rights_per_year;
+    }
+
+    public function totalUsageRights(): int
+    {
+        return $this->usageRightsPerYear() * $this->membership_period_years;
+    }
+
+    public function totalDiscountedRightsFor(int $lots): int
+    {
+        return $this->discountedRightsFor($lots) * $this->membership_period_years;
+    }
 }

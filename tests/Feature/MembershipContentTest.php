@@ -232,12 +232,50 @@ class MembershipContentTest extends TestCase
     {
         $response = $this->get(route('membership', ['locale' => 'en']))->assertOk();
 
-        /* 1, 5 and 10 LOT: 6, 14 and 24 rights per year. */
         $response->assertSee('1 LOT');
         $response->assertSee('5 LOT');
         $response->assertSee('10 LOT');
-        $response->assertSee('14×');
-        $response->assertSee('24×');
+
+        /* An additional LOT buys Discounted Usage Rights, so 1, 5 and 10 LOT
+           yield 0, 8 and 18 of them a year while the 6 Usage Rights stay put. */
+        $response->assertSee('8×');
+        $response->assertSee('18×');
+
+        /* The two were once added together. A combined figure would describe
+           neither benefit, so it must not reappear. */
+        $response->assertDontSee('14×');
+        $response->assertDontSee('24×');
+    }
+
+    public function test_the_two_benefits_are_reported_separately_and_never_added(): void
+    {
+        foreach (['id' => ['Hak Pakai', 'Hak Diskon Pemakaian'], 'en' => ['Usage Rights', 'Discounted Usage Rights']] as $locale => [$rights, $discounted]) {
+            $response = $this->get(route('membership', ['locale' => $locale]))->assertOk();
+
+            $response->assertSee($rights.' / '.($locale === 'id' ? 'Tahun' : 'Year'));
+            $response->assertSee($discounted.' / '.($locale === 'id' ? 'Tahun' : 'Year'));
+
+            /* The calculator opens on a single LOT: six Usage Rights, none of
+               the discounted kind, and the totals across the membership. */
+            $response->assertSee('Total '.$discounted.' / 5 '.($locale === 'id' ? 'Tahun' : 'Years'));
+            $response->assertSee('data-calculator-annual-discounted', false);
+            $response->assertSee('data-calculator-total-discounted', false);
+        }
+    }
+
+    public function test_the_split_figures_follow_the_business_settings(): void
+    {
+        $values = $this->values();
+
+        /* Usage Rights are the base benefit and do not grow with the LOT count. */
+        $this->assertSame(6, $values->usageRightsPerYear());
+        $this->assertSame(30, $values->totalUsageRights());
+
+        /* Discounted Usage Rights are what the additional LOTs buy. */
+        $this->assertSame(0, $values->discountedRightsFor(1));
+        $this->assertSame(8, $values->discountedRightsFor(5));
+        $this->assertSame(18, $values->discountedRightsFor(10));
+        $this->assertSame(90, $values->totalDiscountedRightsFor(10));
     }
 
     public function test_the_page_never_shows_a_raw_placeholder(): void

@@ -137,6 +137,13 @@
     color: var(--color-muted-gray);
 }
 
+/* The second reading in a card: Discounted Usage Rights, a step down in size so
+   the base benefit still leads. */
+.membership-access__example-rights--discounted {
+    margin-top: clamp(12px, 1.1vw, 18px);
+    font-size: clamp(1.375rem, 1.2rem + 0.55vw, 1.75rem);
+}
+
 /* Right: calculator ------------------------------------------------------------- */
 
 .membership-access__calculator {
@@ -231,16 +238,25 @@
 
 /* Results ---------------------------------------------------------------------------- */
 
+/* Four readings: each benefit per year, then each across the membership. The
+   dividers follow the grid rather than the source order, so the card that opens
+   a row never carries a left rule. */
 .membership-access__results {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: clamp(16px, 1.6vw, 28px);
+    row-gap: clamp(18px, 1.6vw, 26px);
     margin-top: clamp(20px, 1.8vw, 30px);
 }
 
-.membership-access__result + .membership-access__result {
+.membership-access__result:nth-child(even) {
     padding-left: clamp(16px, 1.6vw, 28px);
     border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.membership-access__result:nth-child(n + 3) {
+    padding-top: clamp(18px, 1.6vw, 26px);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .membership-access__result-value {
@@ -323,16 +339,30 @@
         font-size: clamp(1.5rem, 1.3rem + 1vw, 1.875rem);
     }
 
-    /* Two narrow result columns become one clear pair of readings. */
+    .membership-access__example-rights--discounted {
+        font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.5rem);
+    }
+
+    /* Three narrow columns: a touch smaller keeps the benefit name on two
+       lines rather than three, so the cards end level. */
+    .membership-access__example-unit {
+        font-size: clamp(0.625rem, 0.58rem + 0.14vw, 0.6875rem);
+    }
+
+    /* Too narrow for two columns: the four readings stack into one list. */
     .membership-access__results {
         grid-template-columns: minmax(0, 1fr);
+        row-gap: 0;
+    }
+
+    .membership-access__result:nth-child(even) {
+        padding-left: 0;
+        border-left: none;
     }
 
     .membership-access__result + .membership-access__result {
         margin-top: clamp(16px, 3.4vw, 22px);
         padding-top: clamp(16px, 3.4vw, 22px);
-        padding-left: 0;
         border-top: 1px solid rgba(255, 255, 255, 0.12);
-        border-left: none;
     }
 }

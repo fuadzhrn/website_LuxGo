@@ -10,8 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const lotsOutput = calculator.querySelector("[data-calculator-lots]");
     const annualOutput = calculator.querySelector("[data-calculator-annual]");
     const totalOutput = calculator.querySelector("[data-calculator-total]");
+    const annualDiscountedOutput = calculator.querySelector("[data-calculator-annual-discounted]");
+    const totalDiscountedOutput = calculator.querySelector("[data-calculator-total-discounted]");
 
-    if (!decreaseButton || !increaseButton || !lotsOutput || !annualOutput || !totalOutput) {
+    const outputs = [lotsOutput, annualOutput, totalOutput, annualDiscountedOutput, totalDiscountedOutput];
+
+    if (!decreaseButton || !increaseButton || outputs.some((output) => !output)) {
         return;
     }
 
@@ -37,12 +41,17 @@ document.addEventListener("DOMContentLoaded", () => {
     let lots = MIN_LOTS;
 
     const render = () => {
-        const annualRights = BASE_RIGHTS + (lots - MIN_LOTS) * RIGHTS_PER_ADDITIONAL_LOT;
-        const totalRights = annualRights * MEMBERSHIP_YEARS;
+        /* Usage Rights are the base benefit and do not grow with the LOT
+           count; what an additional LOT buys is Discounted Usage Rights.
+           The two are reported separately, never added together. */
+        const annualRights = BASE_RIGHTS;
+        const annualDiscounted = (lots - MIN_LOTS) * RIGHTS_PER_ADDITIONAL_LOT;
 
         lotsOutput.textContent = String(lots);
         annualOutput.textContent = annualRights + "\u00d7";
-        totalOutput.textContent = totalRights + "\u00d7";
+        annualDiscountedOutput.textContent = annualDiscounted + "\u00d7";
+        totalOutput.textContent = annualRights * MEMBERSHIP_YEARS + "\u00d7";
+        totalDiscountedOutput.textContent = annualDiscounted * MEMBERSHIP_YEARS + "\u00d7";
 
         decreaseButton.disabled = lots <= MIN_LOTS;
         increaseButton.disabled = lots >= MAX_LOTS;

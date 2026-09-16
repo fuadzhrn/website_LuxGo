@@ -277,14 +277,16 @@ return [
 
                         'rule_one_lot' => ['label' => 'Rule - one LOT', 'group' => 'Rule', 'rules' => ['required', 'string', 'max:60']],
                         'rule_additional' => ['label' => 'Rule - additional LOT', 'group' => 'Rule', 'rules' => ['required', 'string', 'max:60']],
-                        'unit_per_year' => ['label' => 'Unit - per year', 'group' => 'Rule', 'rules' => ['required', 'string', 'max:40']],
+                        'unit_rights' => ['label' => 'Unit - Usage Rights', 'group' => 'Rule', 'help' => 'Names the benefit one LOT provides.', 'rules' => ['required', 'string', 'max:60']],
+                        'unit_discounted' => ['label' => 'Unit - Discounted Usage Rights', 'group' => 'Rule', 'help' => 'Names the benefit each additional LOT provides.', 'rules' => ['required', 'string', 'max:60']],
 
                         'calculator_title' => ['label' => 'Calculator title', 'group' => 'Calculator', 'rules' => ['required', 'string', 'max:80']],
                         'calculator_copy' => ['label' => 'Calculator copy', 'group' => 'Calculator', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:300']],
                         'decrease' => ['label' => 'Decrease button label', 'group' => 'Calculator', 'rules' => ['required', 'string', 'max:60']],
                         'increase' => ['label' => 'Increase button label', 'group' => 'Calculator', 'rules' => ['required', 'string', 'max:60']],
                         'result_annual' => ['label' => 'Result - per year', 'group' => 'Calculator', 'rules' => ['required', 'string', 'max:60']],
-                        'result_total' => ['label' => 'Result - total', 'group' => 'Calculator', 'help' => 'Use {{membership_period}} for the number of years.', 'rules' => ['required', 'string', 'max:80']],
+                        'result_total' => ['label' => 'Result - total Usage Rights', 'group' => 'Calculator', 'help' => 'Use {{membership_period}} for the number of years.', 'rules' => ['required', 'string', 'max:80']],
+                        'result_total_discounted' => ['label' => 'Result - total Discounted Usage Rights', 'group' => 'Calculator', 'help' => 'Use {{membership_period}} for the number of years.', 'rules' => ['required', 'string', 'max:90']],
                         'calculator_note' => ['label' => 'Calculator note', 'group' => 'Calculator', 'type' => 'textarea', 'help' => 'Use {{additional_lot_rights}} instead of typing the figure.', 'rules' => ['required', 'string', 'max:300']],
                     ],
                 ],
