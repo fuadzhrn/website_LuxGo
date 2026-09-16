@@ -4,7 +4,7 @@ return [
 
     'meta' => [
         'title' => 'About & Contact — LUX&GO',
-        'description' => 'LUX&GO is a premium mobility membership offering flexible access to premium vehicles without ownership.',
+        'description' => 'Meet LUX&GO, the company behind premium mobility membership without ownership. Find our head office address and the ways to reach our team.',
     ],
 
     'intro' => [

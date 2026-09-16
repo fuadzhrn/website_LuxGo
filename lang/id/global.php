@@ -46,7 +46,14 @@ return [
     'legal' => [
         'eyebrow' => 'Legal',
         'preparing' => 'Halaman ini sedang disiapkan. :title LUX&GO selengkapnya akan diterbitkan di sini.',
+        'meta_description' => ':title LUX&GO — membership mobilitas premium. Halaman ini sedang disiapkan dan akan segera diterbitkan.',
         'contact' => 'Untuk pertanyaan sementara ini, hubungi',
     ],
 
+    'not_found' => [
+        'eyebrow' => 'Error 404',
+        'title' => 'Halaman Tidak Ditemukan',
+        'copy' => 'Halaman yang Anda cari sudah dipindahkan atau tidak pernah ada. Silakan kembali ke beranda.',
+        'back' => 'Kembali ke Beranda',
+    ],
 ];

@@ -1,6 +1,10 @@
 @php
-    $title = $legalTitle.' — LUX&GO';
-    $description = $legalTitle.' for LUX&GO Premium Mobility Membership.';
+    /* The name comes from the footer link the visitor clicked, so the page and
+       the link can never disagree — and both follow the active language. */
+    $legalTitle = __('global.footer.link_'.$legalKey);
+
+    $title = $legalTitle.' — '.config('app.name');
+    $description = __('global.legal.meta_description', ['title' => $legalTitle]);
 @endphp
 
 @extends('layouts.app')

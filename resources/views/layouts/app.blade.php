@@ -13,6 +13,8 @@
 
     @stack('styles')
 
+    @include('partials.structured-data')
+
 </head>
 <body class="@yield('body_class')">
 

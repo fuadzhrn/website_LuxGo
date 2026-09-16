@@ -4,7 +4,7 @@ return [
 
     'meta' => [
         'title' => 'Tentang Kami & Kontak — LUX&GO',
-        'description' => 'LUX&GO adalah membership mobilitas premium dengan akses fleksibel ke kendaraan premium tanpa kepemilikan.',
+        'description' => 'Kenali LUX&GO, perusahaan di balik membership mobilitas premium tanpa kepemilikan. Temukan alamat kantor pusat dan cara menghubungi tim kami.',
     ],
 
     'intro' => [

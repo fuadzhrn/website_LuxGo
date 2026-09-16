@@ -8,6 +8,7 @@ use App\Services\SeoService;
 use App\Support\LocaleUrl;
 use App\Support\MembershipValues;
 use App\Support\SiteSettings;
+use App\Support\StructuredData;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -48,6 +49,15 @@ class AppServiceProvider extends ServiceProvider
             $pageKey = $seo->pageKeyForRoute(Route::currentRouteName());
 
             $view->with('seo', $pageKey ? $seo->for($pageKey) : null);
+        });
+
+        /* Search engines read the same company details the footer shows, so the
+           graph is built from SiteSettings rather than written into markup. */
+        View::composer('partials.structured-data', function ($view) {
+            $view->with(
+                'structuredData',
+                (new StructuredData(app(SiteSettings::class)))->siteGraph(app()->getLocale())
+            );
         });
 
         /* The company details reach the footer and the contact section without

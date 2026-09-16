@@ -46,7 +46,14 @@ return [
     'legal' => [
         'eyebrow' => 'Legal',
         'preparing' => 'This page is being prepared. The full :title for LUX&GO will be published here.',
+        'meta_description' => ':title for LUX&GO premium mobility membership. This page is being prepared and will be published here shortly.',
         'contact' => 'For questions in the meantime, contact',
     ],
 
+    'not_found' => [
+        'eyebrow' => 'Error 404',
+        'title' => 'Page Not Found',
+        'copy' => 'The page you are looking for has moved or never existed. Please head back to the home page.',
+        'back' => 'Back to Home',
+    ],
 ];
