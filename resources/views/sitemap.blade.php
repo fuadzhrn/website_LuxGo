@@ -3,6 +3,9 @@
 @foreach ($entries as $entry)
     <url>
         <loc>{{ $entry['loc'] }}</loc>
+@if ($entry['lastmod'])
+        <lastmod>{{ $entry['lastmod'] }}</lastmod>
+@endif
 @foreach ($entry['alternates'] as $locale => $url)
         <xhtml:link rel="alternate" hreflang="{{ $locale }}" href="{{ $url }}"/>
 @endforeach

@@ -21,6 +21,11 @@ return Application::configure(basePath: dirname(__DIR__))
         then: function () {
             // Internal tooling: registered outside the localized public routes.
             Route::middleware('web')->group(base_path('routes/admin.php'));
+
+            /* robots.txt and sitemap.xml take no middleware at all, so neither
+               opens a session nor sets a cookie that would stop a CDN caching
+               them. */
+            Route::middleware([])->group(base_path('routes/crawler.php'));
         },
     )
     ->withMiddleware(function (Middleware $middleware): void {

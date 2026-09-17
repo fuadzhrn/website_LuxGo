@@ -2,15 +2,18 @@
 
 namespace Tests\Feature;
 
+use App\Models\FaqItem;
 use App\Models\Page;
 use App\Models\SeoSetting;
 use App\Models\SiteSetting;
+use App\Models\Vehicle;
 use Database\Seeders\MembershipSettingsSeeder;
 use Database\Seeders\PageContentSeeder;
 use Database\Seeders\PagesSeeder;
 use Database\Seeders\SiteSettingsSeeder;
 use Database\Seeders\VehicleSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -236,6 +239,100 @@ class TechnicalSeoTest extends TestCase
         foreach (array_merge($this->urls('id'), $this->urls('en')) as $url) {
             $this->assertContains($url, $locations);
         }
+    }
+
+    public function test_neither_crawler_file_opens_a_session(): void
+    {
+        /* They are registered outside the web middleware group: a crawler has
+           no session to keep, and a response carrying Set-Cookie with
+           Cache-Control: private is one a CDN will refuse to hold. */
+        foreach (['/sitemap.xml', '/robots.txt'] as $path) {
+            $response = $this->get($path)->assertOk();
+
+            $this->assertSame([], $response->headers->getCookies(), "$path set a cookie");
+            $this->assertStringNotContainsString('private', (string) $response->headers->get('Cache-Control'));
+            $this->assertStringContainsString('max-age=3600', (string) $response->headers->get('Cache-Control'));
+        }
+    }
+
+    /**
+     * @return string|null the lastmod the sitemap gives that URL
+     */
+    private function lastmodFor(string $url): ?string
+    {
+        $xml = simplexml_load_string($this->get('/sitemap.xml')->assertOk()->getContent());
+
+        foreach ($xml->url as $entry) {
+            if ((string) $entry->loc === $url) {
+                return count($entry->lastmod) > 0 ? (string) $entry->lastmod : null;
+            }
+        }
+
+        return null;
+    }
+
+    public function test_the_sitemap_dates_each_page_from_when_its_content_last_changed(): void
+    {
+        $url = route('membership', ['locale' => 'id']);
+        $page = Page::where('key', 'membership')->firstOrFail();
+
+        $edited = Carbon::parse('2026-12-25 10:11:12');
+        $page->sections()->firstOrFail()
+            ->translations()->where('locale', 'id')->firstOrFail()
+            ->forceFill(['updated_at' => $edited])->saveQuietly();
+
+        $this->assertSame($edited->toAtomString(), $this->lastmodFor($url));
+    }
+
+    public function test_an_edit_to_an_faq_answer_moves_the_date_of_the_page_that_shows_it(): void
+    {
+        /* A page is more than its sections. If the FAQ were not followed the
+           date would sit still while the page visibly changed. */
+        $url = route('membership', ['locale' => 'id']);
+        $before = $this->lastmodFor($url);
+
+        $edited = Carbon::parse('2027-01-02 03:04:05');
+        FaqItem::firstOrFail()->translations()->where('locale', 'id')->firstOrFail()
+            ->forceFill(['updated_at' => $edited])->saveQuietly();
+
+        $this->assertNotSame($before, $this->lastmodFor($url));
+        $this->assertSame($edited->toAtomString(), $this->lastmodFor($url));
+    }
+
+    public function test_an_edit_to_a_vehicle_moves_the_date_of_the_collection_page(): void
+    {
+        /* Vehicles belong to the collection page by design rather than by a
+           foreign key, so the link is one the sitemap has to make itself. */
+        $url = route('collection', ['locale' => 'id']);
+
+        $edited = Carbon::parse('2027-02-03 04:05:06');
+        Vehicle::firstOrFail()->translations()->where('locale', 'id')->firstOrFail()
+            ->forceFill(['updated_at' => $edited])->saveQuietly();
+
+        $this->assertSame($edited->toAtomString(), $this->lastmodFor($url));
+    }
+
+    public function test_a_page_with_nothing_editable_carries_no_date_rather_than_a_guess(): void
+    {
+        /* Google drops lastmod across a whole sitemap once it finds dates it
+           cannot trust, so the legal pages give none at all. */
+        $xml = simplexml_load_string($this->get('/sitemap.xml')->assertOk()->getContent());
+        $xml->registerXPathNamespace('s', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+
+        $legal = route('legal.terms', ['locale' => 'id']);
+        $dated = 0;
+
+        foreach ($xml->url as $url) {
+            if ((string) $url->loc === $legal) {
+                $this->assertCount(0, $url->lastmod);
+            }
+            if (count($url->lastmod) > 0) {
+                $dated++;
+            }
+        }
+
+        /* The six CMS pages in both locales, and nothing else. */
+        $this->assertSame(12, $dated);
     }
 
     public function test_the_sitemap_lists_nothing_private(): void

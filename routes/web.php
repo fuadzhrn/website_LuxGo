@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\SitemapController;
 use App\Models\Vehicle;
 use App\Services\PageContentService;
 use App\Support\MembershipValues;
@@ -19,13 +18,6 @@ Route::get('/', function () {
 
     return redirect()->route('home', ['locale' => $locale]);
 });
-
-/*
-| Crawler files. Served from routes rather than public/ so their URLs are built
-| from the running application instead of a domain written into a static file.
-*/
-Route::get('/sitemap.xml', [SitemapController::class, 'sitemap'])->name('sitemap');
-Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots');
 
 /*
 | One group for both locales — the slugs are shared, only the prefix differs.
