@@ -229,6 +229,9 @@ return [
                         'label_period' => ['label' => 'Label - membership period', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:60']],
                         'label_rights' => ['label' => 'Label - usage rights', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:60']],
                         'label_total_rights' => ['label' => 'Label - total usage rights', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:60']],
+                        'label_discounted' => ['label' => 'Label - discounted usage rights', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:60']],
+                        'label_vehicle_periods' => ['label' => 'Label - vehicle periods', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:60']],
+                        'unit_vehicle_change' => ['label' => 'Unit - vehicle replacement', 'group' => 'Key numbers', 'help' => 'Use {{vehicle_change_years}} for the interval.', 'rules' => ['required', 'string', 'max:60']],
                     ],
                 ],
 
@@ -255,6 +258,9 @@ return [
                         'label_period' => ['label' => 'Label - membership period', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:60']],
                         'label_rights' => ['label' => 'Label - usage rights', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:60']],
                         'label_total_rights' => ['label' => 'Label - total usage rights', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:60']],
+                        'label_discounted' => ['label' => 'Label - discounted usage rights', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:60']],
+                        'label_vehicle_periods' => ['label' => 'Label - vehicle periods', 'group' => 'Key numbers', 'rules' => ['required', 'string', 'max:60']],
+                        'unit_vehicle_change' => ['label' => 'Unit - vehicle replacement', 'group' => 'Key numbers', 'help' => 'Use {{vehicle_change_years}} for the interval.', 'rules' => ['required', 'string', 'max:60']],
 
                         'usage_label' => ['label' => 'Usage block label', 'group' => 'Usage fee', 'rules' => ['required', 'string', 'max:60']],
                         'usage_unit' => ['label' => 'Usage unit', 'group' => 'Usage fee', 'help' => 'Use {{usage_duration}} for the hours.', 'rules' => ['required', 'string', 'max:60']],
@@ -302,15 +308,18 @@ return [
                         'copy' => ['label' => 'Description', 'type' => 'textarea', 'rules' => ['required', 'string', 'max:400']],
                         'unit' => ['label' => 'Unit', 'help' => 'Use {{usage_duration}} for the hours.', 'rules' => ['required', 'string', 'max:60']],
 
-                        'with_rights' => ['label' => 'Label', 'group' => 'With usage rights', 'rules' => ['required', 'string', 'max:60']],
-                        'caption' => ['label' => 'Fee caption', 'group' => 'With usage rights', 'rules' => ['required', 'string', 'max:60']],
-                        'driver_included' => ['label' => 'Driver note', 'group' => 'With usage rights', 'rules' => ['required', 'string', 'max:120']],
+                        'with_rights' => ['label' => 'Label', 'group' => 'With a Usage Right', 'rules' => ['required', 'string', 'max:60']],
+                        'rights_amount' => ['label' => 'Amount', 'group' => 'With a Usage Right', 'help' => 'Written out rather than a figure, because a Usage Right carries no fee.', 'rules' => ['required', 'string', 'max:40']],
+                        'caption' => ['label' => 'Caption', 'group' => 'With a Usage Right', 'rules' => ['required', 'string', 'max:60']],
+                        'driver_included' => ['label' => 'Driver note', 'group' => 'With a Usage Right', 'rules' => ['required', 'string', 'max:120']],
 
-                        'after_rights' => ['label' => 'Label', 'group' => 'After rights are used', 'rules' => ['required', 'string', 'max:60']],
-                        'regular_usage' => ['label' => 'Row - regular usage', 'group' => 'After rights are used', 'rules' => ['required', 'string', 'max:60']],
-                        'additional_usage' => ['label' => 'Row - additional usage', 'group' => 'After rights are used', 'rules' => ['required', 'string', 'max:60']],
-                        'total' => ['label' => 'Row - total', 'group' => 'After rights are used', 'rules' => ['required', 'string', 'max:60']],
-                        'availability' => ['label' => 'Availability note', 'group' => 'After rights are used', 'rules' => ['required', 'string', 'max:200']],
+                        'with_discount' => ['label' => 'Label', 'group' => 'With a Discounted Usage Right', 'rules' => ['required', 'string', 'max:60']],
+                        'discount_caption' => ['label' => 'Caption', 'group' => 'With a Discounted Usage Right', 'rules' => ['required', 'string', 'max:60']],
+                        'discount_note' => ['label' => 'Saving note', 'group' => 'With a Discounted Usage Right', 'help' => 'Use {{usage_discount_percent}} and {{public_usage_fee}} instead of typing the figures.', 'rules' => ['required', 'string', 'max:160']],
+
+                        'public_label' => ['label' => 'Label', 'group' => 'Public rate', 'rules' => ['required', 'string', 'max:60']],
+                        'public_caption' => ['label' => 'Caption', 'group' => 'Public rate', 'rules' => ['required', 'string', 'max:80']],
+                        'availability' => ['label' => 'Availability note', 'group' => 'Public rate', 'rules' => ['required', 'string', 'max:200']],
                     ],
                 ],
 

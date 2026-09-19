@@ -89,8 +89,10 @@ class UpdatePageSectionRequest extends FormRequest
 
             preg_match_all('/\{\{[^}]*\}\}/', $value, $matches);
 
+            $known = MembershipValues::placeholderTokens();
+
             foreach ($matches[0] as $token) {
-                if (! in_array($token, MembershipValues::allowedPlaceholders(), true)) {
+                if (! in_array($token, $known, true)) {
                     $fail("The :attribute uses an unknown placeholder {$token}.");
                 }
             }

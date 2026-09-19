@@ -29,10 +29,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const number = (name) => Number.parseInt(calculator.dataset[name], 10);
 
     const BASE_RIGHTS = number("baseRights");
+    const BASE_DISCOUNTED = number("baseDiscounted");
     const RIGHTS_PER_ADDITIONAL_LOT = number("additionalRights");
     const MEMBERSHIP_YEARS = number("period");
 
-    if (!Number.isFinite(BASE_RIGHTS) || !Number.isFinite(RIGHTS_PER_ADDITIONAL_LOT) || !Number.isFinite(MEMBERSHIP_YEARS)) {
+    if (![BASE_RIGHTS, BASE_DISCOUNTED, RIGHTS_PER_ADDITIONAL_LOT, MEMBERSHIP_YEARS].every(Number.isFinite)) {
         /* Without the figures the server-rendered values stay as they are,
            rather than being replaced with something invented here. */
         return;
@@ -41,11 +42,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let lots = MIN_LOTS;
 
     const render = () => {
-        /* Usage Rights are the base benefit and do not grow with the LOT
-           count; what an additional LOT buys is Discounted Usage Rights.
-           The two are reported separately, never added together. */
+        /* Usage Rights belong to the membership and do not grow with the LOT
+           count. Discounted Usage Rights start at the membership's own amount
+           and grow with each further LOT. The two are reported separately,
+           never added together. */
         const annualRights = BASE_RIGHTS;
-        const annualDiscounted = (lots - MIN_LOTS) * RIGHTS_PER_ADDITIONAL_LOT;
+        const annualDiscounted = BASE_DISCOUNTED + (lots - MIN_LOTS) * RIGHTS_PER_ADDITIONAL_LOT;
 
         lotsOutput.textContent = String(lots);
         annualOutput.textContent = annualRights + "\u00d7";

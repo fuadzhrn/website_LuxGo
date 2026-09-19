@@ -147,16 +147,24 @@
 
 /* Entitlements ----------------------------------------------------------------- */
 
+/* Four entitlements in two rows. The rules follow the grid rather than the
+   source order, so the card that opens a row never carries a left rule. */
 .membership-package__metrics {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: clamp(16px, 1.6vw, 28px);
+    row-gap: clamp(14px, 1.2vw, 20px);
     margin-top: clamp(14px, 1.2vw, 20px);
 }
 
-.membership-package__metric + .membership-package__metric {
+.membership-package__metric:nth-child(even) {
     padding-left: clamp(16px, 1.6vw, 28px);
     border-left: var(--border-thin);
+}
+
+.membership-package__metric:nth-child(n + 3) {
+    padding-top: clamp(14px, 1.2vw, 20px);
+    border-top: var(--border-thin);
 }
 
 .membership-package__metric-value {
@@ -299,17 +307,21 @@
         max-width: 560px;
     }
 
-    /* Entitlements stack into a divided list rather than three narrow columns. */
+    /* Entitlements stack into a divided list rather than narrow columns. */
     .membership-package__metrics {
         grid-template-columns: minmax(0, 1fr);
+        row-gap: 0;
+    }
+
+    .membership-package__metric:nth-child(even) {
+        padding-left: 0;
+        border-left: none;
     }
 
     .membership-package__metric + .membership-package__metric {
         margin-top: clamp(14px, 2.4vw, 20px);
         padding-top: clamp(14px, 2.4vw, 20px);
-        padding-left: 0;
         border-top: var(--border-thin);
-        border-left: none;
     }
 }
 

@@ -28,11 +28,20 @@
                 {{ $s->text('copy') }}
             </p>
 
+            {{-- One LOT now carries both benefits, so it takes two readings;
+                 the third says what a further LOT adds. The row is a wrapping
+                 flex line, so a third item needs no layout change. --}}
             <div class="membership-access__rule">
                 <div class="membership-access__rule-item">
                     <p class="membership-access__rule-label">{{ $s->text('rule_one_lot') }}</p>
-                    <p class="membership-access__rule-value">{{ $membership->baseRights() }}<span class="membership-access__times">×</span></p>
+                    <p class="membership-access__rule-value">{{ $membership->usageRightsPerYear() }}<span class="membership-access__times">×</span></p>
                     <p class="membership-access__rule-unit">{{ $s->text('unit_rights') }}</p>
+                </div>
+
+                <div class="membership-access__rule-item">
+                    <p class="membership-access__rule-label">{{ $s->text('rule_one_lot') }}</p>
+                    <p class="membership-access__rule-value">{{ $membership->baseDiscountedRights() }}<span class="membership-access__times">×</span></p>
+                    <p class="membership-access__rule-unit">{{ $s->text('unit_discounted') }}</p>
                 </div>
 
                 <div class="membership-access__rule-item">

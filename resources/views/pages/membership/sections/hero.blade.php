@@ -9,15 +9,18 @@
             'accent' => false,
         ],
         [
-            'value' => (string) $membership->baseRights(),
+            'value' => (string) $membership->usageRightsPerYear(),
             'unit' => $s->text('unit_per_year'),
             'label' => $s->text('label_rights'),
             'accent' => true,
         ],
+        /* The two benefits sit side by side. Showing only the total Usage
+           Rights would understate the membership, which also carries the
+           discounted kind. */
         [
-            'value' => (string) $membership->totalMembershipRights(),
-            'unit' => $s->text('unit_per_five_years'),
-            'label' => $s->text('label_total_rights'),
+            'value' => (string) $membership->discountedRightsFor(1),
+            'unit' => $s->text('unit_per_year'),
+            'label' => $s->text('label_discounted'),
             'accent' => true,
         ],
     ];

@@ -1,9 +1,12 @@
 @php
-    /* The same three key numbers as the hero, from the same single source. */
+    /* What the membership carries, from the same single source the rest of the
+       page reads. The vehicle periods are worked out from the term and the
+       replacement interval, so the two can never disagree. */
     $packageMetrics = [
         ['value' => (string) $membership->periodYears(), 'unit' => $s->text('unit_years'), 'label' => $s->text('label_period')],
-        ['value' => $membership->baseRights().'×', 'unit' => $s->text('unit_per_year'), 'label' => $s->text('label_rights')],
-        ['value' => $membership->totalMembershipRights().'×', 'unit' => $s->text('unit_per_five_years'), 'label' => $s->text('label_total_rights')],
+        ['value' => $membership->usageRightsPerYear().'×', 'unit' => $s->text('unit_per_year'), 'label' => $s->text('label_rights')],
+        ['value' => $membership->discountedRightsFor(1).'×', 'unit' => $s->text('unit_per_year'), 'label' => $s->text('label_discounted')],
+        ['value' => $membership->vehiclePeriods().'×', 'unit' => $s->text('unit_vehicle_change'), 'label' => $s->text('label_vehicle_periods')],
     ];
 @endphp
 

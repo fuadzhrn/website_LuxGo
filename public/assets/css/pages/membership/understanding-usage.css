@@ -58,12 +58,19 @@
 /* Comparison ------------------------------------------------------------------- */
 
 /* Two conditions read side by side, separated by a hairline — never boxed. */
+/* Three rates side by side, each separated by the same hairline. */
 .membership-usage__comparison {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
-    column-gap: clamp(32px, 3.4vw, 72px);
+    grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr) 1px minmax(0, 1fr);
+    column-gap: clamp(20px, 2.4vw, 44px);
     padding-top: clamp(20px, 1.8vw, 30px);
     border-top: var(--border-thin);
+}
+
+/* The member rate is the one the programme is selling, so it carries the
+   brand colour while the other two stay in text colour. */
+.membership-usage__case--highlight .membership-usage__amount {
+    color: var(--color-lux-blue);
 }
 
 .membership-usage__divider {

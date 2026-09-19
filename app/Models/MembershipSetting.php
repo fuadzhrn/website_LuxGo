@@ -18,9 +18,13 @@ class MembershipSetting extends Model
         'promo_membership_price',
         'promo_member_limit',
         'membership_period_years',
+        'vehicle_change_years',
         'base_usage_rights_per_year',
+        'base_discounted_rights_per_year',
         'additional_lot_rights_per_year',
         'member_usage_fee',
+        'public_usage_fee',
+        'usage_discount_percent',
         'additional_usage_fee',
         'usage_duration_hours',
     ];
@@ -32,34 +36,21 @@ class MembershipSetting extends Model
             'promo_membership_price' => 'integer',
             'promo_member_limit' => 'integer',
             'membership_period_years' => 'integer',
+            'vehicle_change_years' => 'integer',
             'base_usage_rights_per_year' => 'integer',
+            'base_discounted_rights_per_year' => 'integer',
             'additional_lot_rights_per_year' => 'integer',
             'member_usage_fee' => 'integer',
+            'public_usage_fee' => 'integer',
+            'usage_discount_percent' => 'integer',
             'additional_usage_fee' => 'integer',
             'usage_duration_hours' => 'integer',
         ];
     }
 
     /**
-     * Usage Rights per year for a given number of LOTs — the same rule the
-     * front-end calculator applies.
-     */
-    public function annualRightsFor(int $lots): int
-    {
-        $lots = max(1, $lots);
-
-        return $this->base_usage_rights_per_year
-            + (($lots - 1) * $this->additional_lot_rights_per_year);
-    }
-
-    public function totalRightsFor(int $lots): int
-    {
-        return $this->annualRightsFor($lots) * $this->membership_period_years;
-    }
-
-    /**
-     * Usage Rights are the base benefit and do not grow with the number of
-     * LOTs: one LOT or ten, the member gets the same free usages each year.
+     * Usage Rights are a benefit of the membership, not of a LOT: they do not
+     * grow with how many LOTs are held. One a year, every year of the term.
      */
     public function usageRightsPerYear(): int
     {
@@ -67,12 +58,15 @@ class MembershipSetting extends Model
     }
 
     /**
-     * Discounted Usage Rights are what an additional LOT buys. The first LOT
-     * carries none of them, so a single-LOT membership returns zero.
+     * Discounted Usage Rights come with the membership and grow with it: the
+     * base amount, plus what each additional LOT adds.
      */
     public function discountedRightsFor(int $lots): int
     {
-        return max(0, max(1, $lots) - 1) * $this->additional_lot_rights_per_year;
+        $extra = max(0, max(1, $lots) - 1);
+
+        return $this->base_discounted_rights_per_year
+            + ($extra * $this->additional_lot_rights_per_year);
     }
 
     public function totalUsageRights(): int
@@ -83,5 +77,19 @@ class MembershipSetting extends Model
     public function totalDiscountedRightsFor(int $lots): int
     {
         return $this->discountedRightsFor($lots) * $this->membership_period_years;
+    }
+
+    /**
+     * How many vehicles a member goes through across the term. Derived from the
+     * two stored figures so the two can never disagree; a replacement interval
+     * of zero means the vehicle is not replaced.
+     */
+    public function vehiclePeriods(): int
+    {
+        if ($this->vehicle_change_years < 1) {
+            return 1;
+        }
+
+        return max(1, intdiv($this->membership_period_years, $this->vehicle_change_years));
     }
 }

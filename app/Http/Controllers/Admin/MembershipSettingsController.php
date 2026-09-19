@@ -32,10 +32,13 @@ class MembershipSettingsController extends Controller
         'promo_membership_price' => ['label' => 'Promo membership price', 'min' => 0],
         'promo_member_limit' => ['label' => 'Promo member limit', 'min' => 1],
         'membership_period_years' => ['label' => 'Membership period (years)', 'min' => 1],
-        'base_usage_rights_per_year' => ['label' => 'Base usage rights per year', 'min' => 1],
-        'additional_lot_rights_per_year' => ['label' => 'Additional LOT rights per year', 'min' => 0],
-        'member_usage_fee' => ['label' => 'Member usage fee', 'min' => 0],
-        'additional_usage_fee' => ['label' => 'Additional usage fee', 'min' => 0],
+        'vehicle_change_years' => ['label' => 'Vehicle replaced every (years)', 'min' => 0, 'help' => 'How often the vehicle is replaced during the membership. 0 means it is not replaced.'],
+        'base_usage_rights_per_year' => ['label' => 'Usage Rights per year', 'min' => 0, 'help' => 'Free usages included with the membership. They do not grow with the number of LOTs.'],
+        'base_discounted_rights_per_year' => ['label' => 'Discounted Usage Rights per year', 'min' => 0, 'help' => 'Discounted usages included with one LOT, before any additional LOT is added.'],
+        'additional_lot_rights_per_year' => ['label' => 'Discounted Usage Rights per additional LOT', 'min' => 0, 'help' => 'What each LOT beyond the first adds, per year.'],
+        'member_usage_fee' => ['label' => 'Member usage fee', 'min' => 0, 'help' => 'What a member pays per use with a Discounted Usage Right.'],
+        'public_usage_fee' => ['label' => 'Public rate', 'min' => 0, 'help' => 'What the same use costs without a membership. The member fee is shown as a discount from this.'],
+        'usage_discount_percent' => ['label' => 'Usage discount (%)', 'min' => 0, 'help' => 'Stated on the page as the saving against the public rate.'],
         'usage_duration_hours' => ['label' => 'Usage duration (hours)', 'min' => 1],
     ];
 

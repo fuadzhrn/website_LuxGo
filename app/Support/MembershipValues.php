@@ -34,6 +34,21 @@ class MembershipValues
         return $this->settings->additional_lot_rights_per_year;
     }
 
+    public function vehicleChangeYears(): int
+    {
+        return $this->settings->vehicle_change_years;
+    }
+
+    public function vehiclePeriods(): int
+    {
+        return $this->settings->vehiclePeriods();
+    }
+
+    public function usageDiscountPercent(): int
+    {
+        return $this->settings->usage_discount_percent;
+    }
+
     public function usageHours(): int
     {
         return $this->settings->usage_duration_hours;
@@ -50,16 +65,6 @@ class MembershipValues
      * Usage Rights per year for a number of LOTs — the rule the page states and
      * the calculator applies.
      */
-    public function annualRightsFor(int $lots): int
-    {
-        return $this->settings->annualRightsFor($lots);
-    }
-
-    public function totalRightsFor(int $lots): int
-    {
-        return $this->settings->totalRightsFor($lots);
-    }
-
     /* The two benefits, kept apart. An additional LOT buys Discounted Usage
        Rights, not Usage Rights, so the page reports them separately rather than
        adding them into one figure that belongs to neither. */
@@ -67,6 +72,11 @@ class MembershipValues
     public function usageRightsPerYear(): int
     {
         return $this->settings->usageRightsPerYear();
+    }
+
+    public function baseDiscountedRights(): int
+    {
+        return $this->settings->base_discounted_rights_per_year;
     }
 
     public function discountedRightsFor(int $lots): int
@@ -90,7 +100,7 @@ class MembershipValues
      */
     public function totalMembershipRights(): int
     {
-        return $this->totalRightsFor(1);
+        return $this->totalUsageRights();
     }
 
     /**
@@ -128,6 +138,11 @@ class MembershipValues
         return self::rupiah($this->settings->member_usage_fee);
     }
 
+    public function publicUsageFee(): string
+    {
+        return self::rupiah($this->settings->public_usage_fee);
+    }
+
     public function additionalUsageFee(): string
     {
         return self::rupiah($this->settings->additional_usage_fee);
@@ -156,23 +171,38 @@ class MembershipValues
             '{{membership_period}}' => (string) $this->periodYears(),
             '{{base_usage_rights}}' => (string) $this->baseRights(),
             '{{additional_lot_rights}}' => (string) $this->additionalLotRights(),
+            '{{base_discounted_rights}}' => (string) $this->baseDiscountedRights(),
+            '{{total_discounted_rights}}' => (string) $this->totalDiscountedRightsFor(1),
             '{{member_usage_fee}}' => $this->memberUsageFee(),
             '{{additional_usage_fee}}' => $this->additionalUsageFee(),
             '{{usage_duration}}' => (string) $this->usageHours(),
+            '{{public_usage_fee}}' => $this->publicUsageFee(),
+            '{{usage_discount_percent}}' => (string) $this->usageDiscountPercent(),
+            '{{vehicle_change_years}}' => (string) $this->vehicleChangeYears(),
+            '{{vehicle_periods}}' => (string) $this->vehiclePeriods(),
             '{{total_usage_rights}}' => (string) $this->totalMembershipRights(),
             '{{additional_usage_total}}' => $this->additionalUsageTotalFormatted(),
         ];
     }
 
     /**
+     * The tokens copy may refer to.
+     *
+     * Static on purpose: validating a heading on any page must not depend on
+     * the membership figures existing. A test asserts this list matches the
+     * keys of placeholders() exactly, so the two cannot drift apart.
+     *
      * @return array<int, string>
      */
-    public static function allowedPlaceholders(): array
+    public static function placeholderTokens(): array
     {
         return [
             '{{regular_price}}', '{{promo_price}}', '{{promo_member_limit}}',
             '{{membership_period}}', '{{base_usage_rights}}', '{{additional_lot_rights}}',
+            '{{base_discounted_rights}}', '{{total_discounted_rights}}',
             '{{member_usage_fee}}', '{{additional_usage_fee}}', '{{usage_duration}}',
+            '{{public_usage_fee}}', '{{usage_discount_percent}}',
+            '{{vehicle_change_years}}', '{{vehicle_periods}}',
             '{{total_usage_rights}}', '{{additional_usage_total}}',
         ];
     }
@@ -189,6 +219,7 @@ class MembershipValues
     {
         return [
             'data-base-rights' => $this->baseRights(),
+            'data-base-discounted' => $this->baseDiscountedRights(),
             'data-additional-rights' => $this->additionalLotRights(),
             'data-period' => $this->periodYears(),
         ];

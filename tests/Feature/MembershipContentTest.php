@@ -90,8 +90,11 @@ class MembershipContentTest extends TestCase
     {
         return array_replace($this->settings()->only([
             'regular_membership_price', 'promo_membership_price', 'promo_member_limit',
-            'membership_period_years', 'base_usage_rights_per_year', 'additional_lot_rights_per_year',
-            'member_usage_fee', 'additional_usage_fee', 'usage_duration_hours',
+            'membership_period_years', 'vehicle_change_years',
+            'base_usage_rights_per_year', 'base_discounted_rights_per_year',
+            'additional_lot_rights_per_year',
+            'member_usage_fee', 'public_usage_fee', 'usage_discount_percent',
+            'additional_usage_fee', 'usage_duration_hours',
         ]), $overrides);
     }
 
@@ -101,11 +104,12 @@ class MembershipContentTest extends TestCase
     {
         $settings = $this->settings();
 
-        $this->assertSame(35_000_000, $settings->regular_membership_price);
-        $this->assertSame(25_000_000, $settings->promo_membership_price);
+        $this->assertSame(30_500_000, $settings->regular_membership_price);
+        $this->assertSame(20_500_000, $settings->promo_membership_price);
         $this->assertSame(100, $settings->promo_member_limit);
-        $this->assertSame(5, $settings->membership_period_years);
-        $this->assertSame(6, $settings->base_usage_rights_per_year);
+        $this->assertSame(10, $settings->membership_period_years);
+        $this->assertSame(1, $settings->base_usage_rights_per_year);
+        $this->assertSame(6, $settings->base_discounted_rights_per_year);
         $this->assertSame(2, $settings->additional_lot_rights_per_year);
         $this->assertSame(750_000, $settings->member_usage_fee);
         $this->assertSame(500_000, $settings->additional_usage_fee);
@@ -116,43 +120,32 @@ class MembershipContentTest extends TestCase
     {
         $values = $this->values();
 
-        $this->assertSame(30, $values->totalMembershipRights());
+        $this->assertSame(10, $values->totalMembershipRights());
         $this->assertSame(1_250_000, $values->additionalUsageTotal());
         $this->assertSame('Rp1.250.000', $values->additionalUsageTotalFormatted());
-        $this->assertSame('Rp35.000.000', $values->regularPrice());
+        $this->assertSame('Rp30.500.000', $values->regularPrice());
 
         /* Nothing derived is kept as a column of its own. */
         $this->assertArrayNotHasKey('total_usage_rights', $this->settings()->getAttributes());
         $this->assertArrayNotHasKey('additional_lot_price', $this->settings()->getAttributes());
     }
 
-    public function test_usage_rights_follow_the_lot_rule(): void
-    {
-        $values = $this->values();
-
-        $this->assertSame(6, $values->annualRightsFor(1));
-        $this->assertSame(30, $values->totalRightsFor(1));
-        $this->assertSame(14, $values->annualRightsFor(5));
-        $this->assertSame(70, $values->totalRightsFor(5));
-        $this->assertSame(24, $values->annualRightsFor(10));
-        $this->assertSame(120, $values->totalRightsFor(10));
-    }
-
     public function test_changed_settings_change_every_calculated_figure(): void
     {
         $this->settings()->update([
-            'base_usage_rights_per_year' => 8,
+            'base_usage_rights_per_year' => 2,
+            'base_discounted_rights_per_year' => 8,
             'additional_lot_rights_per_year' => 3,
             'membership_period_years' => 4,
         ]);
 
         $values = $this->values();
 
-        $this->assertSame(8, $values->annualRightsFor(1));
-        $this->assertSame(32, $values->totalRightsFor(1));
-        $this->assertSame(20, $values->annualRightsFor(5));
-        $this->assertSame(80, $values->totalRightsFor(5));
-        $this->assertSame(32, $values->totalMembershipRights());
+        $this->assertSame(2, $values->usageRightsPerYear());
+        $this->assertSame(8, $values->totalUsageRights());
+        $this->assertSame(8, $values->discountedRightsFor(1));
+        $this->assertSame(20, $values->discountedRightsFor(5));
+        $this->assertSame(80, $values->totalDiscountedRightsFor(5));
     }
 
     public function test_an_administrator_can_edit_the_figures(): void
@@ -160,13 +153,21 @@ class MembershipContentTest extends TestCase
         $this->actingAs($this->administrator())
             ->put(route('admin.content.business-settings.update', $this->membership()), $this->settingsPayload([
                 'member_usage_fee' => 800_000,
-                'additional_usage_fee' => 600_000,
+                'public_usage_fee' => 3_200_000,
+                'usage_discount_percent' => 75,
+                'vehicle_change_years' => 2,
             ]))
             ->assertRedirect(route('admin.content.business-settings', $this->membership()))
             ->assertSessionHas('success', 'Changes saved successfully.');
 
-        $this->assertSame(800_000, $this->settings()->fresh()->member_usage_fee);
-        $this->assertSame(1_400_000, $this->values()->additionalUsageTotal());
+        $settings = $this->settings()->fresh();
+
+        $this->assertSame(800_000, $settings->member_usage_fee);
+        $this->assertSame(3_200_000, $settings->public_usage_fee);
+
+        /* The vehicle periods are derived, so a shorter interval means more of
+           them without anyone storing the count. */
+        $this->assertSame(5, $settings->vehiclePeriods());
     }
 
     public function test_negative_and_zero_figures_are_rejected(): void
@@ -175,11 +176,11 @@ class MembershipContentTest extends TestCase
             ->put(route('admin.content.business-settings.update', $this->membership()), $this->settingsPayload([
                 'regular_membership_price' => -1,
                 'membership_period_years' => 0,
-                'base_usage_rights_per_year' => 0,
+                'usage_duration_hours' => 0,
             ]))
-            ->assertSessionHasErrors(['regular_membership_price', 'membership_period_years', 'base_usage_rights_per_year']);
+            ->assertSessionHasErrors(['regular_membership_price', 'membership_period_years', 'usage_duration_hours']);
 
-        $this->assertSame(35_000_000, $this->settings()->fresh()->regular_membership_price);
+        $this->assertSame(30_500_000, $this->settings()->fresh()->regular_membership_price);
     }
 
     public function test_a_page_without_business_settings_has_no_such_screen(): void
@@ -195,13 +196,14 @@ class MembershipContentTest extends TestCase
     {
         $response = $this->get(route('membership', ['locale' => 'id']))->assertOk();
 
-        $response->assertSee('Rp35.000.000');
-        $response->assertSee('Rp25.000.000');
+        $response->assertSee('Rp30.500.000');
+        $response->assertSee('Rp20.500.000');
         $response->assertSee('Rp750.000');
         $response->assertSee('Rp1.250.000');
-        $response->assertSee('data-base-rights="6"', false);
+        $response->assertSee('data-base-rights="1"', false);
+        $response->assertSee('data-base-discounted="6"', false);
         $response->assertSee('data-additional-rights="2"', false);
-        $response->assertSee('data-period="5"', false);
+        $response->assertSee('data-period="10"', false);
     }
 
     public function test_changing_a_setting_updates_the_whole_page(): void
@@ -222,10 +224,10 @@ class MembershipContentTest extends TestCase
         $response->assertSee('data-period="4"', false);
 
         /* Copy that mentions a figure follows it too. */
-        $response->assertSee('Mulai dengan 8 Hak Pakai per tahun');
+        $response->assertSee('Satu LOT memberi 8x Hak Pakai dan 6x Hak Diskon Pemakaian per tahun');
         $response->assertSee('/ 10 Jam');
         $response->assertSee('32 Hak Pakai selama 4 tahun');
-        $response->assertDontSee('Rp35.000.000');
+        $response->assertDontSee('Rp30.500.000');
     }
 
     public function test_the_worked_examples_use_the_same_rule_as_the_calculator(): void
@@ -236,15 +238,15 @@ class MembershipContentTest extends TestCase
         $response->assertSee('5 LOT');
         $response->assertSee('10 LOT');
 
-        /* An additional LOT buys Discounted Usage Rights, so 1, 5 and 10 LOT
-           yield 0, 8 and 18 of them a year while the 6 Usage Rights stay put. */
-        $response->assertSee('8×');
-        $response->assertSee('18×');
+        /* Usage Rights belong to the membership and stay at 1 however many
+           LOTs are held; the discounted kind runs 6, 14 and 18 + 6. */
+        $response->assertSee('1×');
+        $response->assertSee('6×');
+        $response->assertSee('14×');
+        $response->assertSee('24×');
 
-        /* The two were once added together. A combined figure would describe
-           neither benefit, so it must not reappear. */
-        $response->assertDontSee('14×');
-        $response->assertDontSee('24×');
+        /* The two must never be added: 1 + 6 is a figure describing neither. */
+        $response->assertDontSee('7×');
     }
 
     public function test_the_two_benefits_are_reported_separately_and_never_added(): void
@@ -255,9 +257,9 @@ class MembershipContentTest extends TestCase
             $response->assertSee($rights.' / '.($locale === 'id' ? 'Tahun' : 'Year'));
             $response->assertSee($discounted.' / '.($locale === 'id' ? 'Tahun' : 'Year'));
 
-            /* The calculator opens on a single LOT: six Usage Rights, none of
-               the discounted kind, and the totals across the membership. */
-            $response->assertSee('Total '.$discounted.' / 5 '.($locale === 'id' ? 'Tahun' : 'Years'));
+            /* The calculator opens on a single LOT and reports each benefit
+               on its own, per year and across the ten-year membership. */
+            $response->assertSee('Total '.$discounted.' / 10 '.($locale === 'id' ? 'Tahun' : 'Years'));
             $response->assertSee('data-calculator-annual-discounted', false);
             $response->assertSee('data-calculator-total-discounted', false);
         }
@@ -267,15 +269,31 @@ class MembershipContentTest extends TestCase
     {
         $values = $this->values();
 
-        /* Usage Rights are the base benefit and do not grow with the LOT count. */
-        $this->assertSame(6, $values->usageRightsPerYear());
-        $this->assertSame(30, $values->totalUsageRights());
+        /* Usage Rights belong to the membership: one a year, ten across the
+           term, however many LOTs are held. */
+        $this->assertSame(1, $values->usageRightsPerYear());
+        $this->assertSame(10, $values->totalUsageRights());
+        $this->assertSame(1, $values->usageRightsPerYear());
 
-        /* Discounted Usage Rights are what the additional LOTs buy. */
-        $this->assertSame(0, $values->discountedRightsFor(1));
-        $this->assertSame(8, $values->discountedRightsFor(5));
-        $this->assertSame(18, $values->discountedRightsFor(10));
-        $this->assertSame(90, $values->totalDiscountedRightsFor(10));
+        /* Discounted Usage Rights start at the membership's own six and grow
+           by two with every further LOT. */
+        $this->assertSame(6, $values->discountedRightsFor(1));
+        $this->assertSame(14, $values->discountedRightsFor(5));
+        $this->assertSame(24, $values->discountedRightsFor(10));
+        $this->assertSame(60, $values->totalDiscountedRightsFor(1));
+        $this->assertSame(240, $values->totalDiscountedRightsFor(10));
+    }
+
+    public function test_the_two_placeholder_lists_stay_in_step(): void
+    {
+        /* One list says which tokens copy may use, the other fills them in.
+           They are separate so that validating a heading on any page does not
+           need the membership figures to exist — which makes this the only
+           thing keeping them honest. */
+        $this->assertSame(
+            MembershipValues::placeholderTokens(),
+            array_keys($this->values()->placeholders()),
+        );
     }
 
     public function test_the_page_never_shows_a_raw_placeholder(): void
@@ -474,13 +492,13 @@ class MembershipContentTest extends TestCase
     public function test_a_faq_answer_renders_the_current_figures(): void
     {
         $response = $this->get(route('membership', ['locale' => 'id']))->assertOk();
-        $response->assertSee('6 Hak Pakai per tahun, setara 30 Hak Pakai selama 5 tahun');
+        $response->assertSee('1 Hak Pakai per tahun, setara 10 Hak Pakai selama 10 tahun');
 
         $this->settings()->update(['base_usage_rights_per_year' => 7]);
 
         $this->get(route('membership', ['locale' => 'id']))
             ->assertOk()
-            ->assertSee('7 Hak Pakai per tahun, setara 35 Hak Pakai selama 5 tahun');
+            ->assertSee('7 Hak Pakai per tahun, setara 70 Hak Pakai selama 10 tahun');
     }
 
     public function test_a_faq_screen_only_exists_for_a_section_that_has_one(): void
@@ -505,6 +523,6 @@ class MembershipContentTest extends TestCase
         $this->actingAs($user)->get($faqUrl)->assertForbidden();
         $this->actingAs($user)->put(route('admin.content.business-settings.update', $this->membership()), $this->settingsPayload())->assertForbidden();
 
-        $this->assertSame(35_000_000, $this->settings()->fresh()->regular_membership_price);
+        $this->assertSame(30_500_000, $this->settings()->fresh()->regular_membership_price);
     }
 }
